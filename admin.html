@@ -535,10 +535,18 @@
 
 
   // ---------- Load data ----------
+  // Busca os dados direto do repositório (raw.githubusercontent.com), não
+  // pelo link normal do site — não depende da publicação do GitHub Pages
+  // terminar, só do commit já ter acontecido. O "?t=" força sempre a
+  // versão mais nova, sem cache.
+  function rawUrl(path){
+    return `https://raw.githubusercontent.com/${gh.owner}/${gh.repo}/${gh.branch}/${path}?t=${Date.now()}`;
+  }
+
   async function loadData(){
     const [catRes, cfgRes] = await Promise.all([
-      fetch('catalog.json', { cache:'no-store' }),
-      fetch('config.json', { cache:'no-store' })
+      fetch(rawUrl('catalog.json'), { cache:'no-store' }),
+      fetch(rawUrl('config.json'), { cache:'no-store' })
     ]);
     CATALOG = await catRes.json();
     CONFIG = Object.assign(CONFIG, await cfgRes.json());
