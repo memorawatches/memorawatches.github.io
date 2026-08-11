@@ -851,20 +851,24 @@
     return { net, n, gross, installmentVal, grossVista };
   }
 
-  function updateQuote(){
+  function textoCotacao(){
     const { n, gross, installmentVal, grossVista } = calcularCotacao();
     const linhas = [
-      n === 1 ? `${formatBRL(gross)} à vista no cartão` : `${formatBRL(gross)} em ${n}x de ${formatBRL(installmentVal)}`,
+      `${formatBRL(grossVista)} à vista | ${n}x`,
+      '',
+      `* 💰 À vista: ${formatBRL(grossVista)}`,
+      `* 🔗 Valor do link: ${formatBRL(gross)}`
     ];
-    if(n !== 1) linhas.push(`Equivalente a ${formatBRL(grossVista)} à vista no cartão.`);
-    document.getElementById('qResult').textContent = linhas.join('\n');
+    if(n !== 1) linhas.push(`* 🔹 Parcelamento: ${n}x de ${formatBRL(installmentVal)}`);
+    return linhas.join('\n');
+  }
+
+  function updateQuote(){
+    document.getElementById('qResult').textContent = textoCotacao();
   }
 
   document.getElementById('qCopyBtn').addEventListener('click', async () => {
-    const { n, gross, installmentVal } = calcularCotacao();
-    const texto = n === 1
-      ? `${formatBRL(gross)} à vista no cartão`
-      : `${formatBRL(gross)} em ${n}x de ${formatBRL(installmentVal)}`;
+    const texto = textoCotacao();
     try{
       await navigator.clipboard.writeText(texto);
     } catch(e){
