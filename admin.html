@@ -321,7 +321,7 @@
   const PAGE_SIZE = 70;
   let CATALOG = [];
   let CONFIG = { rates:{}, whatsappGroupUrl:'', whatsappSellerNumber:'', locked:false };
-  let state = { search:'', brand:'Todos', size:'Todos', status:'Todos', sort:'recent', page:1 };
+  let state = { search:'', brand:'Todos', size:'Todos', status:'Todos', sort:'popular', page:1 };
   let gh = null; // {owner, repo, branch, token}
   let nextId = 1;
   let pendingPhotos = []; // [{dataUrl, isNew}] for the open add/edit form
@@ -347,10 +347,9 @@
     return `https://cdn.jsdelivr.net/gh/${gh.owner}/${gh.repo}@${gh.branch}/${path}`;
   }
   function imagesOf(w){ return (w.images && w.images.length) ? w.images : [PLACEHOLDER_IMG]; }
+  const LIMIAR_MAIS_VENDIDO = 5; // mais de 5 unidades vendidas = "mais pedido"
   function popularIds(){
-    return new Set(
-      CATALOG.filter(w => (w.orderCount||0) > 0).sort((a,b) => (b.orderCount||0) - (a.orderCount||0)).slice(0, 12).map(w => w.id)
-    );
+    return new Set(CATALOG.filter(w => (w.orderCount||0) > LIMIAR_MAIS_VENDIDO).map(w => w.id));
   }
   function toast(msg){
     const el = document.createElement('div');
@@ -621,7 +620,7 @@
     const statuses = Array.from(new Set(CATALOG.map(w => w.status || 'Sob encomenda'))).sort();
     setupDropdown('status', [{value:'Todos', label:'Todos os status'}, ...statuses.map(s => ({value:s, label:s}))], state.status, v => { state.status=v; state.page=1; render(); });
     setupDropdown('sort', [
-      {value:'recent', label:'Mais recentes'}, {value:'popular', label:'🔥 Mais pedidos'},
+      {value:'popular', label:'🔥 Mais pedidos'}, {value:'recent', label:'Mais recentes'},
       {value:'price_asc', label:'Menor preço'}, {value:'price_desc', label:'Maior preço'}
     ], state.sort, v => { state.sort=v; state.page=1; render(); });
   }

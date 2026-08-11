@@ -378,7 +378,7 @@
   const PAGE_SIZE = 70;
   let CATALOG = [];
   let CONFIG = { rates:{}, whatsappGroupUrl:'', whatsappSellerNumber:'', locked:false };
-  let state = { search:'', brand:'Todos', size:'Todos', status:'Todos', sort:'recent', page:1 };
+  let state = { search:'', brand:'Todos', size:'Todos', status:'Todos', sort:'popular', page:1 };
 
   const PLACEHOLDER_IMG = 'data:image/svg+xml;utf8,' + encodeURIComponent(
     '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><rect width="200" height="200" fill="#e9e4d8"/><circle cx="100" cy="100" r="55" fill="none" stroke="#b8ac8f" stroke-width="4"/><line x1="100" y1="100" x2="100" y2="65" stroke="#b8ac8f" stroke-width="4"/><line x1="100" y1="100" x2="125" y2="100" stroke="#b8ac8f" stroke-width="4"/></svg>'
@@ -404,12 +404,9 @@
     return `https://cdn.jsdelivr.net/gh/${GH_OWNER}/${GH_REPO}@${GH_BRANCH}/${path}`;
   }
   function imagesOf(w){ return (w.images && w.images.length) ? w.images : [PLACEHOLDER_IMG]; }
+  const LIMIAR_MAIS_VENDIDO = 5; // mais de 5 unidades vendidas = "mais pedido"
   function popularIds(){
-    return new Set(
-      CATALOG.filter(w => (w.orderCount||0) > 0)
-        .sort((a,b) => (b.orderCount||0) - (a.orderCount||0))
-        .slice(0, 12).map(w => w.id)
-    );
+    return new Set(CATALOG.filter(w => (w.orderCount||0) > LIMIAR_MAIS_VENDIDO).map(w => w.id));
   }
 
   // ---------- Load data ----------
@@ -530,8 +527,8 @@
   }
   function renderSortMenu(){
     const options = [
-      {value:'recent', label:'Mais recentes'},
       {value:'popular', label:'🔥 Mais pedidos'},
+      {value:'recent', label:'Mais recentes'},
       {value:'price_asc', label:'Menor preço'},
       {value:'price_desc', label:'Maior preço'}
     ];
