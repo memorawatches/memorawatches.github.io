@@ -245,6 +245,18 @@
     cursor:pointer; transition:transform .2s ease;
   }
   .whats-group-btn:hover{ transform:translateY(-3px); }
+  .back-to-top{
+    position:fixed; bottom:24px; right:24px; z-index:40;
+    width:46px; height:46px; border-radius:50%;
+    background:var(--panel); border:1px solid var(--border); color:var(--text);
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer; box-shadow:var(--shadow);
+    opacity:0; pointer-events:none; transform:translateY(10px);
+    transition:opacity .2s ease, transform .2s ease, border-color .2s ease;
+  }
+  .back-to-top.show{ opacity:1; pointer-events:auto; transform:translateY(0); }
+  .back-to-top:hover{ border-color:var(--gold); }
+  @media (max-width:640px){ .back-to-top{ right:16px; bottom:16px; } }
   .whats-popover{
     position:fixed; bottom:88px; left:24px; z-index:41; width:230px;
     background:var(--panel); border:1px solid var(--border); border-radius:16px;
@@ -363,7 +375,7 @@
 
 <script>
 (function(){
-  const PAGE_SIZE = 24;
+  const PAGE_SIZE = 70;
   let CATALOG = [];
   let CONFIG = { rates:{}, whatsappGroupUrl:'', whatsappSellerNumber:'', locked:false };
   let state = { search:'', brand:'Todos', size:'Todos', status:'Todos', sort:'recent', page:1 };
@@ -378,6 +390,18 @@
     const rate = (CONFIG.rates[String(n)] || 0) / 100;
     const gross = price / (1 - rate);
     return gross / n;
+  }
+  // As fotos são servidas via jsDelivr (uma CDN gratuita que lê direto do
+  // repositório do GitHub) em vez do link normal do site — assim elas ficam
+  // disponíveis quase na hora, sem esperar o GitHub Pages publicar o site
+  // inteiro (que pode demorar). Só funciona bem porque cada foto tem nome
+  // único e nunca é sobrescrita, então não tem risco de "versão antiga".
+  const GH_OWNER = location.hostname.split('.')[0];
+  const GH_REPO = location.hostname;
+  const GH_BRANCH = 'main';
+  function cdnUrl(path){
+    if(!path || path.startsWith('data:') || path.startsWith('http')) return path;
+    return `https://cdn.jsdelivr.net/gh/${GH_OWNER}/${GH_REPO}@${GH_BRANCH}/${path}`;
   }
   function imagesOf(w){ return (w.images && w.images.length) ? w.images : [PLACEHOLDER_IMG]; }
   function popularIds(){
@@ -537,7 +561,7 @@
     return `
     <article class="watch-card" data-id="${w.id}" data-photo-index="0">
       <div class="card-media">
-        <img src="${imgs[0]}" alt="${w.name}" loading="lazy">
+        <img src="${cdnUrl(imgs[0])}" alt="${w.name}" loading="lazy">
         <span class="badge">${status}</span>
         ${popular ? '<span class="popular-badge" title="Um dos mais pedidos">🔥<span class="popular-badge-text"> Mais pedido</span></span>' : ''}
         ${imgs.length > 1 ? `
@@ -604,7 +628,7 @@
         const imgs = imagesOf(w);
         let idx = (Number(card.dataset.photoIndex) + Number(btn.dataset.dir) + imgs.length) % imgs.length;
         card.dataset.photoIndex = idx;
-        card.querySelector('img').src = imgs[idx];
+        card.querySelector('img').src = cdnUrl(imgs[idx]);
         card.querySelectorAll('.gallery-dots span').forEach((d,i) => d.classList.toggle('active', i===idx));
       });
     });
@@ -639,13 +663,13 @@
       <button class="modal-close" id="detailCloseBtn">&times;</button>
       <div class="detail-gallery-col">
         <div class="detail-gallery">
-          <img id="detailMainImg" src="${imgs[0]}" alt="${w.name}">
+          <img id="detailMainImg" src="${cdnUrl(imgs[0])}" alt="${w.name}">
           ${imgs.length > 1 ? `
             <button type="button" class="detail-gallery-arrow prev" id="detailPrevBtn" aria-label="Foto anterior">‹</button>
             <button type="button" class="detail-gallery-arrow next" id="detailNextBtn" aria-label="Próxima foto">›</button>
           ` : ''}
         </div>
-        ${imgs.length > 1 ? `<div class="detail-thumbs">${imgs.map((src,i) => `<img src="${src}" class="${i===0?'active':''}" data-i="${i}">`).join('')}</div>` : ''}
+        ${imgs.length > 1 ? `<div class="detail-thumbs">${imgs.map((src,i) => `<img src="${cdnUrl(src)}" class="${i===0?'active':''}" data-i="${i}">`).join('')}</div>` : ''}
       </div>
       <div class="detail-scroll-col">
       <div class="detail-body">
@@ -681,7 +705,7 @@
     let currentPhoto = 0;
     function showPhoto(i){
       currentPhoto = (i + imgs.length) % imgs.length;
-      document.getElementById('detailMainImg').src = imgs[currentPhoto];
+      document.getElementById('detailMainImg').src = cdnUrl(imgs[currentPhoto]);
       document.querySelectorAll('.detail-thumbs img').forEach((t,idx) => t.classList.toggle('active', idx===currentPhoto));
     }
     document.querySelectorAll('.detail-thumbs img').forEach(thumb => {
@@ -711,6 +735,18 @@
 
   loadData();
 })();
+</script>
+
+<button id="backToTopBtn" class="back-to-top" aria-label="Voltar ao topo" title="Voltar ao topo">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+</button>
+<script>
+  const backToTopBtn = document.getElementById('backToTopBtn');
+  window.addEventListener('scroll', () => {
+    if(window.scrollY > 400) backToTopBtn.classList.add('show');
+    else backToTopBtn.classList.remove('show');
+  });
+  backToTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 </script>
 </body>
 </html>

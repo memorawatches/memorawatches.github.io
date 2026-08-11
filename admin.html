@@ -53,6 +53,18 @@
   .btn-gold:hover{ transform:translateY(-1px); }
   .btn-danger{ background:transparent; color:var(--danger); border-color:var(--danger); }
   .icon-btn{ width:38px; height:38px; padding:0; display:flex; align-items:center; justify-content:center; }
+  .back-to-top{
+    position:fixed; bottom:24px; right:24px; z-index:40;
+    width:46px; height:46px; border-radius:50%;
+    background:var(--panel); border:1px solid var(--border); color:var(--text);
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer; box-shadow:var(--shadow);
+    opacity:0; pointer-events:none; transform:translateY(10px);
+    transition:opacity .2s ease, transform .2s ease, border-color .2s ease;
+  }
+  .back-to-top.show{ opacity:1; pointer-events:auto; transform:translateY(0); }
+  .back-to-top:hover{ border-color:var(--gold); }
+  @media (max-width:640px){ .back-to-top{ right:16px; bottom:16px; } }
 
   .controls{ display:flex; flex-wrap:wrap; gap:10px; padding:0 24px 18px; max-width:1240px; margin:0 auto; }
   .search-box{ position:relative; flex:1 1 240px; }
@@ -306,7 +318,7 @@
 
 <script>
 (function(){
-  const PAGE_SIZE = 24;
+  const PAGE_SIZE = 70;
   let CATALOG = [];
   let CONFIG = { rates:{}, whatsappGroupUrl:'', whatsappSellerNumber:'', locked:false };
   let state = { search:'', brand:'Todos', size:'Todos', status:'Todos', sort:'recent', page:1 };
@@ -325,6 +337,14 @@
     const rate = (CONFIG.rates[String(n)] || 0) / 100;
     const gross = price / (1 - rate);
     return gross / n;
+  }
+  // As fotos são servidas via jsDelivr (CDN gratuita que lê direto do
+  // repositório) em vez do link normal do site — ficam disponíveis quase na
+  // hora, sem esperar o GitHub Pages publicar o site inteiro (o que pode
+  // demorar, principalmente com muitas fotos em sequência).
+  function cdnUrl(path){
+    if(!path || path.startsWith('data:') || path.startsWith('http')) return path;
+    return `https://cdn.jsdelivr.net/gh/${gh.owner}/${gh.repo}@${gh.branch}/${path}`;
   }
   function imagesOf(w){ return (w.images && w.images.length) ? w.images : [PLACEHOLDER_IMG]; }
   function popularIds(){
@@ -530,6 +550,44 @@
     _lockBusy = false;
   };
 
+  // ---------- Reiniciar histórico de commits (uso raro, irreversível) ----------
+  // Mantém todos os arquivos EXATAMENTE como estão agora, mas apaga todo o
+  // histórico de commits, deixando só 1 commit novo no lugar de todos os
+  // anteriores. Não afeta velocidade do site (isso nunca foi um problema de
+  // verdade) — é só uma "faxina". IRREVERSÍVEL: depois de rodar, não tem
+  // mais como voltar pra nenhuma versão antiga. Só use quando tiver certeza
+  // de que não vai precisar recuperar nada do histórico atual.
+  // Pra usar: abra o Console do navegador (F12 → Console) aqui no admin.html
+  // e digite:
+  //   resetRepoHistory()
+  window.resetRepoHistory = async function(){
+    if(!confirm('Isso apaga PARA SEMPRE todo o histórico de commits do repositório (os arquivos continuam exatamente como estão agora). Não tem como desfazer depois. Tem certeza que quer continuar?')){
+      console.log('Cancelado.');
+      return;
+    }
+    try{
+      const ref = await ghApi(`git/refs/heads/${gh.branch}`, { cache:'no-store' });
+      const latestCommit = await ghApi(`git/commits/${ref.object.sha}`, { cache:'no-store' });
+      const newCommit = await ghApi('git/commits', {
+        method:'POST',
+        body: JSON.stringify({
+          message: 'Reinicia histórico do repositório (arquivos preservados)',
+          tree: latestCommit.tree.sha,
+          parents: []
+        })
+      });
+      await ghApi(`git/refs/heads/${gh.branch}`, {
+        method:'PATCH',
+        body: JSON.stringify({ sha: newCommit.sha, force: true })
+      });
+      console.log('✅ Histórico reiniciado — agora o repositório tem só 1 commit.');
+      toast('Histórico do repositório reiniciado!');
+    } catch(e){
+      console.error('Erro ao reiniciar histórico:', e.message);
+      toast('Erro ao reiniciar histórico: ' + e.message);
+    }
+  };
+
   // ---------- Dropdown helper (same pattern as index.html) ----------
   function setupDropdown(prefix, options, activeValue, onSelect){
     const trigger = document.getElementById(prefix + 'Trigger');
@@ -610,7 +668,7 @@
     return `
     <article class="watch-card" data-id="${w.id}">
       <div class="card-media">
-        <img src="${imgs[0]}" alt="${w.name}" loading="lazy">
+        <img src="${cdnUrl(imgs[0])}" alt="${w.name}" loading="lazy">
         <span class="badge">${status}</span>
         ${popular ? '<span class="popular-badge" title="Um dos mais pedidos">🔥<span class="popular-badge-text"> Mais pedido</span></span>' : ''}
         <div class="card-icon-row">
@@ -745,7 +803,7 @@
     const grid = document.getElementById('photoGrid');
     grid.innerHTML = pendingPhotos.map((p,i) => `
       <div class="photo-thumb">
-        <img src="${p.src}">
+        <img src="${cdnUrl(p.src)}">
         <button type="button" class="rm" data-i="${i}" title="Remover">&times;</button>
         ${i===0
           ? '<span class="cover-tag">Capa</span>'
@@ -958,6 +1016,18 @@
     init();
   }
 })();
+</script>
+
+<button id="backToTopBtn" class="back-to-top" aria-label="Voltar ao topo" title="Voltar ao topo">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+</button>
+<script>
+  const backToTopBtn = document.getElementById('backToTopBtn');
+  window.addEventListener('scroll', () => {
+    if(window.scrollY > 400) backToTopBtn.classList.add('show');
+    else backToTopBtn.classList.remove('show');
+  });
+  backToTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 </script>
 </body>
 </html>
