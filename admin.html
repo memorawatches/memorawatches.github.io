@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="data:image/png;base64,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">
+<title>Memora Watches — Admin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#09111e; --panel:#131c2f; --panel-2:#1b263b; --border:#28364f;
+    --text:#f3f0e8; --text-dim:#9d9a93; --gold:#c9a24e; --gold-strong:#e0bc6c;
+    --badge-bg:rgba(19,28,47,.85); --badge-border:rgba(201,162,78,.4);
+    --shadow:0 18px 40px -14px rgba(0,0,0,.55); --danger:#c9634e; --ok:#7fbf7f;
+  }
+  html[data-theme="light"]{
+    --bg:#f8f4ea; --panel:#ffffff; --panel-2:#f1ebdc; --border:#e2d8c0;
+    --text:#241d10; --text-dim:#8a7f68; --gold:#a97c2f; --gold-strong:#c9a24e;
+    --badge-bg:rgba(255,255,255,.88); --badge-border:rgba(169,124,47,.35);
+    --shadow:0 18px 40px -14px rgba(120,100,60,.25);
+  }
+  html, body{ transition:background-color .25s ease, color .25s ease; }
+  *{box-sizing:border-box;}
+  body{ margin:0; background:var(--bg); color:var(--text); font-family:'Inter',sans-serif; }
+  h1,h2,h3{ font-family:'Fraunces',serif; font-weight:600; margin:0; }
+  a{ color:inherit; }
+  button{ font-family:inherit; }
+  .wrap{ max-width:1240px; margin:0 auto; padding:0 24px; }
+
+  header.site-header{
+    display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap;
+    gap:14px; padding:28px 24px 18px; max-width:1240px; margin:0 auto;
+  }
+  .brand{ display:flex; align-items:center; gap:14px; }
+  .brand-icon{
+    width:44px; height:44px; border-radius:12px; background:#ffffff;
+    border:1px solid var(--border); display:flex; align-items:center; justify-content:center;
+    padding:7px; overflow:hidden; flex-shrink:0;
+  }
+  .brand-icon img{ width:100%; height:100%; object-fit:contain; }
+  .brand h1{ font-size:22px; }
+  .brand p{ margin:2px 0 0; font-size:12.5px; color:var(--text-dim); }
+  .header-actions{ display:flex; align-items:center; gap:10px; flex-wrap:wrap; justify-content:flex-end; }
+  .save-indicator{ display:flex; align-items:center; gap:6px; font-size:11.5px; color:var(--text-dim); font-family:'IBM Plex Mono',monospace; }
+  .save-indicator .dot{ width:7px; height:7px; border-radius:50%; background:#6fbf7c; flex-shrink:0; }
+  .save-indicator.busy .dot{ background:#c9a24e; }
+  .save-indicator.error .dot{ background:var(--danger); }
+
+  .btn{ border-radius:9px; border:1px solid var(--border); background:var(--panel); color:var(--text); padding:10px 16px; font-size:13.5px; font-weight:600; cursor:pointer; transition:border-color .2s, transform .15s; }
+  .btn:hover{ border-color:var(--gold); }
+  .btn-gold{ background:linear-gradient(180deg, var(--gold-strong), var(--gold)); color:#191305; border:none; }
+  .btn-gold:hover{ transform:translateY(-1px); }
+  .btn-danger{ background:transparent; color:var(--danger); border-color:var(--danger); }
+  .icon-btn{ width:38px; height:38px; padding:0; display:flex; align-items:center; justify-content:center; }
+
+  .controls{ display:flex; flex-wrap:wrap; gap:10px; padding:0 24px 18px; max-width:1240px; margin:0 auto; }
+  .search-box{ position:relative; flex:1 1 240px; }
+  .search-box svg{ position:absolute; left:12px; top:50%; transform:translateY(-50%); opacity:.55; }
+  .search-box input{ width:100%; padding:11px 34px 11px 38px; border-radius:10px; border:1px solid var(--border); background:var(--panel); color:var(--text); font-family:'Inter',sans-serif; font-size:14px; outline:none; }
+  .search-box input:focus{ border-color:var(--gold); }
+  .search-clear{ position:absolute; right:8px; top:50%; transform:translateY(-50%); width:22px; height:22px; border-radius:50%; border:none; background:transparent; color:var(--text-dim); font-size:16px; line-height:1; cursor:pointer; display:flex; align-items:center; justify-content:center; }
+  .search-clear:hover{ background:var(--panel-2); color:var(--text); }
+  .search-clear[hidden]{ display:none; }
+
+  .dropdown{ position:relative; }
+  .dd-trigger{ display:flex; align-items:center; gap:8px; padding:11px 14px; border-radius:10px; border:1px solid var(--border); background:var(--panel); color:var(--text); font-size:13.5px; font-weight:600; cursor:pointer; white-space:nowrap; }
+  .dd-trigger:hover{ border-color:var(--gold); }
+  .dd-trigger .chevron{ transition:transform .15s; opacity:.6; }
+  .dd-trigger[aria-expanded="true"] .chevron{ transform:rotate(180deg); }
+  .dd-menu{ position:absolute; top:calc(100% + 6px); left:0; min-width:170px; max-height:280px; overflow-y:auto; background:var(--panel); border:1px solid var(--border); border-radius:10px; box-shadow:var(--shadow); z-index:20; padding:6px; }
+  .dd-option{ display:block; width:100%; text-align:left; padding:8px 10px; border-radius:7px; border:none; background:none; color:var(--text); font-size:13.5px; cursor:pointer; }
+  .dd-option:hover{ background:var(--panel-2); }
+  .dd-option.active{ color:var(--gold-strong); font-weight:600; }
+
+  .count-line{ padding:0 24px 14px; max-width:1240px; margin:0 auto; font-size:12.5px; color:var(--text-dim); font-family:'IBM Plex Mono',monospace; }
+  main.catalog-grid{ max-width:1240px; margin:0 auto; padding:0 24px 20px; display:grid; grid-template-columns:repeat(auto-fill, minmax(230px,1fr)); gap:18px; }
+  .watch-card{ background:var(--panel); border:1px solid var(--border); border-radius:16px; overflow:hidden; display:flex; flex-direction:column; transition:border-color .2s, transform .2s; cursor:pointer; }
+  .watch-card:hover{ border-color:var(--gold); transform:translateY(-2px); }
+  .card-media{ position:relative; aspect-ratio:1/1; background:#fff; overflow:hidden; }
+  .card-media img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .badge{ position:absolute; top:10px; left:10px; font-size:10.5px; font-weight:700; text-transform:uppercase; letter-spacing:.05em; padding:5px 9px; border-radius:999px; background:var(--badge-bg); color:var(--gold-strong); border:1px solid var(--badge-border); backdrop-filter:blur(3px); max-width:64%; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .popular-badge{ position:absolute; bottom:10px; right:10px; font-size:10.5px; font-weight:700; padding:5px 9px; border-radius:999px; letter-spacing:.02em; background:linear-gradient(180deg, var(--gold-strong), var(--gold)); color:#191305; box-shadow:0 6px 14px -6px rgba(201,162,78,.7); max-width:60%; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  @media (max-width:480px){ .popular-badge-text{ display:none; } .popular-badge{ padding:6px 8px; } }
+  .card-icon-row{ position:absolute; top:10px; right:10px; display:flex; gap:6px; }
+  .card-icon-row button{ width:28px; height:28px; border-radius:50%; border:none; background:rgba(9,17,30,.6); color:#fff; display:flex; align-items:center; justify-content:center; cursor:pointer; }
+  .card-icon-row .btn-delete:hover{ background:var(--danger); }
+  .card-icon-row .btn-edit:hover{ background:var(--gold); color:#191305; }
+  .photo-count-badge{ position:absolute; bottom:10px; left:10px; font-size:10px; font-weight:600; padding:4px 8px; border-radius:999px; background:var(--badge-bg); color:var(--text-dim); border:1px solid var(--border); }
+  .card-body{ padding:14px 16px 16px; display:flex; flex-direction:column; gap:2px; flex:1; }
+  .eyebrow{ font-size:10.5px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--gold-strong); }
+  .card-body h3{ font-size:16px; margin:2px 0 4px; }
+  .ref{ font-size:11.5px; color:var(--text-dim); font-family:'IBM Plex Mono',monospace; margin:0 0 8px; }
+  .price{ font-size:17px; font-weight:700; margin:0; }
+  .price .unit{ font-size:11px; font-weight:500; color:var(--text-dim); }
+  .installment-hint{ font-size:11.5px; color:var(--text-dim); margin:2px 0 12px; }
+  .empty-state{ text-align:center; padding:60px 20px; color:var(--text-dim); grid-column:1/-1; }
+  .pagination{ display:flex; justify-content:center; gap:8px; padding:0 24px 60px; }
+  .pagination button{ width:36px; height:36px; border-radius:8px; border:1px solid var(--border); background:var(--panel); color:var(--text); cursor:pointer; font-size:13px; }
+  .pagination button.active{ background:var(--gold); color:#191305; border-color:var(--gold); font-weight:700; }
+
+  .modal-overlay{ position:fixed; inset:0; background:rgba(4,8,15,.7); backdrop-filter:blur(3px); display:flex; align-items:center; justify-content:center; z-index:100; padding:20px; }
+  .modal-overlay[hidden]{ display:none; }
+  .modal{ position:relative; background:var(--panel); border:1px solid var(--border); border-radius:18px; max-width:520px; width:100%; max-height:88vh; overflow-y:auto; box-shadow:var(--shadow); padding:26px; }
+  .modal-close{
+    position:absolute; top:14px; right:14px; width:32px; height:32px; border-radius:50%;
+    border:1px solid rgba(224,90,90,.4); background:rgba(224,90,90,.14); color:var(--danger);
+    font-size:18px; line-height:1; cursor:pointer; padding:0;
+    display:flex; align-items:center; justify-content:center;
+    transition:background .15s ease, color .15s ease;
+  }
+  .modal-close:hover{ background:var(--danger); color:#fff; }
+  .field{ margin-bottom:16px; }
+  .field label{ display:block; font-size:12px; color:var(--text-dim); margin-bottom:6px; }
+  .field input, .field select{ width:100%; padding:11px 12px; border-radius:9px; border:1px solid var(--border); background:var(--panel-2); color:var(--text); font-size:14px; outline:none; font-family:inherit; }
+  .field input:focus, .field select:focus{ border-color:var(--gold); }
+  .field-row{ display:flex; gap:10px; }
+  .field-row .field{ flex:1; }
+  @media (max-width:640px){ .field-row{ flex-direction:column; gap:13px; } }
+  .photo-input-btn{ border:1.5px dashed var(--border); border-radius:10px; padding:16px; text-align:center; cursor:pointer; color:var(--text-dim); font-size:13px; }
+  .photo-input-btn:hover{ border-color:var(--gold); color:var(--text); }
+  .photo-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin-top:10px; }
+  @media (max-width:640px){ .photo-grid{ grid-template-columns:repeat(3,1fr); } }
+  .photo-thumb{ position:relative; aspect-ratio:1/1; border-radius:8px; overflow:hidden; border:1px solid var(--border); }
+  .photo-thumb img{ width:100%; height:100%; object-fit:cover; }
+  .photo-thumb .rm{ position:absolute; top:3px; right:3px; width:20px; height:20px; border-radius:50%; border:none; background:rgba(9,17,30,.7); color:#fff; font-size:12px; cursor:pointer; }
+  .photo-thumb .cover-tag{ position:absolute; bottom:3px; left:3px; font-size:9px; padding:2px 5px; border-radius:5px; background:var(--gold); color:#191305; font-weight:700; }
+  .photo-thumb .set-cover{
+    position:absolute; bottom:3px; left:3px; right:3px; font-size:9px; padding:3px 4px; border-radius:5px;
+    background:rgba(9,17,30,.75); color:#fff; border:none; cursor:pointer; opacity:0; transition:opacity .15s;
+  }
+  .photo-thumb:hover .set-cover{ opacity:1; }
+  @media (hover:none){ .photo-thumb .set-cover{ opacity:1; } }
+  .modal-actions{ display:flex; gap:10px; margin-top:6px; }
+  .modal-actions .btn{ flex:1; }
+
+  .settings-form .field small{ display:block; margin-top:4px; color:var(--text-dim); font-size:11px; }
+  .locked-screen{ min-height:100vh; display:flex; align-items:center; justify-content:center; text-align:center; padding:24px; }
+
+  @media (max-width:640px){
+    header.site-header{ padding:20px 16px 14px; }
+    .header-actions{ width:100%; justify-content:flex-start; }
+    .controls{ padding:0 16px; }
+    .count-line{ padding:0 16px 14px; }
+    main.catalog-grid{ padding:0 16px 20px; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:12px; }
+    .pagination{ padding:0 16px; margin-bottom:40px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Tela de configuração da conexão com o GitHub (aparece só se ainda não configurado) -->
+<div class="modal-overlay" id="settingsGate">
+  <div class="modal settings-form" style="max-width:440px;">
+    <h2 style="margin-bottom:6px;">Conectar ao GitHub</h2>
+    <p style="font-size:13px; color:var(--text-dim); margin:0 0 20px;">
+      Esses dados ficam salvos só neste navegador (nunca são enviados a mais ninguém).
+    </p>
+    <div class="field">
+      <label>Usuário ou organização do GitHub</label>
+      <input id="setOwner" placeholder="ex: caiao07">
+    </div>
+    <div class="field">
+      <label>Nome do repositório</label>
+      <input id="setRepo" placeholder="ex: memora-watches">
+    </div>
+    <div class="field">
+      <label>Branch</label>
+      <input id="setBranch" value="main">
+    </div>
+    <div class="field">
+      <label>Token de acesso pessoal (fine-grained)</label>
+      <input id="setToken" type="password" placeholder="github_pat_...">
+      <small>GitHub → foto de perfil → Settings → Developer settings → Personal access tokens → Fine-grained tokens → Generate new token. Em "Repository access" escolha só este repositório; em "Permissions" dê "Contents: Read and write".</small>
+    </div>
+    <button class="btn btn-gold" id="setSaveBtn" style="width:100%;">Salvar e conectar</button>
+  </div>
+</div>
+
+<div id="app" hidden>
+<header class="site-header">
+  <div class="brand">
+    <div class="brand-icon"><img src="data:image/png;base64,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" alt="Memora Watches"></div>
+    <div>
+      <h1>Memora Watches</h1>
+      <p>Painel administrativo</p>
+    </div>
+  </div>
+  <div class="header-actions">
+    <span class="save-indicator" id="saveIndicator"><span class="dot"></span><span id="saveIndicatorText">Pronto</span></span>
+    <button class="btn icon-btn" id="themeToggleBtn" title="Alternar tema" aria-label="Alternar tema"></button>
+    <button class="btn" id="settingsBtn" title="Configurações da conexão">⚙️</button>
+    <button class="btn" id="ratesBtn">Taxas do cartão</button>
+    <button class="btn btn-gold" id="addWatchBtn">+ Adicionar relógio</button>
+  </div>
+</header>
+
+<section class="controls">
+  <div class="search-box">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <input id="searchInput" type="text" placeholder="Buscar por modelo ou referência...">
+    <button type="button" class="search-clear" id="searchClearBtn" title="Limpar busca" hidden>&times;</button>
+  </div>
+  <div class="dropdown" id="brandDropdown">
+    <button type="button" class="dd-trigger" id="brandTrigger" aria-expanded="false">
+      <span id="brandTriggerLabel">Todas as marcas</span>
+      <svg class="chevron" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+    </button>
+    <div class="dd-menu" id="brandMenu" hidden></div>
+  </div>
+
+  <div class="dropdown" id="sizeDropdown">
+    <button type="button" class="dd-trigger" id="sizeTrigger" aria-expanded="false">
+      <span id="sizeTriggerLabel">Todos os tamanhos</span>
+      <svg class="chevron" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+    </button>
+    <div class="dd-menu" id="sizeMenu" hidden></div>
+  </div>
+  <div class="dropdown" id="statusDropdown">
+    <button type="button" class="dd-trigger" id="statusTrigger" aria-expanded="false">
+      <span id="statusTriggerLabel">Todos os status</span>
+      <svg class="chevron" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+    </button>
+    <div class="dd-menu" id="statusMenu" hidden></div>
+  </div>
+  <div class="dropdown" id="sortDropdown">
+    <button type="button" class="dd-trigger" id="sortTrigger" aria-expanded="false">
+      <span id="sortTriggerLabel">Mais recentes</span>
+      <svg class="chevron" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+    </button>
+    <div class="dd-menu" id="sortMenu" hidden></div>
+  </div>
+</section>
+
+<p class="count-line" id="countLine"></p>
+<main class="catalog-grid" id="grid"></main>
+<div class="pagination" id="pagination"></div>
+</div>
+
+<!-- Modal Adicionar/Editar -->
+<div class="modal-overlay" id="watchModal" hidden>
+  <div class="modal">
+    <button class="modal-close" id="watchModalClose">&times;</button>
+    <h2 id="watchModalTitle" style="margin-bottom:18px;">Adicionar relógio</h2>
+    <form id="watchForm">
+      <div class="field"><label>Nome (com a marca no início)</label><input id="fName" required placeholder="ex: Mido Ocean Star Azul"></div>
+      <div class="field-row">
+        <div class="field"><label>Referência</label><input id="fRef"></div>
+        <div class="field"><label>Tamanho</label><input id="fMedida" placeholder="ex: 39mm"></div>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label>Status</label>
+          <select id="fStatus">
+            <option>Sob encomenda</option>
+            <option>Em estoque</option>
+            <option>A caminho</option>
+            <option>Esgotado</option>
+            <option>Descontinuado</option>
+          </select>
+        </div>
+        <div class="field" id="fQtyField" style="display:none;"><label>Quantidade</label><input id="fQty" type="number" min="0"></div>
+      </div>
+      <div class="field"><label>Preço à vista (R$)</label><input id="fPrice" type="number" step="0.01" min="0" required></div>
+      <div class="field">
+        <label>Fotos (pode escolher várias de uma vez — a primeira vira a capa)</label>
+        <label class="photo-input-btn" id="photoInputBtn">📷 Clique para escolher fotos<input type="file" id="fPhotos" accept="image/*" multiple hidden></label>
+        <div class="photo-grid" id="photoGrid"></div>
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="btn" id="watchCancelBtn">Cancelar</button>
+        <button type="submit" class="btn btn-gold" id="watchSaveBtn">Salvar</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Modal Taxas do cartão -->
+<div class="modal-overlay" id="ratesModal" hidden>
+  <div class="modal" style="max-width:420px;">
+    <button class="modal-close" id="ratesModalClose">&times;</button>
+    <h2 style="margin-bottom:6px;">Taxas do cartão</h2>
+    <p style="font-size:13px; color:var(--text-dim); margin:0 0 18px;">
+      Percentual cobrado pela maquininha em cada quantidade de parcelas — é isso que define o valor que o cliente vê ao simular o parcelamento no site.
+    </p>
+    <div id="ratesGrid" style="display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-bottom:20px;"></div>
+    <div class="modal-actions">
+      <button type="button" class="btn" id="ratesCancelBtn">Cancelar</button>
+      <button type="button" class="btn btn-gold" id="ratesSaveBtn">Salvar</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Texto pronto (pra copiar e colar pro cliente) -->
+<div class="modal-overlay" id="textModal" hidden>
+  <div class="modal" style="max-width:420px;">
+    <button class="modal-close" id="textModalClose">&times;</button>
+    <h2 style="margin-bottom:14px;">Texto para o cliente</h2>
+    <textarea id="textModalContent" readonly style="width:100%; min-height:300px; padding:16px; border-radius:10px; border:1px solid var(--border); background:var(--panel-2); color:var(--text); font-family:'IBM Plex Mono',monospace; font-size:14px; line-height:1.9; resize:vertical; overflow:hidden;"></textarea>
+    <div class="modal-actions">
+      <button type="button" class="btn" id="textModalCloseBtn">Fechar</button>
+      <button type="button" class="btn btn-gold" id="textModalCopyBtn">📋 Copiar texto</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const PAGE_SIZE = 24;
+  let CATALOG = [];
+  let CONFIG = { rates:{}, whatsappGroupUrl:'', whatsappSellerNumber:'', locked:false };
+  let state = { search:'', brand:'Todos', size:'Todos', status:'Todos', sort:'recent', page:1 };
+  let gh = null; // {owner, repo, branch, token}
+  let nextId = 1;
+  let pendingPhotos = []; // [{dataUrl, isNew}] for the open add/edit form
+  let editingId = null;
+
+  const PLACEHOLDER_IMG = 'data:image/svg+xml;utf8,' + encodeURIComponent(
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><rect width="200" height="200" fill="#e9e4d8"/><circle cx="100" cy="100" r="55" fill="none" stroke="#b8ac8f" stroke-width="4"/><line x1="100" y1="100" x2="100" y2="65" stroke="#b8ac8f" stroke-width="4"/><line x1="100" y1="100" x2="125" y2="100" stroke="#b8ac8f" stroke-width="4"/></svg>'
+  );
+
+  function brandOf(name){ return (name || '').trim().split(' ')[0] || 'Outros'; }
+  function formatBRL(v){ return 'R$ ' + Math.ceil(v||0).toLocaleString('pt-BR', { minimumFractionDigits:2, maximumFractionDigits:2 }); }
+  function installmentAt(price, n){
+    const rate = (CONFIG.rates[String(n)] || 0) / 100;
+    const gross = price / (1 - rate);
+    return gross / n;
+  }
+  function imagesOf(w){ return (w.images && w.images.length) ? w.images : [PLACEHOLDER_IMG]; }
+  function popularIds(){
+    return new Set(
+      CATALOG.filter(w => (w.orderCount||0) > 0).sort((a,b) => (b.orderCount||0) - (a.orderCount||0)).slice(0, 12).map(w => w.id)
+    );
+  }
+  function toast(msg){
+    const el = document.createElement('div');
+    el.textContent = msg;
+    el.style.cssText = 'position:fixed; bottom:24px; left:50%; transform:translateX(-50%); background:var(--panel); border:1px solid var(--border); color:var(--text); padding:12px 20px; border-radius:10px; box-shadow:var(--shadow); z-index:200; font-size:13.5px; max-width:90vw;';
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), 4500);
+  }
+  function setSaveIndicator(state, text){
+    const el = document.getElementById('saveIndicator');
+    el.className = 'save-indicator' + (state ? ' ' + state : '');
+    document.getElementById('saveIndicatorText').textContent = text;
+  }
+
+  // ---------- GitHub connection settings ----------
+  function loadSettings(){
+    try{
+      const raw = localStorage.getItem('memora_gh_settings');
+      if(!raw) return null;
+      return JSON.parse(raw);
+    } catch(e){ return null; }
+  }
+  function saveSettings(s){ localStorage.setItem('memora_gh_settings', JSON.stringify(s)); }
+
+  document.getElementById('setSaveBtn').addEventListener('click', () => {
+    const owner = document.getElementById('setOwner').value.trim();
+    const repo = document.getElementById('setRepo').value.trim();
+    const branch = document.getElementById('setBranch').value.trim() || 'main';
+    const token = document.getElementById('setToken').value.trim();
+    if(!owner || !repo || !token){ toast('Preencha usuário, repositório e token.'); return; }
+    gh = { owner, repo, branch, token };
+    saveSettings(gh);
+    document.getElementById('settingsGate').hidden = true;
+    document.getElementById('app').hidden = false;
+    init();
+  });
+
+  document.getElementById('settingsBtn').addEventListener('click', () => {
+    document.getElementById('setOwner').value = gh.owner;
+    document.getElementById('setRepo').value = gh.repo;
+    document.getElementById('setBranch').value = gh.branch;
+    document.getElementById('setToken').value = gh.token;
+    document.getElementById('settingsGate').hidden = false;
+  });
+
+  // ---------- GitHub Contents API ----------
+  function utf8ToBase64(str){ return btoa(unescape(encodeURIComponent(str))); }
+
+  async function ghGetFile(path){
+    const url = `https://api.github.com/repos/${gh.owner}/${gh.repo}/contents/${path}?ref=${gh.branch}`;
+    const res = await fetch(url, {
+      cache: 'no-store',
+      headers:{ 'Authorization':`Bearer ${gh.token}`, 'Accept':'application/vnd.github+json' }
+    });
+    if(res.status === 404) return null;
+    if(!res.ok) throw new Error(`Erro ao ler ${path} (${res.status})`);
+    return res.json();
+  }
+
+  async function ghPutFile(path, base64Content, message, opts){
+    opts = opts || {};
+    const attempt = opts._attempt || 0;
+    const existing = opts.isNewFile ? null : await ghGetFile(path);
+    const body = { message, content: base64Content, branch: gh.branch };
+    if(existing) body.sha = existing.sha;
+    const url = `https://api.github.com/repos/${gh.owner}/${gh.repo}/contents/${path}`;
+    const res = await fetch(url, {
+      method:'PUT',
+      headers:{ 'Authorization':`Bearer ${gh.token}`, 'Accept':'application/vnd.github+json' },
+      body: JSON.stringify(body)
+    });
+    if(!res.ok){
+      const err = await res.json().catch(()=>({}));
+      const msg = err.message || `Falha ao salvar ${path} (${res.status})`;
+      // Conflito de versão (ex: duas ações salvando quase ao mesmo tempo, ou
+      // um pequeno atraso de propagação do lado do GitHub): busca o sha mais
+      // atual de novo e tenta salvar mais algumas vezes, com uma pausa curta
+      // entre tentativas, antes de desistir. GitHub sinaliza isso com o
+      // status 409 — checar pelo status é mais confiável do que tentar
+      // reconhecer o texto da mensagem, que varia bastante.
+      if(res.status === 409 && attempt < 2){
+        await new Promise(r => setTimeout(r, 400 * (attempt + 1)));
+        return ghPutFile(path, base64Content, message, Object.assign({}, opts, { _attempt: attempt + 1, isNewFile:false }));
+      }
+      throw new Error(msg);
+    }
+    return res.json();
+  }
+
+  async function saveCatalogToGithub(message){
+    setSaveIndicator('busy', 'Salvando no GitHub...');
+    try{
+      await ghPutFile('catalog.json', utf8ToBase64(JSON.stringify(CATALOG, null, 2)), message);
+      setSaveIndicator('', 'Salvo ' + new Date().toLocaleTimeString('pt-BR', {hour:'2-digit', minute:'2-digit'}));
+    } catch(e){
+      setSaveIndicator('error', 'Erro ao salvar');
+      toast('Não foi possível salvar no GitHub: ' + e.message);
+      throw e;
+    }
+  }
+
+  async function saveConfigToGithub(message){
+    await ghPutFile('config.json', utf8ToBase64(JSON.stringify(CONFIG, null, 2)), message);
+  }
+
+  async function uploadPhoto(watchId, index, dataUrl){
+    const base64 = dataUrl.split(',')[1];
+    const path = `images/${watchId}-${Date.now()}-${index}.jpg`;
+    await ghPutFile(path, base64, `Foto do relógio #${watchId}`, { isNewFile:true });
+    return path;
+  }
+
+  // ---------- Commit único pra várias mudanças de uma vez ----------
+  // Em vez de um commit por arquivo (o que gera uma publicação nova do site
+  // a CADA foto), isso junta várias fotos + o catalog.json/config.json num
+  // ÚNICO commit — o site publica uma vez só, não uma vez por arquivo.
+  // Fundamental pra quando forem centenas de relógios, cada um com fotos.
+  async function ghApi(path, options){
+    const url = `https://api.github.com/repos/${gh.owner}/${gh.repo}/${path}`;
+    const res = await fetch(url, Object.assign({
+      headers:{ 'Authorization':`Bearer ${gh.token}`, 'Accept':'application/vnd.github+json', 'Content-Type':'application/json' }
+    }, options));
+    if(!res.ok){
+      const err = await res.json().catch(()=>({}));
+      throw new Error(err.message || `Falha na API do GitHub (${res.status})`);
+    }
+    return res.json();
+  }
+
+  async function commitFilesTogether(files, message){
+    // files: [{ path, contentBase64 }]
+    // 1) referência atual do branch
+    const ref = await ghApi(`git/refs/heads/${gh.branch}`, { cache:'no-store' });
+    const latestCommitSha = ref.object.sha;
+    // 2) árvore-base desse commit
+    const latestCommit = await ghApi(`git/commits/${latestCommitSha}`, { cache:'no-store' });
+    const baseTreeSha = latestCommit.tree.sha;
+    // 3) cria um "blob" pra cada arquivo (pode ser em paralelo)
+    const blobs = await Promise.all(files.map(async f => {
+      const blob = await ghApi('git/blobs', {
+        method:'POST',
+        body: JSON.stringify({ content: f.contentBase64, encoding:'base64' })
+      });
+      return { path: f.path, mode:'100644', type:'blob', sha: blob.sha };
+    }));
+    // 4) cria uma nova árvore com esses blobs em cima da árvore-base
+    const newTree = await ghApi('git/trees', {
+      method:'POST',
+      body: JSON.stringify({ base_tree: baseTreeSha, tree: blobs })
+    });
+    // 5) cria o commit novo apontando pra essa árvore
+    const newCommit = await ghApi('git/commits', {
+      method:'POST',
+      body: JSON.stringify({ message, tree: newTree.sha, parents: [latestCommitSha] })
+    });
+    // 6) move o branch pra apontar pro commit novo — SÓ AGORA o site publica,
+    // e publica uma vez só, com tudo junto.
+    await ghApi(`git/refs/heads/${gh.branch}`, {
+      method:'PATCH',
+      body: JSON.stringify({ sha: newCommit.sha })
+    });
+    return newCommit.sha;
+  }
+
+
+  // ---------- Load data ----------
+  async function loadData(){
+    const [catRes, cfgRes] = await Promise.all([
+      fetch('catalog.json', { cache:'no-store' }),
+      fetch('config.json', { cache:'no-store' })
+    ]);
+    CATALOG = await catRes.json();
+    CONFIG = Object.assign(CONFIG, await cfgRes.json());
+    nextId = Math.max(0, ...CATALOG.map(w => w.id)) + 1;
+  }
+
+  // Bloquear/desbloquear o site não tem mais botão na tela (a pedido) — mas
+  // a função continua existindo no código. Pra usar: abra o Console do
+  // navegador (F12 → Console) aqui no admin.html e digite:
+  //   toggleSiteLock()
+  // Isso alterna entre bloqueado/desbloqueado, sem precisar editar o
+  // config.json manualmente no GitHub.
+  let _lockBusy = false;
+  window.toggleSiteLock = async function(){
+    if(_lockBusy){ console.log('Já tem uma operação de bloqueio em andamento, aguarde...'); return; }
+    _lockBusy = true;
+    CONFIG.locked = !CONFIG.locked;
+    try{
+      await saveConfigToGithub(CONFIG.locked ? 'Bloqueia o site' : 'Desbloqueia o site');
+      console.log(CONFIG.locked ? '🔒 Site bloqueado para todos.' : '🔓 Site desbloqueado.');
+      toast(CONFIG.locked ? 'Site bloqueado para todos.' : 'Site desbloqueado.');
+    } catch(e){
+      CONFIG.locked = !CONFIG.locked;
+      console.error('Não foi possível mudar o bloqueio:', e.message);
+      toast('Não foi possível mudar o bloqueio: ' + e.message);
+    }
+    _lockBusy = false;
+  };
+
+  // ---------- Dropdown helper (same pattern as index.html) ----------
+  function setupDropdown(prefix, options, activeValue, onSelect){
+    const trigger = document.getElementById(prefix + 'Trigger');
+    const label = document.getElementById(prefix + 'TriggerLabel');
+    const menu = document.getElementById(prefix + 'Menu');
+    menu.innerHTML = options.map(o => `<button type="button" class="dd-option${o.value===activeValue?' active':''}" data-value="${o.value}">${o.label}</button>`).join('');
+    label.textContent = (options.find(o => o.value === activeValue) || options[0]).label;
+    function close(){ menu.hidden = true; trigger.setAttribute('aria-expanded','false'); }
+    trigger.onclick = (e) => {
+      e.stopPropagation();
+      const willOpen = menu.hidden;
+      document.querySelectorAll('.dd-menu').forEach(m => m.hidden = true);
+      if(willOpen){ menu.hidden = false; trigger.setAttribute('aria-expanded','true'); }
+    };
+    menu.querySelectorAll('.dd-option').forEach(btn => {
+      btn.onclick = (e) => {
+        e.stopPropagation();
+        onSelect(btn.dataset.value);
+        label.textContent = btn.textContent;
+        menu.querySelectorAll('.dd-option').forEach(o => o.classList.toggle('active', o === btn));
+        close();
+      };
+    });
+    document.addEventListener('click', (e) => { if(!menu.hidden && !e.target.closest('#' + prefix + 'Dropdown')) close(); });
+  }
+  function renderFilterMenus(){
+    const brands = Array.from(new Set(CATALOG.map(w => brandOf(w.name)))).sort();
+    setupDropdown('brand', [{value:'Todos', label:'Todas as marcas'}, ...brands.map(b => ({value:b, label:b}))], state.brand, v => { state.brand=v; state.page=1; render(); });
+    const sizes = Array.from(new Set(CATALOG.map(w => w.medida).filter(Boolean))).sort();
+    setupDropdown('size', [{value:'Todos', label:'Todos os tamanhos'}, ...sizes.map(s => ({value:s, label:s}))], state.size, v => { state.size=v; state.page=1; render(); });
+    const statuses = Array.from(new Set(CATALOG.map(w => w.status || 'Sob encomenda'))).sort();
+    setupDropdown('status', [{value:'Todos', label:'Todos os status'}, ...statuses.map(s => ({value:s, label:s}))], state.status, v => { state.status=v; state.page=1; render(); });
+    setupDropdown('sort', [
+      {value:'recent', label:'Mais recentes'}, {value:'popular', label:'🔥 Mais pedidos'},
+      {value:'price_asc', label:'Menor preço'}, {value:'price_desc', label:'Maior preço'}
+    ], state.sort, v => { state.sort=v; state.page=1; render(); });
+  }
+
+  // ---------- Theme ----------
+  function updateThemeIcon(theme){
+    const btn = document.getElementById('themeToggleBtn');
+    btn.innerHTML = theme === 'light'
+      ? '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z"/></svg>'
+      : '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>';
+  }
+  function setupTheme(){
+    const theme = localStorage.getItem('memora_theme') || 'dark';
+    document.documentElement.setAttribute('data-theme', theme);
+    updateThemeIcon(theme);
+    document.getElementById('themeToggleBtn').addEventListener('click', () => {
+      const current = document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', current);
+      localStorage.setItem('memora_theme', current);
+      updateThemeIcon(current);
+    });
+  }
+
+  document.getElementById('searchInput').addEventListener('input', e => {
+    state.search = e.target.value; state.page = 1;
+    document.getElementById('searchClearBtn').hidden = !e.target.value;
+    render();
+  });
+  document.getElementById('searchClearBtn').addEventListener('click', () => {
+    const input = document.getElementById('searchInput');
+    input.value = ''; state.search = ''; state.page = 1;
+    document.getElementById('searchClearBtn').hidden = true;
+    input.focus(); render();
+  });
+
+  // ---------- Card rendering ----------
+  function cardHTML(w, popular){
+    const brand = brandOf(w.name);
+    const rest = w.name.startsWith(brand) ? w.name.slice(brand.length).trim() : w.name;
+    const imgs = imagesOf(w);
+    const specs = [w.ref, w.medida].filter(Boolean).join(' · ');
+    const status = w.status || 'Sob encomenda';
+    const val12 = installmentAt(w.price, 12);
+    return `
+    <article class="watch-card" data-id="${w.id}">
+      <div class="card-media">
+        <img src="${imgs[0]}" alt="${w.name}" loading="lazy">
+        <span class="badge">${status}</span>
+        ${popular ? '<span class="popular-badge" title="Um dos mais pedidos">🔥<span class="popular-badge-text"> Mais pedido</span></span>' : ''}
+        <div class="card-icon-row">
+          <button class="btn-edit" data-id="${w.id}" title="Editar">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
+          </button>
+          <button class="btn-delete" data-id="${w.id}" title="Remover">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6"/></svg>
+          </button>
+        </div>
+        ${imgs.length > 1 && imgs[0] !== PLACEHOLDER_IMG ? `<span class="photo-count-badge">${imgs.length} fotos</span>` : ''}
+      </div>
+      <div class="card-body">
+        <span class="eyebrow">${brand}</span>
+        <h3>${rest || w.name}</h3>
+        ${specs ? `<p class="ref">${specs}</p>` : '<p class="ref">&nbsp;</p>'}
+        <p class="price">${formatBRL(w.price)} <span class="unit">à vista</span></p>
+        <p class="installment-hint">em até 12x de ${formatBRL(val12)}</p>
+      </div>
+    </article>`;
+  }
+
+  function filteredSorted(){
+    let list = CATALOG.slice();
+    if(state.brand !== 'Todos') list = list.filter(w => brandOf(w.name) === state.brand);
+    if(state.size !== 'Todos') list = list.filter(w => w.medida === state.size);
+    if(state.status !== 'Todos') list = list.filter(w => (w.status || 'Sob encomenda') === state.status);
+    if(state.search.trim()){
+      const q = state.search.trim().toLowerCase();
+      list = list.filter(w => (w.name||'').toLowerCase().includes(q) || (w.ref||'').toLowerCase().includes(q));
+    }
+    if(state.sort === 'popular') list.sort((a,b) => (b.orderCount||0) - (a.orderCount||0));
+    else if(state.sort === 'price_asc') list.sort((a,b) => a.price - b.price);
+    else if(state.sort === 'price_desc') list.sort((a,b) => b.price - a.price);
+    else list.sort((a,b) => new Date(b.postedAt||0) - new Date(a.postedAt||0));
+    return list;
+  }
+
+  function render(){
+    const grid = document.getElementById('grid');
+    const list = filteredSorted();
+    const total = list.length;
+    const totalPages = Math.max(1, Math.ceil(total / PAGE_SIZE));
+    state.page = Math.min(state.page, totalPages);
+    const start = (state.page - 1) * PAGE_SIZE;
+    const pageItems = list.slice(start, start + PAGE_SIZE);
+    const popular = popularIds();
+
+    document.getElementById('countLine').textContent = total ? `Mostrando ${start+1}–${Math.min(start+PAGE_SIZE, total)} de ${total} relógios` : '';
+    grid.innerHTML = pageItems.length ? pageItems.map(w => cardHTML(w, popular.has(w.id))).join('') : '<div class="empty-state">Nenhum relógio encontrado.</div>';
+
+    grid.querySelectorAll('.btn-edit').forEach(b => b.addEventListener('click', (e) => { e.stopPropagation(); openWatchModal(Number(b.dataset.id)); }));
+    grid.querySelectorAll('.btn-delete').forEach(b => b.addEventListener('click', (e) => { e.stopPropagation(); deleteWatch(Number(b.dataset.id)); }));
+    grid.querySelectorAll('.watch-card').forEach(card => {
+      card.addEventListener('click', () => openTextModal(Number(card.dataset.id)));
+    });
+
+    renderPagination(totalPages);
+  }
+
+  function renderPagination(totalPages){
+    const el = document.getElementById('pagination');
+    if(totalPages <= 1){ el.innerHTML = ''; return; }
+    el.innerHTML = Array.from({length: totalPages}, (_,i) => i+1)
+      .map(p => `<button class="${p===state.page?'active':''}" data-page="${p}">${p}</button>`).join('');
+    el.querySelectorAll('button').forEach(btn => {
+      btn.addEventListener('click', () => { state.page = Number(btn.dataset.page); render(); window.scrollTo({top:0, behavior:'smooth'}); });
+    });
+  }
+
+  // ---------- Add/Edit modal ----------
+  const statusSelect = document.getElementById('fStatus');
+  const qtyField = document.getElementById('fQtyField');
+  statusSelect.addEventListener('change', () => { qtyField.style.display = statusSelect.value === 'Em estoque' ? 'block' : 'none'; });
+
+  document.getElementById('addWatchBtn').addEventListener('click', () => openWatchModal(null));
+
+  // ---------- Taxas do cartão ----------
+  document.getElementById('ratesBtn').addEventListener('click', () => {
+    const grid = document.getElementById('ratesGrid');
+    const keys = Object.keys(CONFIG.rates).map(Number).sort((a,b) => a-b);
+    grid.innerHTML = keys.map(n => `
+      <div class="field" style="margin-bottom:0;">
+        <label>${n === 1 ? 'À vista' : n + 'x'}</label>
+        <input type="number" step="0.01" min="0" class="rate-input" data-n="${n}" value="${CONFIG.rates[n]}">
+      </div>
+    `).join('');
+    document.getElementById('ratesModal').hidden = false;
+  });
+  document.getElementById('ratesModalClose').addEventListener('click', () => { document.getElementById('ratesModal').hidden = true; });
+  document.getElementById('ratesCancelBtn').addEventListener('click', () => { document.getElementById('ratesModal').hidden = true; });
+  document.getElementById('ratesSaveBtn').addEventListener('click', async (e) => {
+    const btn = e.currentTarget;
+    btn.disabled = true;
+    document.querySelectorAll('.rate-input').forEach(inp => {
+      const n = inp.dataset.n;
+      const val = parseFloat(inp.value);
+      if(!isNaN(val) && val >= 0) CONFIG.rates[n] = val;
+    });
+    try{
+      await saveConfigToGithub('Atualiza taxas do cartão');
+      document.getElementById('ratesModal').hidden = true;
+      render();
+      toast('Taxas atualizadas! Pode levar até 1-2 minutos pra refletir no site.');
+    } catch(err){
+      toast('Erro ao salvar taxas: ' + err.message);
+    }
+    btn.disabled = false;
+  });
+
+  document.getElementById('watchModalClose').addEventListener('click', closeWatchModal);
+  document.getElementById('watchCancelBtn').addEventListener('click', closeWatchModal);
+
+  function openWatchModal(id){
+    editingId = id;
+    const w = id ? CATALOG.find(x => x.id === id) : null;
+    document.getElementById('watchModalTitle').textContent = w ? 'Editar relógio' : 'Adicionar relógio';
+    document.getElementById('fName').value = w ? w.name : '';
+    document.getElementById('fRef').value = w ? (w.ref||'') : '';
+    document.getElementById('fMedida').value = w ? (w.medida||'') : '';
+    document.getElementById('fPrice').value = w ? w.price : '';
+    statusSelect.value = w ? (w.status || 'Sob encomenda') : 'Sob encomenda';
+    document.getElementById('fQty').value = w ? (w.qty||'') : '';
+    qtyField.style.display = statusSelect.value === 'Em estoque' ? 'block' : 'none';
+    pendingPhotos = w ? imagesOf(w).filter(src => src !== PLACEHOLDER_IMG).map(src => ({ src, isNew:false })) : [];
+    renderPhotoGrid();
+    document.getElementById('watchModal').hidden = false;
+  }
+  function closeWatchModal(){ document.getElementById('watchModal').hidden = true; pendingPhotos = []; editingId = null; }
+
+  function renderPhotoGrid(){
+    const grid = document.getElementById('photoGrid');
+    grid.innerHTML = pendingPhotos.map((p,i) => `
+      <div class="photo-thumb">
+        <img src="${p.src}">
+        <button type="button" class="rm" data-i="${i}" title="Remover">&times;</button>
+        ${i===0
+          ? '<span class="cover-tag">Capa</span>'
+          : `<button type="button" class="set-cover" data-i="${i}" title="Tornar capa">Tornar capa</button>`}
+      </div>
+    `).join('');
+    grid.querySelectorAll('.rm').forEach(btn => {
+      btn.addEventListener('click', () => { pendingPhotos.splice(Number(btn.dataset.i), 1); renderPhotoGrid(); });
+    });
+    grid.querySelectorAll('.set-cover').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const i = Number(btn.dataset.i);
+        const [chosen] = pendingPhotos.splice(i, 1);
+        pendingPhotos.unshift(chosen);
+        renderPhotoGrid();
+      });
+    });
+  }
+
+  function processPhotoFile(file){
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = ev => {
+        const img = new Image();
+        img.onload = () => {
+          const size = Math.min(img.width, img.height);
+          const source = document.createElement('canvas');
+          source.width = size; source.height = size;
+          source.getContext('2d').drawImage(img, (img.width-size)/2, (img.height-size)/2, size, size, 0, 0, size, size);
+          // Sem limite de célula de planilha agora — só um teto generoso pra
+          // manter o site rápido de carregar (bem acima da qualidade de antes).
+          const MAX_BYTES = 700 * 1024;
+          const TAMANHOS = [1600, 1400, 1200, 1000, 800];
+          let dataUrl = null;
+          for(const lado of TAMANHOS){
+            const canvas = document.createElement('canvas');
+            canvas.width = lado; canvas.height = lado;
+            canvas.getContext('2d').drawImage(source, 0, 0, lado, lado);
+            let quality = 0.88;
+            dataUrl = canvas.toDataURL('image/jpeg', quality);
+            while(dataUrl.length * 0.75 > MAX_BYTES && quality > 0.55){
+              quality -= 0.08;
+              dataUrl = canvas.toDataURL('image/jpeg', quality);
+            }
+            if(dataUrl.length * 0.75 <= MAX_BYTES) break;
+          }
+          resolve(dataUrl);
+        };
+        img.onerror = reject;
+        img.src = ev.target.result;
+      };
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+  }
+
+  document.getElementById('fPhotos').addEventListener('change', async (e) => {
+    const files = Array.from(e.target.files || []);
+    if(!files.length) return;
+    toast('Processando ' + files.length + ' foto(s)...');
+    const results = await Promise.all(files.map(processPhotoFile));
+    results.forEach(dataUrl => pendingPhotos.push({ src: dataUrl, isNew:true }));
+    renderPhotoGrid();
+    e.target.value = '';
+  });
+
+  document.getElementById('watchForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const saveBtn = document.getElementById('watchSaveBtn');
+    const originalLabel = saveBtn.textContent;
+    saveBtn.disabled = true;
+    const id = editingId || nextId;
+    const previousWatch = editingId ? CATALOG.find(x => x.id === id) : null;
+    try{
+      saveBtn.textContent = 'Salvando...';
+      setSaveIndicator('busy', 'Salvando...');
+
+      // Monta os caminhos das fotos novas SEM enviar ainda — tudo (fotos +
+      // catalog.json) vai junto num commit único lá no fim, então o site
+      // publica uma vez só, não uma vez por arquivo.
+      const filesToCommit = [];
+      const finalImagePaths = pendingPhotos.map((p, i) => {
+        if(!p.isNew) return p.src;
+        const path = `images/${id}-${Date.now()}-${i}.jpg`;
+        filesToCommit.push({ path, contentBase64: p.src.split(',')[1] });
+        return path;
+      });
+
+      const watch = {
+        id,
+        name: document.getElementById('fName').value.trim(),
+        ref: document.getElementById('fRef').value.trim(),
+        medida: document.getElementById('fMedida').value.trim(),
+        status: statusSelect.value,
+        qty: statusSelect.value === 'Em estoque' ? (Number(document.getElementById('fQty').value) || 0) : null,
+        price: Number(document.getElementById('fPrice').value) || 0,
+        orderCount: editingId ? (previousWatch.orderCount || 0) : 0,
+        postedAt: editingId ? previousWatch.postedAt : new Date().toISOString().slice(0,10),
+        images: finalImagePaths
+      };
+      if(editingId){
+        const idx = CATALOG.findIndex(x => x.id === id);
+        CATALOG[idx] = watch;
+      } else {
+        CATALOG.push(watch);
+      }
+      filesToCommit.push({ path: 'catalog.json', contentBase64: utf8ToBase64(JSON.stringify(CATALOG, null, 2)) });
+
+      await commitFilesTogether(filesToCommit, (editingId ? 'Edita ' : 'Adiciona ') + watch.name);
+      if(!editingId) nextId = id + 1;
+      setSaveIndicator('', 'Salvo ' + new Date().toLocaleTimeString('pt-BR', {hour:'2-digit', minute:'2-digit'}));
+      closeWatchModal();
+      renderFilterMenus();
+      render();
+      toast('Relógio salvo! O site pode levar até 1-2 minutos pra atualizar no ar.');
+    } catch(err){
+      // Desfaz a mudança local se o commit não foi confirmado no GitHub,
+      // pra não deixar o catálogo na tela diferente do que está salvo.
+      if(editingId && previousWatch){
+        const idx = CATALOG.findIndex(x => x.id === id);
+        if(idx !== -1) CATALOG[idx] = previousWatch;
+      } else if(!editingId){
+        const idx = CATALOG.findIndex(x => x.id === id);
+        if(idx !== -1) CATALOG.splice(idx, 1);
+      }
+      setSaveIndicator('error', 'Erro ao salvar');
+      toast('Erro ao salvar: ' + err.message);
+    }
+    saveBtn.textContent = originalLabel;
+    saveBtn.disabled = false;
+  });
+
+  async function deleteWatch(id){
+    const w = CATALOG.find(x => x.id === id);
+    if(!w) return;
+    if(!confirm(`Remover "${w.name}" do catálogo?`)) return;
+    CATALOG = CATALOG.filter(x => x.id !== id);
+    try{
+      await saveCatalogToGithub('Remove ' + w.name);
+      renderFilterMenus();
+      render();
+      toast('Relógio removido. Pode levar até 1-2 minutos pra sumir do site.');
+    } catch(err){
+      CATALOG.push(w);
+      toast('Erro ao remover: ' + err.message);
+    }
+  }
+
+  // ---------- Texto pronto pra copiar e mandar pro cliente ----------
+  function generateWatchText(w){
+    const val12 = installmentAt(w.price, 12);
+    const handle = (CONFIG.instagramUrl || '').replace(/\/+$/, '').split('/').pop();
+    const lines = [
+      w.name,
+      'Novo, completo',
+      w.ref ? `Ref. ${w.ref}` : null,
+      w.medida ? `Medida: ${w.medida}` : null,
+      'Automático',
+      w.status || 'Sob encomenda',
+      `R$${Math.ceil(w.price).toLocaleString('pt-BR')} à vista`,
+      `Até 12x de ${Math.ceil(val12).toLocaleString('pt-BR')},00`,
+      handle ? `@${handle}` : null
+    ];
+    return lines.filter(Boolean).join('\n');
+  }
+
+  function openTextModal(id){
+    const w = CATALOG.find(x => x.id === id);
+    if(!w) return;
+    const ta = document.getElementById('textModalContent');
+    ta.value = generateWatchText(w);
+    document.getElementById('textModal').hidden = false;
+    ta.style.height = 'auto';
+    ta.style.height = (ta.scrollHeight + 4) + 'px';
+  }
+  function closeTextModal(){ document.getElementById('textModal').hidden = true; }
+  document.getElementById('textModalClose').addEventListener('click', closeTextModal);
+  document.getElementById('textModalCloseBtn').addEventListener('click', closeTextModal);
+  document.getElementById('textModalCopyBtn').addEventListener('click', async () => {
+    const ta = document.getElementById('textModalContent');
+    try{
+      await navigator.clipboard.writeText(ta.value);
+    } catch(e){
+      ta.focus(); ta.select();
+      document.execCommand('copy');
+    }
+    toast('Texto copiado!');
+  });
+
+  // ---------- Init ----------
+  async function init(){
+    setSaveIndicator('busy', 'Carregando...');
+    try{
+      await loadData();
+      setupTheme();
+      renderFilterMenus();
+      render();
+      setSaveIndicator('', 'Pronto');
+    } catch(e){
+      setSaveIndicator('error', 'Erro ao carregar');
+      toast('Não foi possível carregar catalog.json/config.json: ' + e.message);
+    }
+  }
+
+  const savedSettings = loadSettings();
+  if(savedSettings){
+    gh = savedSettings;
+    document.getElementById('settingsGate').hidden = true;
+    document.getElementById('app').hidden = false;
+    init();
+  }
+})();
+</script>
+</body>
+</html>
