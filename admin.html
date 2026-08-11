@@ -92,6 +92,13 @@
   .card-media{ position:relative; aspect-ratio:1/1; background:#fff; overflow:hidden; }
   .card-media img{ width:100%; height:100%; object-fit:cover; display:block; }
   .badge{ position:absolute; top:10px; left:10px; font-size:10.5px; font-weight:700; text-transform:uppercase; letter-spacing:.05em; padding:5px 9px; border-radius:999px; background:var(--badge-bg); color:var(--gold-strong); border:1px solid var(--badge-border); backdrop-filter:blur(3px); max-width:64%; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .badge-sobencomenda{ color:#e0bc6c; border-color:rgba(224,188,108,.5); background:rgba(224,188,108,.14); }
+  .badge-emestoque{ color:#8fd19e; border-color:rgba(143,209,158,.5); background:rgba(143,209,158,.14); }
+  .badge-acaminho{ color:#8ec2e8; border-color:rgba(142,194,232,.5); background:rgba(142,194,232,.14); }
+  .badge-esgotado{ color:#e0937c; border-color:rgba(224,147,124,.5); background:rgba(224,147,124,.14); }
+  .badge-descontinuado{ color:#a39d90; border-color:rgba(163,157,144,.45); background:rgba(163,157,144,.12); }
+  .watch-card.faded{ opacity:.55; transition:opacity .2s ease; }
+  .watch-card.faded:hover{ opacity:.9; }
   .popular-badge{ position:absolute; bottom:10px; right:10px; font-size:10.5px; font-weight:700; padding:5px 9px; border-radius:999px; letter-spacing:.02em; background:linear-gradient(180deg, var(--gold-strong), var(--gold)); color:#191305; box-shadow:0 6px 14px -6px rgba(201,162,78,.7); max-width:60%; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
   @media (max-width:480px){ .popular-badge-text{ display:none; } .popular-badge{ padding:6px 8px; } }
   .card-icon-row{ position:absolute; top:10px; right:10px; display:flex; gap:6px; }
@@ -332,6 +339,18 @@
   );
 
   function brandOf(name){ return (name || '').trim().split(' ')[0] || 'Outros'; }
+  function statusClass(status){
+    const s = (status || '').toLowerCase();
+    if(s.includes('estoque')) return 'badge-emestoque';
+    if(s.includes('caminho')) return 'badge-acaminho';
+    if(s.includes('esgotado')) return 'badge-esgotado';
+    if(s.includes('descontinuado')) return 'badge-descontinuado';
+    return 'badge-sobencomenda';
+  }
+  function isFadedStatus(status){
+    const s = (status || '').toLowerCase();
+    return s.includes('esgotado') || s.includes('descontinuado');
+  }
   function formatBRL(v){ return 'R$ ' + Math.ceil(v||0).toLocaleString('pt-BR', { minimumFractionDigits:2, maximumFractionDigits:2 }); }
   function installmentAt(price, n){
     const rate = (CONFIG.rates[String(n)] || 0) / 100;
@@ -665,10 +684,10 @@
     const status = w.status || 'Sob encomenda';
     const val12 = installmentAt(w.price, 12);
     return `
-    <article class="watch-card" data-id="${w.id}">
+    <article class="watch-card${isFadedStatus(status) ? ' faded' : ''}" data-id="${w.id}">
       <div class="card-media">
         <img src="${cdnUrl(imgs[0])}" alt="${w.name}" loading="lazy">
-        <span class="badge">${status}</span>
+        <span class="badge ${statusClass(status)}">${status}</span>
         ${popular ? '<span class="popular-badge" title="Um dos mais pedidos">🔥<span class="popular-badge-text"> Mais pedido</span></span>' : ''}
         <div class="card-icon-row">
           <button class="btn-edit" data-id="${w.id}" title="Editar">
