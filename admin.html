@@ -366,7 +366,7 @@
     return `https://cdn.jsdelivr.net/gh/${gh.owner}/${gh.repo}@${gh.branch}/${path}`;
   }
   function imagesOf(w){ return (w.images && w.images.length) ? w.images : [PLACEHOLDER_IMG]; }
-  const LIMIAR_MAIS_VENDIDO = 5; // mais de 5 unidades vendidas = "mais pedido"
+  const LIMIAR_MAIS_VENDIDO = 2; // mais de 2 unidades vendidas = "mais pedido"
   function popularIds(){
     return new Set(CATALOG.filter(w => (w.orderCount||0) > LIMIAR_MAIS_VENDIDO).map(w => w.id));
   }
