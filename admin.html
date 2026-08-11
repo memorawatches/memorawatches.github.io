@@ -210,6 +210,7 @@
     <button class="btn icon-btn" id="themeToggleBtn" title="Alternar tema" aria-label="Alternar tema"></button>
     <button class="btn" id="settingsBtn" title="Configurações da conexão">⚙️</button>
     <button class="btn" id="ratesBtn">Taxas do cartão</button>
+    <button class="btn" id="quoteBtn">Cotação avulsa</button>
     <button class="btn btn-gold" id="addWatchBtn">+ Adicionar relógio</button>
   </div>
 </header>
@@ -307,6 +308,27 @@
       <button type="button" class="btn" id="ratesCancelBtn">Cancelar</button>
       <button type="button" class="btn btn-gold" id="ratesSaveBtn">Salvar</button>
     </div>
+  </div>
+</div>
+
+<!-- Modal Cotação avulsa (sem item de catálogo vinculado) -->
+<div class="modal-overlay" id="quoteModal" hidden>
+  <div class="modal" style="max-width:420px;">
+    <button class="modal-close" id="quoteModalClose">&times;</button>
+    <h2 style="margin-bottom:6px;">Cotação avulsa</h2>
+    <p style="font-size:13px; color:var(--text-dim); margin:0 0 18px;">
+      Sem item de catálogo vinculado — calcula usando as mesmas taxas do cartão do site.
+    </p>
+    <div class="field">
+      <label>Valor líquido desejado (R$)</label>
+      <input type="number" step="0.01" min="0" id="qNet" placeholder="0,00">
+    </div>
+    <div class="field">
+      <label>Número de parcelas</label>
+      <select id="qInstallments"></select>
+    </div>
+    <div id="qResult" style="background:var(--panel-2); border:1px solid var(--border); border-radius:10px; padding:14px 16px; font-size:13.5px; line-height:1.9; margin-bottom:18px; white-space:pre-line;"></div>
+    <button type="button" class="btn btn-gold" id="qCopyBtn" style="width:100%;">📋 Copiar mensagem</button>
   </div>
 </div>
 
@@ -803,6 +825,52 @@
       toast('Erro ao salvar taxas: ' + err.message);
     }
     btn.disabled = false;
+  });
+
+  // ---------- Cotação avulsa ----------
+  document.getElementById('quoteBtn').addEventListener('click', () => {
+    const sel = document.getElementById('qInstallments');
+    const keys = Object.keys(CONFIG.rates).map(Number).sort((a,b) => a-b);
+    sel.innerHTML = keys.map(n => `<option value="${n}" ${n===12?'selected':''}>${n===1 ? 'À vista' : n+'x'}</option>`).join('');
+    document.getElementById('qNet').value = '';
+    updateQuote();
+    document.getElementById('quoteModal').hidden = false;
+  });
+  document.getElementById('quoteModalClose').addEventListener('click', () => { document.getElementById('quoteModal').hidden = true; });
+  document.getElementById('qNet').addEventListener('input', updateQuote);
+  document.getElementById('qInstallments').addEventListener('change', updateQuote);
+
+  function calcularCotacao(){
+    const net = parseFloat(document.getElementById('qNet').value) || 0;
+    const n = Number(document.getElementById('qInstallments').value) || 1;
+    const rate = (CONFIG.rates[String(n)] || 0) / 100;
+    const rateVista = (CONFIG.rates['1'] || 0) / 100;
+    const gross = rate < 1 ? net / (1 - rate) : net;
+    const installmentVal = gross / n;
+    const grossVista = rateVista < 1 ? net / (1 - rateVista) : net;
+    return { net, n, gross, installmentVal, grossVista };
+  }
+
+  function updateQuote(){
+    const { n, gross, installmentVal, grossVista } = calcularCotacao();
+    const linhas = [
+      n === 1 ? `${formatBRL(gross)} à vista no cartão` : `${formatBRL(gross)} em ${n}x de ${formatBRL(installmentVal)}`,
+    ];
+    if(n !== 1) linhas.push(`Equivalente a ${formatBRL(grossVista)} à vista no cartão.`);
+    document.getElementById('qResult').textContent = linhas.join('\n');
+  }
+
+  document.getElementById('qCopyBtn').addEventListener('click', async () => {
+    const { n, gross, installmentVal } = calcularCotacao();
+    const texto = n === 1
+      ? `${formatBRL(gross)} à vista no cartão`
+      : `${formatBRL(gross)} em ${n}x de ${formatBRL(installmentVal)}`;
+    try{
+      await navigator.clipboard.writeText(texto);
+    } catch(e){
+      // navegadores mais antigos: fallback silencioso, o texto já está na tela pra copiar manualmente
+    }
+    toast('Copiado!');
   });
 
   document.getElementById('watchModalClose').addEventListener('click', closeWatchModal);
