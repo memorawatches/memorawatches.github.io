@@ -1904,20 +1904,6 @@
     ]
   },
   {
-    "id": 142,
-    "name": "Seiko Presage Manhattan Marrom",
-    "ref": "SRPB46",
-    "medida": "40mm",
-    "status": "Sob encomenda",
-    "qty": null,
-    "price": 3390,
-    "orderCount": 0,
-    "postedAt": "2026-04-29",
-    "images": [
-      "images/142-cover.jpg"
-    ]
-  },
-  {
     "id": 145,
     "name": "Seiko Presage Negroni",
     "ref": "SRPE41",
