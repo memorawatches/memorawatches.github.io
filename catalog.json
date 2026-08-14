@@ -2156,20 +2156,6 @@
     ]
   },
   {
-    "id": 170,
-    "name": "Seiko Speedtimer US Special Creation",
-    "ref": "SSC931",
-    "medida": "41mm",
-    "status": "Sob encomenda",
-    "qty": null,
-    "price": 3690,
-    "orderCount": 0,
-    "postedAt": "2026-05-10",
-    "images": [
-      "images/170-cover.jpg"
-    ]
-  },
-  {
     "id": 188,
     "name": "Venezianico Redentore Ultrablack 36",
     "ref": "1121510",
