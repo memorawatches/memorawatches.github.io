@@ -1876,20 +1876,6 @@
     ]
   },
   {
-    "id": 164,
-    "name": "Seiko Speedtimer Mechanical Preto",
-    "ref": "SRQ055",
-    "medida": "42mm",
-    "status": "Sob encomenda",
-    "qty": null,
-    "price": 16900,
-    "orderCount": 0,
-    "postedAt": "2026-05-04",
-    "images": [
-      "images/164-cover.jpg"
-    ]
-  },
-  {
     "id": 165,
     "name": "Seiko Speedtimer Panda",
     "ref": "SSC961",
