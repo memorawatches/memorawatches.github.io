@@ -2408,20 +2408,6 @@
     ]
   },
   {
-    "id": 178,
-    "name": "Seiko 5 GMT US Special Cration",
-    "ref": "SSK019",
-    "medida": "42,5mm",
-    "status": "Sob encomenda",
-    "qty": null,
-    "price": 2890,
-    "orderCount": 1,
-    "postedAt": "2026-05-10",
-    "images": [
-      "images/178-cover.jpg"
-    ]
-  },
-  {
     "id": 179,
     "name": "Seiko 5 GMT Laranja",
     "ref": "SSK005",
