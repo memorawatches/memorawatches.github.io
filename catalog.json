@@ -3260,5 +3260,19 @@
     "images": [
       "images/286-1786729195734-0.jpg"
     ]
+  },
+  {
+    "id": 287,
+    "name": "Mido TV 35 Preto",
+    "ref": "M049.307.11.081.00",
+    "medida": "35mm",
+    "status": "Sob encomenda",
+    "qty": null,
+    "price": 8390,
+    "orderCount": 0,
+    "postedAt": "2026-08-14",
+    "images": [
+      "images/287-1786729232849-0.jpg"
+    ]
   }
 ]
