@@ -1358,20 +1358,6 @@
     ]
   },
   {
-    "id": 98,
-    "name": "Mido TV Big Date Allblack",
-    "ref": "M049.526.37.291.00",
-    "medida": "39mm",
-    "status": "Sob encomenda",
-    "qty": null,
-    "price": 8990,
-    "orderCount": 0,
-    "postedAt": "2026-07-20",
-    "images": [
-      "images/98-cover.jpg"
-    ]
-  },
-  {
     "id": 99,
     "name": "Mido TV Big Date Azul",
     "ref": "M049.526.37.041.00",
