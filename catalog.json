@@ -1904,20 +1904,6 @@
     ]
   },
   {
-    "id": 163,
-    "name": "Seiko Speedtimer Automatic Preto",
-    "ref": "SPB515",
-    "medida": "39mm",
-    "status": "Sob encomenda",
-    "qty": null,
-    "price": 6390,
-    "orderCount": 0,
-    "postedAt": "2026-05-04",
-    "images": [
-      "images/163-cover.jpg"
-    ]
-  },
-  {
     "id": 164,
     "name": "Seiko Speedtimer Mechanical Preto",
     "ref": "SRQ055",
