@@ -1904,20 +1904,6 @@
     ]
   },
   {
-    "id": 141,
-    "name": "Seiko Presage Sky Diving",
-    "ref": "SRPB43",
-    "medida": "40mm",
-    "status": "Sob encomenda",
-    "qty": null,
-    "price": 3390,
-    "orderCount": 1,
-    "postedAt": "2026-04-29",
-    "images": [
-      "images/141-cover.jpg"
-    ]
-  },
-  {
     "id": 142,
     "name": "Seiko Presage Manhattan Marrom",
     "ref": "SRPB46",
