@@ -2520,20 +2520,6 @@
     ]
   },
   {
-    "id": 182,
-    "name": "Seiko 5 Sports SKX Azul",
-    "ref": "SRPD51",
-    "medida": "42,5mm",
-    "status": "Sob encomenda",
-    "qty": null,
-    "price": 2390,
-    "orderCount": 0,
-    "postedAt": "2026-05-10",
-    "images": [
-      "images/182-cover.jpg"
-    ]
-  },
-  {
     "id": 183,
     "name": "Seiko 5 Sports SKX Pepsi",
     "ref": "SRPD53",
