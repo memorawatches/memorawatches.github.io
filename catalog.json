@@ -1386,20 +1386,6 @@
     ]
   },
   {
-    "id": 101,
-    "name": "Seiko Prosper Turle",
-    "ref": "SRPE93K1",
-    "medida": "45mm",
-    "status": "Sob encomenda",
-    "qty": null,
-    "price": 3390,
-    "orderCount": 0,
-    "postedAt": "2026-04-06",
-    "images": [
-      "images/101-cover.jpg"
-    ]
-  },
-  {
     "id": 102,
     "name": "Citizen Tsuyosa Shore",
     "ref": "NJ0230-59L",
