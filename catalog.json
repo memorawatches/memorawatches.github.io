@@ -2338,20 +2338,6 @@
     ]
   },
   {
-    "id": 175,
-    "name": "Seiko 5 GMT Sprite",
-    "ref": "SSK035",
-    "medida": "42,5mm",
-    "status": "Sob encomenda",
-    "qty": null,
-    "price": 3190,
-    "orderCount": 0,
-    "postedAt": "2026-05-10",
-    "images": [
-      "images/175-cover.jpg"
-    ]
-  },
-  {
     "id": 176,
     "name": "Seiko 5 GMT Bruce Wayne",
     "ref": "SSK001",
