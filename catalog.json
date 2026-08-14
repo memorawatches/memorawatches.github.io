@@ -2818,12 +2818,14 @@
     "name": "Venezianico Nereide Salone Nautico Venezia 2026 — EDIÇÃO LIMITADA À 500un.",
     "ref": "",
     "medida": "42mm",
-    "status": "Sob encomenda",
+    "status": "Esgotado",
     "qty": null,
     "price": 7190,
     "orderCount": 0,
     "postedAt": "2026-06-09",
-    "images": []
+    "images": [
+      "images/252-1786717112413-0.jpg"
+    ]
   },
   {
     "id": 253,
