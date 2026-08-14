@@ -2338,20 +2338,6 @@
     ]
   },
   {
-    "id": 176,
-    "name": "Seiko 5 GMT Bruce Wayne",
-    "ref": "SSK001",
-    "medida": "42,5mm",
-    "status": "Sob encomenda",
-    "qty": null,
-    "price": 3190,
-    "orderCount": 2,
-    "postedAt": "2026-05-10",
-    "images": [
-      "images/176-cover.jpg"
-    ]
-  },
-  {
     "id": 177,
     "name": "Seiko 5 GMT Batman",
     "ref": "SSK003",
