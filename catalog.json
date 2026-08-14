@@ -1960,20 +1960,6 @@
     ]
   },
   {
-    "id": 153,
-    "name": "Seiko Presage Style60's Azul",
-    "ref": "SRPL07",
-    "medida": "40mm",
-    "status": "Sob encomenda",
-    "qty": null,
-    "price": 3790,
-    "orderCount": 0,
-    "postedAt": "2026-04-30",
-    "images": [
-      "images/153-cover.jpg"
-    ]
-  },
-  {
     "id": 155,
     "name": "Seiko Presage Style60's Pistache",
     "ref": "SRPL71",
