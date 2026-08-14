@@ -2408,20 +2408,6 @@
     ]
   },
   {
-    "id": 179,
-    "name": "Seiko 5 GMT Laranja",
-    "ref": "SSK005",
-    "medida": "42,5mm",
-    "status": "Sob encomenda",
-    "qty": null,
-    "price": 2890,
-    "orderCount": 0,
-    "postedAt": "2026-05-10",
-    "images": [
-      "images/179-cover.jpg"
-    ]
-  },
-  {
     "id": 180,
     "name": "Seiko 5 GMT Zombie",
     "ref": "SSK021",
