@@ -3232,5 +3232,19 @@
     "images": [
       "images/284-1786726727786-0.jpg"
     ]
+  },
+  {
+    "id": 285,
+    "name": "Mido TV 35 Rosê",
+    "ref": "M049.307.33.296.00",
+    "medida": "35mm",
+    "status": "Sob encomenda",
+    "qty": null,
+    "price": 9490,
+    "orderCount": 0,
+    "postedAt": "2026-08-14",
+    "images": [
+      "images/285-1786729066233-0.jpg"
+    ]
   }
 ]
