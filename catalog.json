@@ -1974,20 +1974,6 @@
     ]
   },
   {
-    "id": 168,
-    "name": "Seiko Presage Silver Bullet",
-    "ref": "SSK049",
-    "medida": "40mm",
-    "status": "Sob encomenda",
-    "qty": null,
-    "price": 4890,
-    "orderCount": 0,
-    "postedAt": "2026-05-09",
-    "images": [
-      "images/168-cover.jpg"
-    ]
-  },
-  {
     "id": 169,
     "name": "Seiko Speedtimer Coffee",
     "ref": "SSC817",
