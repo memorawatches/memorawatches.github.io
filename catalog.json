@@ -2352,20 +2352,6 @@
     ]
   },
   {
-    "id": 172,
-    "name": "Seiko 5 Sports SKX Preto",
-    "ref": "SRPL85",
-    "medida": "42.5mm",
-    "status": "Sob encomenda",
-    "qty": null,
-    "price": 2890,
-    "orderCount": 0,
-    "postedAt": "2026-05-10",
-    "images": [
-      "images/172-cover.jpg"
-    ]
-  },
-  {
     "id": 174,
     "name": "Seiko 5 GMT White Batman",
     "ref": "SSK033",
