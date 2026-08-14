@@ -1414,20 +1414,6 @@
     ]
   },
   {
-    "id": 104,
-    "name": "Seiko Prospex Diver",
-    "ref": "SRPF03",
-    "medida": "44mm",
-    "status": "Sob encomenda",
-    "qty": null,
-    "price": 3390,
-    "orderCount": 0,
-    "postedAt": "2026-04-08",
-    "images": [
-      "images/104-cover.jpg"
-    ]
-  },
-  {
     "id": 105,
     "name": "Hamilton American Classic",
     "ref": "H13519711",
