@@ -2338,20 +2338,6 @@
     ]
   },
   {
-    "id": 177,
-    "name": "Seiko 5 GMT Batman",
-    "ref": "SSK003",
-    "medida": "42,5mm",
-    "status": "Descontinuado",
-    "qty": null,
-    "price": 3190,
-    "orderCount": 2,
-    "postedAt": "2026-05-10",
-    "images": [
-      "images/177-cover.jpg"
-    ]
-  },
-  {
     "id": 188,
     "name": "Venezianico Redentore Ultrablack 36",
     "ref": "1121510",
