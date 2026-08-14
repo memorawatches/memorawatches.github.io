@@ -557,7 +557,8 @@
       {value:'popular', label:'🔥 Mais pedidos'},
       {value:'recent', label:'Mais recentes'},
       {value:'price_asc', label:'Menor preço'},
-      {value:'price_desc', label:'Maior preço'}
+      {value:'price_desc', label:'Maior preço'},
+      {value:'name_asc', label:'Nome A-Z'}, {value:'name_desc', label:'Nome Z-A'}
     ];
     setupDropdown('sort', options, state.sort, v => { state.sort = v; state.page = 1; render(); });
   }
@@ -619,6 +620,8 @@
     if(state.sort === 'popular') list.sort((a,b) => (b.orderCount||0) - (a.orderCount||0));
     else if(state.sort === 'price_asc') list.sort((a,b) => a.price - b.price);
     else if(state.sort === 'price_desc') list.sort((a,b) => b.price - a.price);
+    else if(state.sort === 'name_asc') list.sort((a,b) => a.name.localeCompare(b.name, 'pt-BR'));
+    else if(state.sort === 'name_desc') list.sort((a,b) => b.name.localeCompare(a.name, 'pt-BR'));
     else list.sort((a,b) => new Date(b.postedAt||0) - new Date(a.postedAt||0));
     return list;
   }
