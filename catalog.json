@@ -2030,20 +2030,6 @@
     ]
   },
   {
-    "id": 159,
-    "name": "Seiko Presage Style60's GMT Azul",
-    "ref": "SSK009",
-    "medida": "40mm",
-    "status": "Sob encomenda",
-    "qty": null,
-    "price": 3690,
-    "orderCount": 0,
-    "postedAt": "2026-04-30",
-    "images": [
-      "images/159-cover.jpg"
-    ]
-  },
-  {
     "id": 160,
     "name": "Seiko Presage Style60's GMT Branco",
     "ref": "SSK011",
