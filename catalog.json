@@ -1540,20 +1540,6 @@
     ]
   },
   {
-    "id": 116,
-    "name": "Seiko 5 GMT Red Passion",
-    "ref": "SSK031",
-    "medida": "42mm",
-    "status": "Sob encomenda",
-    "qty": null,
-    "price": 4590,
-    "orderCount": 0,
-    "postedAt": "2026-04-15",
-    "images": [
-      "images/116-cover.jpg"
-    ]
-  },
-  {
     "id": 117,
     "name": "Seiko 5 GMT Ice Blue",
     "ref": "SSK029",
