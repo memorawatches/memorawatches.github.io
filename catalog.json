@@ -2520,20 +2520,6 @@
     ]
   },
   {
-    "id": 185,
-    "name": "Seiko 5 Sports SKX Verde",
-    "ref": "SRPD63",
-    "medida": "42,5mm",
-    "status": "Sob encomenda",
-    "qty": null,
-    "price": 2390,
-    "orderCount": 0,
-    "postedAt": "2026-05-10",
-    "images": [
-      "images/185-cover.jpg"
-    ]
-  },
-  {
     "id": 186,
     "name": "Seiko 5 Sports SKX All Black",
     "ref": "SRPD65",
