@@ -1960,20 +1960,6 @@
     ]
   },
   {
-    "id": 151,
-    "name": "Seiko Presage Style60's Preto",
-    "ref": "SRPL09",
-    "medida": "40mm",
-    "status": "Sob encomenda",
-    "qty": null,
-    "price": 3690,
-    "orderCount": 0,
-    "postedAt": "2026-04-30",
-    "images": [
-      "images/151-cover.jpg"
-    ]
-  },
-  {
     "id": 152,
     "name": "Seiko Presage Style60's Branco",
     "ref": "SRPG03",
