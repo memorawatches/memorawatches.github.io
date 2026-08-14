@@ -2408,20 +2408,6 @@
     ]
   },
   {
-    "id": 180,
-    "name": "Seiko 5 GMT Zombie",
-    "ref": "SSK021",
-    "medida": "42,5mm",
-    "status": "Sob encomenda",
-    "qty": null,
-    "price": 2890,
-    "orderCount": 0,
-    "postedAt": "2026-05-10",
-    "images": [
-      "images/180-cover.jpg"
-    ]
-  },
-  {
     "id": 181,
     "name": "Seiko 5 GMT Gold",
     "ref": "SSK036",
