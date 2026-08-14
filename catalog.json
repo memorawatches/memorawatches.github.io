@@ -1890,20 +1890,6 @@
     ]
   },
   {
-    "id": 140,
-    "name": "Seiko Presage Blue Moon",
-    "ref": "SRPB41",
-    "medida": "41mm",
-    "status": "Sob encomenda",
-    "qty": null,
-    "price": 3490,
-    "orderCount": 0,
-    "postedAt": "2026-04-29",
-    "images": [
-      "images/140-cover.jpg"
-    ]
-  },
-  {
     "id": 145,
     "name": "Seiko Presage Negroni",
     "ref": "SRPE41",
