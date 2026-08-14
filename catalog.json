@@ -2520,20 +2520,6 @@
     ]
   },
   {
-    "id": 187,
-    "name": "Seiko 5 SKX Suits Blue",
-    "ref": "SRPD71",
-    "medida": "42,5mm",
-    "status": "Sob encomenda",
-    "qty": null,
-    "price": 2690,
-    "orderCount": 0,
-    "postedAt": "2026-05-10",
-    "images": [
-      "images/187-cover.jpg"
-    ]
-  },
-  {
     "id": 188,
     "name": "Venezianico Redentore Ultrablack 36",
     "ref": "1121510",
