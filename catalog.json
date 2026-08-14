@@ -1960,20 +1960,6 @@
     ]
   },
   {
-    "id": 144,
-    "name": "Seiko Presage Mockingbird",
-    "ref": "SRPE15",
-    "medida": "40mm",
-    "status": "Sob encomenda",
-    "qty": null,
-    "price": 3290,
-    "orderCount": 0,
-    "postedAt": "2026-04-29",
-    "images": [
-      "images/144-cover.jpg"
-    ]
-  },
-  {
     "id": 145,
     "name": "Seiko Presage Negroni",
     "ref": "SRPE41",
