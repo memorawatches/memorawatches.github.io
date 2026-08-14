@@ -113,6 +113,12 @@
   .price{ font-size:17px; font-weight:700; margin:0; }
   .price .unit{ font-size:11px; font-weight:500; color:var(--text-dim); }
   .installment-hint{ font-size:11.5px; color:var(--text-dim); margin:2px 0 12px; }
+  .card-actions{ margin-top:auto; }
+  .btn-quote-card{
+    width:100%; padding:10px; border-radius:9px; border:1px solid var(--border); background:var(--panel-2);
+    color:var(--text); font-weight:600; font-size:13px; cursor:pointer;
+  }
+  .btn-quote-card:hover{ border-color:var(--gold); }
   .empty-state{ text-align:center; padding:60px 20px; color:var(--text-dim); grid-column:1/-1; }
   .pagination{ display:flex; justify-content:center; gap:8px; padding:0 24px 60px; }
   .pagination button{ width:36px; height:36px; border-radius:8px; border:1px solid var(--border); background:var(--panel); color:var(--text); cursor:pointer; font-size:13px; }
@@ -311,12 +317,12 @@
   </div>
 </div>
 
-<!-- Modal Cotação avulsa (sem item de catálogo vinculado) -->
+<!-- Modal Cotação avulsa / vinculada a um relógio -->
 <div class="modal-overlay" id="quoteModal" hidden>
   <div class="modal" style="max-width:420px;">
     <button class="modal-close" id="quoteModalClose">&times;</button>
-    <h2 style="margin-bottom:6px;">Cotação avulsa</h2>
-    <p style="font-size:13px; color:var(--text-dim); margin:0 0 18px;">
+    <h2 style="margin-bottom:6px;" id="quoteModalTitle">Cotação avulsa</h2>
+    <p style="font-size:13px; color:var(--text-dim); margin:0 0 18px;" id="quoteModalSubtitle">
       Sem item de catálogo vinculado — calcula usando as mesmas taxas do cartão do site.
     </p>
     <div class="field">
@@ -670,7 +676,8 @@
     setupDropdown('status', [{value:'Todos', label:'Todos os status'}, ...statuses.map(s => ({value:s, label:s}))], state.status, v => { state.status=v; state.page=1; render(); });
     setupDropdown('sort', [
       {value:'popular', label:'🔥 Mais pedidos'}, {value:'recent', label:'Mais recentes'},
-      {value:'price_asc', label:'Menor preço'}, {value:'price_desc', label:'Maior preço'}
+      {value:'price_asc', label:'Menor preço'}, {value:'price_desc', label:'Maior preço'},
+      {value:'name_asc', label:'Nome A-Z'}, {value:'name_desc', label:'Nome Z-A'}
     ], state.sort, v => { state.sort=v; state.page=1; render(); });
   }
 
@@ -735,6 +742,9 @@
         ${specs ? `<p class="ref">${specs}</p>` : '<p class="ref">&nbsp;</p>'}
         <p class="price">${formatBRL(w.price)} <span class="unit">à vista</span></p>
         <p class="installment-hint">em até 12x de ${formatBRL(val12)}</p>
+        <div class="card-actions">
+          <button type="button" class="btn-quote-card" data-id="${w.id}">Gerar orçamento</button>
+        </div>
       </div>
     </article>`;
   }
@@ -751,6 +761,8 @@
     if(state.sort === 'popular') list.sort((a,b) => (b.orderCount||0) - (a.orderCount||0));
     else if(state.sort === 'price_asc') list.sort((a,b) => a.price - b.price);
     else if(state.sort === 'price_desc') list.sort((a,b) => b.price - a.price);
+    else if(state.sort === 'name_asc') list.sort((a,b) => a.name.localeCompare(b.name, 'pt-BR'));
+    else if(state.sort === 'name_desc') list.sort((a,b) => b.name.localeCompare(a.name, 'pt-BR'));
     else list.sort((a,b) => new Date(b.postedAt||0) - new Date(a.postedAt||0));
     return list;
   }
@@ -770,6 +782,7 @@
 
     grid.querySelectorAll('.btn-edit').forEach(b => b.addEventListener('click', (e) => { e.stopPropagation(); openWatchModal(Number(b.dataset.id)); }));
     grid.querySelectorAll('.btn-delete').forEach(b => b.addEventListener('click', (e) => { e.stopPropagation(); deleteWatch(Number(b.dataset.id)); }));
+    grid.querySelectorAll('.btn-quote-card').forEach(b => b.addEventListener('click', (e) => { e.stopPropagation(); openQuoteModal(Number(b.dataset.id)); }));
     grid.querySelectorAll('.watch-card').forEach(card => {
       card.addEventListener('click', () => openTextModal(Number(card.dataset.id)));
     });
@@ -827,15 +840,34 @@
     btn.disabled = false;
   });
 
-  // ---------- Cotação avulsa ----------
-  document.getElementById('quoteBtn').addEventListener('click', () => {
+  // ---------- Cotação avulsa / vinculada a um relógio ----------
+  let quoteContext = null; // relógio atual, ou null pra cotação avulsa
+
+  function abrirQuoteModal(){
     const sel = document.getElementById('qInstallments');
     const keys = Object.keys(CONFIG.rates).map(Number).sort((a,b) => a-b);
     sel.innerHTML = keys.map(n => `<option value="${n}" ${n===12?'selected':''}>${n===1 ? 'À vista' : n+'x'}</option>`).join('');
-    document.getElementById('qNet').value = '';
+    if(quoteContext){
+      document.getElementById('quoteModalTitle').textContent = 'Gerar orçamento';
+      document.getElementById('quoteModalSubtitle').textContent = `${quoteContext.name}${quoteContext.ref ? ' — Ref. ' + quoteContext.ref : ''}`;
+      document.getElementById('qNet').value = quoteContext.price || '';
+    } else {
+      document.getElementById('quoteModalTitle').textContent = 'Cotação avulsa';
+      document.getElementById('quoteModalSubtitle').textContent = 'Sem item de catálogo vinculado — calcula usando as mesmas taxas do cartão do site.';
+      document.getElementById('qNet').value = '';
+    }
     updateQuote();
     document.getElementById('quoteModal').hidden = false;
+  }
+
+  document.getElementById('quoteBtn').addEventListener('click', () => {
+    quoteContext = null;
+    abrirQuoteModal();
   });
+  function openQuoteModal(id){
+    quoteContext = CATALOG.find(x => x.id === id) || null;
+    abrirQuoteModal();
+  }
   document.getElementById('quoteModalClose').addEventListener('click', () => { document.getElementById('quoteModal').hidden = true; });
   document.getElementById('qNet').addEventListener('input', updateQuote);
   document.getElementById('qInstallments').addEventListener('change', updateQuote);
@@ -853,12 +885,14 @@
 
   function textoCotacao(){
     const { n, gross, installmentVal, grossVista } = calcularCotacao();
-    const linhas = [
-      `${formatBRL(grossVista)} à vista | ${n}x`,
-      '',
-      `* 💰 À vista: ${formatBRL(grossVista)}`,
-      `* 🔗 Valor do link: ${formatBRL(gross)}`
-    ];
+    const linhas = [];
+    if(quoteContext){
+      linhas.push(quoteContext.name);
+      if(quoteContext.ref) linhas.push(`Ref. ${quoteContext.ref}`);
+      linhas.push('');
+    }
+    linhas.push(`${formatBRL(grossVista)} à vista | ${n}x`, '');
+    linhas.push(`* 💰 À vista: ${formatBRL(grossVista)}`, `* 🔗 Valor do link: ${formatBRL(gross)}`);
     if(n !== 1) linhas.push(`* 🔹 Parcelamento: ${n}x de ${formatBRL(installmentVal)}`);
     return linhas.join('\n');
   }
