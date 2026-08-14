@@ -3324,9 +3324,11 @@
     "medida": "38.5mm",
     "status": "Sob encomenda",
     "qty": null,
-    "price": 7490,
+    "price": 7590,
     "orderCount": 0,
     "postedAt": "2026-08-14",
-    "images": []
+    "images": [
+      "images/291-1786730422997-0.jpg"
+    ]
   }
 ]
