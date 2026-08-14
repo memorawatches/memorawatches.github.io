@@ -1932,20 +1932,6 @@
     ]
   },
   {
-    "id": 148,
-    "name": "Seiko Presage Aviation",
-    "ref": "SRPJ13",
-    "medida": "40mm",
-    "status": "Sob encomenda",
-    "qty": null,
-    "price": 3890,
-    "orderCount": 0,
-    "postedAt": "2026-04-29",
-    "images": [
-      "images/148-cover.jpg"
-    ]
-  },
-  {
     "id": 150,
     "name": "Seiko Craftsmanship Arita",
     "ref": "SPB445",
