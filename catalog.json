@@ -1386,20 +1386,6 @@
     ]
   },
   {
-    "id": 102,
-    "name": "Citizen Tsuyosa Shore",
-    "ref": "NJ0230-59L",
-    "medida": "40mm",
-    "status": "Sob encomenda",
-    "qty": null,
-    "price": 3590,
-    "orderCount": 0,
-    "postedAt": "2026-04-06",
-    "images": [
-      "images/102-cover.jpg"
-    ]
-  },
-  {
     "id": 103,
     "name": "Citizen Tsuyosa 60",
     "ref": "NK0023-57L",
