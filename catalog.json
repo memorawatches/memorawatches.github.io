@@ -1540,20 +1540,6 @@
     ]
   },
   {
-    "id": 118,
-    "name": "Seiko Turtle JAWS",
-    "ref": "SRPL81",
-    "medida": "45mm",
-    "status": "Sob encomenda",
-    "qty": null,
-    "price": 6990,
-    "orderCount": 0,
-    "postedAt": "2026-04-15",
-    "images": [
-      "images/118-cover.jpg"
-    ]
-  },
-  {
     "id": 119,
     "name": "Mido TV Big Date All Black",
     "ref": "M049.526.33.081.00",
