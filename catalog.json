@@ -1960,20 +1960,6 @@
     ]
   },
   {
-    "id": 155,
-    "name": "Seiko Presage Style60's Pistache",
-    "ref": "SRPL71",
-    "medida": "40mm",
-    "status": "Sob encomenda",
-    "qty": null,
-    "price": 3790,
-    "orderCount": 0,
-    "postedAt": "2026-04-30",
-    "images": [
-      "images/155-cover.jpg"
-    ]
-  },
-  {
     "id": 156,
     "name": "Seiko Presage Style60's Lavanda",
     "ref": "SRPL73",
