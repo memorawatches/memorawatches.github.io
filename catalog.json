@@ -3246,5 +3246,17 @@
     "images": [
       "images/285-1786729066233-0.jpg"
     ]
+  },
+  {
+    "id": 286,
+    "name": "Mido TV 35 Azul",
+    "ref": "M049.307.11.041.00",
+    "medida": "35mm",
+    "status": "Sob encomenda",
+    "qty": null,
+    "price": 8390,
+    "orderCount": 0,
+    "postedAt": "2026-08-14",
+    "images": []
   }
 ]
