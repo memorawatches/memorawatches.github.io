@@ -1876,20 +1876,6 @@
     ]
   },
   {
-    "id": 150,
-    "name": "Seiko Craftsmanship Arita",
-    "ref": "SPB445",
-    "medida": "40mm",
-    "status": "Sob encomenda",
-    "qty": null,
-    "price": 12900,
-    "orderCount": 0,
-    "postedAt": "2026-04-29",
-    "images": [
-      "images/150-cover.jpg"
-    ]
-  },
-  {
     "id": 164,
     "name": "Seiko Speedtimer Mechanical Preto",
     "ref": "SRQ055",
