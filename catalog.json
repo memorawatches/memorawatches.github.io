@@ -1540,20 +1540,6 @@
     ]
   },
   {
-    "id": 117,
-    "name": "Seiko 5 GMT Ice Blue",
-    "ref": "SSK029",
-    "medida": "42mm",
-    "status": "Sob encomenda",
-    "qty": null,
-    "price": 4590,
-    "orderCount": 1,
-    "postedAt": "2026-04-15",
-    "images": [
-      "images/117-cover.jpg"
-    ]
-  },
-  {
     "id": 118,
     "name": "Seiko Turtle JAWS",
     "ref": "SRPL81",
