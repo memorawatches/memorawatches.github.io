@@ -2380,20 +2380,6 @@
     ]
   },
   {
-    "id": 173,
-    "name": "Seiko 5 Sports SKX Laranja",
-    "ref": "SRPL87",
-    "medida": "42.5mm",
-    "status": "Sob encomenda",
-    "qty": null,
-    "price": 2790,
-    "orderCount": 0,
-    "postedAt": "2026-05-10",
-    "images": [
-      "images/173-cover.jpg"
-    ]
-  },
-  {
     "id": 174,
     "name": "Seiko 5 GMT White Batman",
     "ref": "SSK033",
