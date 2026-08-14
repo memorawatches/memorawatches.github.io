@@ -2338,20 +2338,6 @@
     ]
   },
   {
-    "id": 174,
-    "name": "Seiko 5 GMT White Batman",
-    "ref": "SSK033",
-    "medida": "42,5mm",
-    "status": "Descontinuado",
-    "qty": null,
-    "price": 3190,
-    "orderCount": 0,
-    "postedAt": "2026-05-10",
-    "images": [
-      "images/174-cover.jpg"
-    ]
-  },
-  {
     "id": 175,
     "name": "Seiko 5 GMT Sprite",
     "ref": "SSK035",
