@@ -3456,5 +3456,19 @@
     "images": [
       "images/302-1786753745584-0.jpg"
     ]
+  },
+  {
+    "id": 303,
+    "name": "Baltic Scalegraph Blue",
+    "ref": "",
+    "medida": "39.5mm",
+    "status": "Sob encomenda",
+    "qty": null,
+    "price": 17490,
+    "orderCount": 0,
+    "postedAt": "2026-08-15",
+    "images": [
+      "images/303-1786753791798-0.jpg"
+    ]
   }
 ]
