@@ -3540,5 +3540,19 @@
     "images": [
       "images/308-1786759479796-0.jpg"
     ]
+  },
+  {
+    "id": 309,
+    "name": "Tissot Seastar 1000 Azul",
+    "ref": "T120.407.11.041.00",
+    "medida": "36mm",
+    "status": "Esgotado",
+    "qty": null,
+    "price": 3690,
+    "orderCount": 0,
+    "postedAt": "2026-08-15",
+    "images": [
+      "images/309-1786759610881-0.jpg"
+    ]
   }
 ]
