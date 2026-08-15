@@ -3498,5 +3498,19 @@
     "images": [
       "images/305-1786753873742-0.jpg"
     ]
+  },
+  {
+    "id": 306,
+    "name": "Baltic Scalegraph Classic Reverse Panda",
+    "ref": "",
+    "medida": "39.5mm",
+    "status": "Sob encomenda",
+    "qty": null,
+    "price": 16990,
+    "orderCount": 0,
+    "postedAt": "2026-08-15",
+    "images": [
+      "images/306-1786753913858-0.jpg"
+    ]
   }
 ]
