@@ -3610,5 +3610,19 @@
     "images": [
       "images/313-1786797552652-0.jpg"
     ]
+  },
+  {
+    "id": 314,
+    "name": "Seiko Cronógrafo Sport Preto",
+    "ref": "SSB479",
+    "medida": "39.5mm",
+    "status": "Sob encomenda",
+    "qty": null,
+    "price": 2990,
+    "orderCount": 0,
+    "postedAt": "2026-08-15",
+    "images": [
+      "images/314-1786797647424-0.jpg"
+    ]
   }
 ]
