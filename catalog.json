@@ -3512,5 +3512,19 @@
     "images": [
       "images/306-1786753913858-0.jpg"
     ]
+  },
+  {
+    "id": 307,
+    "name": "Christopher_Ward C63 Sealander GMT",
+    "ref": "C63-39AGM4-S00V0-B1",
+    "medida": "39mm",
+    "status": "Sob encomenda",
+    "qty": null,
+    "price": 11900,
+    "orderCount": 0,
+    "postedAt": "2026-08-15",
+    "images": [
+      "images/307-1786759233587-0.jpg"
+    ]
   }
 ]
