@@ -3526,5 +3526,19 @@
     "images": [
       "images/307-1786759233587-0.jpg"
     ]
+  },
+  {
+    "id": 308,
+    "name": "Venezianico Nereide 42 Azul",
+    "ref": "3321502C",
+    "medida": "42mm",
+    "status": "Sob encomenda",
+    "qty": null,
+    "price": 4990,
+    "orderCount": 0,
+    "postedAt": "2026-08-15",
+    "images": [
+      "images/308-1786759479796-0.jpg"
+    ]
   }
 ]
