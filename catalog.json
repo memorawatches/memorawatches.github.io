@@ -1400,20 +1400,6 @@
     ]
   },
   {
-    "id": 106,
-    "name": "Hamilton Navy Scuba",
-    "ref": "H82505150",
-    "medida": "43mm",
-    "status": "Sob encomenda",
-    "qty": null,
-    "price": 7490,
-    "orderCount": 0,
-    "postedAt": "2026-04-15",
-    "images": [
-      "images/106-cover.jpg"
-    ]
-  },
-  {
     "id": 107,
     "name": "Hamilton Navy Scuba",
     "ref": "H82345141",
