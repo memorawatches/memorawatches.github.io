@@ -3330,5 +3330,19 @@
     "images": [
       "images/292-1786730549031-0.jpg"
     ]
+  },
+  {
+    "id": 294,
+    "name": "Baltic Prismic Stone Pietersite",
+    "ref": "",
+    "medida": "36mm",
+    "status": "Sob encomenda",
+    "qty": null,
+    "price": 16490,
+    "orderCount": 0,
+    "postedAt": "2026-08-15",
+    "images": [
+      "images/294-1786753046592-0.jpg"
+    ]
   }
 ]
