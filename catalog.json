@@ -3596,5 +3596,19 @@
     "images": [
       "images/312-1786760156886-0.jpg"
     ]
+  },
+  {
+    "id": 313,
+    "name": "Seiko Cronógrafo Sport Azul",
+    "ref": "SSB477",
+    "medida": "39.5mm",
+    "status": "Sob encomenda",
+    "qty": null,
+    "price": 2990,
+    "orderCount": 0,
+    "postedAt": "2026-08-15",
+    "images": [
+      "images/313-1786797552652-0.jpg"
+    ]
   }
 ]
