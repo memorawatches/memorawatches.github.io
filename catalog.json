@@ -3414,5 +3414,19 @@
     "images": [
       "images/299-1786753501568-0.jpg"
     ]
+  },
+  {
+    "id": 300,
+    "name": "Baltic Prismic Salmon",
+    "ref": "",
+    "medida": "36mm",
+    "status": "Sob encomenda",
+    "qty": null,
+    "price": 11990,
+    "orderCount": 0,
+    "postedAt": "2026-08-15",
+    "images": [
+      "images/300-1786753552038-0.jpg"
+    ]
   }
 ]
