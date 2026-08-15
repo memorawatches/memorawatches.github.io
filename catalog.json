@@ -3428,5 +3428,19 @@
     "images": [
       "images/300-1786753552038-0.jpg"
     ]
+  },
+  {
+    "id": 301,
+    "name": "Baltic Prismic Green",
+    "ref": "",
+    "medida": "36mm",
+    "status": "Sob encomenda",
+    "qty": null,
+    "price": 11990,
+    "orderCount": 0,
+    "postedAt": "2026-08-15",
+    "images": [
+      "images/301-1786753585647-0.jpg"
+    ]
   }
 ]
