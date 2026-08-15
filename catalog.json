@@ -3582,5 +3582,19 @@
     "images": [
       "images/311-1786759934708-0.jpg"
     ]
+  },
+  {
+    "id": 312,
+    "name": "Christopher_Ward C63 Sealander",
+    "ref": "C63-39ADA4-S00B0-B0",
+    "medida": "36mm ou 39mm",
+    "status": "Sob encomenda",
+    "qty": null,
+    "price": 10990,
+    "orderCount": 0,
+    "postedAt": "2026-08-15",
+    "images": [
+      "images/312-1786760156886-0.jpg"
+    ]
   }
 ]
