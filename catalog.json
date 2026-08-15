@@ -3358,5 +3358,19 @@
     "images": [
       "images/295-1786753165656-0.jpg"
     ]
+  },
+  {
+    "id": 296,
+    "name": "Baltic Prismic Stone Dumortierite",
+    "ref": "",
+    "medida": "36mm",
+    "status": "Sob encomenda",
+    "qty": null,
+    "price": 14490,
+    "orderCount": 0,
+    "postedAt": "2026-08-15",
+    "images": [
+      "images/296-1786753308342-0.jpg"
+    ]
   }
 ]
