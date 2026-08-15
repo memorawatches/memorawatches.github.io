@@ -3386,5 +3386,19 @@
     "images": [
       "images/297-1786753342910-0.jpg"
     ]
+  },
+  {
+    "id": 298,
+    "name": "Baltic Prismic Purple",
+    "ref": "",
+    "medida": "36mm",
+    "status": "Sob encomenda",
+    "qty": null,
+    "price": 11990,
+    "orderCount": 0,
+    "postedAt": "2026-08-15",
+    "images": [
+      "images/298-1786753464738-0.jpg"
+    ]
   }
 ]
