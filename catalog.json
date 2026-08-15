@@ -3372,5 +3372,19 @@
     "images": [
       "images/296-1786753308342-0.jpg"
     ]
+  },
+  {
+    "id": 297,
+    "name": "Baltic Prismic Stone Bloodstone",
+    "ref": "",
+    "medida": "36mm",
+    "status": "Sob encomenda",
+    "qty": null,
+    "price": 14490,
+    "orderCount": 0,
+    "postedAt": "2026-08-15",
+    "images": [
+      "images/297-1786753342910-0.jpg"
+    ]
   }
 ]
