@@ -3484,5 +3484,19 @@
     "images": [
       "images/304-1786753831135-0.jpg"
     ]
+  },
+  {
+    "id": 305,
+    "name": "Baltic Scalegraph Classic Panda",
+    "ref": "",
+    "medida": "39.5mm",
+    "status": "Sob encomenda",
+    "qty": null,
+    "price": 16990,
+    "orderCount": 0,
+    "postedAt": "2026-08-15",
+    "images": [
+      "images/305-1786753873742-0.jpg"
+    ]
   }
 ]
