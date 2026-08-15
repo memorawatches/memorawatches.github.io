@@ -3400,5 +3400,19 @@
     "images": [
       "images/298-1786753464738-0.jpg"
     ]
+  },
+  {
+    "id": 299,
+    "name": "Baltic Prismic Grey blue",
+    "ref": "",
+    "medida": "36mm",
+    "status": "Sob encomenda",
+    "qty": null,
+    "price": 11990,
+    "orderCount": 0,
+    "postedAt": "2026-08-15",
+    "images": [
+      "images/299-1786753501568-0.jpg"
+    ]
   }
 ]
