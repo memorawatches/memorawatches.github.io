@@ -3554,5 +3554,19 @@
     "images": [
       "images/309-1786759610881-0.jpg"
     ]
+  },
+  {
+    "id": 310,
+    "name": "Citizen Tsuyosa Small Seconds Verde",
+    "ref": "NK5010-51X",
+    "medida": "40mm",
+    "status": "Sob encomenda",
+    "qty": null,
+    "price": 3290,
+    "orderCount": 0,
+    "postedAt": "2026-08-15",
+    "images": [
+      "images/310-1786759783746-0.jpg"
+    ]
   }
 ]
