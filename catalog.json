@@ -3470,5 +3470,19 @@
     "images": [
       "images/303-1786753791798-0.jpg"
     ]
+  },
+  {
+    "id": 304,
+    "name": "Baltic Scalegraph Grey",
+    "ref": "",
+    "medida": "39.5mm",
+    "status": "Sob encomenda",
+    "qty": null,
+    "price": 17490,
+    "orderCount": 0,
+    "postedAt": "2026-08-15",
+    "images": [
+      "images/304-1786753831135-0.jpg"
+    ]
   }
 ]
