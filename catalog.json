@@ -1958,7 +1958,7 @@
   },
   {
     "id": 193,
-    "name": "Venezianico Bellanotte",
+    "name": "Venezianico Redentore Bellanotte",
     "ref": "1221575",
     "medida": "40mm",
     "status": "Sob encomenda",
@@ -1967,7 +1967,13 @@
     "orderCount": 0,
     "postedAt": "2026-05-16",
     "images": [
-      "images/193-cover.jpg"
+      "images/193-cover.jpg",
+      "images/193-1786798748975-1.jpg",
+      "images/193-1786798748976-2.jpg",
+      "images/193-1786798748976-3.jpg",
+      "images/193-1786798748976-4.jpg",
+      "images/193-1786798748976-5.jpg",
+      "images/193-1786798748976-6.jpg"
     ]
   },
   {
