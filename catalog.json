@@ -3693,5 +3693,19 @@
     "images": [
       "images/314-1786797647424-0.jpg"
     ]
+  },
+  {
+    "id": 315,
+    "name": "Venezianico Nereide Tigris",
+    "ref": "",
+    "medida": "42mm",
+    "status": "Sob encomenda",
+    "qty": null,
+    "price": 8990,
+    "orderCount": 0,
+    "postedAt": "2026-08-17",
+    "images": [
+      "images/315-1786987859856-0.jpg"
+    ]
   }
 ]
