@@ -3749,5 +3749,19 @@
     "images": [
       "images/318-1787089907102-0.jpg"
     ]
+  },
+  {
+    "id": 319,
+    "name": "Citizen Tsuyosa Verde 37",
+    "ref": "NJ0200-50X",
+    "medida": "37mm",
+    "status": "Sob encomenda",
+    "qty": null,
+    "price": 2790,
+    "orderCount": 0,
+    "postedAt": "2026-08-18",
+    "images": [
+      "images/319-1787089969395-0.jpg"
+    ]
   }
 ]
