@@ -3707,5 +3707,19 @@
     "images": [
       "images/315-1786987859856-0.jpg"
     ]
+  },
+  {
+    "id": 316,
+    "name": "Seiko Chronograph Verde",
+    "ref": "SSB481",
+    "medida": "38.7mm",
+    "status": "Sob encomenda",
+    "qty": null,
+    "price": 2990,
+    "orderCount": 0,
+    "postedAt": "2026-08-18",
+    "images": [
+      "images/316-1787089745632-0.jpg"
+    ]
   }
 ]
