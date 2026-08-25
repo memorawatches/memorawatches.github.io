@@ -390,7 +390,7 @@
     "status": "Sob encomenda",
     "qty": null,
     "price": 5690,
-    "orderCount": 0,
+    "orderCount": 1,
     "postedAt": "2026-07-10",
     "images": [
       "images/28-cover.jpg"
@@ -3758,7 +3758,7 @@
     "status": "Sob encomenda",
     "qty": null,
     "price": 2790,
-    "orderCount": 0,
+    "orderCount": 1,
     "postedAt": "2026-08-18",
     "images": [
       "images/319-1787089969395-0.jpg"
