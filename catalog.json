@@ -3,7 +3,7 @@
     "id": 1,
     "name": "Tissot Gentleman 38 Silver",
     "ref": "T165.807.11.031.00",
-    "medida": "38mm",
+    "medida": "38m",
     "status": "Sob encomenda",
     "qty": null,
     "price": 5990,
@@ -17,7 +17,7 @@
     "id": 2,
     "name": "Tissot Gentleman 38 Preto",
     "ref": "T165.807.11.051.00",
-    "medida": "38mm",
+    "medida": "38m",
     "status": "Sob encomenda",
     "qty": null,
     "price": 6490,
@@ -31,7 +31,7 @@
     "id": 3,
     "name": "Tissot Gentleman 38 Azul",
     "ref": "T165.807.11.041.00",
-    "medida": "38mm",
+    "medida": "38m",
     "status": "Sob encomenda",
     "qty": null,
     "price": 6490,
@@ -45,7 +45,7 @@
     "id": 4,
     "name": "Tissot Gentleman 38 Verde",
     "ref": "T165.807.11.091.00",
-    "medida": "38mm",
+    "medida": "38m",
     "status": "Sob encomenda",
     "qty": null,
     "price": 6490,
@@ -318,12 +318,7 @@
     "orderCount": 1,
     "postedAt": "2026-07-10",
     "images": [
-      "images/23-cover.jpg",
-      "images/23-1786799873219-1.jpg",
-      "images/23-1786799873219-2.jpg",
-      "images/23-1786799873219-3.jpg",
-      "images/23-1786799873219-4.jpg",
-      "images/23-1786799873219-5.jpg"
+      "images/23-cover.jpg"
     ]
   },
   {
@@ -390,7 +385,7 @@
     "status": "Sob encomenda",
     "qty": null,
     "price": 5690,
-    "orderCount": 1,
+    "orderCount": 0,
     "postedAt": "2026-07-10",
     "images": [
       "images/28-cover.jpg"
@@ -491,11 +486,7 @@
     "orderCount": 3,
     "postedAt": "2026-07-10",
     "images": [
-      "images/35-cover.jpg",
-      "images/35-1786799560585-1.jpg",
-      "images/35-1786799560585-2.jpg",
-      "images/35-1786799560585-3.jpg",
-      "images/35-1786799560585-4.jpg"
+      "images/35-cover.jpg"
     ]
   },
   {
@@ -551,12 +542,7 @@
     "orderCount": 0,
     "postedAt": "2026-07-10",
     "images": [
-      "images/39-cover.jpg",
-      "images/39-1786799707259-1.jpg",
-      "images/39-1786799707259-2.jpg",
-      "images/39-1786799707259-3.jpg",
-      "images/39-1786799707259-4.jpg",
-      "images/39-1786799707259-5.jpg"
+      "images/39-cover.jpg"
     ]
   },
   {
@@ -777,7 +763,7 @@
     "status": "Sob encomenda",
     "qty": null,
     "price": 3990,
-    "orderCount": 1,
+    "orderCount": 0,
     "postedAt": "2026-07-11",
     "images": [
       "images/55-cover.jpg"
@@ -1253,7 +1239,7 @@
     "status": "Sob encomenda",
     "qty": null,
     "price": 7190,
-    "orderCount": 9,
+    "orderCount": 7,
     "postedAt": "2026-07-17",
     "images": [
       "images/89-cover.jpg"
@@ -1267,7 +1253,7 @@
     "status": "Sob encomenda",
     "qty": null,
     "price": 7190,
-    "orderCount": 12,
+    "orderCount": 9,
     "postedAt": "2026-07-17",
     "images": [
       "images/90-cover.jpg"
@@ -1474,7 +1460,7 @@
     "name": "Seiko Prospex Alpinist",
     "ref": "SPB121",
     "medida": "39mm",
-    "status": "Descontinuado",
+    "status": "Sob encomenda",
     "qty": null,
     "price": 5390,
     "orderCount": 0,
@@ -1900,12 +1886,7 @@
     "orderCount": 4,
     "postedAt": "2026-05-16",
     "images": [
-      "images/188-cover.jpg",
-      "images/188-1786798271723-1.jpg",
-      "images/188-1786798271723-2.jpg",
-      "images/188-1786798271723-3.jpg",
-      "images/188-1786798271724-4.jpg",
-      "images/188-1786798271724-5.jpg"
+      "images/188-cover.jpg"
     ]
   },
   {
@@ -1919,13 +1900,7 @@
     "orderCount": 1,
     "postedAt": "2026-05-16",
     "images": [
-      "images/189-cover.jpg",
-      "images/189-1786798614261-1.jpg",
-      "images/189-1786798614261-2.jpg",
-      "images/189-1786798614261-3.jpg",
-      "images/189-1786798614261-4.jpg",
-      "images/189-1786798614261-5.jpg",
-      "images/189-1786798614261-6.jpg"
+      "images/189-cover.jpg"
     ]
   },
   {
@@ -1972,7 +1947,7 @@
   },
   {
     "id": 193,
-    "name": "Venezianico Redentore Bellanotte",
+    "name": "Venezianico Bellanote",
     "ref": "1221575",
     "medida": "40mm",
     "status": "Sob encomenda",
@@ -1981,13 +1956,7 @@
     "orderCount": 0,
     "postedAt": "2026-05-16",
     "images": [
-      "images/193-cover.jpg",
-      "images/193-1786798748975-1.jpg",
-      "images/193-1786798748976-2.jpg",
-      "images/193-1786798748976-3.jpg",
-      "images/193-1786798748976-4.jpg",
-      "images/193-1786798748976-5.jpg",
-      "images/193-1786798748976-6.jpg"
+      "images/193-cover.jpg"
     ]
   },
   {
@@ -1997,7 +1966,7 @@
     "medida": "40mm",
     "status": "Sob encomenda",
     "qty": null,
-    "price": 6390,
+    "price": 5390,
     "orderCount": 0,
     "postedAt": "2026-05-16",
     "images": [
@@ -2015,12 +1984,7 @@
     "orderCount": 0,
     "postedAt": "2026-05-16",
     "images": [
-      "images/195-cover.jpg",
-      "images/195-1786798890563-1.jpg",
-      "images/195-1786798890563-2.jpg",
-      "images/195-1786798890564-3.jpg",
-      "images/195-1786798890564-4.jpg",
-      "images/195-1786798890564-5.jpg"
+      "images/195-cover.jpg"
     ]
   },
   {
@@ -2034,13 +1998,7 @@
     "orderCount": 2,
     "postedAt": "2026-05-16",
     "images": [
-      "images/196-cover.jpg",
-      "images/196-1786798477300-1.jpg",
-      "images/196-1786798477300-2.jpg",
-      "images/196-1786798477300-3.jpg",
-      "images/196-1786798477300-4.jpg",
-      "images/196-1786798477300-5.jpg",
-      "images/196-1786798477300-6.jpg"
+      "images/196-cover.jpg"
     ]
   },
   {
@@ -2191,7 +2149,7 @@
     "status": "Sob encomenda",
     "qty": null,
     "price": 8490,
-    "orderCount": 1,
+    "orderCount": 0,
     "postedAt": "2026-05-16",
     "images": [
       "images/207-cover.jpg"
@@ -2390,10 +2348,7 @@
     "orderCount": 0,
     "postedAt": "2026-05-16",
     "images": [
-      "images/221-cover.jpg",
-      "images/221-1786799024329-1.jpg",
-      "images/221-1786799024329-2.jpg",
-      "images/221-1786799024329-3.jpg"
+      "images/221-cover.jpg"
     ]
   },
   {
@@ -2463,12 +2418,7 @@
     "orderCount": 3,
     "postedAt": "2026-05-16",
     "images": [
-      "images/226-cover.jpg",
-      "images/226-1786799195757-1.jpg",
-      "images/226-1786799195757-2.jpg",
-      "images/226-1786799195757-3.jpg",
-      "images/226-1786799195757-4.jpg",
-      "images/226-1786799195758-5.jpg"
+      "images/226-cover.jpg"
     ]
   },
   {
@@ -2482,12 +2432,7 @@
     "orderCount": 1,
     "postedAt": "2026-05-16",
     "images": [
-      "images/227-cover.jpg",
-      "images/227-1786799292684-1.jpg",
-      "images/227-1786799292684-2.jpg",
-      "images/227-1786799292684-3.jpg",
-      "images/227-1786799292684-4.jpg",
-      "images/227-1786799292684-5.jpg"
+      "images/227-cover.jpg"
     ]
   },
   {
@@ -2904,15 +2849,10 @@
     "status": "Sob encomenda",
     "qty": null,
     "price": 7990,
-    "orderCount": 3,
+    "orderCount": 1,
     "postedAt": "2026-06-12",
     "images": [
-      "images/257-1786716034933-0.jpg",
-      "images/257-1786805566926-1.jpg",
-      "images/257-1786805566926-2.jpg",
-      "images/257-1786805566926-3.jpg",
-      "images/257-1786805566926-4.jpg",
-      "images/257-1786805566926-5.jpg"
+      "images/257-1786716034933-0.jpg"
     ]
   },
   {
@@ -3575,207 +3515,16 @@
   },
   {
     "id": 307,
-    "name": "Christopher_Ward C63 Sealander GMT",
-    "ref": "C63-39AGM4-S00V0-B1",
-    "medida": "39mm",
+    "name": "Christopher_Ward The Twelve 660 Branco",
+    "ref": "C12-38H2H1-S00W0-B0",
+    "medida": "38mm",
     "status": "Sob encomenda",
     "qty": null,
-    "price": 11900,
+    "price": 15990,
     "orderCount": 0,
-    "postedAt": "2026-08-15",
+    "postedAt": "2026-08-25",
     "images": [
-      "images/307-1786759233587-0.jpg",
-      "images/307-1786805321426-1.jpg",
-      "images/307-1786805321426-2.jpg",
-      "images/307-1786805321426-3.jpg",
-      "images/307-1786805321426-4.jpg",
-      "images/307-1786805321426-5.jpg"
-    ]
-  },
-  {
-    "id": 308,
-    "name": "Venezianico Nereide 42 Azul",
-    "ref": "3321502C",
-    "medida": "42mm",
-    "status": "Sob encomenda",
-    "qty": null,
-    "price": 4990,
-    "orderCount": 0,
-    "postedAt": "2026-08-15",
-    "images": [
-      "images/308-1786759479796-0.jpg"
-    ]
-  },
-  {
-    "id": 309,
-    "name": "Tissot Seastar 1000 Azul",
-    "ref": "T120.407.11.041.00",
-    "medida": "36mm",
-    "status": "Esgotado",
-    "qty": null,
-    "price": 3690,
-    "orderCount": 0,
-    "postedAt": "2026-08-15",
-    "images": [
-      "images/309-1786759610881-0.jpg"
-    ]
-  },
-  {
-    "id": 310,
-    "name": "Citizen Tsuyosa Small Seconds Verde",
-    "ref": "NK5010-51X",
-    "medida": "40mm",
-    "status": "Sob encomenda",
-    "qty": null,
-    "price": 3290,
-    "orderCount": 3,
-    "postedAt": "2026-08-15",
-    "images": [
-      "images/310-1786759783746-0.jpg",
-      "images/310-1786805449980-1.jpg",
-      "images/310-1786805449980-2.jpg",
-      "images/310-1786805449980-3.jpg",
-      "images/310-1786805449980-4.jpg"
-    ]
-  },
-  {
-    "id": 311,
-    "name": "Seiko Samurai Black Shogu-Rai",
-    "ref": "SRPL15",
-    "medida": "41.7mm",
-    "status": "Sob encomenda",
-    "qty": null,
-    "price": 3890,
-    "orderCount": 1,
-    "postedAt": "2026-08-15",
-    "images": [
-      "images/311-1786759934708-0.jpg"
-    ]
-  },
-  {
-    "id": 312,
-    "name": "Christopher_Ward C63 Sealander",
-    "ref": "C63-39ADA4-S00B0-B0",
-    "medida": "36mm ou 39mm",
-    "status": "Sob encomenda",
-    "qty": null,
-    "price": 10990,
-    "orderCount": 0,
-    "postedAt": "2026-08-15",
-    "images": [
-      "images/312-1786760156886-0.jpg"
-    ]
-  },
-  {
-    "id": 313,
-    "name": "Seiko Cronógrafo Sport Azul",
-    "ref": "SSB477",
-    "medida": "39.5mm",
-    "status": "Sob encomenda",
-    "qty": null,
-    "price": 2990,
-    "orderCount": 2,
-    "postedAt": "2026-08-15",
-    "images": [
-      "images/313-1786797552652-0.jpg"
-    ]
-  },
-  {
-    "id": 314,
-    "name": "Seiko Cronógrafo Sport Preto",
-    "ref": "SSB479",
-    "medida": "39.5mm",
-    "status": "Sob encomenda",
-    "qty": null,
-    "price": 2990,
-    "orderCount": 0,
-    "postedAt": "2026-08-15",
-    "images": [
-      "images/314-1786797647424-0.jpg"
-    ]
-  },
-  {
-    "id": 315,
-    "name": "Venezianico Nereide Tigris",
-    "ref": "4521543S",
-    "medida": "42mm",
-    "status": "Em estoque",
-    "qty": 0,
-    "price": 8990,
-    "orderCount": 0,
-    "postedAt": "2026-08-17",
-    "images": [
-      "images/315-1786987859856-0.jpg"
-    ]
-  },
-  {
-    "id": 316,
-    "name": "Seiko Chronograph Verde",
-    "ref": "SSB481",
-    "medida": "38.7mm",
-    "status": "Em estoque",
-    "qty": 0,
-    "price": 2990,
-    "orderCount": 0,
-    "postedAt": "2026-08-18",
-    "images": [
-      "images/316-1787089745632-0.jpg"
-    ]
-  },
-  {
-    "id": 317,
-    "name": "Seiko Chronograph Sport Azul",
-    "ref": "SSB453",
-    "medida": "40mm",
-    "status": "Em estoque",
-    "qty": 0,
-    "price": 2990,
-    "orderCount": 0,
-    "postedAt": "2026-08-18",
-    "images": [
-      "images/317-1787089837082-0.jpg"
-    ]
-  },
-  {
-    "id": 318,
-    "name": "Tissot Carson Preto",
-    "ref": "T122.407.11.051.00",
-    "medida": "40mm",
-    "status": "Em estoque",
-    "qty": 0,
-    "price": 3290,
-    "orderCount": 0,
-    "postedAt": "2026-08-18",
-    "images": [
-      "images/318-1787089907102-0.jpg"
-    ]
-  },
-  {
-    "id": 319,
-    "name": "Citizen Tsuyosa Verde 37",
-    "ref": "NJ0200-50X",
-    "medida": "37mm",
-    "status": "Sob encomenda",
-    "qty": null,
-    "price": 2790,
-    "orderCount": 1,
-    "postedAt": "2026-08-18",
-    "images": [
-      "images/319-1787089969395-0.jpg"
-    ]
-  },
-  {
-    "id": 320,
-    "name": "Seiko Prospex Alpinist",
-    "ref": "SPB507",
-    "medida": "39.5mm",
-    "status": "Sob encomenda",
-    "qty": null,
-    "price": 7290,
-    "orderCount": 0,
-    "postedAt": "2026-08-21",
-    "images": [
-      "images/320-1787311065905-0.jpg"
+      "images/307-1787624357454-0.jpg"
     ]
   }
 ]
