@@ -376,7 +376,7 @@
     "status": "Sob encomenda",
     "qty": null,
     "price": 5190,
-    "orderCount": 3,
+    "orderCount": 4,
     "postedAt": "2026-07-10",
     "images": [
       "images/27-cover.jpg"
@@ -707,7 +707,7 @@
     "status": "Sob encomenda",
     "qty": null,
     "price": 5890,
-    "orderCount": 0,
+    "orderCount": 1,
     "postedAt": "2026-07-11",
     "images": [
       "images/50-cover.jpg"
@@ -1253,7 +1253,7 @@
     "status": "Sob encomenda",
     "qty": null,
     "price": 7190,
-    "orderCount": 9,
+    "orderCount": 11,
     "postedAt": "2026-07-17",
     "images": [
       "images/89-cover.jpg"
@@ -1295,7 +1295,7 @@
     "status": "Sob encomenda",
     "qty": null,
     "price": 8490,
-    "orderCount": 3,
+    "orderCount": 4,
     "postedAt": "2026-07-20",
     "images": [
       "images/92-1786716271406-0.jpg"
@@ -1897,7 +1897,7 @@
     "status": "Sob encomenda",
     "qty": null,
     "price": 4990,
-    "orderCount": 4,
+    "orderCount": 5,
     "postedAt": "2026-05-16",
     "images": [
       "images/188-cover.jpg",
@@ -2904,7 +2904,7 @@
     "status": "Sob encomenda",
     "qty": null,
     "price": 7990,
-    "orderCount": 3,
+    "orderCount": 4,
     "postedAt": "2026-06-12",
     "images": [
       "images/257-1786716034933-0.jpg",
@@ -3133,7 +3133,7 @@
     "status": "Sob encomenda",
     "qty": null,
     "price": 4290,
-    "orderCount": 0,
+    "orderCount": 1,
     "postedAt": "2026-08-08",
     "images": [
       "images/274-1786714161189-0.jpg"
@@ -3786,7 +3786,7 @@
     "status": "Sob encomenda",
     "qty": null,
     "price": 15990,
-    "orderCount": 0,
+    "orderCount": 1,
     "postedAt": "2026-08-25",
     "images": [
       "images/321-1787624495986-0.jpg"
