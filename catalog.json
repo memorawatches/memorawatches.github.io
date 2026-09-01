@@ -3875,5 +3875,19 @@
     "images": [
       "images/328-1788306862534-0.jpg"
     ]
+  },
+  {
+    "id": 329,
+    "name": "Seiko Speedtimer Verde",
+    "ref": "SSC965",
+    "medida": "39mm",
+    "status": "Em estoque",
+    "qty": 0,
+    "price": 4690,
+    "orderCount": 0,
+    "postedAt": "2026-09-01",
+    "images": [
+      "images/329-1788306987118-0.jpg"
+    ]
   }
 ]
