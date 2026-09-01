@@ -3777,5 +3777,17 @@
     "images": [
       "images/321-1787624495986-0.jpg"
     ]
+  },
+  {
+    "id": 322,
+    "name": "Longines HydroConquest Preto",
+    "ref": "L3.788.4.56.6",
+    "medida": "39mm",
+    "status": "Sob encomenda",
+    "qty": null,
+    "price": 16.49,
+    "orderCount": 0,
+    "postedAt": "2026-09-01",
+    "images": []
   }
 ]
