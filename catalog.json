@@ -3805,5 +3805,19 @@
     "images": [
       "images/323-1788306112020-0.jpg"
     ]
+  },
+  {
+    "id": 324,
+    "name": "Citizen Zenshin 60 Verde",
+    "ref": "NK5020-58X",
+    "medida": "40mm",
+    "status": "Em estoque",
+    "qty": 0,
+    "price": 3490,
+    "orderCount": 0,
+    "postedAt": "2026-09-01",
+    "images": [
+      "images/324-1788306419665-0.jpg"
+    ]
   }
 ]
