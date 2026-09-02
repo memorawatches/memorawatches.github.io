@@ -356,7 +356,7 @@
   const PAGE_SIZE = 70;
   let CATALOG = [];
   let CONFIG = { rates:{}, whatsappGroupUrl:'', whatsappSellerNumber:'', locked:false };
-  let state = { search:'', brand:'Todos', size:'Todos', status:'Todos', sort:'popular', page:1 };
+  let state = { search:'', brand:'Todos', size:'Todos', status:'Disponíveis', sort:'popular', page:1 };
   let gh = null; // {owner, repo, branch, token}
   let nextId = 1;
   let pendingPhotos = []; // [{dataUrl, isNew}] for the open add/edit form
@@ -675,7 +675,11 @@
     const sizes = Array.from(new Set(CATALOG.map(w => w.medida).filter(Boolean))).sort();
     setupDropdown('size', [{value:'Todos', label:'Todos os tamanhos'}, ...sizes.map(s => ({value:s, label:s}))], state.size, v => { state.size=v; state.page=1; render(); });
     const statuses = Array.from(new Set(CATALOG.map(w => w.status || 'Sob encomenda'))).sort();
-    setupDropdown('status', [{value:'Todos', label:'Todos os status'}, ...statuses.map(s => ({value:s, label:s}))], state.status, v => { state.status=v; state.page=1; render(); });
+    setupDropdown('status', [
+      {value:'Disponíveis', label:'✅ Disponíveis'},
+      {value:'Todos', label:'Todos os status'},
+      ...statuses.map(s => ({value:s, label:s}))
+    ], state.status, v => { state.status=v; state.page=1; render(); });
     setupDropdown('sort', [
       {value:'popular', label:'🔥 Mais pedidos'}, {value:'recent', label:'Mais recentes'},
       {value:'price_asc', label:'Menor preço'}, {value:'price_desc', label:'Maior preço'},
@@ -755,7 +759,8 @@
     let list = CATALOG.slice();
     if(state.brand !== 'Todos') list = list.filter(w => brandOf(w.name) === state.brand);
     if(state.size !== 'Todos') list = list.filter(w => w.medida === state.size);
-    if(state.status !== 'Todos') list = list.filter(w => (w.status || 'Sob encomenda') === state.status);
+    if(state.status === 'Disponíveis') list = list.filter(w => !isFadedStatus(w.status));
+    else if(state.status !== 'Todos') list = list.filter(w => (w.status || 'Sob encomenda') === state.status);
     if(state.search.trim()){
       const q = state.search.trim().toLowerCase();
       list = list.filter(w => (w.name||'').toLowerCase().includes(q) || (w.ref||'').toLowerCase().includes(q));

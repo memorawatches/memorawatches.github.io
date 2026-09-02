@@ -385,7 +385,7 @@
   const PAGE_SIZE = 70;
   let CATALOG = [];
   let CONFIG = { rates:{}, whatsappGroupUrl:'', whatsappSellerNumber:'', locked:false };
-  let state = { search:'', brand:'Todos', size:'Todos', status:'Todos', sort:'popular', page:1 };
+  let state = { search:'', brand:'Todos', size:'Todos', status:'Disponíveis', sort:'popular', page:1 };
 
   const PLACEHOLDER_IMG = 'data:image/svg+xml;utf8,' + encodeURIComponent(
     '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><rect width="200" height="200" fill="#e9e4d8"/><circle cx="100" cy="100" r="55" fill="none" stroke="#b8ac8f" stroke-width="4"/><line x1="100" y1="100" x2="100" y2="65" stroke="#b8ac8f" stroke-width="4"/><line x1="100" y1="100" x2="125" y2="100" stroke="#b8ac8f" stroke-width="4"/></svg>'
@@ -551,7 +551,11 @@
   }
   function renderStatusMenu(){
     const statuses = Array.from(new Set(CATALOG.map(w => w.status || 'Sob encomenda'))).sort();
-    const options = [{value:'Todos', label:'Todos os status'}, ...statuses.map(s => ({value:s, label:s}))];
+    const options = [
+      {value:'Disponíveis', label:'✅ Disponíveis'},
+      {value:'Todos', label:'Todos os status'},
+      ...statuses.map(s => ({value:s, label:s}))
+    ];
     setupDropdown('status', options, state.status, v => { state.status = v; state.page = 1; render(); });
   }
   function renderSortMenu(){
@@ -614,7 +618,8 @@
     let list = CATALOG.slice();
     if(state.brand !== 'Todos') list = list.filter(w => brandOf(w.name) === state.brand);
     if(state.size !== 'Todos') list = list.filter(w => w.medida === state.size);
-    if(state.status !== 'Todos') list = list.filter(w => (w.status || 'Sob encomenda') === state.status);
+    if(state.status === 'Disponíveis') list = list.filter(w => !isFadedStatus(w.status));
+    else if(state.status !== 'Todos') list = list.filter(w => (w.status || 'Sob encomenda') === state.status);
     if(state.search.trim()){
       const q = state.search.trim().toLowerCase();
       list = list.filter(w => (w.name||'').toLowerCase().includes(q) || (w.ref||'').toLowerCase().includes(q));
