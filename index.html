@@ -425,7 +425,9 @@
   function imagesOf(w){ return (w.images && w.images.length) ? w.images : [PLACEHOLDER_IMG]; }
   const LIMIAR_MAIS_VENDIDO = 2; // mais de 2 unidades vendidas = "mais pedido"
   function popularIds(){
-    return new Set(CATALOG.filter(w => (w.orderCount||0) > LIMIAR_MAIS_VENDIDO).map(w => w.id));
+    return new Set(
+      CATALOG.filter(w => (w.orderCount||0) > LIMIAR_MAIS_VENDIDO && !isFadedStatus(w.status)).map(w => w.id)
+    );
   }
 
   // ---------- Load data ----------
