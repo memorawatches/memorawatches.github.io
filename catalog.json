@@ -3889,5 +3889,19 @@
     "images": [
       "images/329-1788306987118-0.jpg"
     ]
+  },
+  {
+    "id": 330,
+    "name": "Citizen Tsuyosa Roxo",
+    "ref": "NJ0200-50W",
+    "medida": "37mm",
+    "status": "Sob encomenda",
+    "qty": null,
+    "price": 2790,
+    "orderCount": 0,
+    "postedAt": "2026-09-05",
+    "images": [
+      "images/330-1788628179419-0.jpg"
+    ]
   }
 ]
