@@ -3903,5 +3903,19 @@
     "images": [
       "images/330-1788628179419-0.jpg"
     ]
+  },
+  {
+    "id": 331,
+    "name": "Tissot Prx Rosa",
+    "ref": "T137.210.11.331.00",
+    "medida": "35 mm",
+    "status": "Sob encomenda",
+    "qty": null,
+    "price": 3290,
+    "orderCount": 0,
+    "postedAt": "2026-09-05",
+    "images": [
+      "images/331-1788628237063-0.jpg"
+    ]
   }
 ]
