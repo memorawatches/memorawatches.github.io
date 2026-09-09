@@ -4141,5 +4141,19 @@
     "images": [
       "images/347-1788921792992-0.jpg"
     ]
+  },
+  {
+    "id": 348,
+    "name": "NOMOS Club Campus 38 Electric Green",
+    "ref": "726",
+    "medida": "38mm",
+    "status": "Sob encomenda",
+    "qty": null,
+    "price": 13990,
+    "orderCount": 0,
+    "postedAt": "2026-09-09",
+    "images": [
+      "images/348-1788921859391-0.jpg"
+    ]
   }
 ]
