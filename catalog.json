@@ -4211,5 +4211,19 @@
     "images": [
       "images/352-1788922284639-0.jpg"
     ]
+  },
+  {
+    "id": 353,
+    "name": "NOMOS Club Campus 38 Full Rose",
+    "ref": "720",
+    "medida": "38mm",
+    "status": "Sob encomenda",
+    "qty": null,
+    "price": 13990,
+    "orderCount": 0,
+    "postedAt": "2026-09-09",
+    "images": [
+      "images/353-1788922378746-0.jpg"
+    ]
   }
 ]
