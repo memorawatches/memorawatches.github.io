@@ -3931,5 +3931,19 @@
     "images": [
       "images/332-1788919190888-0.jpg"
     ]
+  },
+  {
+    "id": 333,
+    "name": "NOMOS Club Campus Blue Purple",
+    "ref": "713",
+    "medida": "36mm",
+    "status": "Sob encomenda",
+    "qty": null,
+    "price": 15390,
+    "orderCount": 0,
+    "postedAt": "2026-09-09",
+    "images": [
+      "images/333-1788920244299-0.jpg"
+    ]
   }
 ]
