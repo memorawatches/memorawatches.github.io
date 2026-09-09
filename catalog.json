@@ -4169,5 +4169,19 @@
     "images": [
       "images/349-1788921982505-0.jpg"
     ]
+  },
+  {
+    "id": 350,
+    "name": "NOMOS Club Campus 38 Endless Blue",
+    "ref": "724",
+    "medida": "38mm",
+    "status": "Sob encomenda",
+    "qty": null,
+    "price": 13990,
+    "orderCount": 0,
+    "postedAt": "2026-09-09",
+    "images": [
+      "images/350-1788922052521-0.jpg"
+    ]
   }
 ]
