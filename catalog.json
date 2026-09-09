@@ -4099,5 +4099,19 @@
     "images": [
       "images/344-1788921593731-0.jpg"
     ]
+  },
+  {
+    "id": 345,
+    "name": "NOMOS Club Campus 38 Deep Pink",
+    "ref": "728",
+    "medida": "38mm",
+    "status": "Sob encomenda",
+    "qty": null,
+    "price": 13990,
+    "orderCount": 0,
+    "postedAt": "2026-09-09",
+    "images": [
+      "images/345-1788921658088-0.jpg"
+    ]
   }
 ]
