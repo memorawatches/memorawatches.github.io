@@ -4239,5 +4239,19 @@
     "images": [
       "images/354-1789005321489-0.jpg"
     ]
+  },
+  {
+    "id": 355,
+    "name": "Christopher_Ward Trident Biscay Automatic",
+    "ref": "C60-42C3H1-S0KK0-B0",
+    "medida": "42mm",
+    "status": "Sob encomenda",
+    "qty": null,
+    "price": 16490,
+    "orderCount": 0,
+    "postedAt": "2026-09-10",
+    "images": [
+      "images/355-1789005831342-0.jpg"
+    ]
   }
 ]
