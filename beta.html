@@ -240,6 +240,12 @@
   }
   .installment-result{ font-size:13.5px; color:var(--text-dim); margin-top:8px; }
   .strap-options{ display:flex; flex-wrap:wrap; gap:8px; }
+  .strap-badge{
+    position:absolute; bottom:10px; left:10px; font-size:10.5px; font-weight:700;
+    padding:5px 10px; border-radius:999px; letter-spacing:.02em;
+    background:var(--badge-bg); color:var(--gold-strong); border:1px solid rgba(201,162,78,.5);
+    backdrop-filter:blur(3px);
+  }
   .strap-option{
     padding:9px 14px; border-radius:999px; border:1px solid var(--border);
     background:var(--panel-2); color:var(--text); font-size:13px; font-weight:600;
@@ -434,6 +440,18 @@
     return `https://cdn.jsdelivr.net/gh/${GH_OWNER}/${GH_REPO}@${GH_BRANCH}/${path}`;
   }
   function imagesOf(w){ return (w.images && w.images.length) ? w.images : [PLACEHOLDER_IMG]; }
+  // Monta a lista de opções de pulseira SEMPRE incluindo a versão original do
+  // relógio (com o preço e as fotos principais) como primeira opção — senão
+  // o cliente perderia justamente a versão padrão de vista.
+  function strapsOf(w){
+    if(!(w.straps && w.straps.length)) return null;
+    const base = {
+      nome: w.strapBaseName || 'Padrão',
+      price: w.price,
+      images: imagesOf(w)
+    };
+    return [base, ...w.straps];
+  }
   const LIMIAR_MAIS_VENDIDO = 2; // mais de 2 unidades vendidas = "mais pedido"
   function popularIds(){
     return new Set(
@@ -606,6 +624,7 @@
         <img src="${cdnUrl(imgs[0])}" alt="${w.name}" loading="lazy">
         <span class="badge ${statusClass(status)}">${status}</span>
         ${popular ? '<span class="popular-badge" title="Um dos mais pedidos">🔥<span class="popular-badge-text"> Mais pedido</span></span>' : ''}
+        ${(w.straps && w.straps.length) ? `<span class="strap-badge">${w.straps.length + 1} pulseiras</span>` : ''}
         ${imgs.length > 1 ? `
           <button class="gallery-arrow prev" data-dir="-1" aria-label="Foto anterior">‹</button>
           <button class="gallery-arrow next" data-dir="1" aria-label="Próxima foto">›</button>
@@ -705,7 +724,7 @@
 
     // Pulseiras: cada uma tem nome, preço próprio e (opcionalmente) fotos próprias.
     // Relógio sem pulseiras cadastradas continua funcionando exatamente como antes.
-    const straps = (w.straps && w.straps.length) ? w.straps : null;
+    const straps = strapsOf(w);
     let currentStrap = 0;
     let currentPhoto = 0;
 

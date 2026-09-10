@@ -147,6 +147,17 @@
   .photo-input-btn:hover{ border-color:var(--gold); color:var(--text); }
   .photo-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin-top:10px; }
   @media (max-width:640px){ .photo-grid{ grid-template-columns:repeat(3,1fr); } }
+  .strap-options{ display:flex; flex-wrap:wrap; gap:8px; }
+  .strap-option{
+    padding:9px 14px; border-radius:999px; border:1px solid var(--border);
+    background:var(--panel-2); color:var(--text); font-size:13px; font-weight:600;
+    cursor:pointer; transition:border-color .15s, background .15s, color .15s;
+  }
+  .strap-option:hover{ border-color:var(--gold); }
+  .strap-option.active{
+    background:linear-gradient(180deg, var(--gold-strong), var(--gold));
+    color:#191305; border-color:transparent;
+  }
   .strap-card{
     border:1px solid var(--border); border-radius:12px; padding:14px;
     margin-bottom:10px; background:var(--panel-2);
@@ -311,7 +322,12 @@
         <label>Pulseiras (opcional)</label>
         <p style="font-size:11.5px; color:var(--text-dim); margin:-2px 0 10px;">
           Deixe vazio se o relógio tem só uma versão. Se cadastrar, o cliente escolhe a pulseira e o preço/fotos mudam sozinhos.
+          A versão original acima (preço e fotos principais) entra automaticamente como a primeira opção.
         </p>
+        <div class="field" id="strapBaseNameField" style="display:none;">
+          <label>Como chamar a versão original</label>
+          <input type="text" id="fStrapBaseName" placeholder="ex: Couro, Nylon, Padrão">
+        </div>
         <div id="strapsList"></div>
         <button type="button" class="btn" id="addStrapBtn" style="width:100%; margin-top:8px;">+ Adicionar pulseira</button>
       </div>
@@ -347,6 +363,10 @@
     <p style="font-size:13px; color:var(--text-dim); margin:0 0 18px;" id="quoteModalSubtitle">
       Sem item de catálogo vinculado — calcula usando as mesmas taxas do cartão do site.
     </p>
+    <div class="field" id="qStrapField" style="display:none;">
+      <label>Pulseira</label>
+      <div class="strap-options" id="qStrapOptions"></div>
+    </div>
     <div class="field">
       <label>Valor líquido desejado (R$)</label>
       <input type="number" step="0.01" min="0" id="qNet" placeholder="0,00">
@@ -417,6 +437,13 @@
     return `https://cdn.jsdelivr.net/gh/${gh.owner}/${gh.repo}@${gh.branch}/${path}`;
   }
   function imagesOf(w){ return (w.images && w.images.length) ? w.images : [PLACEHOLDER_IMG]; }
+  // Lista de opções de pulseira incluindo SEMPRE a versão original do relógio
+  // (preço e fotos principais) como primeira opção.
+  function strapsOf(w){
+    if(!(w.straps && w.straps.length)) return null;
+    const base = { nome: w.strapBaseName || 'Padrão', price: w.price, images: imagesOf(w) };
+    return [base, ...w.straps];
+  }
   const LIMIAR_MAIS_VENDIDO = 2; // mais de 2 unidades vendidas = "mais pedido"
   function popularIds(){
     return new Set(
@@ -764,7 +791,7 @@
           </button>
         </div>
         ${imgs.length > 1 && imgs[0] !== PLACEHOLDER_IMG ? `<span class="photo-count-badge">${imgs.length} fotos</span>` : ''}
-        ${(w.straps && w.straps.length) ? `<span class="strap-count-badge">⌚ ${w.straps.length} pulseiras</span>` : ''}
+        ${(w.straps && w.straps.length) ? `<span class="strap-count-badge">⌚ ${w.straps.length + 1} pulseiras</span>` : ''}
       </div>
       <div class="card-body">
         <span class="eyebrow">${brand}</span>
@@ -873,19 +900,43 @@
 
   // ---------- Cotação avulsa / vinculada a um relógio ----------
   let quoteContext = null; // relógio atual, ou null pra cotação avulsa
+  let quoteStrapNome = null; // pulseira escolhida no orçamento, se houver
 
   function abrirQuoteModal(){
     const sel = document.getElementById('qInstallments');
     const keys = Object.keys(CONFIG.rates).map(Number).sort((a,b) => a-b);
     sel.innerHTML = keys.map(n => `<option value="${n}" ${n===12?'selected':''}>${n===1 ? 'À vista' : n+'x'}</option>`).join('');
+    const strapField = document.getElementById('qStrapField');
+    quoteStrapNome = null;
     if(quoteContext){
       document.getElementById('quoteModalTitle').textContent = 'Gerar orçamento';
       document.getElementById('quoteModalSubtitle').textContent = `${quoteContext.name}${quoteContext.ref ? ' — Ref. ' + quoteContext.ref : ''}`;
       document.getElementById('qNet').value = quoteContext.price || '';
+
+      const straps = strapsOf(quoteContext);
+      if(straps){
+        strapField.style.display = 'block';
+        quoteStrapNome = straps[0].nome;
+        document.getElementById('qStrapOptions').innerHTML = straps.map((s,i) =>
+          `<button type="button" class="strap-option${i===0?' active':''}" data-i="${i}">${s.nome}</button>`
+        ).join('');
+        document.querySelectorAll('#qStrapOptions .strap-option').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const s = straps[Number(btn.dataset.i)];
+            quoteStrapNome = s.nome;
+            document.querySelectorAll('#qStrapOptions .strap-option').forEach(b => b.classList.toggle('active', b === btn));
+            document.getElementById('qNet').value = s.price || quoteContext.price || '';
+            updateQuote();
+          });
+        });
+      } else {
+        strapField.style.display = 'none';
+      }
     } else {
       document.getElementById('quoteModalTitle').textContent = 'Cotação avulsa';
       document.getElementById('quoteModalSubtitle').textContent = 'Sem item de catálogo vinculado — calcula usando as mesmas taxas do cartão do site.';
       document.getElementById('qNet').value = '';
+      strapField.style.display = 'none';
     }
     updateQuote();
     document.getElementById('quoteModal').hidden = false;
@@ -920,6 +971,7 @@
     if(quoteContext){
       linhas.push(quoteContext.name);
       if(quoteContext.ref) linhas.push(`Ref. ${quoteContext.ref}`);
+      if(quoteStrapNome) linhas.push(`Pulseira: ${quoteStrapNome}`);
       linhas.push('');
     }
     linhas.push(`${formatBRL(grossVista)} à vista | ${n}x`, '');
@@ -962,6 +1014,7 @@
       price: s.price || '',
       photos: (s.images || []).map(src => ({ src, isNew:false }))
     })) : [];
+    document.getElementById('fStrapBaseName').value = (w && w.strapBaseName) ? w.strapBaseName : '';
     renderPhotoGrid();
     renderStrapsList();
     document.getElementById('watchModal').hidden = false;
@@ -971,6 +1024,8 @@
   // ---------- Pulseiras ----------
   function renderStrapsList(){
     const cont = document.getElementById('strapsList');
+    // O campo "nome da versão original" só faz sentido quando há pulseiras.
+    document.getElementById('strapBaseNameField').style.display = pendingStraps.length ? 'block' : 'none';
     cont.innerHTML = pendingStraps.map((s,i) => `
       <div class="strap-card" data-i="${i}">
         <div class="strap-card-head">
@@ -1157,7 +1212,10 @@
       };
       // Só grava o campo se houver pulseiras — relógios sem pulseira ficam
       // exatamente com o mesmo formato de antes.
-      if(finalStraps.length) watch.straps = finalStraps;
+      if(finalStraps.length){
+        watch.straps = finalStraps;
+        watch.strapBaseName = (document.getElementById('fStrapBaseName').value || '').trim() || 'Padrão';
+      }
       if(editingId){
         const idx = CATALOG.findIndex(x => x.id === id);
         CATALOG[idx] = watch;
