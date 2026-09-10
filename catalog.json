@@ -3137,6 +3137,22 @@
     "postedAt": "2026-08-08",
     "images": [
       "images/274-1786714161189-0.jpg"
+    ],
+    "straps": [
+      {
+        "nome": "Beads of Rice",
+        "price": 4890,
+        "images": [
+          "images/274-strap0-1789007499992-0.jpg"
+        ]
+      },
+      {
+        "nome": "Flat Link",
+        "price": 4890,
+        "images": [
+          "images/274-strap1-1789007499992-0.jpg"
+        ]
+      }
     ]
   },
   {
