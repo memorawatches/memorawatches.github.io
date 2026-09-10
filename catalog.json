@@ -161,7 +161,7 @@
     "status": "Sob encomenda",
     "qty": null,
     "price": 6990,
-    "orderCount": 1,
+    "orderCount": 0,
     "postedAt": "2026-07-10",
     "images": [
       "images/12-cover.jpg"
@@ -203,7 +203,7 @@
     "status": "Sob encomenda",
     "qty": null,
     "price": 5990,
-    "orderCount": 6,
+    "orderCount": 3,
     "postedAt": "2026-07-10",
     "images": [
       "images/15-cover.jpg"
@@ -273,7 +273,7 @@
     "status": "Sob encomenda",
     "qty": null,
     "price": 4990,
-    "orderCount": 3,
+    "orderCount": 2,
     "postedAt": "2026-07-10",
     "images": [
       "images/20-cover.jpg"
@@ -595,7 +595,7 @@
     "status": "Sob encomenda",
     "qty": null,
     "price": 4890,
-    "orderCount": 2,
+    "orderCount": 1,
     "postedAt": "2026-07-10",
     "images": [
       "images/42-cover.jpg"
@@ -1099,7 +1099,7 @@
     "status": "Sob encomenda",
     "qty": null,
     "price": 6990,
-    "orderCount": 2,
+    "orderCount": 1,
     "postedAt": "2026-07-11",
     "images": [
       "images/78-cover.jpg"
@@ -1267,7 +1267,7 @@
     "status": "Sob encomenda",
     "qty": null,
     "price": 7190,
-    "orderCount": 13,
+    "orderCount": 12,
     "postedAt": "2026-07-17",
     "images": [
       "images/90-cover.jpg"
@@ -1855,7 +1855,7 @@
     "status": "Sob encomenda",
     "qty": null,
     "price": 4690,
-    "orderCount": 14,
+    "orderCount": 13,
     "postedAt": "2026-05-04",
     "images": [
       "images/165-cover.jpg"
@@ -2331,7 +2331,7 @@
     "status": "Sob encomenda",
     "qty": null,
     "price": 6490,
-    "orderCount": 1,
+    "orderCount": 0,
     "postedAt": "2026-05-16",
     "images": [
       "images/217-cover.jpg"
@@ -3133,7 +3133,7 @@
     "status": "Sob encomenda",
     "qty": null,
     "price": 4290,
-    "orderCount": 2,
+    "orderCount": 1,
     "postedAt": "2026-08-08",
     "images": [
       "images/274-1786714161189-0.jpg"
@@ -3646,7 +3646,7 @@
     "status": "Sob encomenda",
     "qty": null,
     "price": 10990,
-    "orderCount": 1,
+    "orderCount": 0,
     "postedAt": "2026-08-15",
     "images": [
       "images/312-1786760156886-0.jpg"
@@ -3842,7 +3842,7 @@
     "status": "Em estoque",
     "qty": 0,
     "price": 5290,
-    "orderCount": 1,
+    "orderCount": 0,
     "postedAt": "2026-09-01",
     "images": [
       "images/326-1788306604946-0.jpg"
@@ -3884,7 +3884,7 @@
     "status": "Em estoque",
     "qty": 0,
     "price": 4690,
-    "orderCount": 1,
+    "orderCount": 0,
     "postedAt": "2026-09-01",
     "images": [
       "images/329-1788306987118-0.jpg"
@@ -4224,6 +4224,20 @@
     "postedAt": "2026-09-09",
     "images": [
       "images/353-1788922378746-0.jpg"
+    ]
+  },
+  {
+    "id": 354,
+    "name": "NOMOS Club Campus 38 All Olive",
+    "ref": "739",
+    "medida": "38mm",
+    "status": "Sob encomenda",
+    "qty": null,
+    "price": 13990,
+    "orderCount": 0,
+    "postedAt": "2026-09-10",
+    "images": [
+      "images/354-1789005321489-0.jpg"
     ]
   }
 ]
