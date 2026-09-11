@@ -9,15 +9,15 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#09111e; --panel:#131c2f; --panel-2:#1b263b; --border:#28364f;
-    --text:#f3f0e8; --text-dim:#9d9a93; --gold:#c9a24e; --gold-strong:#e0bc6c;
-    --badge-bg:rgba(19,28,47,.85); --badge-border:rgba(201,162,78,.4);
+    --bg:#0c1613; --panel:#14211c; --panel-2:#1c2c25; --border:#2a3d35;
+    --text:#f1efe8; --text-dim:#96a29a; --gold:#b98d55; --gold-strong:#d6ab74;
+    --badge-bg:rgba(20,33,28,.85); --badge-border:rgba(214,171,116,.4);
     --shadow:0 18px 40px -14px rgba(0,0,0,.55); --danger:#c9634e;
   }
   html[data-theme="light"]{
-    --bg:#f8f4ea; --panel:#ffffff; --panel-2:#f1ebdc; --border:#e2d8c0;
-    --text:#241d10; --text-dim:#8a7f68; --gold:#a97c2f; --gold-strong:#c9a24e;
-    --badge-bg:rgba(255,255,255,.88); --badge-border:rgba(169,124,47,.35);
+    --bg:#f5f3ec; --panel:#ffffff; --panel-2:#eceae0; --border:#dcdace;
+    --text:#18231e; --text-dim:#79847c; --gold:#8f6b38; --gold-strong:#b98d55;
+    --badge-bg:rgba(255,255,255,.88); --badge-border:rgba(143,107,56,.35);
     --shadow:0 18px 40px -14px rgba(120,100,60,.25);
   }
   html, body{ transition:background-color .25s ease, color .25s ease; }
@@ -52,7 +52,7 @@
     cursor:pointer; transition:border-color .2s, transform .15s;
   }
   .btn:hover{ border-color:var(--gold); }
-  .btn-gold{ background:linear-gradient(180deg, var(--gold-strong), var(--gold)); color:#191305; border:none; }
+  .btn-gold{ background:linear-gradient(180deg, var(--gold-strong), var(--gold)); color:#1a1508; border:none; }
   .btn-gold:hover{ transform:translateY(-1px); }
   .icon-btn{ width:38px; height:38px; padding:0; display:flex; align-items:center; justify-content:center; }
   .btn-contact{
@@ -133,7 +133,7 @@
     background:var(--badge-bg); color:var(--gold-strong); border:1px solid var(--badge-border);
     backdrop-filter:blur(3px); max-width:64%; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
   }
-  .badge-sobencomenda{ color:#e0bc6c; border-color:rgba(224,188,108,.5); background:rgba(224,188,108,.14); }
+  .badge-sobencomenda{ color:#d6ab74; border-color:rgba(214,171,116,.5); background:rgba(214,171,116,.14); }
   .badge-emestoque{ color:#8fd19e; border-color:rgba(143,209,158,.5); background:rgba(143,209,158,.14); }
   .badge-acaminho{ color:#8ec2e8; border-color:rgba(142,194,232,.5); background:rgba(142,194,232,.14); }
   .badge-esgotado{ color:#e0937c; border-color:rgba(224,147,124,.5); background:rgba(224,147,124,.14); }
@@ -143,8 +143,8 @@
   .popular-badge{
     position:absolute; bottom:10px; right:10px; font-size:10.5px; font-weight:700;
     padding:5px 9px; border-radius:999px; letter-spacing:.02em;
-    background:linear-gradient(180deg, var(--gold-strong), var(--gold)); color:#191305;
-    box-shadow:0 6px 14px -6px rgba(201,162,78,.7);
+    background:linear-gradient(180deg, var(--gold-strong), var(--gold)); color:#1a1508;
+    box-shadow:0 6px 14px -6px rgba(214,171,116,.7);
     max-width:60%; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
   }
   @media (max-width:480px){
@@ -153,7 +153,7 @@
   }
   .gallery-arrow{
     position:absolute; top:50%; transform:translateY(-50%); width:26px; height:26px; border-radius:50%;
-    background:rgba(9,17,30,.55); border:none; color:#fff; display:flex; align-items:center; justify-content:center;
+    background:rgba(12,22,19,.55); border:none; color:#fff; display:flex; align-items:center; justify-content:center;
     cursor:pointer; opacity:0; transition:opacity .15s;
   }
   .watch-card:hover .gallery-arrow{ opacity:1; }
@@ -183,11 +183,11 @@
     width:36px; height:36px; border-radius:8px; border:1px solid var(--border); background:var(--panel);
     color:var(--text); cursor:pointer; font-size:13px;
   }
-  .pagination button.active{ background:var(--gold); color:#191305; border-color:var(--gold); font-weight:700; }
+  .pagination button.active{ background:var(--gold); color:#1a1508; border-color:var(--gold); font-weight:700; }
 
   /* ---------- Detail modal ---------- */
   .modal-overlay{
-    position:fixed; inset:0; background:rgba(4,8,15,.7); backdrop-filter:blur(3px);
+    position:fixed; inset:0; background:rgba(6,12,10,.72); backdrop-filter:blur(3px);
     display:flex; align-items:center; justify-content:center; z-index:100; padding:20px;
   }
   .modal-overlay[hidden]{ display:none; }
@@ -217,10 +217,10 @@
   .detail-gallery img{ width:100%; height:100%; object-fit:contain; display:block; padding:16px; }
   .detail-gallery-arrow{
     position:absolute; top:50%; transform:translateY(-50%); width:34px; height:34px; border-radius:50%;
-    background:rgba(9,17,30,.55); border:none; color:#fff; display:flex; align-items:center; justify-content:center;
+    background:rgba(12,22,19,.55); border:none; color:#fff; display:flex; align-items:center; justify-content:center;
     cursor:pointer; font-size:18px;
   }
-  .detail-gallery-arrow:hover{ background:rgba(9,17,30,.8); }
+  .detail-gallery-arrow:hover{ background:rgba(12,22,19,.8); }
   .detail-gallery-arrow.prev{ left:10px; } .detail-gallery-arrow.next{ right:10px; }
   .detail-thumbs{ display:flex; gap:8px; padding:12px 20px; overflow-x:auto; flex-shrink:0; }
   .detail-thumbs img{
@@ -283,7 +283,7 @@
   .strap-option:hover{ border-color:var(--gold); }
   .strap-option.active{
     background:linear-gradient(180deg, var(--gold-strong), var(--gold));
-    color:#191305; border-color:transparent;
+    color:#1a1508; border-color:transparent;
   }
   .installment-result strong{ color:var(--text); font-size:15px; }
   .detail-actions{ display:flex; flex-direction:column; gap:10px; margin-top:6px; }
