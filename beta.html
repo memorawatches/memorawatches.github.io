@@ -241,11 +241,25 @@
   }
   .installment-result{ font-size:13.5px; color:var(--text-dim); margin-top:8px; }
   .strap-options{ display:flex; flex-wrap:wrap; gap:8px; }
-  .strap-badge{
-    position:absolute; bottom:10px; left:10px; font-size:10.5px; font-weight:700;
-    padding:5px 10px; border-radius:999px; letter-spacing:.02em;
-    background:var(--badge-bg); color:var(--gold-strong); border:1px solid rgba(201,162,78,.5);
-    backdrop-filter:blur(3px);
+  /* Miniaturas das pulseiras: mostram de cara COMO são as opções, em vez de
+     só dizer quantas são. Ficam empilhadas no canto da foto. */
+  .strap-swatches{
+    position:absolute; bottom:10px; left:12px; display:flex; align-items:center;
+    padding:4px 8px 4px 4px; border-radius:999px;
+    background:var(--badge-bg); backdrop-filter:blur(4px);
+    border:1px solid var(--border);
+  }
+  .strap-swatch{
+    width:26px; height:26px; border-radius:50%; object-fit:cover; flex-shrink:0;
+    border:2px solid var(--panel); margin-left:-9px; background:#fff;
+    transition:transform .15s ease, border-color .15s ease;
+    cursor:pointer;
+  }
+  .strap-swatch:first-child{ margin-left:0; }
+  .strap-swatch:hover{ transform:translateY(-3px) scale(1.12); border-color:var(--gold); z-index:2; }
+  .strap-swatch-more{
+    font-size:10.5px; font-weight:700; color:var(--gold-strong);
+    margin-left:6px; letter-spacing:.02em; white-space:nowrap;
   }
   .strap-option{
     padding:9px 14px; border-radius:999px; border:1px solid var(--border);
@@ -641,7 +655,16 @@
         <img src="${cdnUrl(imgs[0])}" alt="${w.name}" loading="lazy">
         <span class="badge ${statusClass(status)}">${status}</span>
         ${popular ? '<span class="popular-badge" title="Um dos mais pedidos">🔥<span class="popular-badge-text"> Mais pedido</span></span>' : ''}
-        ${(w.straps && w.straps.length) ? `<span class="strap-badge">${w.straps.length + 1} pulseiras</span>` : ''}
+        ${(() => {
+          const sts = strapsOf(w);
+          if(!sts) return '';
+          const mostrar = sts.slice(0, 4);
+          const resto = sts.length - mostrar.length;
+          return `<div class="strap-swatches">
+            ${mostrar.map((s,i) => `<img class="strap-swatch" src="${cdnUrl((s.images && s.images[0]) || PLACEHOLDER_IMG)}" data-strap="${i}" title="${s.nome}" alt="${s.nome}">`).join('')}
+            <span class="strap-swatch-more">${resto > 0 ? '+' + resto : sts.length + ' pulseiras'}</span>
+          </div>`;
+        })()}
         ${imgs.length > 1 ? `
           <button class="gallery-arrow prev" data-dir="-1" aria-label="Foto anterior">‹</button>
           <button class="gallery-arrow next" data-dir="1" aria-label="Próxima foto">›</button>
@@ -698,6 +721,13 @@
     grid.querySelectorAll('.watch-card').forEach(card => {
       card.addEventListener('click', () => openDetail(Number(card.dataset.id)));
     });
+    grid.querySelectorAll('.strap-swatch').forEach(sw => {
+      sw.addEventListener('click', (e) => {
+        e.stopPropagation(); // não deixa o clique "vazar" pro card
+        const card = sw.closest('.watch-card');
+        openDetail(Number(card.dataset.id), Number(sw.dataset.strap));
+      });
+    });
     grid.querySelectorAll('.gallery-arrow').forEach(btn => {
       btn.addEventListener('click', (e) => {
         e.stopPropagation();
@@ -728,7 +758,7 @@
   }
 
   // ---------- Detail modal ----------
-  function openDetail(id){
+  function openDetail(id, strapInicial){
     const w = CATALOG.find(x => x.id === id);
     if(!w) return;
     const brand = brandOf(w.name);
@@ -739,7 +769,8 @@
     // Pulseiras: cada uma tem nome, preço próprio e (opcionalmente) fotos próprias.
     // Relógio sem pulseiras cadastradas continua funcionando exatamente como antes.
     const straps = strapsOf(w);
-    let currentStrap = 0;
+    // Se o cliente clicou direto numa miniatura de pulseira no card, já abre nela.
+    let currentStrap = (straps && strapInicial && strapInicial < straps.length) ? strapInicial : 0;
     let currentPhoto = 0;
 
     function strapAtual(){ return straps ? straps[currentStrap] : null; }
@@ -769,7 +800,7 @@
         <div class="field">
           <label>Pulseira</label>
           <div class="strap-options" id="strapOptions">
-            ${straps.map((s,i) => `<button type="button" class="strap-option${i===0?' active':''}" data-i="${i}">${s.nome || ('Opção ' + (i+1))}</button>`).join('')}
+            ${straps.map((s,i) => `<button type="button" class="strap-option${i===currentStrap?' active':''}" data-i="${i}">${s.nome || ('Opção ' + (i+1))}</button>`).join('')}
           </div>
         </div>` : ''}
         <div class="field">
