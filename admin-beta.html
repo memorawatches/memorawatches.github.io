@@ -375,7 +375,24 @@
       <label>Número de parcelas</label>
       <select id="qInstallments"></select>
     </div>
-    <div id="qResult" style="background:var(--panel-2); border:1px solid var(--border); border-radius:10px; padding:14px 16px; font-size:13.5px; line-height:1.9; margin-bottom:18px; white-space:pre-line;"></div>
+    <div class="field">
+      <label>Desconto</label>
+      <select id="qDiscount">
+        <option value="0" selected>Sem desconto</option>
+        <option value="1">1%</option>
+        <option value="2">2%</option>
+        <option value="3">3%</option>
+        <option value="4">4%</option>
+        <option value="5">5%</option>
+        <option value="6">6%</option>
+        <option value="7">7%</option>
+        <option value="8">8%</option>
+        <option value="9">9%</option>
+        <option value="10">10%</option>
+      </select>
+    </div>
+    <div id="qResult" style="background:var(--panel-2); border:1px solid var(--border); border-radius:10px; padding:14px 16px; font-size:13.5px; line-height:1.9; margin-bottom:8px; white-space:pre-line;"></div>
+    <p id="qDiscountNote" style="font-size:12px; color:var(--gold-strong); margin:0 0 14px; display:none;"></p>
     <button type="button" class="btn btn-gold" id="qCopyBtn" style="width:100%;">📋 Copiar mensagem</button>
   </div>
 </div>
@@ -908,6 +925,7 @@
     sel.innerHTML = keys.map(n => `<option value="${n}" ${n===12?'selected':''}>${n===1 ? 'À vista' : n+'x'}</option>`).join('');
     const strapField = document.getElementById('qStrapField');
     quoteStrapNome = null;
+    document.getElementById('qDiscount').value = '0'; // sempre começa sem desconto
     if(quoteContext){
       document.getElementById('quoteModalTitle').textContent = 'Gerar orçamento';
       document.getElementById('quoteModalSubtitle').textContent = `${quoteContext.name}${quoteContext.ref ? ' — Ref. ' + quoteContext.ref : ''}`;
@@ -953,16 +971,22 @@
   document.getElementById('quoteModalClose').addEventListener('click', () => { document.getElementById('quoteModal').hidden = true; });
   document.getElementById('qNet').addEventListener('input', updateQuote);
   document.getElementById('qInstallments').addEventListener('change', updateQuote);
+  document.getElementById('qDiscount').addEventListener('change', updateQuote);
 
   function calcularCotacao(){
-    const net = parseFloat(document.getElementById('qNet').value) || 0;
+    const netCheio = parseFloat(document.getElementById('qNet').value) || 0;
+    const desconto = Number(document.getElementById('qDiscount').value) || 0;
+    // O desconto reduz o valor na mesma proporção em tudo (à vista, link e
+    // parcela), já que todos derivam do mesmo valor líquido.
+    const net = netCheio * (1 - desconto/100);
     const n = Number(document.getElementById('qInstallments').value) || 1;
     const rate = (CONFIG.rates[String(n)] || 0) / 100;
     const rateVista = (CONFIG.rates['1'] || 0) / 100;
     const gross = rate < 1 ? net / (1 - rate) : net;
     const installmentVal = gross / n;
     const grossVista = rateVista < 1 ? net / (1 - rateVista) : net;
-    return { net, n, gross, installmentVal, grossVista };
+    const grossVistaCheio = rateVista < 1 ? netCheio / (1 - rateVista) : netCheio;
+    return { net, netCheio, desconto, n, gross, installmentVal, grossVista, grossVistaCheio };
   }
 
   function textoCotacao(){
@@ -982,6 +1006,14 @@
 
   function updateQuote(){
     document.getElementById('qResult').textContent = textoCotacao();
+    const { desconto, grossVista, grossVistaCheio } = calcularCotacao();
+    const nota = document.getElementById('qDiscountNote');
+    if(desconto > 0 && grossVistaCheio > 0){
+      nota.style.display = 'block';
+      nota.textContent = `Desconto de ${desconto}% aplicado — de ${formatBRL(grossVistaCheio)} por ${formatBRL(grossVista)} (${formatBRL(grossVistaCheio - grossVista)} a menos).`;
+    } else {
+      nota.style.display = 'none';
+    }
   }
 
   document.getElementById('qCopyBtn').addEventListener('click', async () => {
