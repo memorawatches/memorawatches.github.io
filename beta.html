@@ -241,25 +241,13 @@
   }
   .installment-result{ font-size:13.5px; color:var(--text-dim); margin-top:8px; }
   .strap-options{ display:flex; flex-wrap:wrap; gap:8px; }
-  /* Miniaturas das pulseiras: mostram de cara COMO são as opções, em vez de
-     só dizer quantas são. Ficam empilhadas no canto da foto. */
-  .strap-swatches{
-    position:absolute; bottom:10px; left:12px; display:flex; align-items:center;
-    padding:4px 8px 4px 4px; border-radius:999px;
-    background:var(--badge-bg); backdrop-filter:blur(4px);
-    border:1px solid var(--border);
+  .strap-line{
+    font-size:11.5px; font-weight:600; color:var(--gold-strong);
+    margin:8px 0 0; display:flex; align-items:center; gap:5px;
   }
-  .strap-swatch{
-    width:26px; height:26px; border-radius:50%; object-fit:cover; flex-shrink:0;
-    border:2px solid var(--panel); margin-left:-9px; background:#fff;
-    transition:transform .15s ease, border-color .15s ease;
-    cursor:pointer;
-  }
-  .strap-swatch:first-child{ margin-left:0; }
-  .strap-swatch:hover{ transform:translateY(-3px) scale(1.12); border-color:var(--gold); z-index:2; }
-  .strap-swatch-more{
-    font-size:10.5px; font-weight:700; color:var(--gold-strong);
-    margin-left:6px; letter-spacing:.02em; white-space:nowrap;
+  .strap-line::before{
+    content:''; width:6px; height:6px; border-radius:50%;
+    background:var(--gold); flex-shrink:0;
   }
   .strap-option{
     padding:9px 14px; border-radius:999px; border:1px solid var(--border);
@@ -655,16 +643,6 @@
         <img src="${cdnUrl(imgs[0])}" alt="${w.name}" loading="lazy">
         <span class="badge ${statusClass(status)}">${status}</span>
         ${popular ? '<span class="popular-badge" title="Um dos mais pedidos">🔥<span class="popular-badge-text"> Mais pedido</span></span>' : ''}
-        ${(() => {
-          const sts = strapsOf(w);
-          if(!sts) return '';
-          const mostrar = sts.slice(0, 4);
-          const resto = sts.length - mostrar.length;
-          return `<div class="strap-swatches">
-            ${mostrar.map((s,i) => `<img class="strap-swatch" src="${cdnUrl((s.images && s.images[0]) || PLACEHOLDER_IMG)}" data-strap="${i}" title="${s.nome}" alt="${s.nome}">`).join('')}
-            <span class="strap-swatch-more">${resto > 0 ? '+' + resto : sts.length + ' pulseiras'}</span>
-          </div>`;
-        })()}
         ${imgs.length > 1 ? `
           <button class="gallery-arrow prev" data-dir="-1" aria-label="Foto anterior">‹</button>
           <button class="gallery-arrow next" data-dir="1" aria-label="Próxima foto">›</button>
@@ -677,6 +655,7 @@
         ${specs ? `<p class="ref">${specs}</p>` : '<p class="ref">&nbsp;</p>'}
         <p class="price">${formatBRL(w.price)} <span class="unit">à vista</span></p>
         <p class="installment-hint">em até 12x de ${formatBRL(val12)}</p>
+        ${(w.straps && w.straps.length) ? `<p class="strap-line">${w.straps.length + 1} opções de pulseira</p>` : ''}
       </div>
     </article>`;
   }
@@ -720,13 +699,6 @@
 
     grid.querySelectorAll('.watch-card').forEach(card => {
       card.addEventListener('click', () => openDetail(Number(card.dataset.id)));
-    });
-    grid.querySelectorAll('.strap-swatch').forEach(sw => {
-      sw.addEventListener('click', (e) => {
-        e.stopPropagation(); // não deixa o clique "vazar" pro card
-        const card = sw.closest('.watch-card');
-        openDetail(Number(card.dataset.id), Number(sw.dataset.strap));
-      });
     });
     grid.querySelectorAll('.gallery-arrow').forEach(btn => {
       btn.addEventListener('click', (e) => {

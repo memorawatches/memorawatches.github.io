@@ -107,19 +107,14 @@
   .card-icon-row .btn-edit:hover{ background:var(--gold); color:#191305; }
   .card-icon-row .btn-text:hover{ background:var(--gold); color:#191305; }
   .photo-count-badge{ position:absolute; bottom:10px; left:10px; font-size:10px; font-weight:600; padding:4px 8px; border-radius:999px; background:var(--badge-bg); color:var(--text-dim); border:1px solid var(--border); }
-  /* Miniaturas das pulseiras (só indicação visual aqui no admin — o clique no
-     card abre o orçamento, então elas não capturam clique). */
-  .strap-swatches{
-    position:absolute; bottom:10px; left:12px; display:flex; align-items:center;
-    padding:4px 8px 4px 4px; border-radius:999px; pointer-events:none;
-    background:var(--badge-bg); backdrop-filter:blur(4px); border:1px solid var(--border);
+  .strap-line{
+    font-size:11.5px; font-weight:600; color:var(--gold-strong);
+    margin:8px 0 0; display:flex; align-items:center; gap:5px;
   }
-  .strap-swatch{
-    width:26px; height:26px; border-radius:50%; object-fit:cover; flex-shrink:0;
-    border:2px solid var(--panel); margin-left:-9px; background:#fff;
+  .strap-line::before{
+    content:''; width:6px; height:6px; border-radius:50%;
+    background:var(--gold); flex-shrink:0;
   }
-  .strap-swatch:first-child{ margin-left:0; }
-  .strap-swatch-more{ font-size:10.5px; font-weight:700; color:var(--gold-strong); margin-left:6px; white-space:nowrap; }
   .card-body{ padding:14px 16px 16px; display:flex; flex-direction:column; gap:2px; flex:1; }
   .eyebrow{ font-size:10.5px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--gold-strong); }
   .card-body h3{ font-size:16px; margin:2px 0 4px; }
@@ -854,16 +849,6 @@
           </button>
         </div>
         ${imgs.length > 1 && imgs[0] !== PLACEHOLDER_IMG ? `<span class="photo-count-badge">${imgs.length} fotos</span>` : ''}
-        ${(() => {
-          const sts = strapsOf(w);
-          if(!sts) return '';
-          const mostrar = sts.slice(0, 4);
-          const resto = sts.length - mostrar.length;
-          return `<div class="strap-swatches">
-            ${mostrar.map(s => `<img class="strap-swatch" src="${cdnUrl((s.images && s.images[0]) || PLACEHOLDER_IMG)}" title="${s.nome}" alt="${s.nome}">`).join('')}
-            <span class="strap-swatch-more">${resto > 0 ? '+' + resto : sts.length + ' pulseiras'}</span>
-          </div>`;
-        })()}
       </div>
       <div class="card-body">
         <span class="eyebrow">${brand}</span>
@@ -871,6 +856,7 @@
         ${specs ? `<p class="ref">${specs}</p>` : '<p class="ref">&nbsp;</p>'}
         <p class="price">${formatBRL(w.price)} <span class="unit">à vista</span></p>
         <p class="installment-hint">em até 12x de ${formatBRL(val12)}</p>
+        ${(w.straps && w.straps.length) ? `<p class="strap-line">${w.straps.length + 1} opções de pulseira</p>` : ''}
       </div>
     </article>`;
   }
