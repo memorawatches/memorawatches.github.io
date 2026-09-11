@@ -4555,5 +4555,19 @@
       "images/355-1789005831342-0.jpg"
     ],
     "movimento": "Automático"
+  },
+  {
+    "id": 356,
+    "name": "Hamilton Khaki Field Quartz",
+    "ref": "H69401131",
+    "medida": "38mm",
+    "status": "Sob encomenda",
+    "qty": null,
+    "price": 3990,
+    "orderCount": 0,
+    "postedAt": "2026-09-11",
+    "images": [
+      "images/356-1789160466893-0.jpg"
+    ]
   }
 ]
