@@ -1336,15 +1336,14 @@
     "name": "Mido Ocean Star 39 Cinza/Preto",
     "ref": "M026.907.11.061.00",
     "medida": "39mm",
-    "status": "Sob encomenda",
+    "status": "Esgotado",
     "qty": null,
     "price": 7190,
     "orderCount": 11,
     "postedAt": "2026-07-17",
     "images": [
       "images/89-cover.jpg"
-    ],
-    "movimento": "Automático"
+    ]
   },
   {
     "id": 90,
