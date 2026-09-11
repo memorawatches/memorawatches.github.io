@@ -454,6 +454,22 @@
     if(!path || path.startsWith('data:') || path.startsWith('http')) return path;
     return `https://cdn.jsdelivr.net/gh/${gh.owner}/${gh.repo}@${gh.branch}/${path}`;
   }
+  // Padroniza o tamanho pra "35 mm", "35mm", "36,5mm" e "36.5mm" não virarem
+  // entradas diferentes no filtro. Só afeta exibição e filtro — o dado
+  // cadastrado no catálogo continua como está.
+  function normalizarMedida(m){
+    if(!m) return '';
+    let s = String(m).trim();
+    s = s.replace(/,/g, '.');                    // 36,5mm -> 36.5mm
+    s = s.replace(/\s+/g, ' ');                  // espaços repetidos
+    s = s.replace(/(\d)\s*(mm|m)\b/gi, '$1mm');  // "35 mm" e "38m" -> "35mm"/"38mm"
+    s = s.replace(/\s*\bou\b\s*/gi, ' ou ');     // "37mm OU 39mm" -> "37mm ou 39mm"
+    s = s.replace(/\s*x\s*/gi, ' x ');           // "32mmx50mm" -> "32mm x 50mm"
+    return s.trim();
+  }
+  function ordenarMedidas(a, b){
+    return (parseFloat(a) || 0) - (parseFloat(b) || 0) || a.localeCompare(b);
+  }
   function imagesOf(w){ return (w.images && w.images.length) ? w.images : [PLACEHOLDER_IMG]; }
   // Lista de opções de pulseira incluindo SEMPRE a versão original do relógio
   // (preço e fotos principais) como primeira opção.
@@ -740,7 +756,7 @@
   function renderFilterMenus(){
     const brands = Array.from(new Set(CATALOG.map(w => brandOf(w.name)))).sort();
     setupDropdown('brand', [{value:'Todos', label:'Todas as marcas'}, ...brands.map(b => ({value:b, label:b}))], state.brand, v => { state.brand=v; state.page=1; render(); });
-    const sizes = Array.from(new Set(CATALOG.map(w => w.medida).filter(Boolean))).sort();
+    const sizes = Array.from(new Set(CATALOG.map(w => normalizarMedida(w.medida)).filter(Boolean))).sort(ordenarMedidas);
     setupDropdown('size', [{value:'Todos', label:'Todos os tamanhos'}, ...sizes.map(s => ({value:s, label:s}))], state.size, v => { state.size=v; state.page=1; render(); });
     const statuses = Array.from(new Set(CATALOG.map(w => w.status || 'Sob encomenda'))).sort();
     setupDropdown('status', [
@@ -791,7 +807,7 @@
     const brand = brandOf(w.name);
     const rest = w.name.startsWith(brand) ? w.name.slice(brand.length).trim() : w.name;
     const imgs = imagesOf(w);
-    const specs = [w.ref, w.medida].filter(Boolean).join(' · ');
+    const specs = [w.ref, normalizarMedida(w.medida)].filter(Boolean).join(' · ');
     const status = w.status || 'Sob encomenda';
     const val12 = installmentAt(w.price, 12);
     return `
@@ -827,7 +843,7 @@
   function filteredSorted(){
     let list = CATALOG.slice();
     if(state.brand !== 'Todos') list = list.filter(w => brandOf(w.name) === state.brand);
-    if(state.size !== 'Todos') list = list.filter(w => w.medida === state.size);
+    if(state.size !== 'Todos') list = list.filter(w => normalizarMedida(w.medida) === state.size);
     if(state.status === 'Disponíveis') list = list.filter(w => !isFadedStatus(w.status));
     else if(state.status !== 'Todos') list = list.filter(w => (w.status || 'Sob encomenda') === state.status);
     if(state.search.trim()){
@@ -1326,7 +1342,7 @@
       w.name,
       'Novo, completo',
       w.ref ? `Ref. ${w.ref}` : null,
-      w.medida ? `Medida: ${w.medida}` : null,
+      w.medida ? `Medida: ${normalizarMedida(w.medida)}` : null,
       'Automático',
       w.status || 'Sob encomenda',
       `R$${Math.ceil(w.price).toLocaleString('pt-BR')} à vista`,
