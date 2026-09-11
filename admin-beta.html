@@ -101,6 +101,17 @@
   .watch-card.faded:hover{ opacity:.9; }
   .popular-badge{ position:absolute; bottom:10px; right:10px; font-size:10.5px; font-weight:700; padding:5px 9px; border-radius:999px; letter-spacing:.02em; background:linear-gradient(180deg, var(--gold-strong), var(--gold)); color:#191305; box-shadow:0 6px 14px -6px rgba(201,162,78,.7); max-width:60%; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
   @media (max-width:480px){ .popular-badge-text{ display:none; } .popular-badge{ padding:6px 8px; } }
+  .gallery-arrow{
+    position:absolute; top:50%; transform:translateY(-50%); width:26px; height:26px; border-radius:50%;
+    background:rgba(9,17,30,.55); border:none; color:#fff; display:flex; align-items:center; justify-content:center;
+    cursor:pointer; opacity:0; transition:opacity .15s; font-size:16px; line-height:1; padding:0;
+  }
+  .watch-card:hover .gallery-arrow{ opacity:1; }
+  @media (hover:none){ .gallery-arrow{ opacity:1; } }
+  .gallery-arrow.prev{ left:8px; } .gallery-arrow.next{ right:8px; }
+  .gallery-dots{ position:absolute; bottom:8px; left:50%; transform:translateX(-50%); display:flex; gap:4px; }
+  .gallery-dots span{ width:5px; height:5px; border-radius:50%; background:rgba(255,255,255,.5); }
+  .gallery-dots span.active{ background:#fff; }
   .card-icon-row{ position:absolute; top:10px; right:10px; display:flex; gap:6px; }
   .card-icon-row button{ width:28px; height:28px; border-radius:50%; border:none; background:rgba(9,17,30,.6); color:#fff; display:flex; align-items:center; justify-content:center; cursor:pointer; }
   .card-icon-row .btn-delete:hover{ background:var(--danger); }
@@ -858,11 +869,16 @@
     const status = w.status || 'Sob encomenda';
     const val12 = installmentAt(w.price, 12);
     return `
-    <article class="watch-card${isFadedStatus(status) ? ' faded' : ''}" data-id="${w.id}">
+    <article class="watch-card${isFadedStatus(status) ? ' faded' : ''}" data-id="${w.id}" data-photo-index="0">
       <div class="card-media">
         <img src="${cdnUrl(imgs[0])}" alt="${w.name}" loading="lazy">
         <span class="badge ${statusClass(status)}">${status}</span>
         ${popular ? '<span class="popular-badge" title="Um dos mais pedidos">🔥<span class="popular-badge-text"> Mais pedido</span></span>' : ''}
+        ${imgs.length > 1 ? `
+          <button type="button" class="gallery-arrow prev" data-dir="-1" aria-label="Foto anterior">‹</button>
+          <button type="button" class="gallery-arrow next" data-dir="1" aria-label="Próxima foto">›</button>
+          <div class="gallery-dots">${imgs.map((_,i) => `<span class="${i===0?'active':''}"></span>`).join('')}</div>
+        ` : ''}
         <div class="card-icon-row">
           <button class="btn-text" data-id="${w.id}" title="Texto para o cliente">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6"/><path d="M8 13h8M8 17h5"/></svg>
@@ -924,6 +940,18 @@
     grid.querySelectorAll('.btn-text').forEach(b => b.addEventListener('click', (e) => { e.stopPropagation(); openTextModal(Number(b.dataset.id)); }));
     grid.querySelectorAll('.watch-card').forEach(card => {
       card.addEventListener('click', () => openQuoteModal(Number(card.dataset.id)));
+    });
+    grid.querySelectorAll('.gallery-arrow').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation(); // não deixa abrir o orçamento ao passar foto
+        const card = btn.closest('.watch-card');
+        const w = CATALOG.find(x => x.id === Number(card.dataset.id));
+        const imgs = imagesOf(w);
+        const idx = (Number(card.dataset.photoIndex) + Number(btn.dataset.dir) + imgs.length) % imgs.length;
+        card.dataset.photoIndex = idx;
+        card.querySelector('.card-media img').src = cdnUrl(imgs[idx]);
+        card.querySelectorAll('.gallery-dots span').forEach((d,i) => d.classList.toggle('active', i===idx));
+      });
     });
 
     renderPagination(totalPages);
