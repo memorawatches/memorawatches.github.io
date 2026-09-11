@@ -392,7 +392,8 @@
       </select>
     </div>
     <div id="qResult" style="background:var(--panel-2); border:1px solid var(--border); border-radius:10px; padding:14px 16px; font-size:13.5px; line-height:1.9; margin-bottom:8px; white-space:pre-line;"></div>
-    <p id="qDiscountNote" style="font-size:12px; color:var(--gold-strong); margin:0 0 14px; display:none;"></p>
+    <p id="qDiscountNote" style="font-size:12px; color:var(--gold-strong); margin:0 0 8px; display:none;"></p>
+    <button type="button" id="qShuffleBtn" style="background:none; border:none; color:var(--text-dim); font-size:12px; cursor:pointer; padding:0 0 14px; text-decoration:underline;">🔄 Trocar a frase de abertura</button>
     <button type="button" class="btn btn-gold" id="qCopyBtn" style="width:100%;">📋 Copiar mensagem</button>
   </div>
 </div>
@@ -926,6 +927,7 @@
     const strapField = document.getElementById('qStrapField');
     quoteStrapNome = null;
     document.getElementById('qDiscount').value = '0'; // sempre começa sem desconto
+    sortearFrase();
     if(quoteContext){
       document.getElementById('quoteModalTitle').textContent = 'Gerar orçamento';
       document.getElementById('quoteModalSubtitle').textContent = `${quoteContext.name}${quoteContext.ref ? ' — Ref. ' + quoteContext.ref : ''}`;
@@ -972,6 +974,7 @@
   document.getElementById('qNet').addEventListener('input', updateQuote);
   document.getElementById('qInstallments').addEventListener('change', updateQuote);
   document.getElementById('qDiscount').addEventListener('change', updateQuote);
+  document.getElementById('qShuffleBtn').addEventListener('click', () => { sortearFrase(); updateQuote(); });
 
   function calcularCotacao(){
     const netCheio = parseFloat(document.getElementById('qNet').value) || 0;
@@ -989,8 +992,22 @@
     return { net, netCheio, desconto, n, gross, installmentVal, grossVista, grossVistaCheio };
   }
 
+  // Frases de abertura — variam pra mensagem não ficar com cara de copiar e colar.
+  const FRASES_COTACAO = [
+    'Esse modelo está saindo por:',
+    'Esse relógio está saindo por:',
+    'Essa peça está saindo por:',
+    'Esse modelo sai por:',
+    'Essa peça sai por:',
+    'Esse relógio sai por:'
+  ];
+  let fraseCotacao = FRASES_COTACAO[0];
+  function sortearFrase(){
+    fraseCotacao = FRASES_COTACAO[Math.floor(Math.random() * FRASES_COTACAO.length)];
+  }
+
   function textoCotacao(){
-    const { n, gross, installmentVal, grossVista } = calcularCotacao();
+    const { net, n, gross, installmentVal, grossVista } = calcularCotacao();
     const linhas = [];
     if(quoteContext){
       linhas.push(quoteContext.name);
@@ -998,9 +1015,13 @@
       if(quoteStrapNome) linhas.push(`Pulseira: ${quoteStrapNome}`);
       linhas.push('');
     }
-    linhas.push(`${formatBRL(grossVista)} à vista | ${n}x`, '');
-    linhas.push(`* 💰 À vista: ${formatBRL(grossVista)}`, `* 🔗 Valor do link: ${formatBRL(gross)}`);
-    if(n !== 1) linhas.push(`* 🔹 Parcelamento: ${n}x de ${formatBRL(installmentVal)}`);
+    linhas.push(fraseCotacao, '');
+    // "À vista" = preço sem taxa nenhuma (Pix/dinheiro).
+    // "À vista no cartão" = mesmo valor já com a taxa de 1x embutida.
+    linhas.push(`* 💰 À vista: ${formatBRL(net)}`);
+    linhas.push(`* 💳 À vista no cartão: ${formatBRL(grossVista)}`);
+    linhas.push(`* 🔗 Valor do link: ${formatBRL(gross)}`);
+    if(n !== 1) linhas.push(`* 🔹 Em até ${n}x de ${formatBRL(installmentVal)}`);
     return linhas.join('\n');
   }
 
@@ -1010,7 +1031,8 @@
     const nota = document.getElementById('qDiscountNote');
     if(desconto > 0 && grossVistaCheio > 0){
       nota.style.display = 'block';
-      nota.textContent = `Desconto de ${desconto}% aplicado — de ${formatBRL(grossVistaCheio)} por ${formatBRL(grossVista)} (${formatBRL(grossVistaCheio - grossVista)} a menos).`;
+      const { net, netCheio } = calcularCotacao();
+      nota.textContent = `Desconto de ${desconto}% aplicado — de ${formatBRL(netCheio)} por ${formatBRL(net)} (${formatBRL(netCheio - net)} a menos).`;
     } else {
       nota.style.display = 'none';
     }
