@@ -227,7 +227,32 @@
     border:2px solid transparent; opacity:.6; flex-shrink:0;
   }
   .detail-thumbs img.active{ border-color:var(--gold); opacity:1; }
-  .detail-body{ padding:20px; }
+  .detail-body{ padding:26px 24px 24px; }
+  .badge-inline{
+    display:inline-block; font-size:10px; font-weight:700; text-transform:uppercase;
+    letter-spacing:.06em; padding:4px 10px; border-radius:999px; margin-bottom:12px;
+    border:1px solid var(--badge-border); background:var(--badge-bg); color:var(--gold-strong);
+  }
+  .detail-body .eyebrow{ display:block; margin-bottom:2px; }
+  .detail-body h2{ font-size:25px; line-height:1.15; margin-bottom:18px; }
+  .detail-price-block{
+    padding:16px 0 18px; border-top:1px solid var(--border); border-bottom:1px solid var(--border);
+    margin-bottom:18px;
+  }
+  .detail-price-main{ display:flex; align-items:baseline; gap:9px; }
+  .detail-price-block .price{ font-size:29px; letter-spacing:-.01em; }
+  .detail-price-unit{ color:var(--text-dim); font-size:13px; }
+  .spec-list{ margin:0 0 20px; }
+  .spec-list > div{
+    display:flex; justify-content:space-between; align-items:baseline; gap:16px;
+    padding:8px 0; border-bottom:1px dashed var(--border);
+  }
+  .spec-list > div:last-child{ border-bottom:none; }
+  .spec-list dt{ font-size:12.5px; color:var(--text-dim); }
+  .spec-list dd{
+    margin:0; font-size:13px; font-weight:600; text-align:right;
+    font-family:'IBM Plex Mono',monospace;
+  }
   .detail-body .eyebrow{ display:block; margin-bottom:4px; }
   .detail-body h2{ font-size:22px; margin-bottom:6px; }
   .detail-body .ref{ margin-bottom:14px; }
@@ -411,7 +436,33 @@
     '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><rect width="200" height="200" fill="#e9e4d8"/><circle cx="100" cy="100" r="55" fill="none" stroke="#b8ac8f" stroke-width="4"/><line x1="100" y1="100" x2="100" y2="65" stroke="#b8ac8f" stroke-width="4"/><line x1="100" y1="100" x2="125" y2="100" stroke="#b8ac8f" stroke-width="4"/></svg>'
   );
 
-  function brandOf(name){ return (name || '').trim().split(' ')[0] || 'Outros'; }
+  // Marcas de nome composto: sem essa lista, "Christopher Ward" viraria só
+  // "Christopher" no filtro. Pra adicionar uma marca nova composta, é só
+  // incluir o nome aqui.
+  const MARCAS_COMPOSTAS = [
+    'Christopher Ward','Furlan Marri','Grand Seiko','Frederique Constant',
+    'Maurice Lacroix','Raymond Weil','Dan Henry','Nivada Grenchen',
+    'Studio Underd0g','Kurono Tokyo','Otsuka Lotec','Louis Erard',
+    'Baume Mercier','Carl Bucherer','Massena LAB','Serica Watches'
+  ];
+  function nomeLimpo(name){ return String(name || '').replace(/_/g, ' ').trim(); }
+  function brandOf(name){
+    const limpo = nomeLimpo(name);
+    const alvo = limpo.toLowerCase();
+    const composta = MARCAS_COMPOSTAS.find(m =>
+      alvo === m.toLowerCase() || alvo.startsWith(m.toLowerCase() + ' ')
+    );
+    if(composta) return composta;
+    return limpo.split(' ')[0] || 'Outros';
+  }
+  function semMarca(name){
+    const limpo = nomeLimpo(name);
+    const marca = brandOf(name);
+    return limpo.toLowerCase().startsWith(marca.toLowerCase())
+      ? limpo.slice(marca.length).trim()
+      : limpo;
+  }
+
   function statusClass(status){
     const s = (status || '').toLowerCase();
     if(s.includes('estoque')) return 'badge-emestoque';
@@ -632,7 +683,7 @@
   // ---------- Card + gallery ----------
   function cardHTML(w, popular){
     const brand = brandOf(w.name);
-    const rest = w.name.startsWith(brand) ? w.name.slice(brand.length).trim() : w.name;
+    const rest = semMarca(w.name);
     const imgs = imagesOf(w);
     const specs = [w.ref, normalizarMedida(w.medida)].filter(Boolean).join(' · ');
     const status = w.status || 'Sob encomenda';
@@ -668,7 +719,7 @@
     else if(state.status !== 'Todos') list = list.filter(w => (w.status || 'Sob encomenda') === state.status);
     if(state.search.trim()){
       const q = state.search.trim().toLowerCase();
-      list = list.filter(w => (w.name||'').toLowerCase().includes(q) || (w.ref||'').toLowerCase().includes(q));
+      list = list.filter(w => nomeLimpo(w.name).toLowerCase().includes(q) || (w.ref||'').toLowerCase().includes(q));
     }
     if(state.sort === 'popular') list.sort((a,b) => (b.orderCount||0) - (a.orderCount||0));
     else if(state.sort === 'price_asc') list.sort((a,b) => a.price - b.price);
@@ -734,7 +785,7 @@
     const w = CATALOG.find(x => x.id === id);
     if(!w) return;
     const brand = brandOf(w.name);
-    const rest = w.name.startsWith(brand) ? w.name.slice(brand.length).trim() : w.name;
+    const rest = semMarca(w.name);
     const specs = [w.ref, normalizarMedida(w.medida)].filter(Boolean).join(' · ');
     const rateKeys = Object.keys(CONFIG.rates).map(Number).sort((a,b)=>a-b);
 
@@ -761,13 +812,25 @@
       <div class="detail-gallery-col" id="detailGalleryCol"></div>
       <div class="detail-scroll-col">
       <div class="detail-body">
+        <span class="badge-inline ${statusClass(w.status)}">${w.status || 'Sob encomenda'}</span>
         <span class="eyebrow">${brand}</span>
-        <h2>${rest || w.name}</h2>
-        ${specs ? `<p class="ref">${specs}</p>` : ''}
-        <div class="detail-price-row">
-          <span class="price" id="detailPrice">${formatBRL(w.price)}</span>
-          <span style="color:var(--text-dim); font-size:13px;">à vista</span>
+        <h2>${rest || nomeLimpo(w.name)}</h2>
+
+        <div class="detail-price-block">
+          <div class="detail-price-main">
+            <span class="price" id="detailPrice">${formatBRL(w.price)}</span>
+            <span class="detail-price-unit">à vista</span>
+          </div>
+          <p class="installment-result" id="installmentResult"></p>
         </div>
+
+        <dl class="spec-list">
+          ${w.ref ? `<div><dt>Referência</dt><dd>${w.ref}</dd></div>` : ''}
+          ${w.medida ? `<div><dt>Tamanho</dt><dd>${normalizarMedida(w.medida)}</dd></div>` : ''}
+          ${w.movimento ? `<div><dt>Movimento</dt><dd>${w.movimento}</dd></div>` : ''}
+          <div><dt>Condição</dt><dd>Novo, completo</dd></div>
+        </dl>
+
         ${straps ? `
         <div class="field">
           <label>Pulseira</label>
@@ -780,7 +843,6 @@
           <select id="installmentSelect">
             ${rateKeys.map(n => `<option value="${n}" ${n===12?'selected':''}>${n===1 ? 'À vista no cartão' : n+'x'}</option>`).join('')}
           </select>
-          <p class="installment-result" id="installmentResult"></p>
         </div>
         <div class="detail-actions">
           <a class="btn-contact btn-whats-contact" id="detailWhatsBtn" target="_blank" rel="noopener" style="justify-content:center;">
@@ -852,7 +914,7 @@
       const s = strapAtual();
       const descPulseira = s ? ` (pulseira ${s.nome})` : '';
       document.getElementById('detailWhatsBtn').href = 'https://wa.me/' + CONFIG.whatsappSellerNumber + '?text=' +
-        encodeURIComponent(`Olá! Tenho interesse no ${w.name}${w.ref ? ' (ref. ' + w.ref + ')' : ''}${descPulseira}. Vi o preço de ${formatBRL(preco)} (${n2}). Ainda está disponível?`);
+        encodeURIComponent(`Olá! Tenho interesse no ${nomeLimpo(w.name)}${w.ref ? ' (ref. ' + w.ref + ')' : ''}${descPulseira}. Vi o preço de ${formatBRL(preco)} (${n2}). Ainda está disponível?`);
     }
     select.addEventListener('change', updateInstallment);
     document.getElementById('detailPrice').textContent = formatBRL(precoAtual());

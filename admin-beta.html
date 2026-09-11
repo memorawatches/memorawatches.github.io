@@ -448,7 +448,33 @@
     '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><rect width="200" height="200" fill="#e9e4d8"/><circle cx="100" cy="100" r="55" fill="none" stroke="#b8ac8f" stroke-width="4"/><line x1="100" y1="100" x2="100" y2="65" stroke="#b8ac8f" stroke-width="4"/><line x1="100" y1="100" x2="125" y2="100" stroke="#b8ac8f" stroke-width="4"/></svg>'
   );
 
-  function brandOf(name){ return (name || '').trim().split(' ')[0] || 'Outros'; }
+  // Marcas de nome composto: sem essa lista, "Christopher Ward" viraria só
+  // "Christopher" no filtro. Pra adicionar uma marca nova composta, é só
+  // incluir o nome aqui.
+  const MARCAS_COMPOSTAS = [
+    'Christopher Ward','Furlan Marri','Grand Seiko','Frederique Constant',
+    'Maurice Lacroix','Raymond Weil','Dan Henry','Nivada Grenchen',
+    'Studio Underd0g','Kurono Tokyo','Otsuka Lotec','Louis Erard',
+    'Baume Mercier','Carl Bucherer','Massena LAB','Serica Watches'
+  ];
+  function nomeLimpo(name){ return String(name || '').replace(/_/g, ' ').trim(); }
+  function brandOf(name){
+    const limpo = nomeLimpo(name);
+    const alvo = limpo.toLowerCase();
+    const composta = MARCAS_COMPOSTAS.find(m =>
+      alvo === m.toLowerCase() || alvo.startsWith(m.toLowerCase() + ' ')
+    );
+    if(composta) return composta;
+    return limpo.split(' ')[0] || 'Outros';
+  }
+  function semMarca(name){
+    const limpo = nomeLimpo(name);
+    const marca = brandOf(name);
+    return limpo.toLowerCase().startsWith(marca.toLowerCase())
+      ? limpo.slice(marca.length).trim()
+      : limpo;
+  }
+
   function statusClass(status){
     const s = (status || '').toLowerCase();
     if(s.includes('estoque')) return 'badge-emestoque';
@@ -826,7 +852,7 @@
   // ---------- Card rendering ----------
   function cardHTML(w, popular){
     const brand = brandOf(w.name);
-    const rest = w.name.startsWith(brand) ? w.name.slice(brand.length).trim() : w.name;
+    const rest = semMarca(w.name);
     const imgs = imagesOf(w);
     const specs = [w.ref, normalizarMedida(w.medida)].filter(Boolean).join(' · ');
     const status = w.status || 'Sob encomenda';
@@ -869,7 +895,7 @@
     else if(state.status !== 'Todos') list = list.filter(w => (w.status || 'Sob encomenda') === state.status);
     if(state.search.trim()){
       const q = state.search.trim().toLowerCase();
-      list = list.filter(w => (w.name||'').toLowerCase().includes(q) || (w.ref||'').toLowerCase().includes(q));
+      list = list.filter(w => nomeLimpo(w.name).toLowerCase().includes(q) || (w.ref||'').toLowerCase().includes(q));
     }
     if(state.sort === 'popular') list.sort((a,b) => (b.orderCount||0) - (a.orderCount||0));
     else if(state.sort === 'price_asc') list.sort((a,b) => a.price - b.price);
@@ -967,7 +993,7 @@
     sortearFrase();
     if(quoteContext){
       document.getElementById('quoteModalTitle').textContent = 'Gerar orçamento';
-      document.getElementById('quoteModalSubtitle').textContent = `${quoteContext.name}${quoteContext.ref ? ' — Ref. ' + quoteContext.ref : ''}`;
+      document.getElementById('quoteModalSubtitle').textContent = `${nomeLimpo(quoteContext.name)}${quoteContext.ref ? ' — Ref. ' + quoteContext.ref : ''}`;
       document.getElementById('qNet').value = quoteContext.price || '';
 
       const straps = strapsOf(quoteContext);
@@ -1047,7 +1073,7 @@
     const { net, n, gross, installmentVal, grossVista } = calcularCotacao();
     const linhas = [];
     if(quoteContext){
-      linhas.push(quoteContext.name);
+      linhas.push(nomeLimpo(quoteContext.name));
       if(quoteContext.ref) linhas.push(`Ref. ${quoteContext.ref}`);
       if(quoteStrapNome) linhas.push(`Pulseira: ${quoteStrapNome}`);
       linhas.push('');
@@ -1362,7 +1388,7 @@
     const val12 = installmentAt(w.price, 12);
     const handle = (CONFIG.instagramUrl || '').replace(/\/+$/, '').split('/').pop();
     const lines = [
-      w.name,
+      nomeLimpo(w.name),
       'Novo, completo',
       w.ref ? `Ref. ${w.ref}` : null,
       w.medida ? `Medida: ${normalizarMedida(w.medida)}` : null,
