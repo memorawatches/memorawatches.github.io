@@ -66,8 +66,22 @@
     display:flex; align-items:center; justify-content:center; flex-shrink:0;
   }
   .btn-whats-contact{ background:linear-gradient(135deg, #2fd86b, #1fa851); }
-  .btn-instagram{ background:linear-gradient(135deg, #f9ce34, #ee2a7b, #6228d7); }
-  @media (max-width:520px){ .header-actions .btn-contact{ padding:9px; } .header-actions .btn-contact-label{ display:none; } }
+  /* Botões do cabeçalho (Instagram/WhatsApp): pill discreta igual aos outros
+     botões do site — só o ícone carrega a cor da rede, não o botão inteiro. */
+  .btn-social{
+    display:inline-flex; align-items:center; gap:8px; padding:9px 16px 9px 9px;
+    border-radius:999px; border:1px solid var(--border); background:var(--panel);
+    color:var(--text); font-weight:600; font-size:13px; text-decoration:none;
+    cursor:pointer; transition:border-color .15s ease, transform .15s ease;
+  }
+  .btn-social:hover{ border-color:var(--gold); transform:translateY(-2px); }
+  .btn-social-icon{
+    width:24px; height:24px; border-radius:50%; flex-shrink:0; color:#fff;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .btn-social-icon.instagram{ background:linear-gradient(135deg, #f9ce34, #ee2a7b, #6228d7); }
+  .btn-social-icon.whatsapp{ background:#25D366; }
+  @media (max-width:520px){ .header-actions .btn-social{ padding:9px; } .header-actions .btn-contact-label{ display:none; } }
   .detail-actions .btn-contact{ width:100%; padding:13px 16px 13px 12px; font-size:14px; }
   .detail-actions .btn-contact-icon{ width:26px; height:26px; }
 
@@ -148,8 +162,7 @@
     max-width:60%; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
   }
   @media (max-width:480px){
-    .popular-badge-text{ display:none; }
-    .popular-badge{ padding:6px 8px; }
+    .popular-badge{ padding:5px 8px; font-size:9.5px; }
   }
   .gallery-arrow{
     position:absolute; top:50%; transform:translateY(-50%); width:26px; height:26px; border-radius:50%;
@@ -254,6 +267,11 @@
     margin:0; font-size:13px; font-weight:600; text-align:right;
     font-family:'IBM Plex Mono',monospace;
   }
+  .delivery-note{
+    font-size:11.5px; line-height:1.5; color:var(--text-dim);
+    background:var(--panel-2); border:1px solid var(--border); border-radius:9px;
+    padding:10px 12px; margin:0 0 18px;
+  }
   .detail-body .eyebrow{ display:block; margin-bottom:4px; }
   .detail-body h2{ font-size:22px; margin-bottom:6px; }
   .detail-body .ref{ margin-bottom:14px; }
@@ -352,12 +370,12 @@
   </div>
   <div class="header-actions">
     <button class="btn icon-btn" id="themeToggleBtn" title="Alternar tema" aria-label="Alternar tema"></button>
-    <a class="btn-contact btn-instagram" id="instagramBtn" target="_blank" rel="noopener" title="Instagram">
-      <span class="btn-contact-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg></span>
+    <a class="btn-social" id="instagramBtn" target="_blank" rel="noopener" title="Instagram">
+      <span class="btn-social-icon instagram"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg></span>
       <span class="btn-contact-label">Instagram</span>
     </a>
-    <a class="btn-contact btn-whats-contact" id="talkSellerBtn" target="_blank" rel="noopener">
-      <span class="btn-contact-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.46 0-9.9 4.44-9.9 9.9 0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.9-4.44 9.9-9.9 0-2.64-1.03-5.12-2.9-6.99A9.82 9.82 0 0 0 12.04 2Zm5.8 14.1c-.24.68-1.4 1.3-1.93 1.38-.5.08-1.1.11-1.78-.11-.41-.13-.94-.3-1.62-.6-2.85-1.23-4.71-4.1-4.85-4.29-.14-.19-1.16-1.55-1.16-2.96 0-1.4.74-2.09 1-2.38.26-.28.57-.35.76-.35h.55c.18 0 .42-.07.65.5.24.58.81 2 .88 2.14.07.14.12.31.02.5-.09.19-.14.3-.28.47-.14.16-.29.36-.42.49-.14.14-.29.29-.12.57.16.28.72 1.19 1.55 1.93 1.06.94 1.96 1.24 2.24 1.38.28.14.44.12.61-.07.16-.19.7-.82.89-1.1.19-.28.37-.23.63-.14.26.09 1.65.78 1.94.93.28.14.47.21.54.33.07.12.07.68-.17 1.36Z"/></svg></span>
+    <a class="btn-social" id="talkSellerBtn" target="_blank" rel="noopener">
+      <span class="btn-social-icon whatsapp"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.46 0-9.9 4.44-9.9 9.9 0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.9-4.44 9.9-9.9 0-2.64-1.03-5.12-2.9-6.99A9.82 9.82 0 0 0 12.04 2Zm5.8 14.1c-.24.68-1.4 1.3-1.93 1.38-.5.08-1.1.11-1.78-.11-.41-.13-.94-.3-1.62-.6-2.85-1.23-4.71-4.1-4.85-4.29-.14-.19-1.16-1.55-1.16-2.96 0-1.4.74-2.09 1-2.38.26-.28.57-.35.76-.35h.55c.18 0 .42-.07.65.5.24.58.81 2 .88 2.14.07.14.12.31.02.5-.09.19-.14.3-.28.47-.14.16-.29.36-.42.49-.14.14-.29.29-.12.57.16.28.72 1.19 1.55 1.93 1.06.94 1.96 1.24 2.24 1.38.28.14.44.12.61-.07.16-.19.7-.82.89-1.1.19-.28.37-.23.63-.14.26.09 1.65.78 1.94.93.28.14.47.21.54.33.07.12.07.68-.17 1.36Z"/></svg></span>
       <span class="btn-contact-label">Falar com a loja</span>
     </a>
   </div>
@@ -428,7 +446,7 @@
 
 <script>
 (function(){
-  const PAGE_SIZE = 70;
+  const PAGE_SIZE = 24;
   let CATALOG = [];
   let CONFIG = { rates:{}, whatsappGroupUrl:'', whatsappSellerNumber:'', locked:false };
   let state = { search:'', brand:'Todos', size:'Todos', status:'Disponíveis', sort:'popular', page:1 };
@@ -660,7 +678,7 @@
   }
   function renderSortMenu(){
     const options = [
-      {value:'popular', label:'🔥 Mais pedidos'},
+      {value:'popular', label:'Mais pedidos'},
       {value:'recent', label:'Mais recentes'},
       {value:'price_asc', label:'Menor preço'},
       {value:'price_desc', label:'Maior preço'},
@@ -694,7 +712,7 @@
       <div class="card-media">
         <img src="${cdnUrl(imgs[0])}" alt="${w.name}" loading="lazy">
         <span class="badge ${statusClass(status)}">${status}</span>
-        ${popular ? '<span class="popular-badge" title="Um dos mais pedidos">🔥<span class="popular-badge-text"> Mais pedido</span></span>' : ''}
+        ${popular ? '<span class="popular-badge" title="Um dos mais pedidos">Mais pedido</span>' : ''}
         ${imgs.length > 1 ? `
           <button class="gallery-arrow prev" data-dir="-1" aria-label="Foto anterior">‹</button>
           <button class="gallery-arrow next" data-dir="1" aria-label="Próxima foto">›</button>
@@ -831,6 +849,12 @@
           ${w.movimento ? `<div><dt>Movimento</dt><dd>${w.movimento}</dd></div>` : ''}
           <div><dt>Condição</dt><dd>Novo, completo</dd></div>
         </dl>
+        ${(w.status === 'Sob encomenda' && CONFIG.prazoEntregaDias) ? `
+          <p class="delivery-note">
+            Prazo estimado de entrega: até ${CONFIG.prazoEntregaDias} dias corridos.
+            É uma estimativa, não um compromisso fechado — pode variar conforme disponibilidade e logística.
+          </p>
+        ` : ''}
 
         ${straps ? `
         <div class="field">
