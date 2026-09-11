@@ -105,6 +105,7 @@
   .card-icon-row button{ width:28px; height:28px; border-radius:50%; border:none; background:rgba(9,17,30,.6); color:#fff; display:flex; align-items:center; justify-content:center; cursor:pointer; }
   .card-icon-row .btn-delete:hover{ background:var(--danger); }
   .card-icon-row .btn-edit:hover{ background:var(--gold); color:#191305; }
+  .card-icon-row .btn-text:hover{ background:var(--gold); color:#191305; }
   .photo-count-badge{ position:absolute; bottom:10px; left:10px; font-size:10px; font-weight:600; padding:4px 8px; border-radius:999px; background:var(--badge-bg); color:var(--text-dim); border:1px solid var(--border); }
   .strap-count-badge{ position:absolute; bottom:38px; left:10px; font-size:10px; font-weight:700; padding:4px 8px; border-radius:999px; background:rgba(201,162,78,.18); color:var(--gold-strong); border:1px solid rgba(201,162,78,.5); }
   .card-body{ padding:14px 16px 16px; display:flex; flex-direction:column; gap:2px; flex:1; }
@@ -310,6 +311,19 @@
           </select>
         </div>
         <div class="field" id="fQtyField" style="display:none;"><label>Quantidade</label><input id="fQty" type="number" min="0"></div>
+      </div>
+      <div class="field">
+        <label>Movimento</label>
+        <input id="fMovimento" list="movimentoOpcoes" placeholder="ex: Automático, Quartzo, Solar">
+        <datalist id="movimentoOpcoes">
+          <option value="Automático"></option>
+          <option value="Quartzo"></option>
+          <option value="Solar"></option>
+          <option value="Eco-Drive"></option>
+          <option value="Corda manual"></option>
+          <option value="Automático (GMT)"></option>
+          <option value="Quartzo (cronógrafo)"></option>
+        </datalist>
       </div>
       <div class="field"><label>Preço à vista (R$)</label><input id="fPrice" type="number" step="0.01" min="0" required></div>
       <div class="field">
@@ -817,6 +831,9 @@
         <span class="badge ${statusClass(status)}">${status}</span>
         ${popular ? '<span class="popular-badge" title="Um dos mais pedidos">🔥<span class="popular-badge-text"> Mais pedido</span></span>' : ''}
         <div class="card-icon-row">
+          <button class="btn-text" data-id="${w.id}" title="Texto para o cliente">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6"/><path d="M8 13h8M8 17h5"/></svg>
+          </button>
           <button class="btn-edit" data-id="${w.id}" title="Editar">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
           </button>
@@ -833,9 +850,6 @@
         ${specs ? `<p class="ref">${specs}</p>` : '<p class="ref">&nbsp;</p>'}
         <p class="price">${formatBRL(w.price)} <span class="unit">à vista</span></p>
         <p class="installment-hint">em até 12x de ${formatBRL(val12)}</p>
-        <div class="card-actions">
-          <button type="button" class="btn-quote-card" data-id="${w.id}">Gerar orçamento</button>
-        </div>
       </div>
     </article>`;
   }
@@ -874,9 +888,9 @@
 
     grid.querySelectorAll('.btn-edit').forEach(b => b.addEventListener('click', (e) => { e.stopPropagation(); openWatchModal(Number(b.dataset.id)); }));
     grid.querySelectorAll('.btn-delete').forEach(b => b.addEventListener('click', (e) => { e.stopPropagation(); deleteWatch(Number(b.dataset.id)); }));
-    grid.querySelectorAll('.btn-quote-card').forEach(b => b.addEventListener('click', (e) => { e.stopPropagation(); openQuoteModal(Number(b.dataset.id)); }));
+    grid.querySelectorAll('.btn-text').forEach(b => b.addEventListener('click', (e) => { e.stopPropagation(); openTextModal(Number(b.dataset.id)); }));
     grid.querySelectorAll('.watch-card').forEach(card => {
-      card.addEventListener('click', () => openTextModal(Number(card.dataset.id)));
+      card.addEventListener('click', () => openQuoteModal(Number(card.dataset.id)));
     });
 
     renderPagination(totalPages);
@@ -1074,6 +1088,7 @@
     document.getElementById('fName').value = w ? w.name : '';
     document.getElementById('fRef').value = w ? (w.ref||'') : '';
     document.getElementById('fMedida').value = w ? (w.medida||'') : '';
+    document.getElementById('fMovimento').value = w ? (w.movimento || '') : '';
     document.getElementById('fPrice').value = w ? w.price : '';
     statusSelect.value = w ? (w.status || 'Sob encomenda') : 'Sob encomenda';
     document.getElementById('fQty').value = w ? (w.qty||'') : '';
@@ -1273,6 +1288,7 @@
         name: document.getElementById('fName').value.trim(),
         ref: document.getElementById('fRef').value.trim(),
         medida: document.getElementById('fMedida').value.trim(),
+        movimento: document.getElementById('fMovimento').value.trim(),
         status: statusSelect.value,
         qty: statusSelect.value === 'Em estoque' ? (Number(document.getElementById('fQty').value) || 0) : null,
         price: Number(document.getElementById('fPrice').value) || 0,
@@ -1343,7 +1359,7 @@
       'Novo, completo',
       w.ref ? `Ref. ${w.ref}` : null,
       w.medida ? `Medida: ${normalizarMedida(w.medida)}` : null,
-      'Automático',
+      w.movimento || null,
       w.status || 'Sob encomenda',
       `R$${Math.ceil(w.price).toLocaleString('pt-BR')} à vista`,
       `Até 12x de ${Math.ceil(val12).toLocaleString('pt-BR')},00`,
