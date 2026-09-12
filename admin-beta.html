@@ -941,12 +941,12 @@
     if(state.brand !== 'Todos') list = list.filter(w => brandOf(w.name) === state.brand);
     if(state.size !== 'Todos') list = list.filter(w => normalizarMedida(w.medida) === state.size);
     if(state.status === 'Disponíveis') list = list.filter(w => !isFadedStatus(w.status));
+    else if(state.status !== 'Todos') list = list.filter(w => (w.status || 'Sob encomenda') === state.status);
     if(state.movimento !== 'Todos') list = list.filter(w => w.movimento === state.movimento);
     if(state.priceRange !== 'Todos'){
       const faixa = faixaPreco(state.priceRange);
       list = list.filter(w => w.price >= faixa.min && w.price < faixa.max);
     }
-    else if(state.status !== 'Todos') list = list.filter(w => (w.status || 'Sob encomenda') === state.status);
     if(state.search.trim()){
       const q = state.search.trim().toLowerCase();
       list = list.filter(w => nomeLimpo(w.name).toLowerCase().includes(q) || (w.ref||'').toLowerCase().includes(q));
