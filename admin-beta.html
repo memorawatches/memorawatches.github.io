@@ -292,6 +292,22 @@
     </button>
     <div class="dd-menu" id="statusMenu" hidden></div>
   </div>
+
+  <div class="dropdown" id="movimentoDropdown">
+    <button type="button" class="dd-trigger" id="movimentoTrigger" aria-expanded="false">
+      <span id="movimentoTriggerLabel">Todos os movimentos</span>
+      <svg class="chevron" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+    </button>
+    <div class="dd-menu" id="movimentoMenu" hidden></div>
+  </div>
+
+  <div class="dropdown" id="priceRangeDropdown">
+    <button type="button" class="dd-trigger" id="priceRangeTrigger" aria-expanded="false">
+      <span id="priceRangeTriggerLabel">Qualquer preço</span>
+      <svg class="chevron" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+    </button>
+    <div class="dd-menu" id="priceRangeMenu" hidden></div>
+  </div>
   <div class="dropdown" id="sortDropdown">
     <button type="button" class="dd-trigger" id="sortTrigger" aria-expanded="false">
       <span id="sortTriggerLabel">Mais recentes</span>
@@ -452,7 +468,7 @@
   const PAGE_SIZE = 24;
   let CATALOG = [];
   let CONFIG = { rates:{}, whatsappGroupUrl:'', whatsappSellerNumber:'', locked:false };
-  let state = { search:'', brand:'Todos', size:'Todos', status:'Disponíveis', sort:'popular', page:1 };
+  let state = { search:'', brand:'Todos', size:'Todos', status:'Disponíveis', movimento:'Todos', priceRange:'Todos', sort:'popular', page:1 };
   let gh = null; // {owner, repo, branch, token}
   let nextId = 1;
   let pendingPhotos = []; // [{dataUrl, isNew}] for the open add/edit form
@@ -815,6 +831,16 @@
     });
     document.addEventListener('click', (e) => { if(!menu.hidden && !e.target.closest('#' + prefix + 'Dropdown')) close(); });
   }
+  // Faixas de preço fixas — cobrem bem a distribuição real do catálogo hoje.
+  const FAIXAS_PRECO = [
+    {value:'Todos', label:'Qualquer preço', min:0, max:Infinity},
+    {value:'lt5k', label:'Até R$ 5.000', min:0, max:5000},
+    {value:'5-8k', label:'R$ 5.000 – R$ 8.000', min:5000, max:8000},
+    {value:'8-12k', label:'R$ 8.000 – R$ 12.000', min:8000, max:12000},
+    {value:'gt12k', label:'Acima de R$ 12.000', min:12000, max:Infinity},
+  ];
+  function faixaPreco(value){ return FAIXAS_PRECO.find(f => f.value === value) || FAIXAS_PRECO[0]; }
+
   function renderFilterMenus(){
     const brands = Array.from(new Set(CATALOG.map(w => brandOf(w.name)))).sort();
     setupDropdown('brand', [{value:'Todos', label:'Todas as marcas'}, ...brands.map(b => ({value:b, label:b}))], state.brand, v => { state.brand=v; state.page=1; render(); });
@@ -826,6 +852,9 @@
       {value:'Todos', label:'Todos os status'},
       ...statuses.map(s => ({value:s, label:s}))
     ], state.status, v => { state.status=v; state.page=1; render(); });
+    const movimentos = Array.from(new Set(CATALOG.map(w => w.movimento).filter(Boolean))).sort();
+    setupDropdown('movimento', [{value:'Todos', label:'Todos os movimentos'}, ...movimentos.map(m => ({value:m, label:m}))], state.movimento, v => { state.movimento=v; state.page=1; render(); });
+    setupDropdown('priceRange', FAIXAS_PRECO.map(f => ({value:f.value, label:f.label})), state.priceRange, v => { state.priceRange=v; state.page=1; render(); });
     setupDropdown('sort', [
       {value:'popular', label:'Mais pedidos'}, {value:'recent', label:'Mais recentes'},
       {value:'price_asc', label:'Menor preço'}, {value:'price_desc', label:'Maior preço'},
@@ -912,6 +941,11 @@
     if(state.brand !== 'Todos') list = list.filter(w => brandOf(w.name) === state.brand);
     if(state.size !== 'Todos') list = list.filter(w => normalizarMedida(w.medida) === state.size);
     if(state.status === 'Disponíveis') list = list.filter(w => !isFadedStatus(w.status));
+    if(state.movimento !== 'Todos') list = list.filter(w => w.movimento === state.movimento);
+    if(state.priceRange !== 'Todos'){
+      const faixa = faixaPreco(state.priceRange);
+      list = list.filter(w => w.price >= faixa.min && w.price < faixa.max);
+    }
     else if(state.status !== 'Todos') list = list.filter(w => (w.status || 'Sob encomenda') === state.status);
     if(state.search.trim()){
       const q = state.search.trim().toLowerCase();
