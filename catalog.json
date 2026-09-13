@@ -3931,15 +3931,14 @@
     "name": "Venezianico Nereide Tigris",
     "ref": "4521543S",
     "medida": "42mm",
-    "status": "Em estoque",
-    "qty": 0,
+    "status": "Sob encomenda",
+    "qty": null,
     "price": 8990,
     "orderCount": 0,
     "postedAt": "2026-08-17",
     "images": [
       "images/315-1786987859856-0.jpg"
-    ],
-    "movimento": "Automático"
+    ]
   },
   {
     "id": 316,
