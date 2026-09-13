@@ -332,7 +332,11 @@
             <option>Descontinuado</option>
           </select>
         </div>
-        <div class="field" id="fQtyField" style="display:none;"><label>Quantidade</label><input id="fQty" type="number" min="0"></div>
+        <div class="field" id="fQtyField" style="display:none;">
+          <label>Quantidade</label>
+          <input id="fQty" type="number" min="0">
+          <small id="fQtyWarning" style="display:none; color:var(--danger); margin-top:4px;">Precisa ser maior que zero pra ficar coerente com "Em estoque".</small>
+        </div>
       </div>
       <div class="field">
         <label>Movimento</label>
@@ -1075,7 +1079,16 @@
   // ---------- Add/Edit modal ----------
   const statusSelect = document.getElementById('fStatus');
   const qtyField = document.getElementById('fQtyField');
-  statusSelect.addEventListener('change', () => { qtyField.style.display = statusSelect.value === 'Em estoque' ? 'block' : 'none'; });
+  const qtyWarning = document.getElementById('fQtyWarning');
+  function checarQtyCoerente(){
+    const zero = statusSelect.value === 'Em estoque' && (Number(document.getElementById('fQty').value) || 0) <= 0;
+    qtyWarning.style.display = zero ? 'block' : 'none';
+  }
+  statusSelect.addEventListener('change', () => {
+    qtyField.style.display = statusSelect.value === 'Em estoque' ? 'block' : 'none';
+    checarQtyCoerente();
+  });
+  document.getElementById('fQty').addEventListener('input', checarQtyCoerente);
 
   document.getElementById('addWatchBtn').addEventListener('click', () => openWatchModal(null));
 
@@ -1281,7 +1294,7 @@
     statusSelect.value = w ? (w.status || 'Sob encomenda') : 'Sob encomenda';
     document.getElementById('fQty').value = w ? (w.qty||'') : '';
     qtyField.style.display = statusSelect.value === 'Em estoque' ? 'block' : 'none';
-    pendingPhotos = w ? imagesOf(w).filter(src => src !== PLACEHOLDER_IMG).map(src => ({ src, isNew:false })) : [];
+    checarQtyCoerente();
     pendingStraps = (w && w.straps) ? w.straps.map(s => ({
       nome: s.nome || '',
       price: s.price || '',
@@ -1436,6 +1449,18 @@
 
   document.getElementById('watchForm').addEventListener('submit', async (e) => {
     e.preventDefault();
+
+    // Status e quantidade precisam contar a mesma história: "Em estoque"
+    // com 0 unidades é uma contradição, e é fácil acontecer sem querer.
+    if(statusSelect.value === 'Em estoque'){
+      const qtyVal = Number(document.getElementById('fQty').value) || 0;
+      if(qtyVal <= 0){
+        toast('Status "Em estoque" precisa de uma quantidade maior que zero.');
+        document.getElementById('fQty').focus();
+        return;
+      }
+    }
+
     const saveBtn = document.getElementById('watchSaveBtn');
     const originalLabel = saveBtn.textContent;
     saveBtn.disabled = true;
