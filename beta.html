@@ -778,7 +778,8 @@
 
   function updateFiltersCount(){
     const ativos = [
-      state.size !== 'Todos', state.status !== 'Todos',
+      state.size !== 'Todos',
+      state.status !== 'Todos' && state.status !== 'Disponíveis', // padrão não conta como filtro "ligado"
       state.movimento !== 'Todos', state.priceRange !== 'Todos'
     ].filter(Boolean).length;
     const badge = document.getElementById('filtersCount');
@@ -992,7 +993,12 @@
           ${w.ref ? `<div><dt>Referência</dt><dd>${w.ref}</dd></div>` : ''}
           ${w.medida ? `<div><dt>Tamanho</dt><dd>${normalizarMedida(w.medida)}</dd></div>` : ''}
           ${w.movimento ? `<div><dt>Movimento</dt><dd>${w.movimento}</dd></div>` : ''}
+          ${w.material ? `<div><dt>Material da caixa</dt><dd>${w.material}</dd></div>` : ''}
+          ${w.vidro ? `<div><dt>Vidro</dt><dd>${w.vidro}</dd></div>` : ''}
+          ${w.espessura ? `<div><dt>Espessura</dt><dd>${w.espessura}</dd></div>` : ''}
+          ${w.lugToLug ? `<div><dt>Lug-to-lug</dt><dd>${w.lugToLug}</dd></div>` : ''}
           ${w.resistencia ? `<div><dt>Resistência à água</dt><dd>${w.resistencia}</dd></div>` : ''}
+          ${w.reservaMarcha ? `<div><dt>Reserva de marcha</dt><dd>${w.reservaMarcha}</dd></div>` : ''}
           ${w.acompanha ? `<div><dt>Acompanha</dt><dd>${w.acompanha}</dd></div>` : ''}
           <div><dt>Condição</dt><dd>Novo, completo</dd></div>
         </dl>

@@ -364,9 +364,45 @@
           </datalist>
         </div>
         <div class="field">
-          <label>O que acompanha (opcional)</label>
-          <input id="fAcompanha" placeholder="ex: Caixa, manual e garantia">
+          <label>Material da caixa (opcional)</label>
+          <input id="fMaterial" list="materialOpcoes" placeholder="ex: Aço inoxidável">
+          <datalist id="materialOpcoes">
+            <option value="Aço inoxidável"></option>
+            <option value="Titânio"></option>
+            <option value="Bronze"></option>
+            <option value="Aço PVD preto"></option>
+          </datalist>
         </div>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label>Vidro (opcional)</label>
+          <input id="fVidro" list="vidroOpcoes" placeholder="ex: Safira">
+          <datalist id="vidroOpcoes">
+            <option value="Safira"></option>
+            <option value="Mineral"></option>
+            <option value="Acrílico"></option>
+            <option value="Hesalite"></option>
+          </datalist>
+        </div>
+        <div class="field">
+          <label>Espessura (opcional)</label>
+          <input id="fEspessura" placeholder="ex: 11.5mm">
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label>Lug-to-lug (opcional)</label>
+          <input id="fLugToLug" placeholder="ex: 47mm">
+        </div>
+        <div class="field">
+          <label>Reserva de marcha (opcional)</label>
+          <input id="fReservaMarcha" placeholder="ex: 80 horas">
+        </div>
+      </div>
+      <div class="field">
+        <label>O que acompanha (opcional)</label>
+        <input id="fAcompanha" placeholder="ex: Caixa, manual e garantia">
       </div>
       <div class="field"><label>Preço à vista (R$)</label><input id="fPrice" type="number" step="0.01" min="0" required></div>
       <div class="field">
@@ -907,7 +943,8 @@
 
   function updateFiltersCount(){
     const ativos = [
-      state.size !== 'Todos', state.status !== 'Todos',
+      state.size !== 'Todos',
+      state.status !== 'Todos' && state.status !== 'Disponíveis', // padrão não conta como filtro "ligado"
       state.movimento !== 'Todos', state.priceRange !== 'Todos'
     ].filter(Boolean).length;
     const badge = document.getElementById('filtersCount');
@@ -1289,6 +1326,11 @@
     document.getElementById('fMedida').value = w ? (w.medida||'') : '';
     document.getElementById('fMovimento').value = w ? (w.movimento || '') : '';
     document.getElementById('fResistencia').value = w ? (w.resistencia || '') : '';
+    document.getElementById('fMaterial').value = w ? (w.material || '') : '';
+    document.getElementById('fVidro').value = w ? (w.vidro || '') : '';
+    document.getElementById('fEspessura').value = w ? (w.espessura || '') : '';
+    document.getElementById('fLugToLug').value = w ? (w.lugToLug || '') : '';
+    document.getElementById('fReservaMarcha').value = w ? (w.reservaMarcha || '') : '';
     document.getElementById('fAcompanha').value = w ? (w.acompanha || '') : '';
     document.getElementById('fPrice').value = w ? w.price : '';
     statusSelect.value = w ? (w.status || 'Sob encomenda') : 'Sob encomenda';
@@ -1503,6 +1545,11 @@
         medida: document.getElementById('fMedida').value.trim(),
         movimento: document.getElementById('fMovimento').value.trim(),
         resistencia: document.getElementById('fResistencia').value.trim(),
+        material: document.getElementById('fMaterial').value.trim(),
+        vidro: document.getElementById('fVidro').value.trim(),
+        espessura: document.getElementById('fEspessura').value.trim(),
+        lugToLug: document.getElementById('fLugToLug').value.trim(),
+        reservaMarcha: document.getElementById('fReservaMarcha').value.trim(),
         acompanha: document.getElementById('fAcompanha').value.trim(),
         status: statusSelect.value,
         qty: statusSelect.value === 'Em estoque' ? (Number(document.getElementById('fQty').value) || 0) : null,
@@ -1578,6 +1625,11 @@
       w.medida ? `Medida: ${normalizarMedida(w.medida)}` : null,
       w.movimento || null,
       w.resistencia ? `Resistência à água: ${w.resistencia}` : null,
+      w.material ? `Material da caixa: ${w.material}` : null,
+      w.vidro ? `Vidro: ${w.vidro}` : null,
+      w.espessura ? `Espessura: ${w.espessura}` : null,
+      w.lugToLug ? `Lug-to-lug: ${w.lugToLug}` : null,
+      w.reservaMarcha ? `Reserva de marcha: ${w.reservaMarcha}` : null,
       w.acompanha ? `Acompanha: ${w.acompanha}` : null,
       w.status || 'Sob encomenda',
       `R$${Math.ceil(w.price).toLocaleString('pt-BR')} à vista`,
