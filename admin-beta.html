@@ -284,11 +284,13 @@
     <input id="searchInput" type="text" placeholder="Buscar por modelo ou referência...">
     <button type="button" class="search-clear" id="searchClearBtn" title="Limpar busca" hidden>&times;</button>
   </div>
-  <button type="button" class="btn-filters" id="filtersBtn">
-    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M7 12h10M10 18h4"/></svg>
-    Filtros
-    <span class="filters-count" id="filtersCount" hidden>0</span>
-  </button>
+  <div class="dropdown" id="brandDropdown">
+    <button type="button" class="dd-trigger" id="brandTrigger" aria-expanded="false">
+      <span id="brandTriggerLabel">Todas as marcas</span>
+      <svg class="chevron" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+    </button>
+    <div class="dd-menu" id="brandMenu" hidden></div>
+  </div>
   <div class="dropdown" id="sortDropdown">
     <button type="button" class="dd-trigger" id="sortTrigger" aria-expanded="false">
       <span id="sortTriggerLabel">Mais recentes</span>
@@ -296,6 +298,11 @@
     </button>
     <div class="dd-menu" id="sortMenu" hidden></div>
   </div>
+  <button type="button" class="btn-filters" id="filtersBtn">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M7 12h10M10 18h4"/></svg>
+    Filtros
+    <span class="filters-count" id="filtersCount" hidden>0</span>
+  </button>
 </section>
 
 <p class="count-line" id="countLine"></p>
@@ -339,6 +346,23 @@
           <option value="Automático (GMT)"></option>
           <option value="Quartzo (cronógrafo)"></option>
         </datalist>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label>Resistência à água (opcional)</label>
+          <input id="fResistencia" list="resistenciaOpcoes" placeholder="ex: 100m">
+          <datalist id="resistenciaOpcoes">
+            <option value="30m"></option>
+            <option value="50m"></option>
+            <option value="100m"></option>
+            <option value="200m"></option>
+            <option value="300m"></option>
+          </datalist>
+        </div>
+        <div class="field">
+          <label>O que acompanha (opcional)</label>
+          <input id="fAcompanha" placeholder="ex: Caixa, manual e garantia">
+        </div>
       </div>
       <div class="field"><label>Preço à vista (R$)</label><input id="fPrice" type="number" step="0.01" min="0" required></div>
       <div class="field">
@@ -449,10 +473,6 @@
   <div class="modal">
     <button class="modal-close" id="filtersModalClose">&times;</button>
     <h2 style="margin-bottom:18px;">Filtros</h2>
-    <div class="field">
-      <label>Marca</label>
-      <select id="fltBrand"></select>
-    </div>
     <div class="field">
       <label>Tamanho</label>
       <select id="fltSize"></select>
@@ -856,6 +876,8 @@
 
   function renderFilterMenus(){
     const brands = Array.from(new Set(CATALOG.map(w => brandOf(w.name)))).sort();
+    setupDropdown('brand', [{value:'Todos', label:'Todas as marcas'}, ...brands.map(b => ({value:b, label:b}))], state.brand, v => { state.brand=v; state.page=1; render(); });
+
     const sizes = Array.from(new Set(CATALOG.map(w => normalizarMedida(w.medida)).filter(Boolean))).sort(ordenarMedidas);
     const statuses = Array.from(new Set(CATALOG.map(w => w.status || 'Sob encomenda'))).sort();
     const movimentos = Array.from(new Set(CATALOG.map(w => w.movimento).filter(Boolean))).sort();
@@ -864,7 +886,6 @@
       const sel = document.getElementById(id);
       sel.innerHTML = options.map(o => `<option value="${o.value}" ${o.value===valorAtual?'selected':''}>${o.label}</option>`).join('');
     };
-    preencher('fltBrand', [{value:'Todos', label:'Todas as marcas'}, ...brands.map(b => ({value:b, label:b}))], state.brand);
     preencher('fltSize', [{value:'Todos', label:'Todos os tamanhos'}, ...sizes.map(s => ({value:s, label:s}))], state.size);
     preencher('fltStatus', [
       {value:'Disponíveis', label:'✅ Disponíveis'}, {value:'Todos', label:'Todos os status'},
@@ -882,7 +903,7 @@
 
   function updateFiltersCount(){
     const ativos = [
-      state.brand !== 'Todos', state.size !== 'Todos', state.status !== 'Todos',
+      state.size !== 'Todos', state.status !== 'Todos',
       state.movimento !== 'Todos', state.priceRange !== 'Todos'
     ].filter(Boolean).length;
     const badge = document.getElementById('filtersCount');
@@ -894,13 +915,13 @@
   document.getElementById('filtersModalClose').addEventListener('click', () => { document.getElementById('filtersModal').hidden = true; });
   document.getElementById('filtersCloseBtn').addEventListener('click', () => { document.getElementById('filtersModal').hidden = true; });
   document.getElementById('filtersClearBtn').addEventListener('click', () => {
-    state.brand = 'Todos'; state.size = 'Todos'; state.status = 'Disponíveis';
+    state.size = 'Todos'; state.status = 'Disponíveis';
     state.movimento = 'Todos'; state.priceRange = 'Todos'; state.page = 1;
     renderFilterMenus(); updateFiltersCount(); render();
   });
-  ['fltBrand','fltSize','fltStatus','fltMovimento','fltPriceRange'].forEach(id => {
+  ['fltSize','fltStatus','fltMovimento','fltPriceRange'].forEach(id => {
     document.getElementById(id).addEventListener('change', (e) => {
-      const chave = { fltBrand:'brand', fltSize:'size', fltStatus:'status', fltMovimento:'movimento', fltPriceRange:'priceRange' }[id];
+      const chave = { fltSize:'size', fltStatus:'status', fltMovimento:'movimento', fltPriceRange:'priceRange' }[id];
       state[chave] = e.target.value;
       state.page = 1;
       updateFiltersCount();
@@ -1254,6 +1275,8 @@
     document.getElementById('fRef').value = w ? (w.ref||'') : '';
     document.getElementById('fMedida').value = w ? (w.medida||'') : '';
     document.getElementById('fMovimento').value = w ? (w.movimento || '') : '';
+    document.getElementById('fResistencia').value = w ? (w.resistencia || '') : '';
+    document.getElementById('fAcompanha').value = w ? (w.acompanha || '') : '';
     document.getElementById('fPrice').value = w ? w.price : '';
     statusSelect.value = w ? (w.status || 'Sob encomenda') : 'Sob encomenda';
     document.getElementById('fQty').value = w ? (w.qty||'') : '';
@@ -1454,6 +1477,8 @@
         ref: document.getElementById('fRef').value.trim(),
         medida: document.getElementById('fMedida').value.trim(),
         movimento: document.getElementById('fMovimento').value.trim(),
+        resistencia: document.getElementById('fResistencia').value.trim(),
+        acompanha: document.getElementById('fAcompanha').value.trim(),
         status: statusSelect.value,
         qty: statusSelect.value === 'Em estoque' ? (Number(document.getElementById('fQty').value) || 0) : null,
         price: Number(document.getElementById('fPrice').value) || 0,
@@ -1527,6 +1552,8 @@
       w.ref ? `Ref. ${w.ref}` : null,
       w.medida ? `Medida: ${normalizarMedida(w.medida)}` : null,
       w.movimento || null,
+      w.resistencia ? `Resistência à água: ${w.resistencia}` : null,
+      w.acompanha ? `Acompanha: ${w.acompanha}` : null,
       w.status || 'Sob encomenda',
       `R$${Math.ceil(w.price).toLocaleString('pt-BR')} à vista`,
       `Até 12x de ${Math.ceil(val12).toLocaleString('pt-BR')},00`,
