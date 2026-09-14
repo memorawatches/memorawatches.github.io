@@ -3975,15 +3975,14 @@
     "name": "Seiko Chronograph Sport Azul",
     "ref": "SSB453",
     "medida": "40mm",
-    "status": "Em estoque",
-    "qty": 0,
+    "status": "Sob encomenda",
+    "qty": null,
     "price": 2990,
     "orderCount": 0,
     "postedAt": "2026-08-18",
     "images": [
       "images/317-1787089837082-0.jpg"
-    ],
-    "movimento": "Quartzo (cronógrafo)"
+    ]
   },
   {
     "id": 318,
