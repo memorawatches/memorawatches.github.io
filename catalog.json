@@ -3912,6 +3912,21 @@
     "movimento": "Automático"
   },
   {
+    "id": 313,
+    "name": "Seiko Cronógrafo Sport Azul",
+    "ref": "SSB477",
+    "medida": "39.5mm",
+    "status": "Em estoque",
+    "qty": 0,
+    "price": 2990,
+    "orderCount": 2,
+    "postedAt": "2026-08-15",
+    "images": [
+      "images/313-1786797552652-0.jpg"
+    ],
+    "movimento": "Quartzo (cronógrafo)"
+  },
+  {
     "id": 314,
     "name": "Seiko Cronógrafo Sport Preto",
     "ref": "SSB479",
@@ -4539,19 +4554,5 @@
       "images/355-1789005831342-0.jpg"
     ],
     "movimento": "Automático"
-  },
-  {
-    "id": 356,
-    "name": "Hamilton Khaki Field Quartz",
-    "ref": "H69401131",
-    "medida": "38mm",
-    "status": "Sob encomenda",
-    "qty": null,
-    "price": 3990,
-    "orderCount": 0,
-    "postedAt": "2026-09-11",
-    "images": [
-      "images/356-1789160466893-0.jpg"
-    ]
   }
 ]
