@@ -9,15 +9,15 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#09111e; --panel:#131c2f; --panel-2:#1b263b; --border:#28364f;
-    --text:#f3f0e8; --text-dim:#9d9a93; --gold:#c9a24e; --gold-strong:#e0bc6c;
-    --badge-bg:rgba(19,28,47,.85); --badge-border:rgba(201,162,78,.4);
+    --bg:#0c1613; --panel:#14211c; --panel-2:#1c2c25; --border:#2a3d35;
+    --text:#f1efe8; --text-dim:#96a29a; --gold:#b98d55; --gold-strong:#d6ab74;
+    --badge-bg:rgba(20,33,28,.85); --badge-border:rgba(214,171,116,.4);
     --shadow:0 18px 40px -14px rgba(0,0,0,.55); --danger:#c9634e; --ok:#7fbf7f;
   }
   html[data-theme="light"]{
-    --bg:#f8f4ea; --panel:#ffffff; --panel-2:#f1ebdc; --border:#e2d8c0;
-    --text:#241d10; --text-dim:#8a7f68; --gold:#a97c2f; --gold-strong:#c9a24e;
-    --badge-bg:rgba(255,255,255,.88); --badge-border:rgba(169,124,47,.35);
+    --bg:#f5f3ec; --panel:#ffffff; --panel-2:#eceae0; --border:#dcdace;
+    --text:#18231e; --text-dim:#79847c; --gold:#8f6b38; --gold-strong:#b98d55;
+    --badge-bg:rgba(255,255,255,.88); --badge-border:rgba(143,107,56,.35);
     --shadow:0 18px 40px -14px rgba(120,100,60,.25);
   }
   html, body{ transition:background-color .25s ease, color .25s ease; }
@@ -44,12 +44,12 @@
   .header-actions{ display:flex; align-items:center; gap:10px; flex-wrap:wrap; justify-content:flex-end; }
   .save-indicator{ display:flex; align-items:center; gap:6px; font-size:11.5px; color:var(--text-dim); font-family:'IBM Plex Mono',monospace; }
   .save-indicator .dot{ width:7px; height:7px; border-radius:50%; background:#6fbf7c; flex-shrink:0; }
-  .save-indicator.busy .dot{ background:#c9a24e; }
+  .save-indicator.busy .dot{ background:#b98d55; }
   .save-indicator.error .dot{ background:var(--danger); }
 
   .btn{ border-radius:9px; border:1px solid var(--border); background:var(--panel); color:var(--text); padding:10px 16px; font-size:13.5px; font-weight:600; cursor:pointer; transition:border-color .2s, transform .15s; }
   .btn:hover{ border-color:var(--gold); }
-  .btn-gold{ background:linear-gradient(180deg, var(--gold-strong), var(--gold)); color:#191305; border:none; }
+  .btn-gold{ background:linear-gradient(180deg, var(--gold-strong), var(--gold)); color:#1a1508; border:none; }
   .btn-gold:hover{ transform:translateY(-1px); }
   .btn-danger{ background:transparent; color:var(--danger); border-color:var(--danger); }
   .icon-btn{ width:38px; height:38px; padding:0; display:flex; align-items:center; justify-content:center; }
@@ -78,6 +78,20 @@
   .dropdown{ position:relative; }
   .dd-trigger{ display:flex; align-items:center; gap:8px; padding:11px 14px; border-radius:10px; border:1px solid var(--border); background:var(--panel); color:var(--text); font-size:13.5px; font-weight:600; cursor:pointer; white-space:nowrap; }
   .dd-trigger:hover{ border-color:var(--gold); }
+  .btn-filters{
+    display:inline-flex; align-items:center; gap:8px; padding:11px 16px; border-radius:10px;
+    border:1px solid var(--border); background:var(--panel); color:var(--text);
+    font-size:13.5px; font-weight:600; cursor:pointer; white-space:nowrap;
+    transition:border-color .15s ease;
+  }
+  .btn-filters:hover{ border-color:var(--gold); }
+  .filters-count{
+    background:var(--gold); color:#1a1508; font-size:11px; font-weight:700;
+    width:18px; height:18px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  }
+  #filtersModal .modal{ max-width:400px; }
+  #filtersModal .field:last-of-type{ margin-bottom:20px; }
+
   .dd-trigger .chevron{ transition:transform .15s; opacity:.6; }
   .dd-trigger[aria-expanded="true"] .chevron{ transform:rotate(180deg); }
   .dd-menu{ position:absolute; top:calc(100% + 6px); left:0; min-width:170px; max-height:280px; overflow-y:auto; background:var(--panel); border:1px solid var(--border); border-radius:10px; box-shadow:var(--shadow); z-index:20; padding:6px; }
@@ -92,20 +106,40 @@
   .card-media{ position:relative; aspect-ratio:1/1; background:#fff; overflow:hidden; }
   .card-media img{ width:100%; height:100%; object-fit:cover; display:block; }
   .badge{ position:absolute; top:10px; left:10px; font-size:10.5px; font-weight:700; text-transform:uppercase; letter-spacing:.05em; padding:5px 9px; border-radius:999px; background:var(--badge-bg); color:var(--gold-strong); border:1px solid var(--badge-border); backdrop-filter:blur(3px); max-width:64%; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
-  .badge-sobencomenda{ color:#e0bc6c; border-color:rgba(224,188,108,.5); background:rgba(224,188,108,.14); }
+  .badge-sobencomenda{ color:#d6ab74; border-color:rgba(214,171,116,.5); background:rgba(214,171,116,.14); }
   .badge-emestoque{ color:#8fd19e; border-color:rgba(143,209,158,.5); background:rgba(143,209,158,.14); }
   .badge-acaminho{ color:#8ec2e8; border-color:rgba(142,194,232,.5); background:rgba(142,194,232,.14); }
   .badge-esgotado{ color:#e0937c; border-color:rgba(224,147,124,.5); background:rgba(224,147,124,.14); }
   .badge-descontinuado{ color:#a39d90; border-color:rgba(163,157,144,.45); background:rgba(163,157,144,.12); }
   .watch-card.faded{ opacity:.55; transition:opacity .2s ease; }
   .watch-card.faded:hover{ opacity:.9; }
-  .popular-badge{ position:absolute; bottom:10px; right:10px; font-size:10.5px; font-weight:700; padding:5px 9px; border-radius:999px; letter-spacing:.02em; background:linear-gradient(180deg, var(--gold-strong), var(--gold)); color:#191305; box-shadow:0 6px 14px -6px rgba(201,162,78,.7); max-width:60%; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
-  @media (max-width:480px){ .popular-badge-text{ display:none; } .popular-badge{ padding:6px 8px; } }
+  .popular-badge{ position:absolute; bottom:10px; right:10px; font-size:10.5px; font-weight:700; padding:5px 9px; border-radius:999px; letter-spacing:.02em; background:linear-gradient(180deg, var(--gold-strong), var(--gold)); color:#1a1508; box-shadow:0 6px 14px -6px rgba(214,171,116,.7); max-width:60%; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  @media (max-width:480px){ .popular-badge{ padding:5px 8px; font-size:9.5px; } }
+  .gallery-arrow{
+    position:absolute; top:50%; transform:translateY(-50%); width:26px; height:26px; border-radius:50%;
+    background:rgba(12,22,19,.55); border:none; color:#fff; display:flex; align-items:center; justify-content:center;
+    cursor:pointer; opacity:0; transition:opacity .15s; font-size:16px; line-height:1; padding:0;
+  }
+  .watch-card:hover .gallery-arrow{ opacity:1; }
+  @media (hover:none){ .gallery-arrow{ opacity:1; } }
+  .gallery-arrow.prev{ left:8px; } .gallery-arrow.next{ right:8px; }
+  .gallery-dots{ position:absolute; bottom:8px; left:50%; transform:translateX(-50%); display:flex; gap:4px; }
+  .gallery-dots span{ width:5px; height:5px; border-radius:50%; background:rgba(255,255,255,.5); }
+  .gallery-dots span.active{ background:#fff; }
   .card-icon-row{ position:absolute; top:10px; right:10px; display:flex; gap:6px; }
-  .card-icon-row button{ width:28px; height:28px; border-radius:50%; border:none; background:rgba(9,17,30,.6); color:#fff; display:flex; align-items:center; justify-content:center; cursor:pointer; }
+  .card-icon-row button{ width:28px; height:28px; border-radius:50%; border:none; background:rgba(12,22,19,.6); color:#fff; display:flex; align-items:center; justify-content:center; cursor:pointer; }
   .card-icon-row .btn-delete:hover{ background:var(--danger); }
-  .card-icon-row .btn-edit:hover{ background:var(--gold); color:#191305; }
+  .card-icon-row .btn-edit:hover{ background:var(--gold); color:#1a1508; }
+  .card-icon-row .btn-text:hover{ background:var(--gold); color:#1a1508; }
   .photo-count-badge{ position:absolute; bottom:10px; left:10px; font-size:10px; font-weight:600; padding:4px 8px; border-radius:999px; background:var(--badge-bg); color:var(--text-dim); border:1px solid var(--border); }
+  .strap-line{
+    font-size:11.5px; font-weight:600; color:var(--gold-strong);
+    margin:8px 0 0; display:flex; align-items:center; gap:5px;
+  }
+  .strap-line::before{
+    content:''; width:6px; height:6px; border-radius:50%;
+    background:var(--gold); flex-shrink:0;
+  }
   .card-body{ padding:14px 16px 16px; display:flex; flex-direction:column; gap:2px; flex:1; }
   .eyebrow{ font-size:10.5px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--gold-strong); }
   .card-body h3{ font-size:16px; margin:2px 0 4px; }
@@ -122,9 +156,9 @@
   .empty-state{ text-align:center; padding:60px 20px; color:var(--text-dim); grid-column:1/-1; }
   .pagination{ display:flex; justify-content:center; gap:8px; padding:0 24px 60px; }
   .pagination button{ width:36px; height:36px; border-radius:8px; border:1px solid var(--border); background:var(--panel); color:var(--text); cursor:pointer; font-size:13px; }
-  .pagination button.active{ background:var(--gold); color:#191305; border-color:var(--gold); font-weight:700; }
+  .pagination button.active{ background:var(--gold); color:#1a1508; border-color:var(--gold); font-weight:700; }
 
-  .modal-overlay{ position:fixed; inset:0; background:rgba(4,8,15,.7); backdrop-filter:blur(3px); display:flex; align-items:center; justify-content:center; z-index:100; padding:20px; }
+  .modal-overlay{ position:fixed; inset:0; background:rgba(6,12,10,.72); backdrop-filter:blur(3px); display:flex; align-items:center; justify-content:center; z-index:100; padding:20px; }
   .modal-overlay[hidden]{ display:none; }
   .modal{ position:relative; background:var(--panel); border:1px solid var(--border); border-radius:18px; max-width:520px; width:100%; max-height:88vh; overflow-y:auto; box-shadow:var(--shadow); padding:26px; }
   .modal-close{
@@ -146,13 +180,36 @@
   .photo-input-btn:hover{ border-color:var(--gold); color:var(--text); }
   .photo-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin-top:10px; }
   @media (max-width:640px){ .photo-grid{ grid-template-columns:repeat(3,1fr); } }
+  .strap-options{ display:flex; flex-wrap:wrap; gap:8px; }
+  .strap-option{
+    padding:9px 14px; border-radius:999px; border:1px solid var(--border);
+    background:var(--panel-2); color:var(--text); font-size:13px; font-weight:600;
+    cursor:pointer; transition:border-color .15s, background .15s, color .15s;
+  }
+  .strap-option:hover{ border-color:var(--gold); }
+  .strap-option.active{
+    background:linear-gradient(180deg, var(--gold-strong), var(--gold));
+    color:#1a1508; border-color:transparent;
+  }
+  .strap-card{
+    border:1px solid var(--border); border-radius:12px; padding:14px;
+    margin-bottom:10px; background:var(--panel-2);
+  }
+  .strap-card-head{ display:flex; gap:10px; align-items:flex-end; margin-bottom:10px; }
+  .strap-card-head .field{ flex:1; margin-bottom:0; }
+  .strap-remove{
+    border:1px solid var(--danger); background:transparent; color:var(--danger);
+    border-radius:8px; padding:10px 12px; cursor:pointer; font-size:13px; flex-shrink:0;
+  }
+  .strap-remove:hover{ background:var(--danger); color:#fff; }
+  .strap-card .photo-input-btn{ padding:10px; font-size:12px; }
   .photo-thumb{ position:relative; aspect-ratio:1/1; border-radius:8px; overflow:hidden; border:1px solid var(--border); }
   .photo-thumb img{ width:100%; height:100%; object-fit:cover; }
-  .photo-thumb .rm{ position:absolute; top:3px; right:3px; width:20px; height:20px; border-radius:50%; border:none; background:rgba(9,17,30,.7); color:#fff; font-size:12px; cursor:pointer; }
-  .photo-thumb .cover-tag{ position:absolute; bottom:3px; left:3px; font-size:9px; padding:2px 5px; border-radius:5px; background:var(--gold); color:#191305; font-weight:700; }
+  .photo-thumb .rm{ position:absolute; top:3px; right:3px; width:20px; height:20px; border-radius:50%; border:none; background:rgba(12,22,19,.7); color:#fff; font-size:12px; cursor:pointer; }
+  .photo-thumb .cover-tag{ position:absolute; bottom:3px; left:3px; font-size:9px; padding:2px 5px; border-radius:5px; background:var(--gold); color:#1a1508; font-weight:700; }
   .photo-thumb .set-cover{
     position:absolute; bottom:3px; left:3px; right:3px; font-size:9px; padding:3px 4px; border-radius:5px;
-    background:rgba(9,17,30,.75); color:#fff; border:none; cursor:pointer; opacity:0; transition:opacity .15s;
+    background:rgba(12,22,19,.75); color:#fff; border:none; cursor:pointer; opacity:0; transition:opacity .15s;
   }
   .photo-thumb:hover .set-cover{ opacity:1; }
   @media (hover:none){ .photo-thumb .set-cover{ opacity:1; } }
@@ -234,21 +291,6 @@
     </button>
     <div class="dd-menu" id="brandMenu" hidden></div>
   </div>
-
-  <div class="dropdown" id="sizeDropdown">
-    <button type="button" class="dd-trigger" id="sizeTrigger" aria-expanded="false">
-      <span id="sizeTriggerLabel">Todos os tamanhos</span>
-      <svg class="chevron" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-    </button>
-    <div class="dd-menu" id="sizeMenu" hidden></div>
-  </div>
-  <div class="dropdown" id="statusDropdown">
-    <button type="button" class="dd-trigger" id="statusTrigger" aria-expanded="false">
-      <span id="statusTriggerLabel">Todos os status</span>
-      <svg class="chevron" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-    </button>
-    <div class="dd-menu" id="statusMenu" hidden></div>
-  </div>
   <div class="dropdown" id="sortDropdown">
     <button type="button" class="dd-trigger" id="sortTrigger" aria-expanded="false">
       <span id="sortTriggerLabel">Mais recentes</span>
@@ -256,6 +298,11 @@
     </button>
     <div class="dd-menu" id="sortMenu" hidden></div>
   </div>
+  <button type="button" class="btn-filters" id="filtersBtn">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M7 12h10M10 18h4"/></svg>
+    Filtros
+    <span class="filters-count" id="filtersCount" hidden>0</span>
+  </button>
 </section>
 
 <p class="count-line" id="countLine"></p>
@@ -285,13 +332,97 @@
             <option>Descontinuado</option>
           </select>
         </div>
-        <div class="field" id="fQtyField" style="display:none;"><label>Quantidade</label><input id="fQty" type="number" min="0"></div>
+        <div class="field" id="fQtyField" style="display:none;">
+          <label>Quantidade</label>
+          <input id="fQty" type="number" min="0">
+          <small id="fQtyWarning" style="display:none; color:var(--danger); margin-top:4px;">Precisa ser maior que zero pra ficar coerente com "Em estoque".</small>
+        </div>
+      </div>
+      <div class="field">
+        <label>Movimento</label>
+        <input id="fMovimento" list="movimentoOpcoes" placeholder="ex: Automático, Quartzo, Solar">
+        <datalist id="movimentoOpcoes">
+          <option value="Automático"></option>
+          <option value="Quartzo"></option>
+          <option value="Solar"></option>
+          <option value="Eco-Drive"></option>
+          <option value="Corda manual"></option>
+          <option value="Automático (GMT)"></option>
+          <option value="Quartzo (cronógrafo)"></option>
+        </datalist>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label>Resistência à água (opcional)</label>
+          <input id="fResistencia" list="resistenciaOpcoes" placeholder="ex: 100m">
+          <datalist id="resistenciaOpcoes">
+            <option value="30m"></option>
+            <option value="50m"></option>
+            <option value="100m"></option>
+            <option value="200m"></option>
+            <option value="300m"></option>
+          </datalist>
+        </div>
+        <div class="field">
+          <label>Material da caixa (opcional)</label>
+          <input id="fMaterial" list="materialOpcoes" placeholder="ex: Aço inoxidável">
+          <datalist id="materialOpcoes">
+            <option value="Aço inoxidável"></option>
+            <option value="Titânio"></option>
+            <option value="Bronze"></option>
+            <option value="Aço PVD preto"></option>
+          </datalist>
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label>Vidro (opcional)</label>
+          <input id="fVidro" list="vidroOpcoes" placeholder="ex: Safira">
+          <datalist id="vidroOpcoes">
+            <option value="Safira"></option>
+            <option value="Mineral"></option>
+            <option value="Acrílico"></option>
+            <option value="Hesalite"></option>
+          </datalist>
+        </div>
+        <div class="field">
+          <label>Espessura (opcional)</label>
+          <input id="fEspessura" placeholder="ex: 11.5mm">
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label>Lug-to-lug (opcional)</label>
+          <input id="fLugToLug" placeholder="ex: 47mm">
+        </div>
+        <div class="field">
+          <label>Reserva de marcha (opcional)</label>
+          <input id="fReservaMarcha" placeholder="ex: 80 horas">
+        </div>
+      </div>
+      <div class="field">
+        <label>O que acompanha (opcional)</label>
+        <input id="fAcompanha" placeholder="ex: Caixa, manual e garantia">
       </div>
       <div class="field"><label>Preço à vista (R$)</label><input id="fPrice" type="number" step="0.01" min="0" required></div>
       <div class="field">
         <label>Fotos (pode escolher várias de uma vez — a primeira vira a capa)</label>
         <label class="photo-input-btn" id="photoInputBtn">📷 Clique para escolher fotos<input type="file" id="fPhotos" accept="image/*" multiple hidden></label>
         <div class="photo-grid" id="photoGrid"></div>
+      </div>
+
+      <div class="field">
+        <label>Pulseiras (opcional)</label>
+        <p style="font-size:11.5px; color:var(--text-dim); margin:-2px 0 10px;">
+          Deixe vazio se o relógio tem só uma versão. Se cadastrar, o cliente escolhe a pulseira e o preço/fotos mudam sozinhos.
+          A versão original acima (preço e fotos principais) entra automaticamente como a primeira opção.
+        </p>
+        <div class="field" id="strapBaseNameField" style="display:none;">
+          <label>Como chamar a versão original</label>
+          <input type="text" id="fStrapBaseName" placeholder="ex: Couro, Nylon, Padrão">
+        </div>
+        <div id="strapsList"></div>
+        <button type="button" class="btn" id="addStrapBtn" style="width:100%; margin-top:8px;">+ Adicionar pulseira</button>
       </div>
       <div class="modal-actions">
         <button type="button" class="btn" id="watchCancelBtn">Cancelar</button>
@@ -325,15 +456,41 @@
     <p style="font-size:13px; color:var(--text-dim); margin:0 0 18px;" id="quoteModalSubtitle">
       Sem item de catálogo vinculado — calcula usando as mesmas taxas do cartão do site.
     </p>
+    <div class="field" id="qStrapField" style="display:none;">
+      <label>Pulseira</label>
+      <div class="strap-options" id="qStrapOptions"></div>
+    </div>
     <div class="field">
       <label>Valor líquido desejado (R$)</label>
       <input type="number" step="0.01" min="0" id="qNet" placeholder="0,00">
     </div>
     <div class="field">
-      <label>Número de parcelas</label>
+      <label>Entrada no Pix (R$) — opcional</label>
+      <input type="number" step="0.01" min="0" id="qPixEntry" placeholder="deixe vazio se for tudo no cartão">
+    </div>
+    <div class="field">
+      <label>Número de parcelas <span style="color:var(--text-dim); font-weight:400;">(do valor restante)</span></label>
       <select id="qInstallments"></select>
     </div>
-    <div id="qResult" style="background:var(--panel-2); border:1px solid var(--border); border-radius:10px; padding:14px 16px; font-size:13.5px; line-height:1.9; margin-bottom:18px; white-space:pre-line;"></div>
+    <div class="field">
+      <label>Desconto</label>
+      <select id="qDiscount">
+        <option value="0" selected>Sem desconto</option>
+        <option value="1">1%</option>
+        <option value="2">2%</option>
+        <option value="3">3%</option>
+        <option value="4">4%</option>
+        <option value="5">5%</option>
+        <option value="6">6%</option>
+        <option value="7">7%</option>
+        <option value="8">8%</option>
+        <option value="9">9%</option>
+        <option value="10">10%</option>
+      </select>
+    </div>
+    <div id="qResult" style="background:var(--panel-2); border:1px solid var(--border); border-radius:10px; padding:14px 16px; font-size:13.5px; line-height:1.9; margin-bottom:8px; white-space:pre-line;"></div>
+    <p id="qDiscountNote" style="font-size:12px; color:var(--gold-strong); margin:0 0 8px; display:none;"></p>
+    <button type="button" id="qShuffleBtn" style="background:none; border:none; color:var(--text-dim); font-size:12px; cursor:pointer; padding:0 0 14px; text-decoration:underline;">🔄 Trocar a frase de abertura</button>
     <button type="button" class="btn btn-gold" id="qCopyBtn" style="width:100%;">📋 Copiar mensagem</button>
   </div>
 </div>
@@ -351,22 +508,77 @@
   </div>
 </div>
 
+<!-- Painel de filtros (marca, tamanho, status, movimento, preço) -->
+<div class="modal-overlay" id="filtersModal" hidden>
+  <div class="modal">
+    <button class="modal-close" id="filtersModalClose">&times;</button>
+    <h2 style="margin-bottom:18px;">Filtros</h2>
+    <div class="field">
+      <label>Tamanho</label>
+      <select id="fltSize"></select>
+    </div>
+    <div class="field">
+      <label>Status</label>
+      <select id="fltStatus"></select>
+    </div>
+    <div class="field">
+      <label>Movimento</label>
+      <select id="fltMovimento"></select>
+    </div>
+    <div class="field">
+      <label>Faixa de preço</label>
+      <select id="fltPriceRange"></select>
+    </div>
+    <div class="modal-actions">
+      <button type="button" class="btn" id="filtersClearBtn">Limpar filtros</button>
+      <button type="button" class="btn btn-gold" id="filtersCloseBtn">Fechar</button>
+    </div>
+  </div>
+</div>
+
 <script>
 (function(){
-  const PAGE_SIZE = 70;
+  const PAGE_SIZE = 24;
   let CATALOG = [];
   let CONFIG = { rates:{}, whatsappGroupUrl:'', whatsappSellerNumber:'', locked:false };
-  let state = { search:'', brand:'Todos', size:'Todos', status:'Disponíveis', sort:'popular', page:1 };
+  let state = { search:'', brand:'Todos', size:'Todos', status:'Disponíveis', movimento:'Todos', priceRange:'Todos', sort:'popular', page:1 };
   let gh = null; // {owner, repo, branch, token}
   let nextId = 1;
   let pendingPhotos = []; // [{dataUrl, isNew}] for the open add/edit form
+  let pendingStraps = []; // [{nome, price, photos:[{src,isNew}]}] pulseiras do relógio aberto
   let editingId = null;
 
   const PLACEHOLDER_IMG = 'data:image/svg+xml;utf8,' + encodeURIComponent(
     '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><rect width="200" height="200" fill="#e9e4d8"/><circle cx="100" cy="100" r="55" fill="none" stroke="#b8ac8f" stroke-width="4"/><line x1="100" y1="100" x2="100" y2="65" stroke="#b8ac8f" stroke-width="4"/><line x1="100" y1="100" x2="125" y2="100" stroke="#b8ac8f" stroke-width="4"/></svg>'
   );
 
-  function brandOf(name){ return (name || '').trim().split(' ')[0] || 'Outros'; }
+  // Marcas de nome composto: sem essa lista, "Christopher Ward" viraria só
+  // "Christopher" no filtro. Pra adicionar uma marca nova composta, é só
+  // incluir o nome aqui.
+  const MARCAS_COMPOSTAS = [
+    'Christopher Ward','Furlan Marri','Grand Seiko','Frederique Constant',
+    'Maurice Lacroix','Raymond Weil','Dan Henry','Nivada Grenchen',
+    'Studio Underd0g','Kurono Tokyo','Otsuka Lotec','Louis Erard',
+    'Baume Mercier','Carl Bucherer','Massena LAB','Serica Watches'
+  ];
+  function nomeLimpo(name){ return String(name || '').replace(/_/g, ' ').trim(); }
+  function brandOf(name){
+    const limpo = nomeLimpo(name);
+    const alvo = limpo.toLowerCase();
+    const composta = MARCAS_COMPOSTAS.find(m =>
+      alvo === m.toLowerCase() || alvo.startsWith(m.toLowerCase() + ' ')
+    );
+    if(composta) return composta;
+    return limpo.split(' ')[0] || 'Outros';
+  }
+  function semMarca(name){
+    const limpo = nomeLimpo(name);
+    const marca = brandOf(name);
+    return limpo.toLowerCase().startsWith(marca.toLowerCase())
+      ? limpo.slice(marca.length).trim()
+      : limpo;
+  }
+
   function statusClass(status){
     const s = (status || '').toLowerCase();
     if(s.includes('estoque')) return 'badge-emestoque';
@@ -393,7 +605,30 @@
     if(!path || path.startsWith('data:') || path.startsWith('http')) return path;
     return `https://cdn.jsdelivr.net/gh/${gh.owner}/${gh.repo}@${gh.branch}/${path}`;
   }
+  // Padroniza o tamanho pra "35 mm", "35mm", "36,5mm" e "36.5mm" não virarem
+  // entradas diferentes no filtro. Só afeta exibição e filtro — o dado
+  // cadastrado no catálogo continua como está.
+  function normalizarMedida(m){
+    if(!m) return '';
+    let s = String(m).trim();
+    s = s.replace(/,/g, '.');                    // 36,5mm -> 36.5mm
+    s = s.replace(/\s+/g, ' ');                  // espaços repetidos
+    s = s.replace(/(\d)\s*(mm|m)\b/gi, '$1mm');  // "35 mm" e "38m" -> "35mm"/"38mm"
+    s = s.replace(/\s*\bou\b\s*/gi, ' ou ');     // "37mm OU 39mm" -> "37mm ou 39mm"
+    s = s.replace(/\s*x\s*/gi, ' x ');           // "32mmx50mm" -> "32mm x 50mm"
+    return s.trim();
+  }
+  function ordenarMedidas(a, b){
+    return (parseFloat(a) || 0) - (parseFloat(b) || 0) || a.localeCompare(b);
+  }
   function imagesOf(w){ return (w.images && w.images.length) ? w.images : [PLACEHOLDER_IMG]; }
+  // Lista de opções de pulseira incluindo SEMPRE a versão original do relógio
+  // (preço e fotos principais) como primeira opção.
+  function strapsOf(w){
+    if(!(w.straps && w.straps.length)) return null;
+    const base = { nome: w.strapBaseName || 'Padrão', price: w.price, images: imagesOf(w) };
+    return [base, ...w.straps];
+  }
   const LIMIAR_MAIS_VENDIDO = 2; // mais de 2 unidades vendidas = "mais pedido"
   function popularIds(){
     return new Set(
@@ -669,23 +904,71 @@
     });
     document.addEventListener('click', (e) => { if(!menu.hidden && !e.target.closest('#' + prefix + 'Dropdown')) close(); });
   }
+  // Faixas de preço fixas — cobrem bem a distribuição real do catálogo hoje.
+  const FAIXAS_PRECO = [
+    {value:'Todos', label:'Qualquer preço', min:0, max:Infinity},
+    {value:'lt5k', label:'Até R$ 5.000', min:0, max:5000},
+    {value:'5-8k', label:'R$ 5.000 – R$ 8.000', min:5000, max:8000},
+    {value:'8-12k', label:'R$ 8.000 – R$ 12.000', min:8000, max:12000},
+    {value:'gt12k', label:'Acima de R$ 12.000', min:12000, max:Infinity},
+  ];
+  function faixaPreco(value){ return FAIXAS_PRECO.find(f => f.value === value) || FAIXAS_PRECO[0]; }
+
   function renderFilterMenus(){
     const brands = Array.from(new Set(CATALOG.map(w => brandOf(w.name)))).sort();
     setupDropdown('brand', [{value:'Todos', label:'Todas as marcas'}, ...brands.map(b => ({value:b, label:b}))], state.brand, v => { state.brand=v; state.page=1; render(); });
-    const sizes = Array.from(new Set(CATALOG.map(w => w.medida).filter(Boolean))).sort();
-    setupDropdown('size', [{value:'Todos', label:'Todos os tamanhos'}, ...sizes.map(s => ({value:s, label:s}))], state.size, v => { state.size=v; state.page=1; render(); });
+
+    const sizes = Array.from(new Set(CATALOG.map(w => normalizarMedida(w.medida)).filter(Boolean))).sort(ordenarMedidas);
     const statuses = Array.from(new Set(CATALOG.map(w => w.status || 'Sob encomenda'))).sort();
-    setupDropdown('status', [
-      {value:'Disponíveis', label:'✅ Disponíveis'},
-      {value:'Todos', label:'Todos os status'},
+    const movimentos = Array.from(new Set(CATALOG.map(w => w.movimento).filter(Boolean))).sort();
+
+    const preencher = (id, options, valorAtual) => {
+      const sel = document.getElementById(id);
+      sel.innerHTML = options.map(o => `<option value="${o.value}" ${o.value===valorAtual?'selected':''}>${o.label}</option>`).join('');
+    };
+    preencher('fltSize', [{value:'Todos', label:'Todos os tamanhos'}, ...sizes.map(s => ({value:s, label:s}))], state.size);
+    preencher('fltStatus', [
+      {value:'Disponíveis', label:'✅ Disponíveis'}, {value:'Todos', label:'Todos os status'},
       ...statuses.map(s => ({value:s, label:s}))
-    ], state.status, v => { state.status=v; state.page=1; render(); });
+    ], state.status);
+    preencher('fltMovimento', [{value:'Todos', label:'Todos os movimentos'}, ...movimentos.map(m => ({value:m, label:m}))], state.movimento);
+    preencher('fltPriceRange', FAIXAS_PRECO.map(f => ({value:f.value, label:f.label})), state.priceRange);
+
     setupDropdown('sort', [
-      {value:'popular', label:'🔥 Mais pedidos'}, {value:'recent', label:'Mais recentes'},
+      {value:'popular', label:'Mais pedidos'}, {value:'recent', label:'Mais recentes'},
       {value:'price_asc', label:'Menor preço'}, {value:'price_desc', label:'Maior preço'},
       {value:'name_asc', label:'Nome A-Z'}, {value:'name_desc', label:'Nome Z-A'}
     ], state.sort, v => { state.sort=v; state.page=1; render(); });
   }
+
+  function updateFiltersCount(){
+    const ativos = [
+      state.size !== 'Todos',
+      state.status !== 'Todos' && state.status !== 'Disponíveis', // padrão não conta como filtro "ligado"
+      state.movimento !== 'Todos', state.priceRange !== 'Todos'
+    ].filter(Boolean).length;
+    const badge = document.getElementById('filtersCount');
+    badge.hidden = ativos === 0;
+    badge.textContent = ativos;
+  }
+
+  document.getElementById('filtersBtn').addEventListener('click', () => { document.getElementById('filtersModal').hidden = false; });
+  document.getElementById('filtersModalClose').addEventListener('click', () => { document.getElementById('filtersModal').hidden = true; });
+  document.getElementById('filtersCloseBtn').addEventListener('click', () => { document.getElementById('filtersModal').hidden = true; });
+  document.getElementById('filtersClearBtn').addEventListener('click', () => {
+    state.size = 'Todos'; state.status = 'Disponíveis';
+    state.movimento = 'Todos'; state.priceRange = 'Todos'; state.page = 1;
+    renderFilterMenus(); updateFiltersCount(); render();
+  });
+  ['fltSize','fltStatus','fltMovimento','fltPriceRange'].forEach(id => {
+    document.getElementById(id).addEventListener('change', (e) => {
+      const chave = { fltSize:'size', fltStatus:'status', fltMovimento:'movimento', fltPriceRange:'priceRange' }[id];
+      state[chave] = e.target.value;
+      state.page = 1;
+      updateFiltersCount();
+      render();
+    });
+  });
 
   // ---------- Theme ----------
   function updateThemeIcon(theme){
@@ -721,18 +1004,26 @@
   // ---------- Card rendering ----------
   function cardHTML(w, popular){
     const brand = brandOf(w.name);
-    const rest = w.name.startsWith(brand) ? w.name.slice(brand.length).trim() : w.name;
+    const rest = semMarca(w.name);
     const imgs = imagesOf(w);
-    const specs = [w.ref, w.medida].filter(Boolean).join(' · ');
+    const specs = [w.ref, normalizarMedida(w.medida)].filter(Boolean).join(' · ');
     const status = w.status || 'Sob encomenda';
     const val12 = installmentAt(w.price, 12);
     return `
-    <article class="watch-card${isFadedStatus(status) ? ' faded' : ''}" data-id="${w.id}">
+    <article class="watch-card${isFadedStatus(status) ? ' faded' : ''}" data-id="${w.id}" data-photo-index="0">
       <div class="card-media">
         <img src="${cdnUrl(imgs[0])}" alt="${w.name}" loading="lazy">
         <span class="badge ${statusClass(status)}">${status}</span>
-        ${popular ? '<span class="popular-badge" title="Um dos mais pedidos">🔥<span class="popular-badge-text"> Mais pedido</span></span>' : ''}
+        ${popular ? '<span class="popular-badge" title="Um dos mais pedidos">Mais pedido</span>' : ''}
+        ${imgs.length > 1 ? `
+          <button type="button" class="gallery-arrow prev" data-dir="-1" aria-label="Foto anterior">‹</button>
+          <button type="button" class="gallery-arrow next" data-dir="1" aria-label="Próxima foto">›</button>
+          <div class="gallery-dots">${imgs.map((_,i) => `<span class="${i===0?'active':''}"></span>`).join('')}</div>
+        ` : ''}
         <div class="card-icon-row">
+          <button class="btn-text" data-id="${w.id}" title="Texto para o cliente">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6"/><path d="M8 13h8M8 17h5"/></svg>
+          </button>
           <button class="btn-edit" data-id="${w.id}" title="Editar">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
           </button>
@@ -748,9 +1039,7 @@
         ${specs ? `<p class="ref">${specs}</p>` : '<p class="ref">&nbsp;</p>'}
         <p class="price">${formatBRL(w.price)} <span class="unit">à vista</span></p>
         <p class="installment-hint">em até 12x de ${formatBRL(val12)}</p>
-        <div class="card-actions">
-          <button type="button" class="btn-quote-card" data-id="${w.id}">Gerar orçamento</button>
-        </div>
+        ${(w.straps && w.straps.length) ? `<p class="strap-line">${w.straps.length + 1} opções de pulseira</p>` : ''}
       </div>
     </article>`;
   }
@@ -758,12 +1047,17 @@
   function filteredSorted(){
     let list = CATALOG.slice();
     if(state.brand !== 'Todos') list = list.filter(w => brandOf(w.name) === state.brand);
-    if(state.size !== 'Todos') list = list.filter(w => w.medida === state.size);
+    if(state.size !== 'Todos') list = list.filter(w => normalizarMedida(w.medida) === state.size);
     if(state.status === 'Disponíveis') list = list.filter(w => !isFadedStatus(w.status));
     else if(state.status !== 'Todos') list = list.filter(w => (w.status || 'Sob encomenda') === state.status);
+    if(state.movimento !== 'Todos') list = list.filter(w => w.movimento === state.movimento);
+    if(state.priceRange !== 'Todos'){
+      const faixa = faixaPreco(state.priceRange);
+      list = list.filter(w => w.price >= faixa.min && w.price < faixa.max);
+    }
     if(state.search.trim()){
       const q = state.search.trim().toLowerCase();
-      list = list.filter(w => (w.name||'').toLowerCase().includes(q) || (w.ref||'').toLowerCase().includes(q));
+      list = list.filter(w => nomeLimpo(w.name).toLowerCase().includes(q) || (w.ref||'').toLowerCase().includes(q));
     }
     if(state.sort === 'popular') list.sort((a,b) => (b.orderCount||0) - (a.orderCount||0));
     else if(state.sort === 'price_asc') list.sort((a,b) => a.price - b.price);
@@ -789,9 +1083,21 @@
 
     grid.querySelectorAll('.btn-edit').forEach(b => b.addEventListener('click', (e) => { e.stopPropagation(); openWatchModal(Number(b.dataset.id)); }));
     grid.querySelectorAll('.btn-delete').forEach(b => b.addEventListener('click', (e) => { e.stopPropagation(); deleteWatch(Number(b.dataset.id)); }));
-    grid.querySelectorAll('.btn-quote-card').forEach(b => b.addEventListener('click', (e) => { e.stopPropagation(); openQuoteModal(Number(b.dataset.id)); }));
+    grid.querySelectorAll('.btn-text').forEach(b => b.addEventListener('click', (e) => { e.stopPropagation(); openTextModal(Number(b.dataset.id)); }));
     grid.querySelectorAll('.watch-card').forEach(card => {
-      card.addEventListener('click', () => openTextModal(Number(card.dataset.id)));
+      card.addEventListener('click', () => openQuoteModal(Number(card.dataset.id)));
+    });
+    grid.querySelectorAll('.gallery-arrow').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation(); // não deixa abrir o orçamento ao passar foto
+        const card = btn.closest('.watch-card');
+        const w = CATALOG.find(x => x.id === Number(card.dataset.id));
+        const imgs = imagesOf(w);
+        const idx = (Number(card.dataset.photoIndex) + Number(btn.dataset.dir) + imgs.length) % imgs.length;
+        card.dataset.photoIndex = idx;
+        card.querySelector('.card-media img').src = cdnUrl(imgs[idx]);
+        card.querySelectorAll('.gallery-dots span').forEach((d,i) => d.classList.toggle('active', i===idx));
+      });
     });
 
     renderPagination(totalPages);
@@ -810,7 +1116,16 @@
   // ---------- Add/Edit modal ----------
   const statusSelect = document.getElementById('fStatus');
   const qtyField = document.getElementById('fQtyField');
-  statusSelect.addEventListener('change', () => { qtyField.style.display = statusSelect.value === 'Em estoque' ? 'block' : 'none'; });
+  const qtyWarning = document.getElementById('fQtyWarning');
+  function checarQtyCoerente(){
+    const zero = statusSelect.value === 'Em estoque' && (Number(document.getElementById('fQty').value) || 0) <= 0;
+    qtyWarning.style.display = zero ? 'block' : 'none';
+  }
+  statusSelect.addEventListener('change', () => {
+    qtyField.style.display = statusSelect.value === 'Em estoque' ? 'block' : 'none';
+    checarQtyCoerente();
+  });
+  document.getElementById('fQty').addEventListener('input', checarQtyCoerente);
 
   document.getElementById('addWatchBtn').addEventListener('click', () => openWatchModal(null));
 
@@ -849,19 +1164,46 @@
 
   // ---------- Cotação avulsa / vinculada a um relógio ----------
   let quoteContext = null; // relógio atual, ou null pra cotação avulsa
+  let quoteStrapNome = null; // pulseira escolhida no orçamento, se houver
 
   function abrirQuoteModal(){
     const sel = document.getElementById('qInstallments');
     const keys = Object.keys(CONFIG.rates).map(Number).sort((a,b) => a-b);
     sel.innerHTML = keys.map(n => `<option value="${n}" ${n===12?'selected':''}>${n===1 ? 'À vista' : n+'x'}</option>`).join('');
+    const strapField = document.getElementById('qStrapField');
+    quoteStrapNome = null;
+    document.getElementById('qDiscount').value = '0'; // sempre começa sem desconto
+    document.getElementById('qPixEntry').value = '';
+    sortearFrase();
     if(quoteContext){
       document.getElementById('quoteModalTitle').textContent = 'Gerar orçamento';
-      document.getElementById('quoteModalSubtitle').textContent = `${quoteContext.name}${quoteContext.ref ? ' — Ref. ' + quoteContext.ref : ''}`;
+      document.getElementById('quoteModalSubtitle').textContent = `${nomeLimpo(quoteContext.name)}${quoteContext.ref ? ' — Ref. ' + quoteContext.ref : ''}`;
       document.getElementById('qNet').value = quoteContext.price || '';
+
+      const straps = strapsOf(quoteContext);
+      if(straps){
+        strapField.style.display = 'block';
+        quoteStrapNome = straps[0].nome;
+        document.getElementById('qStrapOptions').innerHTML = straps.map((s,i) =>
+          `<button type="button" class="strap-option${i===0?' active':''}" data-i="${i}">${s.nome}</button>`
+        ).join('');
+        document.querySelectorAll('#qStrapOptions .strap-option').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const s = straps[Number(btn.dataset.i)];
+            quoteStrapNome = s.nome;
+            document.querySelectorAll('#qStrapOptions .strap-option').forEach(b => b.classList.toggle('active', b === btn));
+            document.getElementById('qNet').value = s.price || quoteContext.price || '';
+            updateQuote();
+          });
+        });
+      } else {
+        strapField.style.display = 'none';
+      }
     } else {
       document.getElementById('quoteModalTitle').textContent = 'Cotação avulsa';
       document.getElementById('quoteModalSubtitle').textContent = 'Sem item de catálogo vinculado — calcula usando as mesmas taxas do cartão do site.';
       document.getElementById('qNet').value = '';
+      strapField.style.display = 'none';
     }
     updateQuote();
     document.getElementById('quoteModal').hidden = false;
@@ -878,34 +1220,88 @@
   document.getElementById('quoteModalClose').addEventListener('click', () => { document.getElementById('quoteModal').hidden = true; });
   document.getElementById('qNet').addEventListener('input', updateQuote);
   document.getElementById('qInstallments').addEventListener('change', updateQuote);
+  document.getElementById('qDiscount').addEventListener('change', updateQuote);
+  document.getElementById('qPixEntry').addEventListener('input', updateQuote);
+  document.getElementById('qShuffleBtn').addEventListener('click', () => { sortearFrase(); updateQuote(); });
 
   function calcularCotacao(){
-    const net = parseFloat(document.getElementById('qNet').value) || 0;
+    const netCheio = parseFloat(document.getElementById('qNet').value) || 0;
+    const desconto = Number(document.getElementById('qDiscount').value) || 0;
+    // O desconto reduz o valor na mesma proporção em tudo (à vista, link e
+    // parcela), já que todos derivam do mesmo valor líquido.
+    const net = netCheio * (1 - desconto/100);
     const n = Number(document.getElementById('qInstallments').value) || 1;
     const rate = (CONFIG.rates[String(n)] || 0) / 100;
     const rateVista = (CONFIG.rates['1'] || 0) / 100;
     const gross = rate < 1 ? net / (1 - rate) : net;
     const installmentVal = gross / n;
     const grossVista = rateVista < 1 ? net / (1 - rateVista) : net;
-    return { net, n, gross, installmentVal, grossVista };
+    const grossVistaCheio = rateVista < 1 ? netCheio / (1 - rateVista) : netCheio;
+
+    // Pagamento misto: a parte no Pix não tem taxa de cartão, então o
+    // lojista recebe ela integral. Só o que sobra é que passa no cartão.
+    const pix = Math.min(parseFloat(document.getElementById('qPixEntry').value) || 0, net);
+    const netRestante = Math.max(net - pix, 0);
+    const grossRestante = rate < 1 ? netRestante / (1 - rate) : netRestante;
+    const parcelaRestante = grossRestante / n;
+    const totalMisto = pix + grossRestante;
+
+    return { net, netCheio, desconto, n, gross, installmentVal, grossVista, grossVistaCheio,
+             pix, netRestante, grossRestante, parcelaRestante, totalMisto };
+  }
+
+  // Frases de abertura — variam pra mensagem não ficar com cara de copiar e colar.
+  const FRASES_COTACAO = [
+    'Esse modelo está saindo por:',
+    'Esse relógio está saindo por:',
+    'Essa peça está saindo por:',
+    'Esse modelo sai por:',
+    'Essa peça sai por:',
+    'Esse relógio sai por:'
+  ];
+  let fraseCotacao = FRASES_COTACAO[0];
+  function sortearFrase(){
+    fraseCotacao = FRASES_COTACAO[Math.floor(Math.random() * FRASES_COTACAO.length)];
   }
 
   function textoCotacao(){
-    const { n, gross, installmentVal, grossVista } = calcularCotacao();
+    const { net, n, gross, installmentVal, grossVista, pix, grossRestante, parcelaRestante, totalMisto } = calcularCotacao();
     const linhas = [];
     if(quoteContext){
-      linhas.push(quoteContext.name);
+      linhas.push(nomeLimpo(quoteContext.name));
       if(quoteContext.ref) linhas.push(`Ref. ${quoteContext.ref}`);
+      if(quoteStrapNome) linhas.push(`Pulseira: ${quoteStrapNome}`);
       linhas.push('');
     }
-    linhas.push(`${formatBRL(grossVista)} à vista | ${n}x`, '');
-    linhas.push(`* 💰 À vista: ${formatBRL(grossVista)}`, `* 🔗 Valor do link: ${formatBRL(gross)}`);
-    if(n !== 1) linhas.push(`* 🔹 Parcelamento: ${n}x de ${formatBRL(installmentVal)}`);
+    linhas.push(fraseCotacao, '');
+    if(pix > 0){
+      // Pagamento misto: parte no Pix, resto no cartão.
+      linhas.push(`* 💸 Entrada no Pix: ${formatBRL(pix)}`);
+      linhas.push(`* 🔗 Restante no cartão: ${formatBRL(grossRestante)}`);
+      if(n !== 1) linhas.push(`* 🔹 Em ${n}x de ${formatBRL(parcelaRestante)}`);
+      linhas.push(`* 🧾 Total: ${formatBRL(totalMisto)}`);
+    } else {
+      // "À vista" = preço sem taxa nenhuma (Pix/dinheiro).
+      // "À vista no cartão" = mesmo valor já com a taxa de 1x embutida.
+      linhas.push(`* 💰 À vista: ${formatBRL(net)}`);
+      linhas.push(`* 💳 À vista no cartão: ${formatBRL(grossVista)}`);
+      linhas.push(`* 🔗 Valor do link: ${formatBRL(gross)}`);
+      if(n !== 1) linhas.push(`* 🔹 Em até ${n}x de ${formatBRL(installmentVal)}`);
+    }
     return linhas.join('\n');
   }
 
   function updateQuote(){
     document.getElementById('qResult').textContent = textoCotacao();
+    const { desconto, grossVista, grossVistaCheio } = calcularCotacao();
+    const nota = document.getElementById('qDiscountNote');
+    if(desconto > 0 && grossVistaCheio > 0){
+      nota.style.display = 'block';
+      const { net, netCheio } = calcularCotacao();
+      nota.textContent = `Desconto de ${desconto}% aplicado — de ${formatBRL(netCheio)} por ${formatBRL(net)} (${formatBRL(netCheio - net)} a menos).`;
+    } else {
+      nota.style.display = 'none';
+    }
   }
 
   document.getElementById('qCopyBtn').addEventListener('click', async () => {
@@ -928,15 +1324,99 @@
     document.getElementById('fName').value = w ? w.name : '';
     document.getElementById('fRef').value = w ? (w.ref||'') : '';
     document.getElementById('fMedida').value = w ? (w.medida||'') : '';
+    document.getElementById('fMovimento').value = w ? (w.movimento || '') : '';
+    document.getElementById('fResistencia').value = w ? (w.resistencia || '') : '';
+    document.getElementById('fMaterial').value = w ? (w.material || '') : '';
+    document.getElementById('fVidro').value = w ? (w.vidro || '') : '';
+    document.getElementById('fEspessura').value = w ? (w.espessura || '') : '';
+    document.getElementById('fLugToLug').value = w ? (w.lugToLug || '') : '';
+    document.getElementById('fReservaMarcha').value = w ? (w.reservaMarcha || '') : '';
+    document.getElementById('fAcompanha').value = w ? (w.acompanha || '') : '';
     document.getElementById('fPrice').value = w ? w.price : '';
     statusSelect.value = w ? (w.status || 'Sob encomenda') : 'Sob encomenda';
     document.getElementById('fQty').value = w ? (w.qty||'') : '';
     qtyField.style.display = statusSelect.value === 'Em estoque' ? 'block' : 'none';
-    pendingPhotos = w ? imagesOf(w).filter(src => src !== PLACEHOLDER_IMG).map(src => ({ src, isNew:false })) : [];
+    checarQtyCoerente();
+    pendingStraps = (w && w.straps) ? w.straps.map(s => ({
+      nome: s.nome || '',
+      price: s.price || '',
+      photos: (s.images || []).map(src => ({ src, isNew:false }))
+    })) : [];
+    document.getElementById('fStrapBaseName').value = (w && w.strapBaseName) ? w.strapBaseName : '';
     renderPhotoGrid();
+    renderStrapsList();
     document.getElementById('watchModal').hidden = false;
   }
-  function closeWatchModal(){ document.getElementById('watchModal').hidden = true; pendingPhotos = []; editingId = null; }
+  function closeWatchModal(){ document.getElementById('watchModal').hidden = true; pendingPhotos = []; pendingStraps = []; editingId = null; }
+
+  // ---------- Pulseiras ----------
+  function renderStrapsList(){
+    const cont = document.getElementById('strapsList');
+    // O campo "nome da versão original" só faz sentido quando há pulseiras.
+    document.getElementById('strapBaseNameField').style.display = pendingStraps.length ? 'block' : 'none';
+    cont.innerHTML = pendingStraps.map((s,i) => `
+      <div class="strap-card" data-i="${i}">
+        <div class="strap-card-head">
+          <div class="field">
+            <label>Nome da pulseira</label>
+            <input type="text" class="strap-nome" data-i="${i}" value="${(s.nome||'').replace(/"/g,'&quot;')}" placeholder="ex: Aço, Couro marrom">
+          </div>
+          <div class="field">
+            <label>Preço à vista (R$)</label>
+            <input type="number" step="0.01" min="0" class="strap-price" data-i="${i}" value="${s.price || ''}" placeholder="0,00">
+          </div>
+          <button type="button" class="strap-remove" data-i="${i}" title="Remover esta pulseira">Remover</button>
+        </div>
+        <label class="photo-input-btn">📷 Fotos desta pulseira
+          <input type="file" class="strap-photos-input" data-i="${i}" accept="image/*" multiple hidden>
+        </label>
+        <div class="photo-grid strap-photo-grid" data-i="${i}">
+          ${s.photos.map((p,j) => `
+            <div class="photo-thumb">
+              <img src="${cdnUrl(p.src)}">
+              <button type="button" class="rm strap-photo-rm" data-i="${i}" data-j="${j}" title="Remover">&times;</button>
+              ${j===0 ? '<span class="cover-tag">Capa</span>' : ''}
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    `).join('');
+
+    cont.querySelectorAll('.strap-nome').forEach(inp => {
+      inp.addEventListener('input', () => { pendingStraps[Number(inp.dataset.i)].nome = inp.value; });
+    });
+    cont.querySelectorAll('.strap-price').forEach(inp => {
+      inp.addEventListener('input', () => { pendingStraps[Number(inp.dataset.i)].price = inp.value; });
+    });
+    cont.querySelectorAll('.strap-remove').forEach(btn => {
+      btn.addEventListener('click', () => {
+        pendingStraps.splice(Number(btn.dataset.i), 1);
+        renderStrapsList();
+      });
+    });
+    cont.querySelectorAll('.strap-photo-rm').forEach(btn => {
+      btn.addEventListener('click', () => {
+        pendingStraps[Number(btn.dataset.i)].photos.splice(Number(btn.dataset.j), 1);
+        renderStrapsList();
+      });
+    });
+    cont.querySelectorAll('.strap-photos-input').forEach(input => {
+      input.addEventListener('change', async (e) => {
+        const i = Number(input.dataset.i);
+        const files = Array.from(e.target.files || []);
+        if(!files.length) return;
+        toast('Processando ' + files.length + ' foto(s)...');
+        const results = await Promise.all(files.map(processPhotoFile));
+        results.forEach(dataUrl => pendingStraps[i].photos.push({ src: dataUrl, isNew:true }));
+        renderStrapsList();
+      });
+    });
+  }
+
+  document.getElementById('addStrapBtn').addEventListener('click', () => {
+    pendingStraps.push({ nome:'', price:'', photos:[] });
+    renderStrapsList();
+  });
 
   function renderPhotoGrid(){
     const grid = document.getElementById('photoGrid');
@@ -1011,6 +1491,18 @@
 
   document.getElementById('watchForm').addEventListener('submit', async (e) => {
     e.preventDefault();
+
+    // Status e quantidade precisam contar a mesma história: "Em estoque"
+    // com 0 unidades é uma contradição, e é fácil acontecer sem querer.
+    if(statusSelect.value === 'Em estoque'){
+      const qtyVal = Number(document.getElementById('fQty').value) || 0;
+      if(qtyVal <= 0){
+        toast('Status "Em estoque" precisa de uma quantidade maior que zero.');
+        document.getElementById('fQty').focus();
+        return;
+      }
+    }
+
     const saveBtn = document.getElementById('watchSaveBtn');
     const originalLabel = saveBtn.textContent;
     saveBtn.disabled = true;
@@ -1031,11 +1523,34 @@
         return path;
       });
 
+      // Pulseiras: fotos novas entram no MESMO commit das outras, e só entram
+      // no catálogo as pulseiras que tiverem pelo menos um nome preenchido.
+      const finalStraps = pendingStraps
+        .filter(s => (s.nome || '').trim())
+        .map((s, si) => ({
+          nome: s.nome.trim(),
+          price: Number(s.price) || 0,
+          images: s.photos.map((p, pj) => {
+            if(!p.isNew) return p.src;
+            const path = `images/${id}-strap${si}-${Date.now()}-${pj}.jpg`;
+            filesToCommit.push({ path, contentBase64: p.src.split(',')[1] });
+            return path;
+          })
+        }));
+
       const watch = {
         id,
         name: document.getElementById('fName').value.trim(),
         ref: document.getElementById('fRef').value.trim(),
         medida: document.getElementById('fMedida').value.trim(),
+        movimento: document.getElementById('fMovimento').value.trim(),
+        resistencia: document.getElementById('fResistencia').value.trim(),
+        material: document.getElementById('fMaterial').value.trim(),
+        vidro: document.getElementById('fVidro').value.trim(),
+        espessura: document.getElementById('fEspessura').value.trim(),
+        lugToLug: document.getElementById('fLugToLug').value.trim(),
+        reservaMarcha: document.getElementById('fReservaMarcha').value.trim(),
+        acompanha: document.getElementById('fAcompanha').value.trim(),
         status: statusSelect.value,
         qty: statusSelect.value === 'Em estoque' ? (Number(document.getElementById('fQty').value) || 0) : null,
         price: Number(document.getElementById('fPrice').value) || 0,
@@ -1043,6 +1558,12 @@
         postedAt: editingId ? previousWatch.postedAt : new Date().toISOString().slice(0,10),
         images: finalImagePaths
       };
+      // Só grava o campo se houver pulseiras — relógios sem pulseira ficam
+      // exatamente com o mesmo formato de antes.
+      if(finalStraps.length){
+        watch.straps = finalStraps;
+        watch.strapBaseName = (document.getElementById('fStrapBaseName').value || '').trim() || 'Padrão';
+      }
       if(editingId){
         const idx = CATALOG.findIndex(x => x.id === id);
         CATALOG[idx] = watch;
@@ -1056,6 +1577,7 @@
       setSaveIndicator('', 'Salvo ' + new Date().toLocaleTimeString('pt-BR', {hour:'2-digit', minute:'2-digit'}));
       closeWatchModal();
       renderFilterMenus();
+      updateFiltersCount();
       render();
       toast('Relógio salvo! O site pode levar até 1-2 minutos pra atualizar no ar.');
     } catch(err){
@@ -1083,6 +1605,7 @@
     try{
       await saveCatalogToGithub('Remove ' + w.name);
       renderFilterMenus();
+      updateFiltersCount();
       render();
       toast('Relógio removido. Pode levar até 1-2 minutos pra sumir do site.');
     } catch(err){
@@ -1096,11 +1619,18 @@
     const val12 = installmentAt(w.price, 12);
     const handle = (CONFIG.instagramUrl || '').replace(/\/+$/, '').split('/').pop();
     const lines = [
-      w.name,
+      nomeLimpo(w.name),
       'Novo, completo',
       w.ref ? `Ref. ${w.ref}` : null,
-      w.medida ? `Medida: ${w.medida}` : null,
-      'Automático',
+      w.medida ? `Medida: ${normalizarMedida(w.medida)}` : null,
+      w.movimento || null,
+      w.resistencia ? `Resistência à água: ${w.resistencia}` : null,
+      w.material ? `Material da caixa: ${w.material}` : null,
+      w.vidro ? `Vidro: ${w.vidro}` : null,
+      w.espessura ? `Espessura: ${w.espessura}` : null,
+      w.lugToLug ? `Lug-to-lug: ${w.lugToLug}` : null,
+      w.reservaMarcha ? `Reserva de marcha: ${w.reservaMarcha}` : null,
+      w.acompanha ? `Acompanha: ${w.acompanha}` : null,
       w.status || 'Sob encomenda',
       `R$${Math.ceil(w.price).toLocaleString('pt-BR')} à vista`,
       `Até 12x de ${Math.ceil(val12).toLocaleString('pt-BR')},00`,
@@ -1139,6 +1669,7 @@
       await loadData();
       setupTheme();
       renderFilterMenus();
+      updateFiltersCount();
       render();
       setSaveIndicator('', 'Pronto');
     } catch(e){
