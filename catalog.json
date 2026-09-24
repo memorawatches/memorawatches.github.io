@@ -2916,15 +2916,40 @@
     "name": "Baltic Hermétique Tourer Beige",
     "ref": "",
     "medida": "37mm",
+    "movimento": "Automático",
+    "resistencia": "150m",
+    "material": "Aço inoxidável",
+    "vidro": "Safira",
+    "espessura": "10.8mm",
+    "lugToLug": "46mm",
+    "reservaMarcha": "42 horas",
+    "acompanha": "",
     "status": "Sob encomenda",
     "qty": null,
     "price": 5990,
     "orderCount": 0,
     "postedAt": "2026-05-21",
     "images": [
-      "images/237-1786714715623-0.jpg"
+      "images/237-1786714715623-0.jpg",
+      "images/237-1790273340075-1.jpg"
     ],
-    "movimento": "Automático"
+    "straps": [
+      {
+        "nome": "Beads of Rice",
+        "price": 6490,
+        "images": [
+          "images/237-strap0-1790273340075-0.jpg"
+        ]
+      },
+      {
+        "nome": "Flat Link",
+        "price": 6490,
+        "images": [
+          "images/237-strap1-1790273340075-0.jpg"
+        ]
+      }
+    ],
+    "strapBaseName": "Rubber Sport"
   },
   {
     "id": 238,
