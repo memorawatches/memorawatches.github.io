@@ -3059,15 +3059,23 @@
     "name": "Baltic Hermétique Tourer Bronze Green",
     "ref": "",
     "medida": "37mm",
+    "movimento": "Automático",
+    "resistencia": "150m",
+    "material": "Bronze",
+    "vidro": "Safira",
+    "espessura": "10.8mm",
+    "lugToLug": "46mm",
+    "reservaMarcha": "42 horas",
+    "acompanha": "",
     "status": "Sob encomenda",
     "qty": null,
     "price": 6290,
     "orderCount": 0,
     "postedAt": "2026-05-21",
     "images": [
-      "images/241-1786715012646-0.jpg"
-    ],
-    "movimento": "Automático"
+      "images/241-1786715012646-0.jpg",
+      "images/241-1790274011705-1.jpg"
+    ]
   },
   {
     "id": 242,
