@@ -3839,15 +3839,40 @@
     "name": "Baltic HMS 002 Blue Gilt",
     "ref": "",
     "medida": "38mm",
+    "movimento": "Automático",
+    "resistencia": "50m",
+    "material": "Aço inoxidável",
+    "vidro": "Hesalite",
+    "espessura": "13mm",
+    "lugToLug": "47mm",
+    "reservaMarcha": "60 horas",
+    "acompanha": "",
     "status": "Sob encomenda",
     "qty": null,
     "price": 4290,
     "orderCount": 0,
     "postedAt": "2026-08-08",
     "images": [
-      "images/275-1786714268458-0.jpg"
+      "images/275-1786714268458-0.jpg",
+      "images/275-1790289844916-1.jpg"
     ],
-    "movimento": "Automático"
+    "straps": [
+      {
+        "nome": "Beads of Rice",
+        "price": 4690,
+        "images": [
+          "images/275-strap0-1790289844916-0.jpg"
+        ]
+      },
+      {
+        "nome": "Flat LInk",
+        "price": 4690,
+        "images": [
+          "images/275-strap1-1790289844916-0.jpg"
+        ]
+      }
+    ],
+    "strapBaseName": "Stitched"
   },
   {
     "id": 276,
