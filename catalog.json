@@ -1993,15 +1993,20 @@
     "name": "Seiko Speedtimer Pink",
     "ref": "SSC963",
     "medida": "39mm",
-    "status": "Em estoque",
-    "qty": 0,
+    "movimento": "Solar (cronógrafo)",
+    "resistencia": "",
+    "material": "",
+    "vidro": "",
+    "espessura": "",
+    "lugToLug": "",
+    "reservaMarcha": "",
+    "acompanha": "",
+    "status": "Sob encomenda",
+    "qty": null,
     "price": 4690,
     "orderCount": 1,
     "postedAt": "2026-05-04",
-    "images": [
-      "images/167-cover.jpg"
-    ],
-    "movimento": "Solar (cronógrafo)"
+    "images": []
   },
   {
     "id": 169,
