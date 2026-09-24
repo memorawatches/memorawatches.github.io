@@ -4118,15 +4118,20 @@
     "name": "Hamilton Khaki King Champagne",
     "ref": "H64455523",
     "medida": "40mm",
-    "status": "Em estoque",
-    "qty": 0,
+    "movimento": "Automático",
+    "resistencia": "",
+    "material": "",
+    "vidro": "",
+    "espessura": "",
+    "lugToLug": "",
+    "reservaMarcha": "",
+    "acompanha": "",
+    "status": "Sob encomenda",
+    "qty": null,
     "price": 5290,
     "orderCount": 1,
     "postedAt": "2026-09-01",
-    "images": [
-      "images/326-1788306604946-0.jpg"
-    ],
-    "movimento": "Automático"
+    "images": []
   },
   {
     "id": 327,
