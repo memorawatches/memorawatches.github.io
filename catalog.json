@@ -4242,15 +4242,23 @@
     "name": "Baltic Prismic Stone Pietersite",
     "ref": "",
     "medida": "36mm",
+    "movimento": "Automático",
+    "resistencia": "50m",
+    "material": "Aço inoxidável",
+    "vidro": "Safira",
+    "espessura": "9.2mm",
+    "lugToLug": "44mm",
+    "reservaMarcha": "50 horas",
+    "acompanha": "",
     "status": "Sob encomenda",
     "qty": null,
     "price": 16490,
     "orderCount": 0,
     "postedAt": "2026-08-15",
     "images": [
-      "images/294-1786753046592-0.jpg"
-    ],
-    "movimento": "Automático"
+      "images/294-1786753046592-0.jpg",
+      "images/294-1790291015473-1.jpg"
+    ]
   },
   {
     "id": 295,
