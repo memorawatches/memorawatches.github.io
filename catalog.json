@@ -3776,15 +3776,23 @@
     "name": "Baltic MR Roulette Black",
     "ref": "",
     "medida": "36mm",
+    "movimento": "Automático",
+    "resistencia": "30m",
+    "material": "Aço inoxidável",
+    "vidro": "Hesalite",
+    "espessura": "9.9mm",
+    "lugToLug": "44mm",
+    "reservaMarcha": "42 horas",
+    "acompanha": "",
     "status": "Sob encomenda",
     "qty": null,
     "price": 6290,
     "orderCount": 0,
     "postedAt": "2026-08-08",
     "images": [
-      "images/273-1786715318987-0.jpg"
-    ],
-    "movimento": "Automático"
+      "images/273-1786715318987-0.jpg",
+      "images/273-1790289343060-1.jpg"
+    ]
   },
   {
     "id": 274,
