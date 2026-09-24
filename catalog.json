@@ -3891,15 +3891,20 @@
     "name": "Seiko Samurai Black Shogu-Rai",
     "ref": "SRPL15",
     "medida": "41.7mm",
-    "status": "Em estoque",
-    "qty": 0,
+    "movimento": "Automático",
+    "resistencia": "",
+    "material": "",
+    "vidro": "",
+    "espessura": "",
+    "lugToLug": "",
+    "reservaMarcha": "",
+    "acompanha": "",
+    "status": "Sob encomenda",
+    "qty": null,
     "price": 3890,
     "orderCount": 1,
     "postedAt": "2026-08-15",
-    "images": [
-      "images/311-1786759934708-0.jpg"
-    ],
-    "movimento": "Automático"
+    "images": []
   },
   {
     "id": 312,
