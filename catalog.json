@@ -4403,15 +4403,23 @@
     "name": "Baltic Prismic Green",
     "ref": "",
     "medida": "36mm",
+    "movimento": "Automático",
+    "resistencia": "30m",
+    "material": "Aço inoxidável",
+    "vidro": "Safira",
+    "espessura": "9,2mm",
+    "lugToLug": "44mm",
+    "reservaMarcha": "42 horas",
+    "acompanha": "",
     "status": "Sob encomenda",
     "qty": null,
     "price": 11990,
     "orderCount": 0,
     "postedAt": "2026-08-15",
     "images": [
-      "images/301-1786753585647-0.jpg"
-    ],
-    "movimento": "Automático"
+      "images/301-1786753585647-0.jpg",
+      "images/301-1790291511273-1.jpg"
+    ]
   },
   {
     "id": 302,
