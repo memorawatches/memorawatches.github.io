@@ -1337,6 +1337,8 @@
     document.getElementById('fQty').value = w ? (w.qty||'') : '';
     qtyField.style.display = statusSelect.value === 'Em estoque' ? 'block' : 'none';
     checarQtyCoerente();
+    // Carrega as fotos que o relógio já tem, pra elas não se perderem ao salvar.
+    pendingPhotos = w ? imagesOf(w).filter(src => src !== PLACEHOLDER_IMG).map(src => ({ src, isNew:false })) : [];
     pendingStraps = (w && w.straps) ? w.straps.map(s => ({
       nome: s.nome || '',
       price: s.price || '',
