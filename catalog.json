@@ -3145,15 +3145,40 @@
     "name": "Baltic Aquascaphe Mk2 Green",
     "ref": "",
     "medida": "37mm OU 39.5mm",
+    "movimento": "Automático",
+    "resistencia": "200m",
+    "material": "Aço inoxidável",
+    "vidro": "Safira",
+    "espessura": "12.9mm",
+    "lugToLug": "45mm OU 47mm",
+    "reservaMarcha": "42 horas",
+    "acompanha": "",
     "status": "Sob encomenda",
     "qty": null,
     "price": 6390,
     "orderCount": 0,
     "postedAt": "2026-05-21",
     "images": [
-      "images/244-1786715429246-0.jpg"
+      "images/244-1786715429246-0.jpg",
+      "images/244-1790276567826-1.jpg"
     ],
-    "movimento": "Automático"
+    "straps": [
+      {
+        "nome": "Beads of Rice",
+        "price": 6790,
+        "images": [
+          "images/244-strap0-1790276567826-0.jpg"
+        ]
+      },
+      {
+        "nome": "Flat Link",
+        "price": 6790,
+        "images": [
+          "images/244-strap1-1790276567826-0.jpg"
+        ]
+      }
+    ],
+    "strapBaseName": "Rubber Classic"
   },
   {
     "id": 245,
