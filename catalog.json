@@ -4528,14 +4528,33 @@
     "name": "Baltic Scalegraph Classic Reverse Panda",
     "ref": "",
     "medida": "39.5mm",
+    "movimento": "Corda manual",
+    "resistencia": "100m",
+    "material": "Aço inoxidável",
+    "vidro": "Safira",
+    "espessura": "13.5mm",
+    "lugToLug": "47mm",
+    "reservaMarcha": "63 horas",
+    "acompanha": "",
     "status": "Sob encomenda",
     "qty": null,
     "price": 16990,
     "orderCount": 0,
     "postedAt": "2026-08-15",
     "images": [
-      "images/306-1786753913858-0.jpg"
-    ]
+      "images/306-1786753913858-0.jpg",
+      "images/306-1790292483845-1.jpg"
+    ],
+    "straps": [
+      {
+        "nome": "Beads of Rice",
+        "price": 16990,
+        "images": [
+          "images/306-strap0-1790292483845-0.jpg"
+        ]
+      }
+    ],
+    "strapBaseName": "Flat Link"
   },
   {
     "id": 307,
