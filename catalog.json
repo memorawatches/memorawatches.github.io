@@ -4265,15 +4265,23 @@
     "name": "Baltic Prismic Stone Pink Albite",
     "ref": "",
     "medida": "36mm",
+    "movimento": "Automático",
+    "resistencia": "50m",
+    "material": "Aço inoxidável",
+    "vidro": "Safira",
+    "espessura": "9.2mm",
+    "lugToLug": "44mm",
+    "reservaMarcha": "50 horas",
+    "acompanha": "",
     "status": "Sob encomenda",
     "qty": null,
     "price": 14490,
     "orderCount": 0,
     "postedAt": "2026-08-15",
     "images": [
-      "images/295-1786753165656-0.jpg"
-    ],
-    "movimento": "Automático"
+      "images/295-1786753165656-0.jpg",
+      "images/295-1790291051537-1.jpg"
+    ]
   },
   {
     "id": 296,
