@@ -4380,15 +4380,23 @@
     "name": "Baltic Prismic Salmon",
     "ref": "",
     "medida": "36mm",
+    "movimento": "Automático",
+    "resistencia": "30m",
+    "material": "Aço inoxidável",
+    "vidro": "Safira",
+    "espessura": "9,2mm",
+    "lugToLug": "44mm",
+    "reservaMarcha": "42 horas",
+    "acompanha": "",
     "status": "Sob encomenda",
     "qty": null,
     "price": 11990,
     "orderCount": 0,
     "postedAt": "2026-08-15",
     "images": [
-      "images/300-1786753552038-0.jpg"
-    ],
-    "movimento": "Automático"
+      "images/300-1786753552038-0.jpg",
+      "images/300-1790291474873-1.jpg"
+    ]
   },
   {
     "id": 301,
