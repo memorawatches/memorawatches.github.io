@@ -3919,15 +3919,23 @@
     "name": "Baltic HMS 002 Gold",
     "ref": "",
     "medida": "38mm",
+    "movimento": "Automático",
+    "resistencia": "30m",
+    "material": "Aço PVD Gold",
+    "vidro": "Hesalite",
+    "espessura": "13mm",
+    "lugToLug": "47mm",
+    "reservaMarcha": "60 horas",
+    "acompanha": "",
     "status": "Sob encomenda",
     "qty": null,
     "price": 4290,
     "orderCount": 0,
     "postedAt": "2026-08-08",
     "images": [
-      "images/277-1786714470046-0.jpg"
-    ],
-    "movimento": "Automático"
+      "images/277-1786714470046-0.jpg",
+      "images/277-1790290101910-1.jpg"
+    ]
   },
   {
     "id": 278,
