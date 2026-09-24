@@ -3036,15 +3036,23 @@
     "name": "Baltic Hermétique Tourer Bronze Brown",
     "ref": "",
     "medida": "37mm",
+    "movimento": "Automático",
+    "resistencia": "150m",
+    "material": "Bronze",
+    "vidro": "Safira",
+    "espessura": "10.8mm",
+    "lugToLug": "46mm",
+    "reservaMarcha": "42 horas",
+    "acompanha": "",
     "status": "Sob encomenda",
     "qty": null,
     "price": 6290,
     "orderCount": 0,
     "postedAt": "2026-05-21",
     "images": [
-      "images/240-1786714989630-0.jpg"
-    ],
-    "movimento": "Automático"
+      "images/240-1786714989630-0.jpg",
+      "images/240-1790273972298-1.jpg"
+    ]
   },
   {
     "id": 241,
