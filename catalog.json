@@ -4426,13 +4426,22 @@
     "name": "Baltic Scalegraph Champagne",
     "ref": "",
     "medida": "39.5mm",
+    "movimento": "Corda manual",
+    "resistencia": "100m",
+    "material": "Aço inoxidável",
+    "vidro": "Safira",
+    "espessura": "14.1mm",
+    "lugToLug": "47mm",
+    "reservaMarcha": "63 horas",
+    "acompanha": "",
     "status": "Sob encomenda",
     "qty": null,
     "price": 17490,
     "orderCount": 0,
     "postedAt": "2026-08-15",
     "images": [
-      "images/302-1786753745584-0.jpg"
+      "images/302-1786753745584-0.jpg",
+      "images/302-1790292168536-1.jpg"
     ]
   },
   {
