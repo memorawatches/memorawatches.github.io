@@ -214,15 +214,20 @@
     "name": "Tissot PRX Titanium Azul",
     "ref": "T137.807.44.041.00",
     "medida": "38mm",
-    "status": "Sob encomenda",
-    "qty": null,
+    "movimento": "Automático",
+    "resistencia": "",
+    "material": "",
+    "vidro": "",
+    "espessura": "",
+    "lugToLug": "",
+    "reservaMarcha": "",
+    "acompanha": "",
+    "status": "Em estoque",
+    "qty": 1,
     "price": 5990,
     "orderCount": 6,
     "postedAt": "2026-07-10",
-    "images": [
-      "images/15-cover.jpg"
-    ],
-    "movimento": "Automático"
+    "images": []
   },
   {
     "id": 16,
