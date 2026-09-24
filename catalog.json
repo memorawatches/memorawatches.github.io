@@ -4495,14 +4495,33 @@
     "name": "Baltic Scalegraph Classic Panda",
     "ref": "",
     "medida": "39.5mm",
+    "movimento": "Corda manual",
+    "resistencia": "100m",
+    "material": "Aço inoxidável",
+    "vidro": "Safira",
+    "espessura": "13.5mm",
+    "lugToLug": "47mm",
+    "reservaMarcha": "63 horas",
+    "acompanha": "",
     "status": "Sob encomenda",
     "qty": null,
     "price": 16990,
     "orderCount": 0,
     "postedAt": "2026-08-15",
     "images": [
-      "images/305-1786753873742-0.jpg"
-    ]
+      "images/305-1786753873742-0.jpg",
+      "images/305-1790292371354-1.jpg"
+    ],
+    "straps": [
+      {
+        "nome": "Beads of Rice",
+        "price": 16990,
+        "images": [
+          "images/305-strap0-1790292371354-0.jpg"
+        ]
+      }
+    ],
+    "strapBaseName": "Flat Link"
   },
   {
     "id": 306,
