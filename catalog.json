@@ -4173,15 +4173,20 @@
     "name": "Seiko Presage Rose",
     "ref": "SARY132",
     "medida": "41,5 mm",
-    "status": "Em estoque",
-    "qty": 0,
+    "movimento": "Automático",
+    "resistencia": "",
+    "material": "",
+    "vidro": "",
+    "espessura": "",
+    "lugToLug": "",
+    "reservaMarcha": "",
+    "acompanha": "",
+    "status": "Sob encomenda",
+    "qty": null,
     "price": 4290,
     "orderCount": 0,
     "postedAt": "2026-09-01",
-    "images": [
-      "images/328-1788306862534-0.jpg"
-    ],
-    "movimento": "Automático"
+    "images": []
   },
   {
     "id": 329,
