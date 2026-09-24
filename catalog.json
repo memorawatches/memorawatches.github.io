@@ -676,15 +676,20 @@
     "name": "Tissot Le Locle Branco",
     "ref": "T006.407.16.033.00",
     "medida": "39mm",
-    "status": "Em estoque",
-    "qty": 0,
+    "movimento": "Automático",
+    "resistencia": "",
+    "material": "",
+    "vidro": "",
+    "espessura": "",
+    "lugToLug": "",
+    "reservaMarcha": "",
+    "acompanha": "",
+    "status": "Sob encomenda",
+    "qty": null,
     "price": 4890,
     "orderCount": 0,
     "postedAt": "2026-07-11",
-    "images": [
-      "images/45-cover.jpg"
-    ],
-    "movimento": "Automático"
+    "images": []
   },
   {
     "id": 46,
