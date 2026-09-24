@@ -3684,15 +3684,23 @@
     "name": "Baltic MR Classic Gold",
     "ref": "",
     "medida": "36mm",
+    "movimento": "Automático",
+    "resistencia": "30m",
+    "material": "Aço PVD Gold",
+    "vidro": "Hesalite",
+    "espessura": "9.9mm",
+    "lugToLug": "44mm",
+    "reservaMarcha": "42 horas",
+    "acompanha": "",
     "status": "Sob encomenda",
     "qty": null,
     "price": 6290,
     "orderCount": 0,
     "postedAt": "2026-08-08",
     "images": [
-      "images/269-1786715161594-0.jpg"
-    ],
-    "movimento": "Automático"
+      "images/269-1786715161594-0.jpg",
+      "images/269-1790289203983-1.jpg"
+    ]
   },
   {
     "id": 270,
