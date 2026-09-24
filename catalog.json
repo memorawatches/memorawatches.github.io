@@ -4078,15 +4078,20 @@
     "name": "Seiko Alpinist Azul",
     "ref": "SPB503",
     "medida": "39mm",
-    "status": "Em estoque",
-    "qty": 0,
+    "movimento": "Automático",
+    "resistencia": "",
+    "material": "",
+    "vidro": "",
+    "espessura": "",
+    "lugToLug": "",
+    "reservaMarcha": "",
+    "acompanha": "",
+    "status": "Sob encomenda",
+    "qty": null,
     "price": 7290,
     "orderCount": 0,
     "postedAt": "2026-09-01",
-    "images": [
-      "images/323-1788306112020-0.jpg"
-    ],
-    "movimento": "Automático"
+    "images": []
   },
   {
     "id": 324,
