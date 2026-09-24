@@ -3661,15 +3661,23 @@
     "name": "Baltic MR Classic Silver",
     "ref": "",
     "medida": "36mm",
+    "movimento": "Automático",
+    "resistencia": "30m",
+    "material": "Aço inoxidável",
+    "vidro": "Hesalite",
+    "espessura": "9.9mm",
+    "lugToLug": "44mm",
+    "reservaMarcha": "42 horas",
+    "acompanha": "",
     "status": "Sob encomenda",
     "qty": null,
     "price": 6290,
     "orderCount": 0,
     "postedAt": "2026-08-08",
     "images": [
-      "images/268-1786715133679-0.jpg"
-    ],
-    "movimento": "Automático"
+      "images/268-1786715133679-0.jpg",
+      "images/268-1790289110669-1.jpg"
+    ]
   },
   {
     "id": 269,
