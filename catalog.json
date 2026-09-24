@@ -4288,15 +4288,23 @@
     "name": "Baltic Prismic Stone Dumortierite",
     "ref": "",
     "medida": "36mm",
+    "movimento": "Automático",
+    "resistencia": "50m",
+    "material": "Aço inoxidável",
+    "vidro": "Safira",
+    "espessura": "9.2mm",
+    "lugToLug": "44mm",
+    "reservaMarcha": "50 horas",
+    "acompanha": "",
     "status": "Sob encomenda",
     "qty": null,
     "price": 14490,
     "orderCount": 0,
     "postedAt": "2026-08-15",
     "images": [
-      "images/296-1786753308342-0.jpg"
-    ],
-    "movimento": "Automático"
+      "images/296-1786753308342-0.jpg",
+      "images/296-1790291079529-1.jpg"
+    ]
   },
   {
     "id": 297,
