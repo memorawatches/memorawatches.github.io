@@ -3575,15 +3575,40 @@
     "name": "Baltic Aquascaphe Classic Black Gilt",
     "ref": "",
     "medida": "39mm",
+    "movimento": "Automático",
+    "resistencia": "200m",
+    "material": "Aço inoxidável",
+    "vidro": "Safira",
+    "espessura": "13mm",
+    "lugToLug": "47mm",
+    "reservaMarcha": "42 horas",
+    "acompanha": "",
     "status": "Sob encomenda",
     "qty": null,
     "price": 6490,
     "orderCount": 0,
     "postedAt": "2026-08-08",
     "images": [
-      "images/265-1786715816235-0.jpg"
+      "images/265-1786715816235-0.jpg",
+      "images/265-1790277343954-1.jpg"
     ],
-    "movimento": "Automático"
+    "straps": [
+      {
+        "nome": "Beads of Rice",
+        "price": 6890,
+        "images": [
+          "images/265-strap0-1790277343954-0.jpg"
+        ]
+      },
+      {
+        "nome": "Flat Link",
+        "price": 6890,
+        "images": [
+          "images/265-strap1-1790277343954-0.jpg"
+        ]
+      }
+    ],
+    "strapBaseName": "Rubber Sport"
   },
   {
     "id": 266,
