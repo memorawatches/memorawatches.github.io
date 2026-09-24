@@ -3638,15 +3638,23 @@
     "name": "Baltic MR Classic Blue",
     "ref": "",
     "medida": "36mm",
+    "movimento": "Automático",
+    "resistencia": "30m",
+    "material": "Aço inoxidável",
+    "vidro": "Hesalite",
+    "espessura": "9.9mm",
+    "lugToLug": "44mm",
+    "reservaMarcha": "42 horas",
+    "acompanha": "",
     "status": "Sob encomenda",
     "qty": null,
     "price": 6290,
     "orderCount": 0,
     "postedAt": "2026-08-08",
     "images": [
-      "images/267-1786715089288-0.jpg"
-    ],
-    "movimento": "Automático"
+      "images/267-1786715089288-0.jpg",
+      "images/267-1790289079077-1.jpg"
+    ]
   },
   {
     "id": 268,
