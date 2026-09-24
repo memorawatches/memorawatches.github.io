@@ -3942,14 +3942,40 @@
     "name": "Baltic HMS 003 Salmon",
     "ref": "",
     "medida": "36,5mm",
+    "movimento": "Automático",
+    "resistencia": "50m",
+    "material": "Aço inoxidável",
+    "vidro": "Hesalite",
+    "espessura": "13mm",
+    "lugToLug": "47mm",
+    "reservaMarcha": "60 horas",
+    "acompanha": "",
     "status": "Sob encomenda",
     "qty": null,
     "price": 4290,
     "orderCount": 0,
     "postedAt": "2026-08-08",
     "images": [
-      "images/278-1786714501030-0.jpg"
-    ]
+      "images/278-1786714501030-0.jpg",
+      "images/278-1790290519110-1.jpg"
+    ],
+    "straps": [
+      {
+        "nome": "Beads of Rice",
+        "price": 4690,
+        "images": [
+          "images/278-strap0-1790290519110-0.jpg"
+        ]
+      },
+      {
+        "nome": "Flat Link",
+        "price": 4690,
+        "images": [
+          "images/278-strap1-1790290519110-0.jpg"
+        ]
+      }
+    ],
+    "strapBaseName": "Stitched"
   },
   {
     "id": 279,
