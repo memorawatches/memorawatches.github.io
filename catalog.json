@@ -2769,21 +2769,18 @@
     "price": 5990,
     "orderCount": 0,
     "postedAt": "2026-05-21",
-    "images": [
-      "images/233-1790271730261-0.jpg",
-      "images/233-1790271730261-1.jpg"
-    ],
+    "images": [],
     "straps": [
       {
         "nome": "Beads of Rice",
-        "price": 6.49,
+        "price": 6490,
         "images": [
           "images/233-strap0-1790271636832-0.jpg"
         ]
       },
       {
         "nome": "Flat Link",
-        "price": 6.49,
+        "price": 6490,
         "images": [
           "images/233-strap1-1790271636832-0.jpg"
         ]
