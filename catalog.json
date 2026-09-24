@@ -4357,15 +4357,23 @@
     "name": "Baltic Prismic Grey blue",
     "ref": "",
     "medida": "36mm",
+    "movimento": "Automático",
+    "resistencia": "30m",
+    "material": "Aço inoxidável",
+    "vidro": "Safira",
+    "espessura": "9,2mm",
+    "lugToLug": "44mm",
+    "reservaMarcha": "42 horas",
+    "acompanha": "",
     "status": "Sob encomenda",
     "qty": null,
     "price": 11990,
     "orderCount": 0,
     "postedAt": "2026-08-15",
     "images": [
-      "images/299-1786753501568-0.jpg"
-    ],
-    "movimento": "Automático"
+      "images/299-1786753501568-0.jpg",
+      "images/299-1790291447881-1.jpg"
+    ]
   },
   {
     "id": 300,
