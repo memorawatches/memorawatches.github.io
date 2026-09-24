@@ -2769,7 +2769,10 @@
     "price": 5990,
     "orderCount": 0,
     "postedAt": "2026-05-21",
-    "images": [],
+    "images": [
+      "images/233-1790271730261-0.jpg",
+      "images/233-1790271730261-1.jpg"
+    ],
     "straps": [
       {
         "nome": "Beads of Rice",
