@@ -4449,13 +4449,22 @@
     "name": "Baltic Scalegraph Blue",
     "ref": "",
     "medida": "39.5mm",
+    "movimento": "Corda manual",
+    "resistencia": "100m",
+    "material": "Aço inoxidável",
+    "vidro": "Safira",
+    "espessura": "14.1mm",
+    "lugToLug": "47mm",
+    "reservaMarcha": "63 horas",
+    "acompanha": "",
     "status": "Sob encomenda",
     "qty": null,
     "price": 17490,
     "orderCount": 0,
     "postedAt": "2026-08-15",
     "images": [
-      "images/303-1786753791798-0.jpg"
+      "images/303-1786753791798-0.jpg",
+      "images/303-1790292204903-1.jpg"
     ]
   },
   {
