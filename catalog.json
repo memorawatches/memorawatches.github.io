@@ -4311,15 +4311,23 @@
     "name": "Baltic Prismic Stone Bloodstone",
     "ref": "",
     "medida": "36mm",
+    "movimento": "Automático",
+    "resistencia": "50m",
+    "material": "Aço inoxidável",
+    "vidro": "Safira",
+    "espessura": "9.2mm",
+    "lugToLug": "44mm",
+    "reservaMarcha": "50 horas",
+    "acompanha": "",
     "status": "Sob encomenda",
     "qty": null,
     "price": 14490,
     "orderCount": 0,
     "postedAt": "2026-08-15",
     "images": [
-      "images/297-1786753342910-0.jpg"
-    ],
-    "movimento": "Automático"
+      "images/297-1786753342910-0.jpg",
+      "images/297-1790291103594-1.jpg"
+    ]
   },
   {
     "id": 298,
