@@ -3371,15 +3371,40 @@
     "name": "Baltic Hermétique Tourer Brown",
     "ref": "",
     "medida": "37mm",
+    "movimento": "Automático",
+    "resistencia": "150m",
+    "material": "Aço inoxidável",
+    "vidro": "Safira",
+    "espessura": "10.8mm",
+    "lugToLug": "46mm",
+    "reservaMarcha": "42 horas",
+    "acompanha": "",
     "status": "Sob encomenda",
     "qty": null,
     "price": 5990,
     "orderCount": 0,
     "postedAt": "2026-08-08",
     "images": [
-      "images/263-1786714959012-0.jpg"
+      "images/263-1786714959012-0.jpg",
+      "images/263-1790273862057-1.jpg"
     ],
-    "movimento": "Automático"
+    "straps": [
+      {
+        "nome": "Beads of Rice",
+        "price": 6490,
+        "images": [
+          "images/263-strap0-1790273862057-0.jpg"
+        ]
+      },
+      {
+        "nome": "Flat Link",
+        "price": 6490,
+        "images": [
+          "images/263-strap1-1790273862057-0.jpg"
+        ]
+      }
+    ],
+    "strapBaseName": "Rubber Sport"
   },
   {
     "id": 264,
