@@ -3879,15 +3879,40 @@
     "name": "Baltic HMS 002 Black",
     "ref": "",
     "medida": "38mm",
+    "movimento": "Automático",
+    "resistencia": "50m",
+    "material": "Aço inoxidável",
+    "vidro": "Hesalite",
+    "espessura": "13mm",
+    "lugToLug": "47mm",
+    "reservaMarcha": "60 horas",
+    "acompanha": "",
     "status": "Sob encomenda",
     "qty": null,
     "price": 4290,
     "orderCount": 0,
     "postedAt": "2026-08-08",
     "images": [
-      "images/276-1786714292645-0.jpg"
+      "images/276-1786714292645-0.jpg",
+      "images/276-1790289997495-1.jpg"
     ],
-    "movimento": "Automático"
+    "straps": [
+      {
+        "nome": "Beads of Rice",
+        "price": 4690,
+        "images": [
+          "images/276-strap0-1790289997496-0.jpg"
+        ]
+      },
+      {
+        "nome": "Flat Link",
+        "price": 4690,
+        "images": [
+          "images/276-strap1-1790289997496-0.jpg"
+        ]
+      }
+    ],
+    "strapBaseName": "Stitched"
   },
   {
     "id": 277,
