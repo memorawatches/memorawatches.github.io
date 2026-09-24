@@ -3185,15 +3185,40 @@
     "name": "Baltic Aquascaphe Mk2 Grey",
     "ref": "",
     "medida": "37mm OU 39.5mm",
+    "movimento": "Automático",
+    "resistencia": "200m",
+    "material": "Aço inoxidável",
+    "vidro": "Safira",
+    "espessura": "12.9mm",
+    "lugToLug": "45mm OU 47mm",
+    "reservaMarcha": "42 horas",
+    "acompanha": "",
     "status": "Sob encomenda",
     "qty": null,
     "price": 6390,
     "orderCount": 0,
     "postedAt": "2026-05-21",
     "images": [
-      "images/245-1786715620619-0.jpg"
+      "images/245-1786715620619-0.jpg",
+      "images/245-1790276791558-1.jpg"
     ],
-    "movimento": "Automático"
+    "straps": [
+      {
+        "nome": "Beads of Rice",
+        "price": 6790,
+        "images": [
+          "images/245-strap0-1790276791559-0.jpg"
+        ]
+      },
+      {
+        "nome": "Flat Link",
+        "price": 6790,
+        "images": [
+          "images/245-strap1-1790276791559-0.jpg"
+        ]
+      }
+    ],
+    "strapBaseName": "Rubber Classic"
   },
   {
     "id": 246,
