@@ -3438,12 +3438,12 @@
     "ref": "L3.779.4.96.6",
     "medida": "39mm",
     "movimento": "Automático",
-    "resistencia": "",
-    "material": "",
-    "vidro": "",
-    "espessura": "",
-    "lugToLug": "",
-    "reservaMarcha": "",
+    "resistencia": "300m",
+    "material": "Aço inoxidável",
+    "vidro": "Safira",
+    "espessura": "11.7mm",
+    "lugToLug": "48mm",
+    "reservaMarcha": "72 horas",
     "acompanha": "",
     "status": "Sob encomenda",
     "qty": null,
@@ -3451,7 +3451,9 @@
     "orderCount": 2,
     "postedAt": "2026-08-02",
     "images": [
-      "images/262-1786716169504-0.jpg"
+      "images/262-1786716169504-0.jpg",
+      "images/262-1790357746306-1.jpg",
+      "images/262-1790357746306-2.jpg"
     ]
   },
   {
