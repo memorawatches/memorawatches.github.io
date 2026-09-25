@@ -3469,16 +3469,25 @@
     "id": 258,
     "name": "Furlan Marri Blue Sector",
     "ref": "",
-    "medida": "37mm",
+    "medida": "37.5mm",
+    "movimento": "Automático",
+    "resistencia": "50m",
+    "material": "Aço inoxidável",
+    "vidro": "Safira",
+    "espessura": "10.5mm",
+    "lugToLug": "46mm",
+    "reservaMarcha": "68 horas",
+    "acompanha": "",
     "status": "Sob encomenda",
     "qty": null,
     "price": 15490,
     "orderCount": 0,
     "postedAt": "2026-06-12",
     "images": [
-      "images/258-1786716057029-0.jpg"
-    ],
-    "movimento": "Meca-quartzo"
+      "images/258-1790357084896-0.jpg",
+      "images/258-1790357084896-1.jpg",
+      "images/258-1790357084896-2.jpg"
+    ]
   },
   {
     "id": 259,
