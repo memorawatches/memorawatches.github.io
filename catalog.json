@@ -3355,15 +3355,23 @@
     "name": "Furlan Marri Ardesia Blu",
     "ref": "",
     "medida": "38mm",
+    "movimento": "Meca-quartzo",
+    "resistencia": "",
+    "material": "",
+    "vidro": "",
+    "espessura": "",
+    "lugToLug": "",
+    "reservaMarcha": "",
+    "acompanha": "",
     "status": "Sob encomenda",
     "qty": null,
-    "price": 7990,
+    "price": 7590,
     "orderCount": 0,
     "postedAt": "2026-06-12",
     "images": [
-      "images/253-1786715945779-0.jpg"
-    ],
-    "movimento": "Meca-quartzo"
+      "images/253-1790355023788-0.jpg",
+      "images/253-1790355023788-1.jpg"
+    ]
   },
   {
     "id": 254,
