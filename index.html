@@ -124,26 +124,40 @@
     background:var(--gold); color:#1a1508; font-size:11px; font-weight:700;
     width:18px; height:18px; border-radius:50%; display:flex; align-items:center; justify-content:center;
   }
-  #filtersModal .modal{ position:relative; max-width:400px; padding:26px 24px 24px; }
+  #filtersModal .modal{ position:relative; max-width:440px; padding:26px 24px 24px; }
   #filtersModal .field:last-of-type{ margin-bottom:20px; }
-  /* Filtros de múltipla escolha: cada opção é uma caixinha que liga/desliga */
-  .chk-group{ display:flex; flex-wrap:wrap; gap:7px; }
-  .chk-group .chk{ position:relative; display:inline-block; margin:0; font-size:inherit; color:inherit; cursor:pointer; }
+  /* Filtros: cada grupo é um menu fechado (igual aos de antes) que, ao clicar,
+     abre uma lista com caixinhas de marcar — dá pra escolher várias opções. */
+  .filters-hint{ font-size:12px; color:var(--text-dim); margin:-10px 0 16px; }
+  #filtersModal .flt-group{ margin:0 0 12px; }
+  #filtersModal .flt-label{ display:block; font-size:12px; color:var(--text-dim); margin-bottom:6px; }
+  .flt-trigger{
+    width:100%; display:flex; align-items:center; justify-content:space-between; gap:10px;
+    padding:11px 12px; border-radius:9px; border:1px solid var(--border); background:var(--panel-2);
+    color:var(--text); font-size:14px; font-family:inherit; cursor:pointer; text-align:left;
+  }
+  .flt-trigger:hover, .flt-group.open .flt-trigger{ border-color:var(--gold); }
+  .flt-summary{ overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .flt-trigger .chevron{ flex-shrink:0; opacity:.6; transition:transform .15s ease; }
+  .flt-group.open .flt-trigger .chevron{ transform:rotate(180deg); }
+  .flt-body{
+    margin-top:6px; padding:5px; border:1px solid var(--border); border-radius:9px;
+    background:var(--panel); max-height:230px; overflow-y:auto;
+  }
+  .chk-list .chk{ position:relative; display:block; margin:0; font-size:inherit; color:inherit; cursor:pointer; }
   .chk input{ position:absolute; opacity:0; pointer-events:none; }
-  .chk span{
-    display:inline-flex; align-items:center; gap:7px; padding:7px 12px; border-radius:999px;
-    border:1px solid var(--border); background:var(--panel-2); color:var(--text);
-    font-size:12.5px; font-weight:600; transition:background .15s ease, border-color .15s ease, color .15s ease;
+  .chk-list .chk span{
+    display:flex; align-items:center; gap:10px; padding:8px 9px; border-radius:7px;
+    font-size:13.5px; color:var(--text);
   }
-  .chk span::before{
-    content:''; width:14px; height:14px; border-radius:4px; border:1.5px solid var(--text-dim);
-    display:inline-flex; align-items:center; justify-content:center; font-size:10px; line-height:1; flex-shrink:0;
+  .chk-list .chk:hover span{ background:var(--panel-2); }
+  .chk-list .chk span::before{
+    content:''; width:16px; height:16px; border-radius:4px; border:1.5px solid var(--text-dim);
+    display:inline-flex; align-items:center; justify-content:center;
+    font-size:11px; font-weight:700; line-height:1; flex-shrink:0;
   }
-  .chk:hover span{ border-color:var(--gold); }
-  .chk input:checked + span{ background:var(--gold); border-color:var(--gold); color:#1a1508; }
-  .chk input:checked + span::before{ content:'✓'; background:#1a1508; border-color:#1a1508; color:var(--gold-strong); }
-  .chk input:focus-visible + span{ outline:2px solid var(--gold-strong); outline-offset:2px; }
-  .filters-hint{ font-size:12px; color:var(--text-dim); margin:-10px 0 18px; }
+  .chk-list .chk input:checked + span::before{ content:'✓'; background:var(--gold); border-color:var(--gold); color:#1a1508; }
+  .chk-list .chk input:focus-visible + span{ outline:2px solid var(--gold-strong); outline-offset:1px; }
 
   .dd-trigger .chevron{ transition:transform .15s; opacity:.6; }
   .dd-trigger[aria-expanded="true"] .chevron{ transform:rotate(180deg); }
@@ -518,22 +532,38 @@
   <div class="modal">
     <button class="modal-close" id="filtersModalClose">&times;</button>
     <h2 style="margin-bottom:18px;">Filtros</h2>
-    <p class="filters-hint">Marque quantas opções quiser em cada grupo.</p>
-    <div class="field">
-      <label>Tamanho</label>
-      <div class="chk-group" id="fltSize"></div>
+    <p class="filters-hint">Toque em cada grupo pra abrir a lista — dá pra marcar várias opções.</p>
+    <div class="field flt-group">
+      <span class="flt-label">Faixa de preço</span>
+      <button type="button" class="flt-trigger" aria-expanded="false">
+        <span class="flt-summary" id="cntPriceRange">Qualquer preço</span>
+        <svg class="chevron" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </button>
+      <div class="flt-body" hidden><div class="chk-list" id="fltPriceRange"></div></div>
     </div>
-    <div class="field">
-      <label>Status</label>
-      <div class="chk-group" id="fltStatus"></div>
+    <div class="field flt-group">
+      <span class="flt-label">Tamanho</span>
+      <button type="button" class="flt-trigger" aria-expanded="false">
+        <span class="flt-summary" id="cntSize">Todos os tamanhos</span>
+        <svg class="chevron" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </button>
+      <div class="flt-body" hidden><div class="chk-list" id="fltSize"></div></div>
     </div>
-    <div class="field">
-      <label>Movimento</label>
-      <div class="chk-group" id="fltMovimento"></div>
+    <div class="field flt-group">
+      <span class="flt-label">Movimento</span>
+      <button type="button" class="flt-trigger" aria-expanded="false">
+        <span class="flt-summary" id="cntMovimento">Todos os movimentos</span>
+        <svg class="chevron" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </button>
+      <div class="flt-body" hidden><div class="chk-list" id="fltMovimento"></div></div>
     </div>
-    <div class="field">
-      <label>Faixa de preço</label>
-      <div class="chk-group" id="fltPriceRange"></div>
+    <div class="field flt-group">
+      <span class="flt-label">Status</span>
+      <button type="button" class="flt-trigger" aria-expanded="false">
+        <span class="flt-summary" id="cntStatus">Disponíveis</span>
+        <svg class="chevron" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </button>
+      <div class="flt-body" hidden><div class="chk-list" id="fltStatus"></div></div>
     </div>
     <div class="modal-actions">
       <button type="button" class="btn" id="filtersClearBtn">Limpar filtros</button>
@@ -771,6 +801,24 @@
     {value:'gt12k', label:'Acima de R$ 12.000', min:12000, max:Infinity},
   ];
   function faixaPreco(value){ return FAIXAS_PRECO.find(f => f.value === value) || FAIXAS_PRECO[0]; }
+  // Tamanho em faixas (pelo diâmetro da caixa, arredondado pra baixo): bem mais
+  // fácil de escolher do que 20+ medidas com meio milímetro de diferença.
+  const FAIXAS_TAMANHO = [
+    {value:'ate36', label:'Até 36mm', min:0, max:36},
+    {value:'37-38', label:'37 a 38mm', min:37, max:38},
+    {value:'39-40', label:'39 a 40mm', min:39, max:40},
+    {value:'41mais', label:'41mm ou mais', min:41, max:999},
+  ];
+  function diametros(w){
+    const m = normalizarMedida(w.medida);
+    if(!m) return [];
+    const partes = m.includes(' x ') ? [m.split(' x ')[0]] : m.split(' ou ');
+    return partes.map(p => parseFloat(p)).filter(n => !isNaN(n));
+  }
+  function noTamanho(w, value){
+    const f = FAIXAS_TAMANHO.find(x => x.value === value);
+    return !!f && diametros(w).some(d => Math.floor(d) >= f.min && Math.floor(d) <= f.max);
+  }
 
   function renderBrandMenu(){
     const brands = Array.from(new Set(CATALOG.map(w => brandOf(w.name)))).sort();
@@ -778,10 +826,15 @@
     setupDropdown('brand', options, state.brand, v => { state.brand = v; state.page = 1; render(); });
   }
   function renderFilterMenus(){
-    const sizes = Array.from(new Set(CATALOG.map(w => normalizarMedida(w.medida)).filter(Boolean))).sort(ordenarMedidas);
-    const statuses = Array.from(new Set(CATALOG.map(w => w.status || 'Sob encomenda'))).sort();
-    const movimentos = Array.from(new Set(CATALOG.map(w => w.movimento).filter(Boolean))).sort();
+    // Status: disponíveis primeiro. Movimento: do mais comum pro mais raro.
+    const ORDEM_STATUS = ['Sob encomenda','Em estoque','A caminho','Esgotado','Descontinuado'];
+    const posStatus = s => { const i = ORDEM_STATUS.indexOf(s); return i === -1 ? 99 : i; };
+    const statuses = Array.from(new Set(CATALOG.map(w => w.status || 'Sob encomenda'))).sort((a,b) => posStatus(a) - posStatus(b));
+    const freq = {};
+    CATALOG.forEach(w => { if(w.movimento) freq[w.movimento] = (freq[w.movimento] || 0) + 1; });
+    const movimentos = Object.keys(freq).sort((a,b) => freq[b] - freq[a]);
 
+    const sizes = Array.from(new Set(CATALOG.map(w => normalizarMedida(w.medida)).filter(Boolean))).sort(ordenarMedidas);
     renderChecks('fltSize', sizes.map(s => ({value:s, label:s})), state.size);
     renderChecks('fltStatus', statuses.map(s => ({value:s, label:s})), statusSelecionados());
     renderChecks('fltMovimento', movimentos.map(m => ({value:m, label:m})), state.movimento);
@@ -814,12 +867,40 @@
       state.movimento.length > 0,
       state.priceRange.length > 0
     ].filter(Boolean).length;
+    // O texto de cada menu fechado resume o que está marcado dentro dele.
+    const resumo = (id, vazio, sel, rotulo) => {
+      const el = document.getElementById(id);
+      if(!el) return;
+      const nomes = sel.map(rotulo || (v => v));
+      el.textContent = !sel.length ? vazio : (sel.length <= 2 ? nomes.join(', ') : sel.length + ' selecionados');
+    };
+    resumo('cntPriceRange', 'Qualquer preço', state.priceRange, v => faixaPreco(v).label);
+    resumo('cntSize', 'Todos os tamanhos', state.size);
+    resumo('cntMovimento', 'Todos os movimentos', state.movimento);
+    if(state.status === null) document.getElementById('cntStatus').textContent = 'Disponíveis';
+    else resumo('cntStatus', 'Todos os status', state.status);
     const badge = document.getElementById('filtersCount');
     badge.hidden = ativos === 0;
     badge.textContent = ativos;
   }
 
   document.getElementById('filtersBtn').addEventListener('click', () => { document.getElementById('filtersModal').hidden = false; });
+  document.querySelectorAll('#filtersModal .flt-trigger').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const grupo = btn.closest('.flt-group');
+      const abrir = !grupo.classList.contains('open');
+      document.querySelectorAll('#filtersModal .flt-group').forEach(g => {
+        g.classList.remove('open');
+        g.querySelector('.flt-body').hidden = true;
+        g.querySelector('.flt-trigger').setAttribute('aria-expanded', 'false');
+      });
+      if(abrir){
+        grupo.classList.add('open');
+        grupo.querySelector('.flt-body').hidden = false;
+        btn.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
   document.getElementById('filtersModalClose').addEventListener('click', () => { document.getElementById('filtersModal').hidden = true; });
   document.getElementById('filtersCloseBtn').addEventListener('click', () => { document.getElementById('filtersModal').hidden = true; });
   document.getElementById('filtersClearBtn').addEventListener('click', () => {
