@@ -3424,15 +3424,23 @@
     "name": "Furlan Marri Rosso Grigio",
     "ref": "",
     "medida": "38mm",
+    "movimento": "Meca-quartzo",
+    "resistencia": "50m",
+    "material": "Aço inoxidável",
+    "vidro": "Safira",
+    "espessura": "11.5mm",
+    "lugToLug": "46mm",
+    "reservaMarcha": "",
+    "acompanha": "",
     "status": "Sob encomenda",
     "qty": null,
-    "price": 7990,
+    "price": 7590,
     "orderCount": 0,
     "postedAt": "2026-06-12",
     "images": [
-      "images/256-1786716019815-0.jpg"
-    ],
-    "movimento": "Meca-quartzo"
+      "images/256-1790355668331-0.jpg",
+      "images/256-1790355668331-1.jpg"
+    ]
   },
   {
     "id": 257,
