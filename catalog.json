@@ -1896,21 +1896,6 @@
     "movimento": "Automático"
   },
   {
-    "id": 138,
-    "name": "Longines HydroConquest Azul",
-    "ref": "L3.780.4.96.6",
-    "medida": "39mm",
-    "status": "Sob encomenda",
-    "qty": null,
-    "price": 13490,
-    "orderCount": 0,
-    "postedAt": "2026-04-25",
-    "images": [
-      "images/138-cover.jpg"
-    ],
-    "movimento": "Automático"
-  },
-  {
     "id": 139,
     "name": "Longines HydroConquest Preto",
     "ref": "L3.780.4.56.6",
