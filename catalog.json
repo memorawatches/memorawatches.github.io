@@ -3261,21 +3261,6 @@
     "strapBaseName": "Rubber Classic"
   },
   {
-    "id": 247,
-    "name": "Longines Spirit Prata",
-    "ref": "L3.410.4.63.6",
-    "medida": "37mm",
-    "status": "Sob encomenda",
-    "qty": null,
-    "price": 16490,
-    "orderCount": 0,
-    "postedAt": "2026-05-28",
-    "images": [
-      "images/247-cover.jpg"
-    ],
-    "movimento": "Automático"
-  },
-  {
     "id": 248,
     "name": "Longines Spirit Preto",
     "ref": "L3.810.4.53.6",
