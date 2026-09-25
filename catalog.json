@@ -3261,21 +3261,6 @@
     "strapBaseName": "Rubber Classic"
   },
   {
-    "id": 250,
-    "name": "Longines Zulu Time Preto",
-    "ref": "L3.802.4.50.6",
-    "medida": "39mm",
-    "status": "Sob encomenda",
-    "qty": null,
-    "price": 21900,
-    "orderCount": 0,
-    "postedAt": "2026-05-28",
-    "images": [
-      "images/250-cover.jpg"
-    ],
-    "movimento": "Automático (GMT)"
-  },
-  {
     "id": 251,
     "name": "Seiko 5 Field GMT White",
     "ref": "SSK059",
