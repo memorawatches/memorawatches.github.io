@@ -3542,15 +3542,22 @@
     "name": "Longines HydroConquest Azul",
     "ref": "L3.779.4.96.6",
     "medida": "39mm",
+    "movimento": "Automático",
+    "resistencia": "",
+    "material": "",
+    "vidro": "",
+    "espessura": "",
+    "lugToLug": "",
+    "reservaMarcha": "",
+    "acompanha": "",
     "status": "Sob encomenda",
     "qty": null,
-    "price": 16490,
+    "price": 17490,
     "orderCount": 2,
     "postedAt": "2026-08-02",
     "images": [
       "images/262-1786716169504-0.jpg"
-    ],
-    "movimento": "Automático"
+    ]
   },
   {
     "id": 263,
