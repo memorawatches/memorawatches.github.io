@@ -3378,15 +3378,23 @@
     "name": "Furlan Marri Sabbia Rosa",
     "ref": "",
     "medida": "38mm",
+    "movimento": "Meca-quartzo",
+    "resistencia": "50m",
+    "material": "Aço PVD Rose Gold",
+    "vidro": "Safira",
+    "espessura": "11.5mm",
+    "lugToLug": "46mm",
+    "reservaMarcha": "",
+    "acompanha": "",
     "status": "Sob encomenda",
     "qty": null,
-    "price": 7990,
+    "price": 7590,
     "orderCount": 1,
     "postedAt": "2026-06-12",
     "images": [
-      "images/254-1786715968084-0.jpg"
-    ],
-    "movimento": "Meca-quartzo"
+      "images/254-1790355400728-0.jpg",
+      "images/254-1790355400729-1.jpg"
+    ]
   },
   {
     "id": 255,
