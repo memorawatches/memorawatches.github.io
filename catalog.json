@@ -5554,5 +5554,29 @@
       "images/366-1790366081360-0.jpg",
       "images/366-1790366081360-1.jpg"
     ]
+  },
+  {
+    "id": 367,
+    "name": "Longines HydroConquest Verde",
+    "ref": "L3.781.4.05.6",
+    "medida": "41mm",
+    "movimento": "Automático",
+    "resistencia": "300m",
+    "material": "Aço inoxidável",
+    "vidro": "Safira",
+    "espessura": "11.9mm",
+    "lugToLug": "51mm",
+    "reservaMarcha": "72 horas",
+    "acompanha": "",
+    "status": "Sob encomenda",
+    "qty": null,
+    "price": 13490,
+    "orderCount": 0,
+    "postedAt": "2026-09-25",
+    "images": [
+      "images/367-1790366778460-0.jpg",
+      "images/367-1790366778460-1.jpg",
+      "images/367-1790366778460-2.jpg"
+    ]
   }
 ]
