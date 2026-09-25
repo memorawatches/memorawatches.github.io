@@ -5376,5 +5376,38 @@
       }
     ],
     "strapBaseName": "Beads of RIce"
+  },
+  {
+    "id": 358,
+    "name": "Baltic Aquascaphe GMT MKII Grey",
+    "ref": "",
+    "medida": "39.5mm",
+    "movimento": "Automático (GMT)",
+    "resistencia": "200m",
+    "material": "Aço inoxidável",
+    "vidro": "Safira",
+    "espessura": "13.8mm",
+    "lugToLug": "47mm",
+    "reservaMarcha": "42 horas",
+    "acompanha": "",
+    "status": "Sob encomenda",
+    "qty": null,
+    "price": 9890,
+    "orderCount": 0,
+    "postedAt": "2026-09-25",
+    "images": [
+      "images/358-1790295166116-0.jpg",
+      "images/358-1790295166116-1.jpg"
+    ],
+    "straps": [
+      {
+        "nome": "Flat Link",
+        "price": 9890,
+        "images": [
+          "images/358-strap0-1790295166117-0.jpg"
+        ]
+      }
+    ],
+    "strapBaseName": "Beads of Rice"
   }
 ]
