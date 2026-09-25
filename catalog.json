@@ -3401,15 +3401,23 @@
     "name": "Furlan Marri Nero Sabbia",
     "ref": "",
     "medida": "38mm",
+    "movimento": "Meca-quartzo",
+    "resistencia": "50m",
+    "material": "Aço inoxidável",
+    "vidro": "Safira",
+    "espessura": "11.5mm",
+    "lugToLug": "46mm",
+    "reservaMarcha": "",
+    "acompanha": "",
     "status": "Sob encomenda",
     "qty": null,
-    "price": 7990,
+    "price": 7590,
     "orderCount": 0,
     "postedAt": "2026-06-12",
     "images": [
-      "images/255-1786715982435-0.jpg"
-    ],
-    "movimento": "Meca-quartzo"
+      "images/255-1790355581137-0.jpg",
+      "images/255-1790355581137-1.jpg"
+    ]
   },
   {
     "id": 256,
