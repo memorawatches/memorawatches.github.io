@@ -5508,5 +5508,28 @@
       "images/364-1790365502653-1.jpg",
       "images/364-1790365502653-2.jpg"
     ]
+  },
+  {
+    "id": 365,
+    "name": "Longines HydroConquest Preto",
+    "ref": "L3.780.4.56.6",
+    "medida": "39mm",
+    "movimento": "Automático",
+    "resistencia": "300m",
+    "material": "Aço inoxidável",
+    "vidro": "Safira",
+    "espessura": "12.2mm",
+    "lugToLug": "48mm",
+    "reservaMarcha": "72 horas",
+    "acompanha": "",
+    "status": "Sob encomenda",
+    "qty": null,
+    "price": 13490,
+    "orderCount": 0,
+    "postedAt": "2026-09-25",
+    "images": [
+      "images/365-1790365877772-0.jpg",
+      "images/365-1790365877772-1.jpg"
+    ]
   }
 ]
