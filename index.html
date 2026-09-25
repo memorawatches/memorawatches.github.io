@@ -126,6 +126,24 @@
   }
   #filtersModal .modal{ position:relative; max-width:400px; padding:26px 24px 24px; }
   #filtersModal .field:last-of-type{ margin-bottom:20px; }
+  /* Filtros de múltipla escolha: cada opção é uma caixinha que liga/desliga */
+  .chk-group{ display:flex; flex-wrap:wrap; gap:7px; }
+  .chk-group .chk{ position:relative; display:inline-block; margin:0; font-size:inherit; color:inherit; cursor:pointer; }
+  .chk input{ position:absolute; opacity:0; pointer-events:none; }
+  .chk span{
+    display:inline-flex; align-items:center; gap:7px; padding:7px 12px; border-radius:999px;
+    border:1px solid var(--border); background:var(--panel-2); color:var(--text);
+    font-size:12.5px; font-weight:600; transition:background .15s ease, border-color .15s ease, color .15s ease;
+  }
+  .chk span::before{
+    content:''; width:14px; height:14px; border-radius:4px; border:1.5px solid var(--text-dim);
+    display:inline-flex; align-items:center; justify-content:center; font-size:10px; line-height:1; flex-shrink:0;
+  }
+  .chk:hover span{ border-color:var(--gold); }
+  .chk input:checked + span{ background:var(--gold); border-color:var(--gold); color:#1a1508; }
+  .chk input:checked + span::before{ content:'✓'; background:#1a1508; border-color:#1a1508; color:var(--gold-strong); }
+  .chk input:focus-visible + span{ outline:2px solid var(--gold-strong); outline-offset:2px; }
+  .filters-hint{ font-size:12px; color:var(--text-dim); margin:-10px 0 18px; }
 
   .dd-trigger .chevron{ transition:transform .15s; opacity:.6; }
   .dd-trigger[aria-expanded="true"] .chevron{ transform:rotate(180deg); }
@@ -500,21 +518,22 @@
   <div class="modal">
     <button class="modal-close" id="filtersModalClose">&times;</button>
     <h2 style="margin-bottom:18px;">Filtros</h2>
+    <p class="filters-hint">Marque quantas opções quiser em cada grupo.</p>
     <div class="field">
       <label>Tamanho</label>
-      <select id="fltSize"></select>
+      <div class="chk-group" id="fltSize"></div>
     </div>
     <div class="field">
       <label>Status</label>
-      <select id="fltStatus"></select>
+      <div class="chk-group" id="fltStatus"></div>
     </div>
     <div class="field">
       <label>Movimento</label>
-      <select id="fltMovimento"></select>
+      <div class="chk-group" id="fltMovimento"></div>
     </div>
     <div class="field">
       <label>Faixa de preço</label>
-      <select id="fltPriceRange"></select>
+      <div class="chk-group" id="fltPriceRange"></div>
     </div>
     <div class="modal-actions">
       <button type="button" class="btn" id="filtersClearBtn">Limpar filtros</button>
@@ -528,7 +547,7 @@
   const PAGE_SIZE = 24;
   let CATALOG = [];
   let CONFIG = { rates:{}, whatsappGroupUrl:'', whatsappSellerNumber:'', locked:false };
-  let state = { search:'', brand:'Todos', size:'Todos', status:'Disponíveis', movimento:'Todos', priceRange:'Todos', sort:'popular', page:1 };
+  let state = { search:'', brand:'Todos', size:[], status:null, movimento:[], priceRange:[], sort:'popular', page:1 };
 
   const PLACEHOLDER_IMG = 'data:image/svg+xml;utf8,' + encodeURIComponent(
     '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><rect width="200" height="200" fill="#e9e4d8"/><circle cx="100" cy="100" r="55" fill="none" stroke="#b8ac8f" stroke-width="4"/><line x1="100" y1="100" x2="100" y2="65" stroke="#b8ac8f" stroke-width="4"/><line x1="100" y1="100" x2="125" y2="100" stroke="#b8ac8f" stroke-width="4"/></svg>'
@@ -763,24 +782,37 @@
     const statuses = Array.from(new Set(CATALOG.map(w => w.status || 'Sob encomenda'))).sort();
     const movimentos = Array.from(new Set(CATALOG.map(w => w.movimento).filter(Boolean))).sort();
 
-    const preencher = (id, options, valorAtual) => {
-      const sel = document.getElementById(id);
-      sel.innerHTML = options.map(o => `<option value="${o.value}" ${o.value===valorAtual?'selected':''}>${o.label}</option>`).join('');
-    };
-    preencher('fltSize', [{value:'Todos', label:'Todos os tamanhos'}, ...sizes.map(s => ({value:s, label:s}))], state.size);
-    preencher('fltStatus', [
-      {value:'Disponíveis', label:'✅ Disponíveis'}, {value:'Todos', label:'Todos os status'},
-      ...statuses.map(s => ({value:s, label:s}))
-    ], state.status);
-    preencher('fltMovimento', [{value:'Todos', label:'Todos os movimentos'}, ...movimentos.map(m => ({value:m, label:m}))], state.movimento);
-    preencher('fltPriceRange', FAIXAS_PRECO.map(f => ({value:f.value, label:f.label})), state.priceRange);
+    renderChecks('fltSize', sizes.map(s => ({value:s, label:s})), state.size);
+    renderChecks('fltStatus', statuses.map(s => ({value:s, label:s})), statusSelecionados());
+    renderChecks('fltMovimento', movimentos.map(m => ({value:m, label:m})), state.movimento);
+    renderChecks('fltPriceRange', FAIXAS_PRECO.filter(f => f.value !== 'Todos').map(f => ({value:f.value, label:f.label})), state.priceRange);
+  }
+
+  // ---------- Filtros de múltipla escolha ----------
+  // Cada grupo guarda uma LISTA do que está marcado. Lista vazia = sem filtro.
+  // Status é especial: o padrão ("null") significa "só os disponíveis".
+  function statusDisponiveis(){
+    return Array.from(new Set(CATALOG.map(w => w.status || 'Sob encomenda'))).filter(s => !isFadedStatus(s)).sort();
+  }
+  function statusSelecionados(){ return state.status === null ? statusDisponiveis() : state.status; }
+  function mesmoConjunto(a, b){ return a.length === b.length && a.every(x => b.includes(x)); }
+  function renderChecks(id, options, selecionados){
+    document.getElementById(id).innerHTML = options.map(o => `
+      <label class="chk">
+        <input type="checkbox" value="${o.value}" ${selecionados.includes(o.value) ? 'checked' : ''}>
+        <span>${o.label}</span>
+      </label>`).join('');
+  }
+  function lerChecks(id){
+    return Array.from(document.querySelectorAll('#' + id + ' input:checked')).map(i => i.value);
   }
 
   function updateFiltersCount(){
     const ativos = [
-      state.size !== 'Todos',
-      state.status !== 'Todos' && state.status !== 'Disponíveis', // padrão não conta como filtro "ligado"
-      state.movimento !== 'Todos', state.priceRange !== 'Todos'
+      state.size.length > 0,
+      state.status !== null && !mesmoConjunto(state.status, statusDisponiveis()), // padrão não conta
+      state.movimento.length > 0,
+      state.priceRange.length > 0
     ].filter(Boolean).length;
     const badge = document.getElementById('filtersCount');
     badge.hidden = ativos === 0;
@@ -791,14 +823,14 @@
   document.getElementById('filtersModalClose').addEventListener('click', () => { document.getElementById('filtersModal').hidden = true; });
   document.getElementById('filtersCloseBtn').addEventListener('click', () => { document.getElementById('filtersModal').hidden = true; });
   document.getElementById('filtersClearBtn').addEventListener('click', () => {
-    state.size = 'Todos'; state.status = 'Disponíveis';
-    state.movimento = 'Todos'; state.priceRange = 'Todos'; state.page = 1;
+    state.size = []; state.status = null;
+    state.movimento = []; state.priceRange = []; state.page = 1;
     renderFilterMenus(); updateFiltersCount(); render();
   });
   ['fltSize','fltStatus','fltMovimento','fltPriceRange'].forEach(id => {
-    document.getElementById(id).addEventListener('change', (e) => {
+    document.getElementById(id).addEventListener('change', () => {
       const chave = { fltSize:'size', fltStatus:'status', fltMovimento:'movimento', fltPriceRange:'priceRange' }[id];
-      state[chave] = e.target.value;
+      state[chave] = lerChecks(id);
       state.page = 1;
       updateFiltersCount();
       render();
@@ -862,13 +894,15 @@
   function filteredSorted(){
     let list = CATALOG.slice();
     if(state.brand !== 'Todos') list = list.filter(w => brandOf(w.name) === state.brand);
-    if(state.size !== 'Todos') list = list.filter(w => normalizarMedida(w.medida) === state.size);
-    if(state.status === 'Disponíveis') list = list.filter(w => !isFadedStatus(w.status));
-    else if(state.status !== 'Todos') list = list.filter(w => (w.status || 'Sob encomenda') === state.status);
-    if(state.movimento !== 'Todos') list = list.filter(w => w.movimento === state.movimento);
-    if(state.priceRange !== 'Todos'){
-      const faixa = faixaPreco(state.priceRange);
-      list = list.filter(w => w.price >= faixa.min && w.price < faixa.max);
+    if(state.size.length) list = list.filter(w => state.size.includes(normalizarMedida(w.medida)));
+    const sts = statusSelecionados();
+    if(sts.length) list = list.filter(w => sts.includes(w.status || 'Sob encomenda'));
+    if(state.movimento.length) list = list.filter(w => state.movimento.includes(w.movimento));
+    if(state.priceRange.length){
+      list = list.filter(w => state.priceRange.some(v => {
+        const f = faixaPreco(v);
+        return w.price >= f.min && w.price < f.max;
+      }));
     }
     if(state.search.trim()){
       const q = state.search.trim().toLowerCase();
