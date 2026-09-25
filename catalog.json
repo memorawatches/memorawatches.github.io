@@ -5672,5 +5672,29 @@
       "images/371-1790367524559-0.jpg",
       "images/371-1790367524559-1.jpg"
     ]
+  },
+  {
+    "id": 372,
+    "name": "Longines Conquest Verde",
+    "ref": "L3.720.4.02.6",
+    "medida": "38mm",
+    "movimento": "Automático",
+    "resistencia": "100m",
+    "material": "Aço inoxidável",
+    "vidro": "Safira",
+    "espessura": "10.9mm",
+    "lugToLug": "46.8mm",
+    "reservaMarcha": "72 horas",
+    "acompanha": "",
+    "status": "Sob encomenda",
+    "qty": null,
+    "price": 15490,
+    "orderCount": 0,
+    "postedAt": "2026-09-25",
+    "images": [
+      "images/372-1790367903754-0.jpg",
+      "images/372-1790367903754-1.jpg",
+      "images/372-1790367903754-2.jpg"
+    ]
   }
 ]
