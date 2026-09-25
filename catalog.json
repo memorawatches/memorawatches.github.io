@@ -5626,5 +5626,28 @@
       "images/369-1790367080561-1.jpg",
       "images/369-1790367080561-2.jpg"
     ]
+  },
+  {
+    "id": 370,
+    "name": "Longines HydroConquest Alumínio Azul",
+    "ref": "L3.742.4.96.6",
+    "medida": "",
+    "movimento": "Automático",
+    "resistencia": "300m",
+    "material": "Aço inoxidável",
+    "vidro": "Safira",
+    "espessura": "11.9mm",
+    "lugToLug": "51mm",
+    "reservaMarcha": "72 horas",
+    "acompanha": "",
+    "status": "Sob encomenda",
+    "qty": null,
+    "price": 9990,
+    "orderCount": 0,
+    "postedAt": "2026-09-25",
+    "images": [
+      "images/370-1790367429164-0.jpg",
+      "images/370-1790367429164-1.jpg"
+    ]
   }
 ]
