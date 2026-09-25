@@ -3261,21 +3261,6 @@
     "strapBaseName": "Rubber Classic"
   },
   {
-    "id": 249,
-    "name": "Longines Spirit Azul",
-    "ref": "L3.810.4.93.6",
-    "medida": "40mm",
-    "status": "Sob encomenda",
-    "qty": null,
-    "price": 16290,
-    "orderCount": 1,
-    "postedAt": "2026-05-28",
-    "images": [
-      "images/249-cover.jpg"
-    ],
-    "movimento": "Automático"
-  },
-  {
     "id": 250,
     "name": "Longines Zulu Time Preto",
     "ref": "L3.802.4.50.6",
