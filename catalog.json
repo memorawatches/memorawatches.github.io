@@ -3493,16 +3493,25 @@
     "id": 259,
     "name": "Furlan Marri White Sector",
     "ref": "",
-    "medida": "37mm",
+    "medida": "37.5mm",
+    "movimento": "Automático",
+    "resistencia": "50m",
+    "material": "Aço inoxidável",
+    "vidro": "Safira",
+    "espessura": "10.5mm",
+    "lugToLug": "46mm",
+    "reservaMarcha": "68 horas",
+    "acompanha": "",
     "status": "Sob encomenda",
     "qty": null,
     "price": 15490,
     "orderCount": 0,
     "postedAt": "2026-06-12",
     "images": [
-      "images/259-1786716083171-0.jpg"
-    ],
-    "movimento": "Meca-quartzo"
+      "images/259-1790357266499-0.jpg",
+      "images/259-1790357266499-1.jpg",
+      "images/259-1790357266500-2.jpg"
+    ]
   },
   {
     "id": 260,
