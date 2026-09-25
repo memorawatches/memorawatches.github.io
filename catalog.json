@@ -5436,5 +5436,29 @@
       "images/361-1790357972786-1.jpg",
       "images/361-1790357972786-2.jpg"
     ]
+  },
+  {
+    "id": 362,
+    "name": "Longines HydroConquest Cinza",
+    "ref": "L3.779.4.70.6",
+    "medida": "39mm",
+    "movimento": "Automático",
+    "resistencia": "300m",
+    "material": "Aço inoxidável",
+    "vidro": "Safira",
+    "espessura": "11.7mm",
+    "lugToLug": "48mm",
+    "reservaMarcha": "72 horas",
+    "acompanha": "",
+    "status": "Sob encomenda",
+    "qty": null,
+    "price": 17490,
+    "orderCount": 0,
+    "postedAt": "2026-09-25",
+    "images": [
+      "images/362-1790365185003-0.jpg",
+      "images/362-1790365185003-1.jpg",
+      "images/362-1790365185003-2.jpg"
+    ]
   }
 ]
