@@ -4828,26 +4828,6 @@
     "movimento": "Automático"
   },
   {
-    "id": 325,
-    "name": "Citizen Tsuyosa Vermelho",
-    "ref": "NJ0150-56W",
-    "medida": "40mm",
-    "movimento": "Automático",
-    "resistencia": "",
-    "material": "",
-    "vidro": "",
-    "espessura": "",
-    "lugToLug": "",
-    "reservaMarcha": "",
-    "acompanha": "",
-    "status": "Sob encomenda",
-    "qty": null,
-    "price": 2790,
-    "orderCount": 0,
-    "postedAt": "2026-09-01",
-    "images": []
-  },
-  {
     "id": 326,
     "name": "Hamilton Khaki King Champagne",
     "ref": "H64455523",
