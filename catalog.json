@@ -5809,5 +5809,34 @@
       "images/376-1790544508621-1.jpg",
       "images/376-1790544508621-2.jpg"
     ]
+  },
+  {
+    "id": 377,
+    "name": "Longines Conquest Azul",
+    "ref": "L3.720.4.92.9",
+    "medida": "38mm",
+    "movimento": "Automático",
+    "resistencia": "100m",
+    "material": "Aço inoxidável",
+    "vidro": "Safira",
+    "espessura": "10.9mm",
+    "lugToLug": "46.8mm",
+    "reservaMarcha": "72 horas",
+    "acompanha": "",
+    "status": "Sob encomenda",
+    "qty": null,
+    "price": 15490,
+    "orderCount": 0,
+    "postedAt": "2026-09-27",
+    "images": [
+      "images/377-1790546761880-0.jpg"
+    ],
+    "sizes": [
+      {
+        "medida": "41mm",
+        "ref": "L3.830.4.92.9",
+        "price": 0
+      }
+    ]
   }
 ]
