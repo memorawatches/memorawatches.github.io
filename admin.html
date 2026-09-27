@@ -235,6 +235,8 @@
   }
   .strap-remove:hover{ background:var(--danger); color:#fff; }
   .strap-card .photo-input-btn{ padding:10px; font-size:12px; }
+  .size-card .strap-card-head{ flex-wrap:wrap; margin-bottom:0; }
+  .size-card .strap-card-head .field{ min-width:120px; }
   .photo-thumb{ position:relative; aspect-ratio:1/1; border-radius:8px; overflow:hidden; border:1px solid var(--border); }
   .photo-thumb img{ width:100%; height:100%; object-fit:cover; }
   .photo-thumb .rm{ position:absolute; top:3px; right:3px; width:20px; height:20px; border-radius:50%; border:none; background:rgba(12,22,19,.7); color:#fff; font-size:12px; cursor:pointer; }
@@ -444,6 +446,15 @@
       </div>
 
       <div class="field">
+        <label>Outros tamanhos (opcional)</label>
+        <p style="font-size:11.5px; color:var(--text-dim); margin:-2px 0 10px;">
+          Pra quando o mesmo modelo existe em mais de um tamanho, com outra referência. O tamanho e a referência lá de cima entram como a primeira opção. As fotos são as mesmas; o preço é opcional (vazio = mesmo preço).
+        </p>
+        <div id="sizesList"></div>
+        <button type="button" class="btn" id="addSizeBtn" style="width:100%; margin-top:8px;">+ Adicionar tamanho</button>
+      </div>
+
+      <div class="field">
         <label>Pulseiras (opcional)</label>
         <p style="font-size:11.5px; color:var(--text-dim); margin:-2px 0 10px;">
           Deixe vazio se o relógio tem só uma versão. Se cadastrar, o cliente escolhe a pulseira e o preço/fotos mudam sozinhos.
@@ -488,6 +499,10 @@
     <p style="font-size:13px; color:var(--text-dim); margin:0 0 18px;" id="quoteModalSubtitle">
       Sem item de catálogo vinculado — calcula usando as mesmas taxas do cartão do site.
     </p>
+    <div class="field" id="qSizeField" style="display:none;">
+      <label>Tamanho</label>
+      <div class="strap-options" id="qSizeOptions"></div>
+    </div>
     <div class="field" id="qStrapField" style="display:none;">
       <label>Pulseira</label>
       <div class="strap-options" id="qStrapOptions"></div>
@@ -595,6 +610,7 @@
   let nextId = 1;
   let pendingPhotos = []; // [{dataUrl, isNew}] for the open add/edit form
   let pendingStraps = []; // [{nome, price, photos:[{src,isNew}]}] pulseiras do relógio aberto
+  let pendingSizes = [];  // [{medida, ref, price}] outros tamanhos do relógio aberto
   let editingId = null;
 
   const PLACEHOLDER_IMG = 'data:image/svg+xml;utf8,' + encodeURIComponent(
@@ -671,6 +687,21 @@
     return (parseFloat(a) || 0) - (parseFloat(b) || 0) || a.localeCompare(b);
   }
   function imagesOf(w){ return (w.images && w.images.length) ? w.images : [PLACEHOLDER_IMG]; }
+  // Tamanhos: o mesmo modelo em outras medidas, cada uma com sua referência.
+  // O tamanho/referência "principal" do relógio entra sempre como 1ª opção.
+  // As fotos são as mesmas; o preço de cada tamanho é opcional.
+  function sizesOf(w){
+    if(!(w.sizes && w.sizes.length)) return null;
+    return [{ medida: w.medida, ref: w.ref, price: w.price }, ...w.sizes];
+  }
+  function todasMedidas(w){
+    const s = sizesOf(w);
+    return (s ? s.map(x => x.medida) : [w.medida]).map(normalizarMedida).filter(Boolean);
+  }
+  function todasRefs(w){
+    const s = sizesOf(w);
+    return (s ? s.map(x => x.ref) : [w.ref]).filter(Boolean);
+  }
   // Lista de opções de pulseira incluindo SEMPRE a versão original do relógio
   // (preço e fotos principais) como primeira opção.
   function strapsOf(w){
@@ -993,7 +1024,7 @@
     CATALOG.forEach(w => { if(w.movimento) freq[w.movimento] = (freq[w.movimento] || 0) + 1; });
     const movimentos = Object.keys(freq).sort((a,b) => freq[b] - freq[a]);
 
-    const sizes = Array.from(new Set(CATALOG.map(w => normalizarMedida(w.medida)).filter(Boolean))).sort(ordenarMedidas);
+    const sizes = Array.from(new Set(CATALOG.flatMap(w => todasMedidas(w)))).sort(ordenarMedidas);
     renderChecks('fltSize', sizes.map(s => ({value:s, label:s})), state.size);
     renderChecks('fltStatus', statuses.map(s => ({value:s, label:s})), statusSelecionados());
     renderChecks('fltMovimento', movimentos.map(m => ({value:m, label:m})), state.movimento);
@@ -1119,7 +1150,7 @@
     const brand = brandOf(w.name);
     const rest = semMarca(w.name);
     const imgs = imagesOf(w);
-    const specs = [w.ref, normalizarMedida(w.medida)].filter(Boolean).join(' · ');
+    const specs = [w.ref, todasMedidas(w).join(' / ')].filter(Boolean).join(' · ');
     const status = w.status || 'Sob encomenda';
     const val12 = installmentAt(w.price, 12);
     return `
@@ -1160,7 +1191,7 @@
   function filteredSorted(){
     let list = CATALOG.slice();
     if(state.brand !== 'Todos') list = list.filter(w => brandOf(w.name) === state.brand);
-    if(state.size.length) list = list.filter(w => state.size.includes(normalizarMedida(w.medida)));
+    if(state.size.length) list = list.filter(w => todasMedidas(w).some(m => state.size.includes(m)));
     const sts = statusSelecionados();
     if(sts.length) list = list.filter(w => sts.includes(w.status || 'Sob encomenda'));
     if(state.movimento.length) list = list.filter(w => state.movimento.includes(w.movimento));
@@ -1172,7 +1203,7 @@
     }
     if(state.search.trim()){
       const q = state.search.trim().toLowerCase();
-      list = list.filter(w => nomeLimpo(w.name).toLowerCase().includes(q) || (w.ref||'').toLowerCase().includes(q));
+      list = list.filter(w => nomeLimpo(w.name).toLowerCase().includes(q) || todasRefs(w).some(r => r.toLowerCase().includes(q)));
     }
     if(state.sort === 'popular') list.sort((a,b) => (b.orderCount||0) - (a.orderCount||0));
     else if(state.sort === 'price_asc') list.sort((a,b) => a.price - b.price);
@@ -1280,13 +1311,17 @@
   // ---------- Cotação avulsa / vinculada a um relógio ----------
   let quoteContext = null; // relógio atual, ou null pra cotação avulsa
   let quoteStrapNome = null; // pulseira escolhida no orçamento, se houver
+  let quoteTamanho = null;   // tamanho escolhido no orçamento, se houver
 
   function abrirQuoteModal(){
     const sel = document.getElementById('qInstallments');
     const keys = Object.keys(CONFIG.rates).map(Number).sort((a,b) => a-b);
     sel.innerHTML = keys.map(n => `<option value="${n}" ${n===12?'selected':''}>${n===1 ? 'À vista' : n+'x'}</option>`).join('');
     const strapField = document.getElementById('qStrapField');
+    const sizeField = document.getElementById('qSizeField');
     quoteStrapNome = null;
+    quoteTamanho = null;
+    sizeField.style.display = 'none';
     document.getElementById('qDiscount').value = '0'; // sempre começa sem desconto
     document.getElementById('qPixEntry').value = '';
     sortearFrase();
@@ -1294,6 +1329,25 @@
       document.getElementById('quoteModalTitle').textContent = 'Gerar orçamento';
       document.getElementById('quoteModalSubtitle').textContent = `${nomeLimpo(quoteContext.name)}${quoteContext.ref ? ' — Ref. ' + quoteContext.ref : ''}`;
       document.getElementById('qNet').value = quoteContext.price || '';
+
+      const tams = sizesOf(quoteContext);
+      if(tams){
+        sizeField.style.display = 'block';
+        quoteTamanho = tams[0];
+        document.getElementById('qSizeOptions').innerHTML = tams.map((t,i) =>
+          `<button type="button" class="strap-option${i===0?' active':''}" data-i="${i}">${normalizarMedida(t.medida) || ('Opção ' + (i+1))}</button>`
+        ).join('');
+        document.querySelectorAll('#qSizeOptions .strap-option').forEach(btn => {
+          btn.addEventListener('click', () => {
+            quoteTamanho = tams[Number(btn.dataset.i)];
+            document.querySelectorAll('#qSizeOptions .strap-option').forEach(b => b.classList.toggle('active', b === btn));
+            document.getElementById('qNet').value = quoteTamanho.price || quoteContext.price || '';
+            document.getElementById('quoteModalSubtitle').textContent =
+              `${nomeLimpo(quoteContext.name)}${quoteTamanho.ref ? ' — Ref. ' + quoteTamanho.ref : ''}`;
+            updateQuote();
+          });
+        });
+      }
 
       const straps = strapsOf(quoteContext);
       if(straps){
@@ -1384,7 +1438,9 @@
     const linhas = [];
     if(quoteContext){
       linhas.push(nomeLimpo(quoteContext.name));
-      if(quoteContext.ref) linhas.push(`Ref. ${quoteContext.ref}`);
+      const refQ = quoteTamanho ? quoteTamanho.ref : quoteContext.ref;
+      if(refQ) linhas.push(`Ref. ${refQ}`);
+      if(quoteTamanho && quoteTamanho.medida) linhas.push(`Tamanho: ${normalizarMedida(quoteTamanho.medida)}`);
       if(quoteStrapNome) linhas.push(`Pulseira: ${quoteStrapNome}`);
       linhas.push('');
     }
@@ -1460,11 +1516,49 @@
       photos: (s.images || []).map(src => ({ src, isNew:false }))
     })) : [];
     document.getElementById('fStrapBaseName').value = (w && w.strapBaseName) ? w.strapBaseName : '';
+    pendingSizes = (w && w.sizes) ? w.sizes.map(s => ({ medida: s.medida || '', ref: s.ref || '', price: s.price || '' })) : [];
+    renderSizesList();
     renderPhotoGrid();
     renderStrapsList();
     document.getElementById('watchModal').hidden = false;
   }
-  function closeWatchModal(){ document.getElementById('watchModal').hidden = true; pendingPhotos = []; pendingStraps = []; editingId = null; }
+  function closeWatchModal(){ document.getElementById('watchModal').hidden = true; pendingPhotos = []; pendingStraps = []; pendingSizes = []; editingId = null; }
+
+  // ---------- Outros tamanhos ----------
+  function renderSizesList(){
+    const cont = document.getElementById('sizesList');
+    const esc = v => String(v == null ? '' : v).replace(/"/g, '&quot;');
+    cont.innerHTML = pendingSizes.map((s,i) => `
+      <div class="strap-card size-card">
+        <div class="strap-card-head">
+          <div class="field">
+            <label>Tamanho</label>
+            <input type="text" class="size-medida" data-i="${i}" value="${esc(s.medida)}" placeholder="ex: 40mm">
+          </div>
+          <div class="field">
+            <label>Referência</label>
+            <input type="text" class="size-ref" data-i="${i}" value="${esc(s.ref)}" placeholder="ex: T137.410...">
+          </div>
+          <div class="field">
+            <label>Preço (opcional)</label>
+            <input type="number" step="0.01" min="0" class="size-price" data-i="${i}" value="${s.price || ''}" placeholder="mesmo">
+          </div>
+          <button type="button" class="strap-remove size-remove" data-i="${i}" title="Remover este tamanho">Remover</button>
+        </div>
+      </div>
+    `).join('');
+    cont.querySelectorAll('.size-medida').forEach(inp => inp.addEventListener('input', () => { pendingSizes[Number(inp.dataset.i)].medida = inp.value; }));
+    cont.querySelectorAll('.size-ref').forEach(inp => inp.addEventListener('input', () => { pendingSizes[Number(inp.dataset.i)].ref = inp.value; }));
+    cont.querySelectorAll('.size-price').forEach(inp => inp.addEventListener('input', () => { pendingSizes[Number(inp.dataset.i)].price = inp.value; }));
+    cont.querySelectorAll('.size-remove').forEach(btn => btn.addEventListener('click', () => {
+      pendingSizes.splice(Number(btn.dataset.i), 1);
+      renderSizesList();
+    }));
+  }
+  document.getElementById('addSizeBtn').addEventListener('click', () => {
+    pendingSizes.push({ medida:'', ref:'', price:'' });
+    renderSizesList();
+  });
 
   // ---------- Pulseiras ----------
   function renderStrapsList(){
@@ -1681,6 +1775,11 @@
         watch.straps = finalStraps;
         watch.strapBaseName = (document.getElementById('fStrapBaseName').value || '').trim() || 'Padrão';
       }
+      // Outros tamanhos: só entram os que têm a medida preenchida.
+      const finalSizes = pendingSizes
+        .filter(s => (s.medida || '').trim())
+        .map(s => ({ medida: s.medida.trim(), ref: (s.ref || '').trim(), price: Number(s.price) || 0 }));
+      if(finalSizes.length) watch.sizes = finalSizes;
       if(editingId){
         const idx = CATALOG.findIndex(x => x.id === id);
         CATALOG[idx] = watch;
@@ -1738,8 +1837,9 @@
     const lines = [
       nomeLimpo(w.name),
       'Novo, completo',
-      w.ref ? `Ref. ${w.ref}` : null,
-      w.medida ? `Medida: ${normalizarMedida(w.medida)}` : null,
+      ...(sizesOf(w)
+        ? [`Tamanhos: ${sizesOf(w).map(t => normalizarMedida(t.medida) + (t.ref ? ' (Ref. ' + t.ref + ')' : '')).join(' / ')}`]
+        : [w.ref ? `Ref. ${w.ref}` : null, w.medida ? `Medida: ${normalizarMedida(w.medida)}` : null]),
       w.movimento || null,
       w.resistencia ? `Resistência à água: ${w.resistencia}` : null,
       w.material ? `Material da caixa: ${w.material}` : null,

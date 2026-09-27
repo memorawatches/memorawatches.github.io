@@ -657,6 +657,21 @@
     return (parseFloat(a) || 0) - (parseFloat(b) || 0) || a.localeCompare(b);
   }
   function imagesOf(w){ return (w.images && w.images.length) ? w.images : [PLACEHOLDER_IMG]; }
+  // Tamanhos: o mesmo modelo em outras medidas, cada uma com sua referência.
+  // O tamanho/referência "principal" do relógio entra sempre como 1ª opção.
+  // As fotos são as mesmas; o preço de cada tamanho é opcional.
+  function sizesOf(w){
+    if(!(w.sizes && w.sizes.length)) return null;
+    return [{ medida: w.medida, ref: w.ref, price: w.price }, ...w.sizes];
+  }
+  function todasMedidas(w){
+    const s = sizesOf(w);
+    return (s ? s.map(x => x.medida) : [w.medida]).map(normalizarMedida).filter(Boolean);
+  }
+  function todasRefs(w){
+    const s = sizesOf(w);
+    return (s ? s.map(x => x.ref) : [w.ref]).filter(Boolean);
+  }
   // Monta a lista de opções de pulseira SEMPRE incluindo a versão original do
   // relógio (com o preço e as fotos principais) como primeira opção — senão
   // o cliente perderia justamente a versão padrão de vista.
@@ -834,7 +849,7 @@
     CATALOG.forEach(w => { if(w.movimento) freq[w.movimento] = (freq[w.movimento] || 0) + 1; });
     const movimentos = Object.keys(freq).sort((a,b) => freq[b] - freq[a]);
 
-    const sizes = Array.from(new Set(CATALOG.map(w => normalizarMedida(w.medida)).filter(Boolean))).sort(ordenarMedidas);
+    const sizes = Array.from(new Set(CATALOG.flatMap(w => todasMedidas(w)))).sort(ordenarMedidas);
     renderChecks('fltSize', sizes.map(s => ({value:s, label:s})), state.size);
     renderChecks('fltStatus', statuses.map(s => ({value:s, label:s})), statusSelecionados());
     renderChecks('fltMovimento', movimentos.map(m => ({value:m, label:m})), state.movimento);
@@ -946,7 +961,7 @@
     const brand = brandOf(w.name);
     const rest = semMarca(w.name);
     const imgs = imagesOf(w);
-    const specs = [w.ref, normalizarMedida(w.medida)].filter(Boolean).join(' · ');
+    const specs = [w.ref, todasMedidas(w).join(' / ')].filter(Boolean).join(' · ');
     const status = w.status || 'Sob encomenda';
     const val12 = installmentAt(w.price, 12);
     return `
@@ -975,7 +990,7 @@
   function filteredSorted(){
     let list = CATALOG.slice();
     if(state.brand !== 'Todos') list = list.filter(w => brandOf(w.name) === state.brand);
-    if(state.size.length) list = list.filter(w => state.size.includes(normalizarMedida(w.medida)));
+    if(state.size.length) list = list.filter(w => todasMedidas(w).some(m => state.size.includes(m)));
     const sts = statusSelecionados();
     if(sts.length) list = list.filter(w => sts.includes(w.status || 'Sob encomenda'));
     if(state.movimento.length) list = list.filter(w => state.movimento.includes(w.movimento));
@@ -987,7 +1002,7 @@
     }
     if(state.search.trim()){
       const q = state.search.trim().toLowerCase();
-      list = list.filter(w => nomeLimpo(w.name).toLowerCase().includes(q) || (w.ref||'').toLowerCase().includes(q));
+      list = list.filter(w => nomeLimpo(w.name).toLowerCase().includes(q) || todasRefs(w).some(r => r.toLowerCase().includes(q)));
     }
     if(state.sort === 'popular') list.sort((a,b) => (b.orderCount||0) - (a.orderCount||0));
     else if(state.sort === 'price_asc') list.sort((a,b) => a.price - b.price);
@@ -1063,7 +1078,7 @@
 
     const brand = brandOf(w.name);
     const rest = semMarca(w.name);
-    const specs = [w.ref, normalizarMedida(w.medida)].filter(Boolean).join(' · ');
+    const specs = [w.ref, todasMedidas(w).join(' / ')].filter(Boolean).join(' · ');
     const rateKeys = Object.keys(CONFIG.rates).map(Number).sort((a,b)=>a-b);
 
     // Pulseiras: cada uma tem nome, preço próprio e (opcionalmente) fotos próprias.
@@ -1071,12 +1086,26 @@
     const straps = strapsOf(w);
     // Se o cliente clicou direto numa miniatura de pulseira no card, já abre nela.
     let currentStrap = (straps && strapInicial && strapInicial < straps.length) ? strapInicial : 0;
+    const tamanhos = sizesOf(w);
+    let currentSize = 0;
+    function tamanhoAtual(){ return tamanhos ? tamanhos[currentSize] : null; }
+    function refMensagem(){
+      const t = tamanhoAtual();
+      const ref = t ? t.ref : w.ref;
+      const partes = [];
+      if(t && t.medida) partes.push(normalizarMedida(t.medida));
+      if(ref) partes.push('ref. ' + ref);
+      return partes.length ? ' (' + partes.join(', ') + ')' : '';
+    }
     let currentPhoto = 0;
 
     function strapAtual(){ return straps ? straps[currentStrap] : null; }
     function precoAtual(){
       const s = strapAtual();
-      return (s && typeof s.price === 'number' && s.price > 0) ? s.price : w.price;
+      if(s && currentStrap > 0 && typeof s.price === 'number' && s.price > 0) return s.price;
+      const t = tamanhoAtual();
+      if(t && t.price > 0) return t.price;
+      return w.price;
     }
     function fotosAtuais(){
       const s = strapAtual();
@@ -1105,8 +1134,8 @@
         </div>
 
         <dl class="spec-list">
-          ${w.ref ? `<div><dt>Referência</dt><dd>${w.ref}</dd></div>` : ''}
-          ${w.medida ? `<div><dt>Tamanho</dt><dd>${normalizarMedida(w.medida)}</dd></div>` : ''}
+          ${(w.ref || tamanhos) ? `<div><dt>Referência</dt><dd id="specRef">${w.ref || '—'}</dd></div>` : ''}
+          ${(w.medida || tamanhos) ? `<div><dt>Tamanho</dt><dd id="specMedida">${normalizarMedida(w.medida) || '—'}</dd></div>` : ''}
           ${w.movimento ? `<div><dt>Movimento</dt><dd>${w.movimento}</dd></div>` : ''}
           ${w.material ? `<div><dt>Material da caixa</dt><dd>${w.material}</dd></div>` : ''}
           ${w.vidro ? `<div><dt>Vidro</dt><dd>${w.vidro}</dd></div>` : ''}
@@ -1124,6 +1153,13 @@
           </p>
         ` : ''}
 
+        ${tamanhos ? `
+        <div class="field">
+          <label>Tamanho</label>
+          <div class="strap-options" id="sizeOptions">
+            ${tamanhos.map((t,i) => `<button type="button" class="strap-option${i===0?' active':''}" data-i="${i}">${normalizarMedida(t.medida) || ('Opção ' + (i+1))}</button>`).join('')}
+          </div>
+        </div>` : ''}
         ${straps ? `
         <div class="field">
           <label>Pulseira</label>
@@ -1205,13 +1241,29 @@
     renderGallery();
 
     if(straps){
-      document.querySelectorAll('.strap-option').forEach(btn => {
+      document.querySelectorAll('#strapOptions .strap-option').forEach(btn => {
         btn.addEventListener('click', () => {
           currentStrap = Number(btn.dataset.i);
           currentPhoto = 0;
-          document.querySelectorAll('.strap-option').forEach(b => b.classList.toggle('active', b === btn));
+          document.querySelectorAll('#strapOptions .strap-option').forEach(b => b.classList.toggle('active', b === btn));
           document.getElementById('detailPrice').textContent = formatBRL(precoAtual());
           renderGallery();
+          updateInstallment();
+        });
+      });
+    }
+    // Tamanho: troca referência, medida e (se tiver) preço. A foto continua a mesma.
+    if(tamanhos){
+      document.querySelectorAll('#sizeOptions .strap-option').forEach(btn => {
+        btn.addEventListener('click', () => {
+          currentSize = Number(btn.dataset.i);
+          document.querySelectorAll('#sizeOptions .strap-option').forEach(b => b.classList.toggle('active', b === btn));
+          const t = tamanhoAtual();
+          const refEl = document.getElementById('specRef');
+          if(refEl) refEl.textContent = t.ref || '—';
+          const medEl = document.getElementById('specMedida');
+          if(medEl) medEl.textContent = normalizarMedida(t.medida) || '—';
+          document.getElementById('detailPrice').textContent = formatBRL(precoAtual());
           updateInstallment();
         });
       });
@@ -1229,7 +1281,7 @@
       const s = strapAtual();
       const descPulseira = s ? ` (pulseira ${s.nome})` : '';
       document.getElementById('detailWhatsBtn').href = 'https://wa.me/' + CONFIG.whatsappSellerNumber + '?text=' +
-        encodeURIComponent(`Olá! Tenho interesse no ${nomeLimpo(w.name)}${w.ref ? ' (ref. ' + w.ref + ')' : ''}${descPulseira}. Vi o preço de ${formatBRL(preco)} (${n2}). Ainda está disponível?`);
+        encodeURIComponent(`Olá! Tenho interesse no ${nomeLimpo(w.name)}${refMensagem()}${descPulseira}. Vi o preço de ${formatBRL(preco)} (${n2}). Ainda está disponível?`);
     }
     select.addEventListener('change', updateInstallment);
     document.getElementById('detailPrice').textContent = formatBRL(precoAtual());
