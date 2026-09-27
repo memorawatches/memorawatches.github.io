@@ -5743,7 +5743,17 @@
       "images/374-1790544166233-0.jpg",
       "images/374-1790544166233-1.jpg",
       "images/374-1790544166233-2.jpg"
-    ]
+    ],
+    "straps": [
+      {
+        "nome": "Borracha",
+        "price": 14990,
+        "images": [
+          "images/374-strap0-1790544879000-0.jpg"
+        ]
+      }
+    ],
+    "strapBaseName": "Açø"
   },
   {
     "id": 375,
