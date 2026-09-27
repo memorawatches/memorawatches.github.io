@@ -5590,6 +5590,16 @@
     "images": [
       "images/365-1790365877772-0.jpg",
       "images/365-1790365877772-1.jpg"
+    ],
+    "sizes": [
+      {
+        "medida": "41mm",
+        "ref": "L3.781.4.56.6",
+        "price": 0,
+        "specs": {
+          "lugToLug": "51mm"
+        }
+      }
     ]
   },
   {
