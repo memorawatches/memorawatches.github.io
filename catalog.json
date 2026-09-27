@@ -6036,5 +6036,28 @@
         }
       }
     ]
+  },
+  {
+    "id": 381,
+    "name": "Longines Spirit Prata",
+    "ref": "L3.410.4.63.6",
+    "medida": "37mm",
+    "movimento": "Automático",
+    "resistencia": "100m",
+    "material": "Aço inoxidável",
+    "vidro": "Safira",
+    "espessura": "11.7mm",
+    "lugToLug": "44.8mm",
+    "reservaMarcha": "72 horas",
+    "acompanha": "",
+    "status": "Sob encomenda",
+    "qty": null,
+    "price": 15990,
+    "orderCount": 0,
+    "postedAt": "2026-09-27",
+    "images": [
+      "images/381-1790548482677-0.jpg",
+      "images/381-1790548482677-1.jpg"
+    ]
   }
 ]
