@@ -5729,7 +5729,14 @@
         ]
       }
     ],
-    "strapBaseName": "Aço"
+    "strapBaseName": "Aço",
+    "sizes": [
+      {
+        "medida": "41mm",
+        "ref": "L3.830.4.92.6",
+        "price": 0
+      }
+    ]
   },
   {
     "id": 374,
