@@ -5968,5 +5968,39 @@
       "images/378-1790547609151-1.jpg",
       "images/378-1790547609151-2.jpg"
     ]
+  },
+  {
+    "id": 379,
+    "name": "Longines Spirit Azul",
+    "ref": "L3.410.4.93.6",
+    "medida": "37mm",
+    "movimento": "Automático",
+    "resistencia": "100m",
+    "material": "Aço inoxidável",
+    "vidro": "Safira",
+    "espessura": "11.7mm",
+    "lugToLug": "44.8mm",
+    "reservaMarcha": "72 horas",
+    "acompanha": "",
+    "status": "Sob encomenda",
+    "qty": null,
+    "price": 15990,
+    "orderCount": 0,
+    "postedAt": "2026-09-27",
+    "images": [
+      "images/379-1790548159865-0.jpg",
+      "images/379-1790548159866-1.jpg"
+    ],
+    "sizes": [
+      {
+        "medida": "40mm",
+        "ref": "L3.810.4.93.6",
+        "price": 0,
+        "specs": {
+          "espessura": "12.2mm",
+          "lugToLug": "49.7mm"
+        }
+      }
+    ]
   }
 ]
