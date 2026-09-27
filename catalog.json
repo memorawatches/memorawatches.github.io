@@ -5720,5 +5720,29 @@
       "images/373-1790368066824-1.jpg",
       "images/373-1790368066824-2.jpg"
     ]
+  },
+  {
+    "id": 374,
+    "name": "Longines Conquest Preto",
+    "ref": "L3.720.4.52.6",
+    "medida": "38mm",
+    "movimento": "Automático",
+    "resistencia": "100m",
+    "material": "Aço inoxidável",
+    "vidro": "Safira",
+    "espessura": "10.9mm",
+    "lugToLug": "46.8mm",
+    "reservaMarcha": "72 horas",
+    "acompanha": "",
+    "status": "Sob encomenda",
+    "qty": null,
+    "price": 15490,
+    "orderCount": 0,
+    "postedAt": "2026-09-27",
+    "images": [
+      "images/374-1790544166233-0.jpg",
+      "images/374-1790544166233-1.jpg",
+      "images/374-1790544166233-2.jpg"
+    ]
   }
 ]
