@@ -5754,16 +5754,16 @@
       "images/374-1790544166233-1.jpg",
       "images/374-1790544166233-2.jpg"
     ],
-    "straps": [
+    "sizes": [
       {
-        "nome": "Borracha",
-        "price": 14990,
-        "images": [
-          "images/374-strap0-1790544879000-0.jpg"
-        ]
+        "medida": "41mm",
+        "ref": "L3.830.4.52.6",
+        "price": 0,
+        "specs": {
+          "lugToLug": "49mm"
+        }
       }
-    ],
-    "strapBaseName": "Açø"
+    ]
   },
   {
     "id": 375,
