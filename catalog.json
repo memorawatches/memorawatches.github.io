@@ -5719,7 +5719,17 @@
       "images/373-1790368066824-0.jpg",
       "images/373-1790368066824-1.jpg",
       "images/373-1790368066824-2.jpg"
-    ]
+    ],
+    "straps": [
+      {
+        "nome": "Borracha",
+        "price": 14990,
+        "images": [
+          "images/373-strap0-1790544928689-0.jpg"
+        ]
+      }
+    ],
+    "strapBaseName": "Aço"
   },
   {
     "id": 374,
