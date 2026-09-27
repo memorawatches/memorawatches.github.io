@@ -236,6 +236,14 @@
   .strap-remove:hover{ background:var(--danger); color:#fff; }
   .strap-card .photo-input-btn{ padding:10px; font-size:12px; }
   .size-card .strap-card-head{ flex-wrap:wrap; margin-bottom:0; }
+  .strap-ref-row{ margin-bottom:10px; }
+  .size-specs{ margin-top:10px; border-top:1px dashed var(--border); padding-top:10px; }
+  .size-specs summary{ cursor:pointer; font-size:12.5px; color:var(--gold-strong); font-weight:600; }
+  .size-specs-hint{ font-size:11.5px; color:var(--text-dim); margin:8px 0 10px; }
+  .size-specs-grid{ display:grid; grid-template-columns:repeat(auto-fill, minmax(170px, 1fr)); gap:0 10px; }
+  .size-specs-grid .field{ margin-bottom:10px; }
+  .strap-ref-grid{ display:grid; grid-template-columns:repeat(auto-fill, minmax(150px, 1fr)); gap:8px; }
+  .strap-ref-size{ display:block; font-size:11px; color:var(--text-dim); margin-bottom:4px; }
   .size-card .strap-card-head .field{ min-width:120px; }
   .photo-thumb{ position:relative; aspect-ratio:1/1; border-radius:8px; overflow:hidden; border:1px solid var(--border); }
   .photo-thumb img{ width:100%; height:100%; object-fit:cover; }
@@ -609,7 +617,7 @@
   let gh = null; // {owner, repo, branch, token}
   let nextId = 1;
   let pendingPhotos = []; // [{dataUrl, isNew}] for the open add/edit form
-  let pendingStraps = []; // [{nome, price, photos:[{src,isNew}]}] pulseiras do relógio aberto
+  let pendingStraps = []; // [{nome, price, refs:[...por tamanho], photos:[{src,isNew}]}] pulseiras do relógio aberto
   let pendingSizes = [];  // [{medida, ref, price}] outros tamanhos do relógio aberto
   let editingId = null;
 
@@ -700,7 +708,19 @@
   }
   function todasRefs(w){
     const s = sizesOf(w);
-    return (s ? s.map(x => x.ref) : [w.ref]).filter(Boolean);
+    const base = s ? s.map(x => x.ref) : [w.ref];
+    const dasPulseiras = (w.straps || []).flatMap(p => p.refs || []);
+    return [...base, ...dasPulseiras].filter(Boolean);
+  }
+  // Referência da combinação tamanho × pulseira. strap.refs[i] acompanha a
+  // ordem de sizesOf (0 = tamanho principal). Sem referência própria, vale a
+  // do tamanho.
+  function refDe(w, sizeIdx, strapIdx){
+    const tams = sizesOf(w);
+    const i = sizeIdx || 0;
+    const p = (strapIdx > 0 && w.straps) ? w.straps[strapIdx - 1] : null;
+    if(p && p.refs && p.refs[i]) return p.refs[i];
+    return tams ? (tams[i].ref || '') : (w.ref || '');
   }
   // Lista de opções de pulseira incluindo SEMPRE a versão original do relógio
   // (preço e fotos principais) como primeira opção.
@@ -1312,6 +1332,12 @@
   let quoteContext = null; // relógio atual, ou null pra cotação avulsa
   let quoteStrapNome = null; // pulseira escolhida no orçamento, se houver
   let quoteTamanho = null;   // tamanho escolhido no orçamento, se houver
+  let quoteSizeIdx = 0, quoteStrapIdx = 0;
+  function quoteRef(){ return quoteContext ? refDe(quoteContext, quoteSizeIdx, quoteStrapIdx) : ''; }
+  function quoteSubtitulo(){
+    const r = quoteRef();
+    document.getElementById('quoteModalSubtitle').textContent = `${nomeLimpo(quoteContext.name)}${r ? ' — Ref. ' + r : ''}`;
+  }
 
   function abrirQuoteModal(){
     const sel = document.getElementById('qInstallments');
@@ -1321,6 +1347,7 @@
     const sizeField = document.getElementById('qSizeField');
     quoteStrapNome = null;
     quoteTamanho = null;
+    quoteSizeIdx = 0; quoteStrapIdx = 0;
     sizeField.style.display = 'none';
     document.getElementById('qDiscount').value = '0'; // sempre começa sem desconto
     document.getElementById('qPixEntry').value = '';
@@ -1339,11 +1366,11 @@
         ).join('');
         document.querySelectorAll('#qSizeOptions .strap-option').forEach(btn => {
           btn.addEventListener('click', () => {
-            quoteTamanho = tams[Number(btn.dataset.i)];
+            quoteSizeIdx = Number(btn.dataset.i);
+            quoteTamanho = tams[quoteSizeIdx];
             document.querySelectorAll('#qSizeOptions .strap-option').forEach(b => b.classList.toggle('active', b === btn));
             document.getElementById('qNet').value = quoteTamanho.price || quoteContext.price || '';
-            document.getElementById('quoteModalSubtitle').textContent =
-              `${nomeLimpo(quoteContext.name)}${quoteTamanho.ref ? ' — Ref. ' + quoteTamanho.ref : ''}`;
+            quoteSubtitulo();
             updateQuote();
           });
         });
@@ -1358,8 +1385,10 @@
         ).join('');
         document.querySelectorAll('#qStrapOptions .strap-option').forEach(btn => {
           btn.addEventListener('click', () => {
-            const s = straps[Number(btn.dataset.i)];
+            quoteStrapIdx = Number(btn.dataset.i);
+            const s = straps[quoteStrapIdx];
             quoteStrapNome = s.nome;
+            quoteSubtitulo();
             document.querySelectorAll('#qStrapOptions .strap-option').forEach(b => b.classList.toggle('active', b === btn));
             document.getElementById('qNet').value = s.price || quoteContext.price || '';
             updateQuote();
@@ -1438,7 +1467,7 @@
     const linhas = [];
     if(quoteContext){
       linhas.push(nomeLimpo(quoteContext.name));
-      const refQ = quoteTamanho ? quoteTamanho.ref : quoteContext.ref;
+      const refQ = quoteRef();
       if(refQ) linhas.push(`Ref. ${refQ}`);
       if(quoteTamanho && quoteTamanho.medida) linhas.push(`Tamanho: ${normalizarMedida(quoteTamanho.medida)}`);
       if(quoteStrapNome) linhas.push(`Pulseira: ${quoteStrapNome}`);
@@ -1513,10 +1542,11 @@
     pendingStraps = (w && w.straps) ? w.straps.map(s => ({
       nome: s.nome || '',
       price: s.price || '',
+      refs: Array.isArray(s.refs) ? s.refs.slice() : [],
       photos: (s.images || []).map(src => ({ src, isNew:false }))
     })) : [];
     document.getElementById('fStrapBaseName').value = (w && w.strapBaseName) ? w.strapBaseName : '';
-    pendingSizes = (w && w.sizes) ? w.sizes.map(s => ({ medida: s.medida || '', ref: s.ref || '', price: s.price || '' })) : [];
+    pendingSizes = (w && w.sizes) ? w.sizes.map(s => ({ medida: s.medida || '', ref: s.ref || '', price: s.price || '', specs: Object.assign({}, s.specs || {}) })) : [];
     renderSizesList();
     renderPhotoGrid();
     renderStrapsList();
@@ -1525,6 +1555,8 @@
   function closeWatchModal(){ document.getElementById('watchModal').hidden = true; pendingPhotos = []; pendingStraps = []; pendingSizes = []; editingId = null; }
 
   // ---------- Outros tamanhos ----------
+  // Especificações que podem mudar de um tamanho pro outro. Vazio = igual à versão principal.
+  const SPECS_POR_TAMANHO = [['movimento','Movimento','fMovimento'],['material','Material da caixa','fMaterial'],['vidro','Vidro','fVidro'],['espessura','Espessura','fEspessura'],['lugToLug','Lug-to-lug','fLugToLug'],['resistencia','Resistência à água','fResistencia'],['reservaMarcha','Reserva de marcha','fReservaMarcha'],['acompanha','Acompanha','fAcompanha']];
   function renderSizesList(){
     const cont = document.getElementById('sizesList');
     const esc = v => String(v == null ? '' : v).replace(/"/g, '&quot;');
@@ -1545,22 +1577,80 @@
           </div>
           <button type="button" class="strap-remove size-remove" data-i="${i}" title="Remover este tamanho">Remover</button>
         </div>
+        <details class="size-specs" data-i="${i}" ${(s._aberto || Object.values(s.specs || {}).some(v => (v||'').trim())) ? 'open' : ''}>
+          <summary>Especificações diferentes neste tamanho</summary>
+          <p class="size-specs-hint">Preencha só o que muda. Campo vazio mostra o mesmo valor da versão principal.</p>
+          <div class="size-specs-grid">
+            ${SPECS_POR_TAMANHO.map(([k, rotulo, idCampo]) => {
+              const principal = (document.getElementById(idCampo).value || '').trim();
+              return `
+              <div class="field">
+                <label>${rotulo}</label>
+                <input type="text" class="size-spec" data-i="${i}" data-k="${k}" value="${esc((s.specs || {})[k])}" placeholder="${esc(principal ? 'igual: ' + principal : 'igual ao principal')}">
+              </div>`;
+            }).join('')}
+          </div>
+        </details>
       </div>
     `).join('');
-    cont.querySelectorAll('.size-medida').forEach(inp => inp.addEventListener('input', () => { pendingSizes[Number(inp.dataset.i)].medida = inp.value; }));
+    cont.querySelectorAll('.size-specs').forEach(d => d.addEventListener('toggle', () => { pendingSizes[Number(d.dataset.i)]._aberto = d.open; }));
+    cont.querySelectorAll('.size-spec').forEach(inp => inp.addEventListener('input', () => {
+      const t = pendingSizes[Number(inp.dataset.i)];
+      if(!t.specs) t.specs = {};
+      t.specs[inp.dataset.k] = inp.value;
+    }));
+    cont.querySelectorAll('.size-medida').forEach(inp => {
+      inp.addEventListener('input', () => { pendingSizes[Number(inp.dataset.i)].medida = inp.value; });
+      inp.addEventListener('change', renderStrapsList); // atualiza os rótulos "Ref. 41mm" das pulseiras
+    });
     cont.querySelectorAll('.size-ref').forEach(inp => inp.addEventListener('input', () => { pendingSizes[Number(inp.dataset.i)].ref = inp.value; }));
     cont.querySelectorAll('.size-price').forEach(inp => inp.addEventListener('input', () => { pendingSizes[Number(inp.dataset.i)].price = inp.value; }));
     cont.querySelectorAll('.size-remove').forEach(btn => btn.addEventListener('click', () => {
-      pendingSizes.splice(Number(btn.dataset.i), 1);
+      const i = Number(btn.dataset.i);
+      pendingSizes.splice(i, 1);
+      // Tira a referência desse tamanho de cada pulseira (posição i+1, já que 0 é o principal)
+      pendingStraps.forEach(p => { if(p.refs) p.refs.splice(i + 1, 1); });
       renderSizesList();
+      renderStrapsList();
     }));
   }
   document.getElementById('addSizeBtn').addEventListener('click', () => {
-    pendingSizes.push({ medida:'', ref:'', price:'' });
+    pendingSizes.push({ medida:'', ref:'', price:'', specs:{}, _aberto:true });
     renderSizesList();
+    renderStrapsList();
   });
 
   // ---------- Pulseiras ----------
+  // Tamanhos atualmente no formulário (principal + outros), na mesma ordem do site.
+  function tamanhosDoFormulario(){
+    const principal = document.getElementById('fMedida').value.trim();
+    return [principal, ...pendingSizes.map(s => (s.medida || '').trim())];
+  }
+  function camposRefPulseira(s, i){
+    const esc = v => String(v == null ? '' : v).replace(/"/g, '&quot;');
+    const tams = tamanhosDoFormulario();
+    const refs = s.refs || [];
+    if(tams.length === 1){
+      return `
+        <div class="field strap-ref-row">
+          <label>Referência desta pulseira (opcional)</label>
+          <input type="text" class="strap-ref" data-i="${i}" data-k="0" value="${esc(refs[0])}" placeholder="vazio = mesma referência de cima">
+        </div>`;
+    }
+    return `
+      <div class="field strap-ref-row">
+        <label>Referência desta pulseira em cada tamanho (opcional)</label>
+        <div class="strap-ref-grid">
+          ${tams.map((t,k) => `
+            <div>
+              <span class="strap-ref-size">${t ? normalizarMedida(t) : 'Tamanho ' + (k+1)}</span>
+              <input type="text" class="strap-ref" data-i="${i}" data-k="${k}" value="${esc(refs[k])}" placeholder="vazio = ref. do tamanho">
+            </div>`).join('')}
+        </div>
+      </div>`;
+  }
+  document.getElementById('fMedida').addEventListener('change', () => renderStrapsList());
+
   function renderStrapsList(){
     const cont = document.getElementById('strapsList');
     // O campo "nome da versão original" só faz sentido quando há pulseiras.
@@ -1578,6 +1668,7 @@
           </div>
           <button type="button" class="strap-remove" data-i="${i}" title="Remover esta pulseira">Remover</button>
         </div>
+        ${camposRefPulseira(s, i)}
         <label class="photo-input-btn">📷 Fotos desta pulseira
           <input type="file" class="strap-photos-input" data-i="${i}" accept="image/*" multiple hidden>
         </label>
@@ -1598,6 +1689,13 @@
     });
     cont.querySelectorAll('.strap-price').forEach(inp => {
       inp.addEventListener('input', () => { pendingStraps[Number(inp.dataset.i)].price = inp.value; });
+    });
+    cont.querySelectorAll('.strap-ref').forEach(inp => {
+      inp.addEventListener('input', () => {
+        const p = pendingStraps[Number(inp.dataset.i)];
+        if(!p.refs) p.refs = [];
+        p.refs[Number(inp.dataset.k)] = inp.value;
+      });
     });
     cont.querySelectorAll('.strap-remove').forEach(btn => {
       btn.addEventListener('click', () => {
@@ -1625,7 +1723,7 @@
   }
 
   document.getElementById('addStrapBtn').addEventListener('click', () => {
-    pendingStraps.push({ nome:'', price:'', photos:[] });
+    pendingStraps.push({ nome:'', price:'', refs:[], photos:[] });
     renderStrapsList();
   });
 
@@ -1736,9 +1834,13 @@
 
       // Pulseiras: fotos novas entram no MESMO commit das outras, e só entram
       // no catálogo as pulseiras que tiverem pelo menos um nome preenchido.
+      // Índices dos tamanhos que sobrevivem ao salvar: 0 (principal) + os com medida preenchida.
+      const idxTamanhosMantidos = [0, ...pendingSizes.map((s, k) => (s.medida || '').trim() ? k + 1 : -1).filter(k => k > 0)];
       const finalStraps = pendingStraps
         .filter(s => (s.nome || '').trim())
-        .map((s, si) => ({
+        .map((s, si) => {
+          const refs = idxTamanhosMantidos.map(k => ((s.refs || [])[k] || '').trim());
+          const out = {
           nome: s.nome.trim(),
           price: Number(s.price) || 0,
           images: s.photos.map((p, pj) => {
@@ -1747,7 +1849,11 @@
             filesToCommit.push({ path, contentBase64: p.src.split(',')[1] });
             return path;
           })
-        }));
+          };
+          // Só grava "refs" se alguma foi preenchida — pulseiras antigas ficam iguais.
+          if(refs.some(Boolean)) out.refs = refs;
+          return out;
+        });
 
       const watch = {
         id,
@@ -1778,7 +1884,14 @@
       // Outros tamanhos: só entram os que têm a medida preenchida.
       const finalSizes = pendingSizes
         .filter(s => (s.medida || '').trim())
-        .map(s => ({ medida: s.medida.trim(), ref: (s.ref || '').trim(), price: Number(s.price) || 0 }));
+        .map(s => {
+          const out = { medida: s.medida.trim(), ref: (s.ref || '').trim(), price: Number(s.price) || 0 };
+          // Só grava as especificações que foram preenchidas (o resto herda do principal).
+          const specs = {};
+          Object.entries(s.specs || {}).forEach(([k, v]) => { if((v || '').trim()) specs[k] = v.trim(); });
+          if(Object.keys(specs).length) out.specs = specs;
+          return out;
+        });
       if(finalSizes.length) watch.sizes = finalSizes;
       if(editingId){
         const idx = CATALOG.findIndex(x => x.id === id);

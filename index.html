@@ -310,12 +310,16 @@
   .detail-price-main{ display:flex; align-items:baseline; gap:9px; }
   .detail-price-block .price{ font-size:29px; letter-spacing:-.01em; }
   .detail-price-unit{ color:var(--text-dim); font-size:13px; }
-  .spec-list{ margin:0 0 20px; }
+  .spec-list{ margin:0; }
+  .detail-body .detail-actions{ margin:4px 0 16px; }
+  .detail-specs{ border-top:1px solid var(--border); padding-top:16px; margin-top:4px; }
+  .detail-specs-title{ font-size:13px; font-weight:600; color:var(--text-dim); margin:0 0 4px; letter-spacing:0; }
   .spec-list > div{
     display:flex; justify-content:space-between; align-items:baseline; gap:16px;
     padding:8px 0; border-bottom:1px dashed var(--border);
   }
   .spec-list > div:last-child{ border-bottom:none; }
+  .spec-list > div[hidden]{ display:none; }
   .spec-list dt{ font-size:12.5px; color:var(--text-dim); }
   .spec-list dd{
     margin:0; font-size:13px; font-weight:600; text-align:right;
@@ -670,7 +674,20 @@
   }
   function todasRefs(w){
     const s = sizesOf(w);
-    return (s ? s.map(x => x.ref) : [w.ref]).filter(Boolean);
+    const base = s ? s.map(x => x.ref) : [w.ref];
+    const dasPulseiras = (w.straps || []).flatMap(p => p.refs || []);
+    return [...base, ...dasPulseiras].filter(Boolean);
+  }
+  // Referência da combinação escolhida (tamanho × pulseira). Cada pulseira
+  // extra pode ter uma referência por tamanho (strap.refs[i], alinhado com
+  // sizesOf). Se a pulseira não tiver referência pra aquele tamanho, vale a
+  // referência do tamanho (a da versão original).
+  function refDe(w, sizeIdx, strapIdx){
+    const tams = sizesOf(w);
+    const i = sizeIdx || 0;
+    const p = (strapIdx > 0 && w.straps) ? w.straps[strapIdx - 1] : null;
+    if(p && p.refs && p.refs[i]) return p.refs[i];
+    return tams ? (tams[i].ref || '') : (w.ref || '');
   }
   // Monta a lista de opções de pulseira SEMPRE incluindo a versão original do
   // relógio (com o preço e as fotos principais) como primeira opção — senão
@@ -1064,6 +1081,8 @@
   }
 
   // ---------- Detail modal ----------
+  // Especificações que o admin pode sobrescrever por tamanho (w.sizes[i].specs).
+  const SPECS_VARIAVEIS = [['movimento','Movimento'],['material','Material da caixa'],['vidro','Vidro'],['espessura','Espessura'],['lugToLug','Lug-to-lug'],['resistencia','Resistência à água'],['reservaMarcha','Reserva de marcha'],['acompanha','Acompanha']];
   function openDetail(id, strapInicial, fromUrl){
     const w = CATALOG.find(x => x.id === id);
     if(!w) return;
@@ -1089,9 +1108,21 @@
     const tamanhos = sizesOf(w);
     let currentSize = 0;
     function tamanhoAtual(){ return tamanhos ? tamanhos[currentSize] : null; }
+    // Especificação do tamanho escolhido; se ele não tiver valor próprio, vale a do principal.
+    function specDoTamanho(k){
+      const extra = currentSize > 0 && w.sizes ? w.sizes[currentSize - 1] : null;
+      return (extra && extra.specs && extra.specs[k]) || w[k] || '';
+    }
+    function atualizarSpecs(){
+      document.querySelectorAll('.spec-list [data-spec]').forEach(row => {
+        const v = specDoTamanho(row.dataset.spec);
+        row.querySelector('dd').textContent = v;
+        row.hidden = !v;
+      });
+    }
     function refMensagem(){
       const t = tamanhoAtual();
-      const ref = t ? t.ref : w.ref;
+      const ref = refDe(w, currentSize, currentStrap);
       const partes = [];
       if(t && t.medida) partes.push(normalizarMedida(t.medida));
       if(ref) partes.push('ref. ' + ref);
@@ -1133,26 +1164,6 @@
           <p class="installment-result" id="installmentResult"></p>
         </div>
 
-        <dl class="spec-list">
-          ${(w.ref || tamanhos) ? `<div><dt>Referência</dt><dd id="specRef">${w.ref || '—'}</dd></div>` : ''}
-          ${(w.medida || tamanhos) ? `<div><dt>Tamanho</dt><dd id="specMedida">${normalizarMedida(w.medida) || '—'}</dd></div>` : ''}
-          ${w.movimento ? `<div><dt>Movimento</dt><dd>${w.movimento}</dd></div>` : ''}
-          ${w.material ? `<div><dt>Material da caixa</dt><dd>${w.material}</dd></div>` : ''}
-          ${w.vidro ? `<div><dt>Vidro</dt><dd>${w.vidro}</dd></div>` : ''}
-          ${w.espessura ? `<div><dt>Espessura</dt><dd>${w.espessura}</dd></div>` : ''}
-          ${w.lugToLug ? `<div><dt>Lug-to-lug</dt><dd>${w.lugToLug}</dd></div>` : ''}
-          ${w.resistencia ? `<div><dt>Resistência à água</dt><dd>${w.resistencia}</dd></div>` : ''}
-          ${w.reservaMarcha ? `<div><dt>Reserva de marcha</dt><dd>${w.reservaMarcha}</dd></div>` : ''}
-          ${w.acompanha ? `<div><dt>Acompanha</dt><dd>${w.acompanha}</dd></div>` : ''}
-          <div><dt>Condição</dt><dd>Novo, completo</dd></div>
-        </dl>
-        ${(w.status === 'Sob encomenda' && CONFIG.prazoEntregaDias) ? `
-          <p class="delivery-note">
-            Prazo estimado de entrega: até ${CONFIG.prazoEntregaDias} dias corridos.
-            É uma estimativa, não um compromisso fechado — pode variar conforme disponibilidade e logística.
-          </p>
-        ` : ''}
-
         ${tamanhos ? `
         <div class="field">
           <label>Tamanho</label>
@@ -1178,6 +1189,29 @@
             <span class="btn-contact-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.46 0-9.9 4.44-9.9 9.9 0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.9-4.44 9.9-9.9 0-2.64-1.03-5.12-2.9-6.99A9.82 9.82 0 0 0 12.04 2Zm5.8 14.1c-.24.68-1.4 1.3-1.93 1.38-.5.08-1.1.11-1.78-.11-.41-.13-.94-.3-1.62-.6-2.85-1.23-4.71-4.1-4.85-4.29-.14-.19-1.16-1.55-1.16-2.96 0-1.4.74-2.09 1-2.38.26-.28.57-.35.76-.35h.55c.18 0 .42-.07.65.5.24.58.81 2 .88 2.14.07.14.12.31.02.5-.09.19-.14.3-.28.47-.14.16-.29.36-.42.49-.14.14-.29.29-.12.57.16.28.72 1.19 1.55 1.93 1.06.94 1.96 1.24 2.24 1.38.28.14.44.12.61-.07.16-.19.7-.82.89-1.1.19-.28.37-.23.63-.14.26.09 1.65.78 1.94.93.28.14.47.21.54.33.07.12.07.68-.17 1.36Z"/></svg></span>
             <span class="btn-contact-label">Falar com vendedor sobre este relógio</span>
           </a>
+        </div>
+        ${(w.status === 'Sob encomenda' && CONFIG.prazoEntregaDias) ? `
+          <p class="delivery-note">
+            Prazo estimado de entrega: até ${CONFIG.prazoEntregaDias} dias corridos.
+            É uma estimativa, não um compromisso fechado — pode variar conforme disponibilidade e logística.
+          </p>
+        ` : ''}
+
+        <div class="detail-specs">
+          <h3 class="detail-specs-title">Especificações</h3>
+          <dl class="spec-list">
+            ${(refDe(w, currentSize, currentStrap) || tamanhos || straps) ? `<div><dt>Referência</dt><dd id="specRef">${refDe(w, currentSize, currentStrap) || '—'}</dd></div>` : ''}
+            ${(w.medida || tamanhos) ? `<div><dt>Tamanho</dt><dd id="specMedida">${normalizarMedida(w.medida) || '—'}</dd></div>` : ''}
+            ${SPECS_VARIAVEIS.map(([k, rotulo]) => {
+              // A linha aparece se o principal OU algum tamanho tiver esse dado;
+              // ao trocar de tamanho, ela some se ficar vazia naquele tamanho.
+              const algum = w[k] || (w.sizes || []).some(t => t.specs && t.specs[k]);
+              if(!algum) return '';
+              const v = specDoTamanho(k);
+              return `<div data-spec="${k}"${v ? '' : ' hidden'}><dt>${rotulo}</dt><dd>${v}</dd></div>`;
+            }).join('')}
+            <div><dt>Condição</dt><dd>Novo, completo</dd></div>
+          </dl>
         </div>
       </div>
       </div>
@@ -1246,6 +1280,8 @@
           currentStrap = Number(btn.dataset.i);
           currentPhoto = 0;
           document.querySelectorAll('#strapOptions .strap-option').forEach(b => b.classList.toggle('active', b === btn));
+          const refEl = document.getElementById('specRef');
+          if(refEl) refEl.textContent = refDe(w, currentSize, currentStrap) || '—';
           document.getElementById('detailPrice').textContent = formatBRL(precoAtual());
           renderGallery();
           updateInstallment();
@@ -1260,9 +1296,10 @@
           document.querySelectorAll('#sizeOptions .strap-option').forEach(b => b.classList.toggle('active', b === btn));
           const t = tamanhoAtual();
           const refEl = document.getElementById('specRef');
-          if(refEl) refEl.textContent = t.ref || '—';
+          if(refEl) refEl.textContent = refDe(w, currentSize, currentStrap) || '—';
           const medEl = document.getElementById('specMedida');
           if(medEl) medEl.textContent = normalizarMedida(t.medida) || '—';
+          atualizarSpecs();
           document.getElementById('detailPrice').textContent = formatBRL(precoAtual());
           updateInstallment();
         });
