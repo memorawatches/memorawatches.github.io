@@ -678,6 +678,30 @@
     const dasPulseiras = (w.straps || []).flatMap(p => p.refs || []);
     return [...base, ...dasPulseiras].filter(Boolean);
   }
+  // Busca por referência tolerante a formatação: "L3.830.4.92.6", "l3 830 4 92 6"
+  // e "L38304926" batem entre si (ignora pontos, espaços, traços e maiúsculas).
+  function normRef(s){ return String(s || '').toLowerCase().replace(/[^a-z0-9]/g, ''); }
+  function refBate(ref, q){
+    if(!ref) return false;
+    const qn = normRef(q);
+    return String(ref).toLowerCase().includes(q) || (qn.length >= 3 && normRef(ref).includes(qn));
+  }
+  // Todas as referências do relógio com a combinação a que pertencem
+  // (tamanho × pulseira), pra saber qual versão a busca encontrou.
+  function combinacoesRef(w){
+    const tams = sizesOf(w);
+    const nT = tams ? tams.length : 1;
+    const out = [];
+    for(let i = 0; i < nT; i++) out.push({ ref: tams ? tams[i].ref : w.ref, sizeIdx: i, strapIdx: 0 });
+    (w.straps || []).forEach((p, k) => (p.refs || []).forEach((r, i) => { if(r) out.push({ ref: r, sizeIdx: i, strapIdx: k + 1 }); }));
+    return out.filter(c => c.ref);
+  }
+  // Se a busca bateu numa referência que NÃO é a principal, devolve essa combinação.
+  function versaoBuscada(w){
+    const q = (state.search || '').trim().toLowerCase();
+    if(!q || refBate(w.ref, q) || nomeLimpo(w.name).toLowerCase().includes(q)) return null;
+    return combinacoesRef(w).find(c => refBate(c.ref, q)) || null;
+  }
   // Referência da combinação escolhida (tamanho × pulseira). Cada pulseira
   // extra pode ter uma referência por tamanho (strap.refs[i], alinhado com
   // sizesOf). Se a pulseira não tiver referência pra aquele tamanho, vale a
@@ -978,7 +1002,11 @@
     const brand = brandOf(w.name);
     const rest = semMarca(w.name);
     const imgs = imagesOf(w);
-    const specs = [w.ref, todasMedidas(w).join(' / ')].filter(Boolean).join(' · ');
+    const achada = versaoBuscada(w);
+    const tamsCard = sizesOf(w);
+    const specs = achada
+      ? [achada.ref, tamsCard ? normalizarMedida(tamsCard[achada.sizeIdx].medida) : normalizarMedida(w.medida), achada.strapIdx ? 'pulseira ' + w.straps[achada.strapIdx - 1].nome : ''].filter(Boolean).join(' · ')
+      : [w.ref, todasMedidas(w).join(' / ')].filter(Boolean).join(' · ');
     const status = w.status || 'Sob encomenda';
     const val12 = installmentAt(w.price, 12);
     return `
@@ -1019,7 +1047,7 @@
     }
     if(state.search.trim()){
       const q = state.search.trim().toLowerCase();
-      list = list.filter(w => nomeLimpo(w.name).toLowerCase().includes(q) || todasRefs(w).some(r => r.toLowerCase().includes(q)));
+      list = list.filter(w => nomeLimpo(w.name).toLowerCase().includes(q) || todasRefs(w).some(r => refBate(r, q)));
     }
     if(state.sort === 'popular') list.sort((a,b) => (b.orderCount||0) - (a.orderCount||0));
     else if(state.sort === 'price_asc') list.sort((a,b) => a.price - b.price);
@@ -1049,7 +1077,11 @@
       : '<div class="empty-state">Nenhum relógio encontrado com esses filtros.</div>';
 
     grid.querySelectorAll('.watch-card').forEach(card => {
-      card.addEventListener('click', () => openDetail(Number(card.dataset.id)));
+      card.addEventListener('click', () => {
+        const w = CATALOG.find(x => x.id === Number(card.dataset.id));
+        const achada = w ? versaoBuscada(w) : null;
+        openDetail(Number(card.dataset.id), achada ? achada.strapIdx : null, false, achada ? achada.sizeIdx : 0);
+      });
     });
     grid.querySelectorAll('.gallery-arrow').forEach(btn => {
       btn.addEventListener('click', (e) => {
@@ -1083,7 +1115,7 @@
   // ---------- Detail modal ----------
   // Especificações que o admin pode sobrescrever por tamanho (w.sizes[i].specs).
   const SPECS_VARIAVEIS = [['movimento','Movimento'],['material','Material da caixa'],['vidro','Vidro'],['espessura','Espessura'],['lugToLug','Lug-to-lug'],['resistencia','Resistência à água'],['reservaMarcha','Reserva de marcha'],['acompanha','Acompanha']];
-  function openDetail(id, strapInicial, fromUrl){
+  function openDetail(id, strapInicial, fromUrl, sizeInicial){
     const w = CATALOG.find(x => x.id === id);
     if(!w) return;
 
@@ -1106,7 +1138,7 @@
     // Se o cliente clicou direto numa miniatura de pulseira no card, já abre nela.
     let currentStrap = (straps && strapInicial && strapInicial < straps.length) ? strapInicial : 0;
     const tamanhos = sizesOf(w);
-    let currentSize = 0;
+    let currentSize = (tamanhos && sizeInicial && sizeInicial < tamanhos.length) ? sizeInicial : 0;
     function tamanhoAtual(){ return tamanhos ? tamanhos[currentSize] : null; }
     // Especificação do tamanho escolhido; se ele não tiver valor próprio, vale a do principal.
     function specDoTamanho(k){
@@ -1168,7 +1200,7 @@
         <div class="field">
           <label>Tamanho</label>
           <div class="strap-options" id="sizeOptions">
-            ${tamanhos.map((t,i) => `<button type="button" class="strap-option${i===0?' active':''}" data-i="${i}">${normalizarMedida(t.medida) || ('Opção ' + (i+1))}</button>`).join('')}
+            ${tamanhos.map((t,i) => `<button type="button" class="strap-option${i===currentSize?' active':''}" data-i="${i}">${normalizarMedida(t.medida) || ('Opção ' + (i+1))}</button>`).join('')}
           </div>
         </div>` : ''}
         ${straps ? `
@@ -1201,7 +1233,7 @@
           <h3 class="detail-specs-title">Especificações</h3>
           <dl class="spec-list">
             ${(refDe(w, currentSize, currentStrap) || tamanhos || straps) ? `<div><dt>Referência</dt><dd id="specRef">${refDe(w, currentSize, currentStrap) || '—'}</dd></div>` : ''}
-            ${(w.medida || tamanhos) ? `<div><dt>Tamanho</dt><dd id="specMedida">${normalizarMedida(w.medida) || '—'}</dd></div>` : ''}
+            ${(w.medida || tamanhos) ? `<div><dt>Tamanho</dt><dd id="specMedida">${normalizarMedida(tamanhos ? tamanhos[currentSize].medida : w.medida) || '—'}</dd></div>` : ''}
             ${SPECS_VARIAVEIS.map(([k, rotulo]) => {
               // A linha aparece se o principal OU algum tamanho tiver esse dado;
               // ao trocar de tamanho, ela some se ficar vazia naquele tamanho.

@@ -712,6 +712,30 @@
     const dasPulseiras = (w.straps || []).flatMap(p => p.refs || []);
     return [...base, ...dasPulseiras].filter(Boolean);
   }
+  // Busca por referência tolerante a formatação: "L3.830.4.92.6", "l3 830 4 92 6"
+  // e "L38304926" batem entre si (ignora pontos, espaços, traços e maiúsculas).
+  function normRef(s){ return String(s || '').toLowerCase().replace(/[^a-z0-9]/g, ''); }
+  function refBate(ref, q){
+    if(!ref) return false;
+    const qn = normRef(q);
+    return String(ref).toLowerCase().includes(q) || (qn.length >= 3 && normRef(ref).includes(qn));
+  }
+  // Todas as referências do relógio com a combinação a que pertencem
+  // (tamanho × pulseira), pra saber qual versão a busca encontrou.
+  function combinacoesRef(w){
+    const tams = sizesOf(w);
+    const nT = tams ? tams.length : 1;
+    const out = [];
+    for(let i = 0; i < nT; i++) out.push({ ref: tams ? tams[i].ref : w.ref, sizeIdx: i, strapIdx: 0 });
+    (w.straps || []).forEach((p, k) => (p.refs || []).forEach((r, i) => { if(r) out.push({ ref: r, sizeIdx: i, strapIdx: k + 1 }); }));
+    return out.filter(c => c.ref);
+  }
+  // Se a busca bateu numa referência que NÃO é a principal, devolve essa combinação.
+  function versaoBuscada(w){
+    const q = (state.search || '').trim().toLowerCase();
+    if(!q || refBate(w.ref, q) || nomeLimpo(w.name).toLowerCase().includes(q)) return null;
+    return combinacoesRef(w).find(c => refBate(c.ref, q)) || null;
+  }
   // Referência da combinação tamanho × pulseira. strap.refs[i] acompanha a
   // ordem de sizesOf (0 = tamanho principal). Sem referência própria, vale a
   // do tamanho.
@@ -1170,7 +1194,11 @@
     const brand = brandOf(w.name);
     const rest = semMarca(w.name);
     const imgs = imagesOf(w);
-    const specs = [w.ref, todasMedidas(w).join(' / ')].filter(Boolean).join(' · ');
+    const achada = versaoBuscada(w);
+    const tamsCard = sizesOf(w);
+    const specs = achada
+      ? [achada.ref, tamsCard ? normalizarMedida(tamsCard[achada.sizeIdx].medida) : normalizarMedida(w.medida), achada.strapIdx ? 'pulseira ' + w.straps[achada.strapIdx - 1].nome : ''].filter(Boolean).join(' · ')
+      : [w.ref, todasMedidas(w).join(' / ')].filter(Boolean).join(' · ');
     const status = w.status || 'Sob encomenda';
     const val12 = installmentAt(w.price, 12);
     return `
@@ -1223,7 +1251,7 @@
     }
     if(state.search.trim()){
       const q = state.search.trim().toLowerCase();
-      list = list.filter(w => nomeLimpo(w.name).toLowerCase().includes(q) || todasRefs(w).some(r => r.toLowerCase().includes(q)));
+      list = list.filter(w => nomeLimpo(w.name).toLowerCase().includes(q) || todasRefs(w).some(r => refBate(r, q)));
     }
     if(state.sort === 'popular') list.sort((a,b) => (b.orderCount||0) - (a.orderCount||0));
     else if(state.sort === 'price_asc') list.sort((a,b) => a.price - b.price);
@@ -1810,6 +1838,16 @@
         document.getElementById('fQty').focus();
         return;
       }
+    }
+
+    // Tamanho sem medida era descartado em silêncio ao salvar — junto com a
+    // referência dele, que depois não aparecia na busca. Agora avisa.
+    const semMedida = pendingSizes.findIndex(t => !(t.medida || '').trim() && ((t.ref || '').trim() || t.price));
+    if(semMedida >= 0){
+      toast('Preencha o campo "Tamanho" do tamanho extra ' + (semMedida + 1) + ' (ou remova ele).');
+      const campo = document.querySelector(`.size-medida[data-i="${semMedida}"]`);
+      if(campo) campo.focus();
+      return;
     }
 
     const saveBtn = document.getElementById('watchSaveBtn');
