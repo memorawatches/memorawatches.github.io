@@ -6280,5 +6280,30 @@
         }
       }
     ]
+  },
+  {
+    "id": 389,
+    "name": "Longines Spirit Zulu Time 1925",
+    "ref": "L3.803.5.53.6",
+    "medida": "39mm",
+    "movimento": "Automático (GMT)",
+    "resistencia": "100m",
+    "material": "Aço inoxidável",
+    "vidro": "Safira",
+    "espessura": "13.5mm",
+    "lugToLug": "46.8mm",
+    "reservaMarcha": "72 horas",
+    "acompanha": "",
+    "status": "Sob encomenda",
+    "qty": null,
+    "price": 26900,
+    "orderCount": 0,
+    "postedAt": "2026-09-28",
+    "images": [
+      "images/389-1790559711793-0.jpg",
+      "images/389-1790559711793-1.jpg",
+      "images/389-1790559711793-2.jpg",
+      "images/389-1790559711793-3.jpg"
+    ]
   }
 ]
