@@ -6161,6 +6161,17 @@
     "postedAt": "2026-09-28",
     "images": [
       "images/385-1790559131115-0.jpg"
+    ],
+    "sizes": [
+      {
+        "medida": "42mm",
+        "ref": "L3.812.4.50.6",
+        "price": 0,
+        "specs": {
+          "espessura": "14mm",
+          "lugToLug": "49.4mm"
+        }
+      }
     ]
   }
 ]
