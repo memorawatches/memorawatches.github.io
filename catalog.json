@@ -6173,5 +6173,40 @@
         }
       }
     ]
+  },
+  {
+    "id": 386,
+    "name": "Longines Spirit Zulu Time Preto",
+    "ref": "L3.802.4.53.6",
+    "medida": "39mm",
+    "movimento": "Automático (GMT)",
+    "resistencia": "100m",
+    "material": "Aço inoxidável",
+    "vidro": "Safira",
+    "espessura": "13.5mm",
+    "lugToLug": "46.8mm",
+    "reservaMarcha": "72 horas",
+    "acompanha": "",
+    "status": "Sob encomenda",
+    "qty": null,
+    "price": 21900,
+    "orderCount": 0,
+    "postedAt": "2026-09-28",
+    "images": [
+      "images/386-1790559270769-0.jpg",
+      "images/386-1790559270769-1.jpg",
+      "images/386-1790559270769-2.jpg"
+    ],
+    "sizes": [
+      {
+        "medida": "42mm",
+        "ref": "L3.812.4.53.6",
+        "price": 0,
+        "specs": {
+          "espessura": "14mm",
+          "lugToLug": "49.4mm"
+        }
+      }
+    ]
   }
 ]
