@@ -6245,5 +6245,40 @@
         }
       }
     ]
+  },
+  {
+    "id": 388,
+    "name": "Longines Spirit Zulu Time Azul",
+    "ref": "L3.802.4.93.6",
+    "medida": "39mm",
+    "movimento": "Automático (GMT)",
+    "resistencia": "100m",
+    "material": "Aço inoxidável",
+    "vidro": "Safira",
+    "espessura": "13.5mm",
+    "lugToLug": "46.8mm",
+    "reservaMarcha": "72 horas",
+    "acompanha": "",
+    "status": "Sob encomenda",
+    "qty": null,
+    "price": 21900,
+    "orderCount": 0,
+    "postedAt": "2026-09-28",
+    "images": [
+      "images/388-1790559565101-0.jpg",
+      "images/388-1790559565101-1.jpg",
+      "images/388-1790559565101-2.jpg"
+    ],
+    "sizes": [
+      {
+        "medida": "42mm",
+        "ref": "L3.812.4.93.6",
+        "price": 0,
+        "specs": {
+          "espessura": "14mm",
+          "lugToLug": "49.4mm"
+        }
+      }
+    ]
   }
 ]
