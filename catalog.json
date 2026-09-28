@@ -3059,13 +3059,13 @@
     "id": 243,
     "name": "Baltic Aquascaphe Mk2 Blue",
     "ref": "",
-    "medida": "37mm OU 39.5mm",
+    "medida": "37mm",
     "movimento": "Automático",
     "resistencia": "200m",
     "material": "Aço inoxidável",
     "vidro": "Safira",
     "espessura": "12.9mm",
-    "lugToLug": "45mm OU 47mm",
+    "lugToLug": "45mm",
     "reservaMarcha": "42 horas",
     "acompanha": "",
     "status": "Sob encomenda",
@@ -3093,7 +3093,17 @@
         ]
       }
     ],
-    "strapBaseName": "Rubber Classic"
+    "strapBaseName": "Rubber Classic",
+    "sizes": [
+      {
+        "medida": "39.5mm",
+        "ref": "",
+        "price": 0,
+        "specs": {
+          "lugToLug": "47mm"
+        }
+      }
+    ]
   },
   {
     "id": 244,
