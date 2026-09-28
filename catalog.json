@@ -6082,5 +6082,28 @@
       "images/382-1790548560593-0.jpg",
       "images/382-1790548560593-1.jpg"
     ]
+  },
+  {
+    "id": 383,
+    "name": "Longines Spirit Verde",
+    "ref": "L3.810.4.03.6",
+    "medida": "40mm",
+    "movimento": "Automático",
+    "resistencia": "100m",
+    "material": "Aço inoxidável",
+    "vidro": "Safira",
+    "espessura": "12.2mm",
+    "lugToLug": "49.7mm",
+    "reservaMarcha": "72 horas",
+    "acompanha": "",
+    "status": "Sob encomenda",
+    "qty": null,
+    "price": 15990,
+    "orderCount": 0,
+    "postedAt": "2026-09-28",
+    "images": [
+      "images/383-1790557050725-0.jpg",
+      "images/383-1790557050725-1.jpg"
+    ]
   }
 ]
