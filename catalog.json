@@ -6899,5 +6899,28 @@
       "images/407-1791313800039-0.jpg",
       "images/407-1791313800039-1.jpg"
     ]
+  },
+  {
+    "id": 408,
+    "name": "MD_Watches Nuada Claret",
+    "ref": "",
+    "medida": "40mm",
+    "movimento": "Quartz",
+    "resistencia": "50m",
+    "material": "Aço inoxidável",
+    "vidro": "Safira",
+    "espessura": "11.8mm",
+    "lugToLug": "46mm",
+    "reservaMarcha": "",
+    "acompanha": "",
+    "status": "Sob encomenda",
+    "qty": null,
+    "price": 4690,
+    "orderCount": 0,
+    "postedAt": "2026-10-06",
+    "images": [
+      "images/408-1791313869441-0.jpg",
+      "images/408-1791313869441-1.jpg"
+    ]
   }
 ]
