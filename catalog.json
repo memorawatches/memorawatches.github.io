@@ -6738,5 +6738,28 @@
         }
       }
     ]
+  },
+  {
+    "id": 401,
+    "name": "MD_Watches Supernatural Camulus",
+    "ref": "",
+    "medida": "37mm",
+    "movimento": "Automático",
+    "resistencia": "50m",
+    "material": "Aço inoxidável",
+    "vidro": "Safira",
+    "espessura": "12mm",
+    "lugToLug": "43mm",
+    "reservaMarcha": "42 horas",
+    "acompanha": "",
+    "status": "Sob encomenda",
+    "qty": null,
+    "price": 4990,
+    "orderCount": 0,
+    "postedAt": "2026-10-06",
+    "images": [
+      "images/401-1791309954157-0.jpg",
+      "images/401-1791309954158-1.jpg"
+    ]
   }
 ]
