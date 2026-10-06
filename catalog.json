@@ -6761,5 +6761,28 @@
       "images/401-1791309954157-0.jpg",
       "images/401-1791309954158-1.jpg"
     ]
+  },
+  {
+    "id": 402,
+    "name": "MD_Watches Nuada Ice Fire",
+    "ref": "",
+    "medida": "40mm",
+    "movimento": "Quartz",
+    "resistencia": "50m",
+    "material": "Aço inoxidável",
+    "vidro": "Safira",
+    "espessura": "11.8mm",
+    "lugToLug": "46mm",
+    "reservaMarcha": "",
+    "acompanha": "",
+    "status": "Sob encomenda",
+    "qty": null,
+    "price": 4690,
+    "orderCount": 0,
+    "postedAt": "2026-10-06",
+    "images": [
+      "images/402-1791312867002-0.jpg",
+      "images/402-1791312867002-1.jpg"
+    ]
   }
 ]
