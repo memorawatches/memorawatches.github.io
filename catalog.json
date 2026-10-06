@@ -6945,5 +6945,29 @@
       "images/409-1791313929093-0.jpg",
       "images/409-1791313929093-1.jpg"
     ]
+  },
+  {
+    "id": 410,
+    "name": "Traska Venturer GMT Steel Blue",
+    "ref": "",
+    "medida": "38.5mm",
+    "movimento": "Automático (GMT)",
+    "resistencia": "150m",
+    "material": "Aço inoxidável",
+    "vidro": "Safira",
+    "espessura": "12mm",
+    "lugToLug": "46mm",
+    "reservaMarcha": "42 horas",
+    "acompanha": "",
+    "status": "Sob encomenda",
+    "qty": null,
+    "price": 7990,
+    "orderCount": 0,
+    "postedAt": "2026-10-06",
+    "images": [
+      "images/410-1791315530440-0.jpg",
+      "images/410-1791315530440-1.jpg",
+      "images/410-1791315530440-2.jpg"
+    ]
   }
 ]
