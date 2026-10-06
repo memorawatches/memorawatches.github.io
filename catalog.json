@@ -6807,5 +6807,28 @@
       "images/403-1791313406455-0.jpg",
       "images/403-1791313406455-1.jpg"
     ]
+  },
+  {
+    "id": 404,
+    "name": "MD_Watches Nuada Copar",
+    "ref": "",
+    "medida": "40mm",
+    "movimento": "Quartz",
+    "resistencia": "50m",
+    "material": "Aço inoxidável",
+    "vidro": "Safira",
+    "espessura": "11.8mm",
+    "lugToLug": "46mm",
+    "reservaMarcha": "",
+    "acompanha": "",
+    "status": "Sob encomenda",
+    "qty": null,
+    "price": 4690,
+    "orderCount": 0,
+    "postedAt": "2026-10-06",
+    "images": [
+      "images/404-1791313557098-0.jpg",
+      "images/404-1791313557098-1.jpg"
+    ]
   }
 ]
