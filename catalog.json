@@ -6543,5 +6543,38 @@
       }
     ],
     "strapBaseName": "Opções Padão"
+  },
+  {
+    "id": 396,
+    "name": "MD_Watches Supernatural Nodens",
+    "ref": "",
+    "medida": "40mm",
+    "movimento": "Automático",
+    "resistencia": "50m",
+    "material": "Aço inoxidável",
+    "vidro": "Safira",
+    "espessura": "12mm",
+    "lugToLug": "46mm",
+    "reservaMarcha": "42 horas",
+    "acompanha": "",
+    "status": "Sob encomenda",
+    "qty": null,
+    "price": 4990,
+    "orderCount": 0,
+    "postedAt": "2026-10-06",
+    "images": [
+      "images/396-1791308927365-0.jpg",
+      "images/396-1791308927365-1.jpg"
+    ],
+    "straps": [
+      {
+        "nome": "SS Bracelet",
+        "price": 5190,
+        "images": [
+          "images/396-strap0-1791308927365-0.jpg"
+        ]
+      }
+    ],
+    "strapBaseName": "Opções Padão"
   }
 ]
