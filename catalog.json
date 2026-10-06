@@ -6608,6 +6608,16 @@
         ]
       }
     ],
-    "strapBaseName": "Opções Padão"
+    "strapBaseName": "Opções Padão",
+    "sizes": [
+      {
+        "medida": "37mm",
+        "ref": "",
+        "price": 0,
+        "specs": {
+          "lugToLug": "43mm"
+        }
+      }
+    ]
   }
 ]
