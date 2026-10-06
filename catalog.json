@@ -7017,5 +7017,29 @@
       "images/412-1791316791541-1.jpg",
       "images/412-1791316791541-2.jpg"
     ]
+  },
+  {
+    "id": 413,
+    "name": "Traska Venturer GMT Artic White",
+    "ref": "",
+    "medida": "38.5mm",
+    "movimento": "Automático (GMT)",
+    "resistencia": "150m",
+    "material": "Aço inoxidável",
+    "vidro": "Safira",
+    "espessura": "12mm",
+    "lugToLug": "46mm",
+    "reservaMarcha": "42 horas",
+    "acompanha": "",
+    "status": "Sob encomenda",
+    "qty": null,
+    "price": 7990,
+    "orderCount": 0,
+    "postedAt": "2026-10-06",
+    "images": [
+      "images/413-1791316848131-0.jpg",
+      "images/413-1791316848131-1.jpg",
+      "images/413-1791316848131-2.jpg"
+    ]
   }
 ]
