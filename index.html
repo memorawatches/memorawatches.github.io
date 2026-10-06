@@ -594,21 +594,33 @@
     'Christopher Ward','Furlan Marri','Grand Seiko','Frederique Constant',
     'Maurice Lacroix','Raymond Weil','Dan Henry','Nivada Grenchen',
     'Studio Underd0g','Kurono Tokyo','Otsuka Lotec','Louis Erard',
-    'Baume Mercier','Carl Bucherer','Massena LAB','Serica Watches'
+    'Baume Mercier','Carl Bucherer','Massena LAB','Serica Watches',
+    'MD Watches'
   ];
   function nomeLimpo(name){ return String(name || '').replace(/_/g, ' ').trim(); }
-  function brandOf(name){
-    const limpo = nomeLimpo(name);
+  // Marcas conhecidas: a lista fixa + toda marca cadastrada no campo "Marca"
+  // do admin. A mais longa ganha ("MD Watches" antes de "MD").
+  function marcasConhecidas(){
+    const doCatalogo = (typeof CATALOG !== 'undefined' && CATALOG ? CATALOG : []).map(w => w.brand).filter(Boolean);
+    return Array.from(new Set([...MARCAS_COMPOSTAS, ...doCatalogo])).sort((a, b) => b.length - a.length);
+  }
+  // Aceita o relógio inteiro (usa w.brand, se tiver) ou só o nome.
+  function brandOf(x){
+    if(x && typeof x === 'object'){
+      if(x.brand) return x.brand;
+      x = x.name;
+    }
+    const limpo = nomeLimpo(x);
     const alvo = limpo.toLowerCase();
-    const composta = MARCAS_COMPOSTAS.find(m =>
+    const conhecida = marcasConhecidas().find(m =>
       alvo === m.toLowerCase() || alvo.startsWith(m.toLowerCase() + ' ')
     );
-    if(composta) return composta;
+    if(conhecida) return conhecida;
     return limpo.split(' ')[0] || 'Outros';
   }
-  function semMarca(name){
-    const limpo = nomeLimpo(name);
-    const marca = brandOf(name);
+  function semMarca(x){
+    const limpo = nomeLimpo(x && typeof x === 'object' ? x.name : x);
+    const marca = brandOf(x);
     return limpo.toLowerCase().startsWith(marca.toLowerCase())
       ? limpo.slice(marca.length).trim()
       : limpo;
@@ -877,7 +889,7 @@
   }
 
   function renderBrandMenu(){
-    const brands = Array.from(new Set(CATALOG.map(w => brandOf(w.name)))).sort();
+    const brands = Array.from(new Set(CATALOG.map(w => brandOf(w)))).sort();
     const options = [{value:'Todos', label:'Todas as marcas'}, ...brands.map(b => ({value:b, label:b}))];
     setupDropdown('brand', options, state.brand, v => { state.brand = v; state.page = 1; render(); });
   }
@@ -999,8 +1011,8 @@
 
   // ---------- Card + gallery ----------
   function cardHTML(w, popular){
-    const brand = brandOf(w.name);
-    const rest = semMarca(w.name);
+    const brand = brandOf(w);
+    const rest = semMarca(w);
     const imgs = imagesOf(w);
     const achada = versaoBuscada(w);
     const tamsCard = sizesOf(w);
@@ -1034,7 +1046,7 @@
 
   function filteredSorted(){
     let list = CATALOG.slice();
-    if(state.brand !== 'Todos') list = list.filter(w => brandOf(w.name) === state.brand);
+    if(state.brand !== 'Todos') list = list.filter(w => brandOf(w) === state.brand);
     if(state.size.length) list = list.filter(w => todasMedidas(w).some(m => state.size.includes(m)));
     const sts = statusSelecionados();
     if(sts.length) list = list.filter(w => sts.includes(w.status || 'Sob encomenda'));
@@ -1127,8 +1139,8 @@
     if(fromUrl) history.replaceState({ watchId:id }, '', url);
     else history.pushState({ watchId:id }, '', url);
 
-    const brand = brandOf(w.name);
-    const rest = semMarca(w.name);
+    const brand = brandOf(w);
+    const rest = semMarca(w);
     const specs = [w.ref, todasMedidas(w).join(' / ')].filter(Boolean).join(' · ');
     const rateKeys = Object.keys(CONFIG.rates).map(Number).sort((a,b)=>a-b);
 

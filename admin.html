@@ -237,6 +237,8 @@
   .strap-card .photo-input-btn{ padding:10px; font-size:12px; }
   .size-card .strap-card-head{ flex-wrap:wrap; margin-bottom:0; }
   .strap-ref-row{ margin-bottom:10px; }
+  .field-row-marca > .field:first-child{ flex:1; }
+  .field-row-marca > .field:last-child{ flex:1.6; }
   .size-specs{ margin-top:10px; border-top:1px dashed var(--border); padding-top:10px; }
   .size-specs summary{ cursor:pointer; font-size:12.5px; color:var(--gold-strong); font-weight:600; }
   .size-specs-hint{ font-size:11.5px; color:var(--text-dim); margin:8px 0 10px; }
@@ -358,7 +360,10 @@
     <button class="modal-close" id="watchModalClose">&times;</button>
     <h2 id="watchModalTitle" style="margin-bottom:18px;">Adicionar relógio</h2>
     <form id="watchForm">
-      <div class="field"><label>Nome (com a marca no início)</label><input id="fName" required placeholder="ex: Mido Ocean Star Azul"></div>
+      <div class="field-row field-row-marca">
+        <div class="field"><label>Marca</label><input id="fBrand" list="brandList" required placeholder="ex: MD Watches" autocomplete="off"><datalist id="brandList"></datalist></div>
+        <div class="field"><label>Modelo</label><input id="fName" required placeholder="ex: Supernatural Caturix"></div>
+      </div>
       <div class="field-row">
         <div class="field"><label>Referência</label><input id="fRef"></div>
         <div class="field"><label>Tamanho</label><input id="fMedida" placeholder="ex: 39mm"></div>
@@ -632,21 +637,33 @@
     'Christopher Ward','Furlan Marri','Grand Seiko','Frederique Constant',
     'Maurice Lacroix','Raymond Weil','Dan Henry','Nivada Grenchen',
     'Studio Underd0g','Kurono Tokyo','Otsuka Lotec','Louis Erard',
-    'Baume Mercier','Carl Bucherer','Massena LAB','Serica Watches'
+    'Baume Mercier','Carl Bucherer','Massena LAB','Serica Watches',
+    'MD Watches'
   ];
   function nomeLimpo(name){ return String(name || '').replace(/_/g, ' ').trim(); }
-  function brandOf(name){
-    const limpo = nomeLimpo(name);
+  // Marcas conhecidas: a lista fixa + toda marca cadastrada no campo "Marca"
+  // do admin. A mais longa ganha ("MD Watches" antes de "MD").
+  function marcasConhecidas(){
+    const doCatalogo = (typeof CATALOG !== 'undefined' && CATALOG ? CATALOG : []).map(w => w.brand).filter(Boolean);
+    return Array.from(new Set([...MARCAS_COMPOSTAS, ...doCatalogo])).sort((a, b) => b.length - a.length);
+  }
+  // Aceita o relógio inteiro (usa w.brand, se tiver) ou só o nome.
+  function brandOf(x){
+    if(x && typeof x === 'object'){
+      if(x.brand) return x.brand;
+      x = x.name;
+    }
+    const limpo = nomeLimpo(x);
     const alvo = limpo.toLowerCase();
-    const composta = MARCAS_COMPOSTAS.find(m =>
+    const conhecida = marcasConhecidas().find(m =>
       alvo === m.toLowerCase() || alvo.startsWith(m.toLowerCase() + ' ')
     );
-    if(composta) return composta;
+    if(conhecida) return conhecida;
     return limpo.split(' ')[0] || 'Outros';
   }
-  function semMarca(name){
-    const limpo = nomeLimpo(name);
-    const marca = brandOf(name);
+  function semMarca(x){
+    const limpo = nomeLimpo(x && typeof x === 'object' ? x.name : x);
+    const marca = brandOf(x);
     return limpo.toLowerCase().startsWith(marca.toLowerCase())
       ? limpo.slice(marca.length).trim()
       : limpo;
@@ -1057,7 +1074,7 @@
   }
 
   function renderFilterMenus(){
-    const brands = Array.from(new Set(CATALOG.map(w => brandOf(w.name)))).sort();
+    const brands = Array.from(new Set(CATALOG.map(w => brandOf(w)))).sort();
     setupDropdown('brand', [{value:'Todos', label:'Todas as marcas'}, ...brands.map(b => ({value:b, label:b}))], state.brand, v => { state.brand=v; state.page=1; render(); });
 
     // Status: disponíveis primeiro. Movimento: do mais comum pro mais raro.
@@ -1191,8 +1208,8 @@
 
   // ---------- Card rendering ----------
   function cardHTML(w, popular){
-    const brand = brandOf(w.name);
-    const rest = semMarca(w.name);
+    const brand = brandOf(w);
+    const rest = semMarca(w);
     const imgs = imagesOf(w);
     const achada = versaoBuscada(w);
     const tamsCard = sizesOf(w);
@@ -1238,7 +1255,7 @@
 
   function filteredSorted(){
     let list = CATALOG.slice();
-    if(state.brand !== 'Todos') list = list.filter(w => brandOf(w.name) === state.brand);
+    if(state.brand !== 'Todos') list = list.filter(w => brandOf(w) === state.brand);
     if(state.size.length) list = list.filter(w => todasMedidas(w).some(m => state.size.includes(m)));
     const sts = statusSelecionados();
     if(sts.length) list = list.filter(w => sts.includes(w.status || 'Sob encomenda'));
@@ -1549,7 +1566,10 @@
     editingId = id;
     const w = id ? CATALOG.find(x => x.id === id) : null;
     document.getElementById('watchModalTitle').textContent = w ? 'Editar relógio' : 'Adicionar relógio';
-    document.getElementById('fName').value = w ? w.name : '';
+    document.getElementById('brandList').innerHTML = Array.from(new Set(CATALOG.map(x => brandOf(x)))).sort((a,b) => a.localeCompare(b, 'pt-BR'))
+      .map(m => `<option value="${m.replace(/"/g,'&quot;')}">`).join('');
+    document.getElementById('fBrand').value = w ? brandOf(w) : '';
+    document.getElementById('fName').value = w ? semMarca(w) : '';
     document.getElementById('fRef').value = w ? (w.ref||'') : '';
     document.getElementById('fMedida').value = w ? (w.medida||'') : '';
     document.getElementById('fMovimento').value = w ? (w.movimento || '') : '';
@@ -1893,9 +1913,17 @@
           return out;
         });
 
+      // Marca: se já existe com outra grafia ("md watches"), usa a grafia já cadastrada.
+      let marca = document.getElementById('fBrand').value.trim().replace(/\s+/g, ' ');
+      const mesmaMarca = Array.from(new Set(CATALOG.map(x => brandOf(x)))).find(m => m.toLowerCase() === marca.toLowerCase());
+      if(mesmaMarca) marca = mesmaMarca;
+      let modelo = document.getElementById('fName').value.trim();
+      // Se colaram o nome completo no campo Modelo, não duplica a marca.
+      if(modelo.toLowerCase().startsWith(marca.toLowerCase() + ' ')) modelo = modelo.slice(marca.length).trim();
       const watch = {
         id,
-        name: document.getElementById('fName').value.trim(),
+        brand: marca,
+        name: (marca + ' ' + modelo).trim(),
         ref: document.getElementById('fRef').value.trim(),
         medida: document.getElementById('fMedida').value.trim(),
         movimento: document.getElementById('fMovimento').value.trim(),
