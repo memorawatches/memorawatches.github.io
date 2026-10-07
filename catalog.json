@@ -7008,5 +7008,39 @@
       "images/413-1791316848131-1.jpg",
       "images/413-1791316848131-2.jpg"
     ]
+  },
+  {
+    "id": 414,
+    "brand": "MD Watches",
+    "name": "MD Watches Supernatural Caturix",
+    "ref": "",
+    "medida": "40mm",
+    "movimento": "Automático",
+    "resistencia": "50m",
+    "material": "Aço inoxidável",
+    "vidro": "Safira",
+    "espessura": "12mm",
+    "lugToLug": "46mm",
+    "reservaMarcha": "42 horas",
+    "acompanha": "",
+    "status": "Sob encomenda",
+    "qty": null,
+    "price": 4990,
+    "orderCount": 0,
+    "postedAt": "2026-10-07",
+    "images": [
+      "images/414-1791331652386-0.jpg",
+      "images/414-1791331652386-1.jpg"
+    ],
+    "straps": [
+      {
+        "nome": "SS Bracelet",
+        "price": 5190,
+        "images": [
+          "images/414-strap0-1791331652386-0.jpg"
+        ]
+      }
+    ],
+    "strapBaseName": "Opções Padão"
   }
 ]
