@@ -6347,40 +6347,6 @@
     ]
   },
   {
-    "id": 390,
-    "brand": "MD Watches",
-    "name": "MD Watches Supernatural Caturix",
-    "ref": "",
-    "medida": "40mm",
-    "movimento": "Automático",
-    "resistencia": "50m",
-    "material": "Aço inoxidável",
-    "vidro": "Safira",
-    "espessura": "12mm",
-    "lugToLug": "46mm",
-    "reservaMarcha": "42 horas",
-    "acompanha": "",
-    "status": "Sob encomenda",
-    "qty": null,
-    "price": 4990,
-    "orderCount": 0,
-    "postedAt": "2026-10-06",
-    "images": [
-      "images/390-1791307577892-0.jpg",
-      "images/390-1791307577892-1.jpg"
-    ],
-    "straps": [
-      {
-        "nome": "SS Bracelet",
-        "price": 5190,
-        "images": [
-          "images/390-strap0-1791307577893-0.jpg"
-        ]
-      }
-    ],
-    "strapBaseName": "Opções padrão"
-  },
-  {
     "id": 391,
     "name": "MD_Watches Supernatural Taranis",
     "ref": "",
