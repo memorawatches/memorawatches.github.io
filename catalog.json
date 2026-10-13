@@ -7171,5 +7171,31 @@
       "images/419-1791916747363-1.jpg",
       "images/419-1791916747364-2.jpg"
     ]
+  },
+  {
+    "id": 420,
+    "brand": "Brew",
+    "name": "Brew Metric Retro Dial",
+    "ref": "",
+    "medida": "36mm",
+    "movimento": "Quartz",
+    "resistencia": "50m",
+    "material": "Aço inoxidável",
+    "vidro": "Safira",
+    "espessura": "10.7mm",
+    "lugToLug": "41.5mm",
+    "reservaMarcha": "",
+    "acompanha": "",
+    "status": "Sob encomenda",
+    "qty": null,
+    "price": 4290,
+    "orderCount": 0,
+    "postedAt": "2026-10-13",
+    "images": [
+      "images/420-1791916883157-0.jpg",
+      "images/420-1791916883157-1.jpg",
+      "images/420-1791916883157-2.jpg",
+      "images/420-1791916883157-3.jpg"
+    ]
   }
 ]
