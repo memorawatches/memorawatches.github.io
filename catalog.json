@@ -7068,5 +7068,31 @@
       "images/415-1791913319338-2.jpg",
       "images/415-1791913319338-3.jpg"
     ]
+  },
+  {
+    "id": 416,
+    "brand": "Brew",
+    "name": "Brew Super Metric Burnt Orange",
+    "ref": "",
+    "medida": "36mm",
+    "movimento": "Quartz",
+    "resistencia": "50m",
+    "material": "Aço inoxidável",
+    "vidro": "Safira",
+    "espessura": "10.7mm",
+    "lugToLug": "41.5mm",
+    "reservaMarcha": "",
+    "acompanha": "",
+    "status": "Sob encomenda",
+    "qty": null,
+    "price": 4290,
+    "orderCount": 0,
+    "postedAt": "2026-10-13",
+    "images": [
+      "images/416-1791914833103-0.jpg",
+      "images/416-1791914833103-1.jpg",
+      "images/416-1791914833103-2.jpg",
+      "images/416-1791914833103-3.jpg"
+    ]
   }
 ]
