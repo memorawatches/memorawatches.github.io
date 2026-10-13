@@ -7120,5 +7120,31 @@
       "images/417-1791915893023-2.jpg",
       "images/417-1791915893023-3.jpg"
     ]
+  },
+  {
+    "id": 418,
+    "brand": "Brew",
+    "name": "Brew Super Metric Royal Blue",
+    "ref": "",
+    "medida": "36mm",
+    "movimento": "Quartz",
+    "resistencia": "50m",
+    "material": "Aço inoxidável",
+    "vidro": "Safira",
+    "espessura": "10.7mm",
+    "lugToLug": "41.5mm",
+    "reservaMarcha": "",
+    "acompanha": "",
+    "status": "Sob encomenda",
+    "qty": null,
+    "price": 4290,
+    "orderCount": 0,
+    "postedAt": "2026-10-13",
+    "images": [
+      "images/418-1791916101404-0.jpg",
+      "images/418-1791916101404-1.jpg",
+      "images/418-1791916101404-2.jpg",
+      "images/418-1791916101404-3.jpg"
+    ]
   }
 ]
