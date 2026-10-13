@@ -7146,5 +7146,30 @@
       "images/418-1791916101404-2.jpg",
       "images/418-1791916101404-3.jpg"
     ]
+  },
+  {
+    "id": 419,
+    "brand": "Brew",
+    "name": "Brew Metric Bloom",
+    "ref": "",
+    "medida": "36mm",
+    "movimento": "Quartz",
+    "resistencia": "50m",
+    "material": "Aço inoxidável",
+    "vidro": "Safira",
+    "espessura": "10.7mm",
+    "lugToLug": "41.5mm",
+    "reservaMarcha": "",
+    "acompanha": "",
+    "status": "Sob encomenda",
+    "qty": null,
+    "price": 4290,
+    "orderCount": 0,
+    "postedAt": "2026-10-13",
+    "images": [
+      "images/419-1791916747363-0.jpg",
+      "images/419-1791916747363-1.jpg",
+      "images/419-1791916747364-2.jpg"
+    ]
   }
 ]
