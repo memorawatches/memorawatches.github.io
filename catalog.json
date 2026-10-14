@@ -7324,5 +7324,26 @@
       "images/425-1792000629185-1.jpg",
       "images/425-1792000629186-2.jpg"
     ]
+  },
+  {
+    "id": 426,
+    "brand": "Brew",
+    "name": "Brew Metric Titanium",
+    "ref": "",
+    "medida": "36mm",
+    "movimento": "Quartz",
+    "resistencia": "50m",
+    "material": "Aço inoxidável",
+    "vidro": "Safira",
+    "espessura": "10.7mm",
+    "lugToLug": "41.5mm",
+    "reservaMarcha": "",
+    "acompanha": "",
+    "status": "Sob encomenda",
+    "qty": null,
+    "price": 4490,
+    "orderCount": 0,
+    "postedAt": "2026-10-14",
+    "images": []
   }
 ]
