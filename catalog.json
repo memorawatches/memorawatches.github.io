@@ -7402,5 +7402,30 @@
       "images/428-1792008162477-2.jpg",
       "images/428-1792008162477-3.jpg"
     ]
+  },
+  {
+    "id": 429,
+    "brand": "Brew",
+    "name": "Brew Metric Black PVD",
+    "ref": "",
+    "medida": "36mm",
+    "movimento": "Quartz",
+    "resistencia": "50m",
+    "material": "Aço inoxidável",
+    "vidro": "Safira",
+    "espessura": "10.7mm",
+    "lugToLug": "41.5mm",
+    "reservaMarcha": "",
+    "acompanha": "",
+    "status": "Sob encomenda",
+    "qty": null,
+    "price": 4290,
+    "orderCount": 0,
+    "postedAt": "2026-10-14",
+    "images": [
+      "images/429-1792008439302-0.jpg",
+      "images/429-1792008439302-1.jpg",
+      "images/429-1792008439302-2.jpg"
+    ]
   }
 ]
