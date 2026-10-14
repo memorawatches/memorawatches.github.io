@@ -7350,5 +7350,31 @@
       "images/426-1792001016887-3.jpg",
       "images/426-1792001143795-3.jpg"
     ]
+  },
+  {
+    "id": 427,
+    "brand": "Brew",
+    "name": "Brew Metric Digital Blend",
+    "ref": "",
+    "medida": "36mm",
+    "movimento": "Quartz",
+    "resistencia": "50m",
+    "material": "Aço inoxidável",
+    "vidro": "Safira",
+    "espessura": "10.7mm",
+    "lugToLug": "41.5mm",
+    "reservaMarcha": "",
+    "acompanha": "",
+    "status": "Sob encomenda",
+    "qty": null,
+    "price": 4290,
+    "orderCount": 0,
+    "postedAt": "2026-10-14",
+    "images": [
+      "images/427-1792001467829-0.jpg",
+      "images/427-1792001467829-1.jpg",
+      "images/427-1792001467829-2.jpg",
+      "images/427-1792001467829-3.jpg"
+    ]
   }
 ]
