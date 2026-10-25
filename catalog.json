@@ -4670,21 +4670,6 @@
     "images": []
   },
   {
-    "id": 312,
-    "name": "Christopher Ward C63 Sealander",
-    "ref": "C63-39ADA4-S00B0-B0",
-    "medida": "36mm ou 39mm",
-    "status": "Sob encomenda",
-    "qty": null,
-    "price": 10990,
-    "orderCount": 1,
-    "postedAt": "2026-08-15",
-    "images": [
-      "images/312-1786760156886-0.jpg"
-    ],
-    "movimento": "Automático"
-  },
-  {
     "id": 313,
     "name": "Seiko Cronógrafo Sport Azul",
     "ref": "SSB477",
