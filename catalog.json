@@ -5286,21 +5286,6 @@
     "movimento": "Corda manual"
   },
   {
-    "id": 355,
-    "name": "Christopher Ward Trident Biscay Automatic",
-    "ref": "C60-42C3H1-S0KK0-B0",
-    "medida": "42mm",
-    "status": "Sob encomenda",
-    "qty": null,
-    "price": 16490,
-    "orderCount": 0,
-    "postedAt": "2026-09-10",
-    "images": [
-      "images/355-1789005831342-0.jpg"
-    ],
-    "movimento": "Automático"
-  },
-  {
     "id": 356,
     "name": "Baltic Aquascaphe GMT MKII Blue",
     "ref": "",
