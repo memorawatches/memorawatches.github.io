@@ -7850,5 +7850,30 @@
         }
       }
     ]
+  },
+  {
+    "id": 439,
+    "brand": "Christopher Ward",
+    "name": "Christopher Ward C63 True GMT",
+    "ref": "C63-40APG3-S00W0-B0",
+    "medida": "40.5mm",
+    "movimento": "Automático (GMT)",
+    "resistencia": "100m",
+    "material": "Aço inoxidável",
+    "vidro": "Safira",
+    "espessura": "14.15mm",
+    "lugToLug": "48mm",
+    "reservaMarcha": "120 horas",
+    "acompanha": "",
+    "status": "Sob encomenda",
+    "qty": null,
+    "price": 34.9,
+    "orderCount": 0,
+    "postedAt": "2026-10-26",
+    "images": [
+      "images/439-1793037407452-0.jpg",
+      "images/439-1793037407452-1.jpg",
+      "images/439-1793037407452-2.jpg"
+    ]
   }
 ]
