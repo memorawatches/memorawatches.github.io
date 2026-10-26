@@ -7950,5 +7950,30 @@
       "images/442-1793038221381-1.jpg",
       "images/442-1793038221381-2.jpg"
     ]
+  },
+  {
+    "id": 443,
+    "brand": "Christopher Ward",
+    "name": "Christopher Ward C63 Chronograph Sky Blue",
+    "ref": "C63-41ACH4-S0KB0-B0",
+    "medida": "41mm",
+    "movimento": "Automático",
+    "resistencia": "100m",
+    "material": "Aço inoxidável",
+    "vidro": "Safira",
+    "espessura": "13.9mm",
+    "lugToLug": "48mm",
+    "reservaMarcha": "62 horas",
+    "acompanha": "",
+    "status": "Sob encomenda",
+    "qty": null,
+    "price": 22900,
+    "orderCount": 0,
+    "postedAt": "2026-10-26",
+    "images": [
+      "images/443-1793038379251-0.jpg",
+      "images/443-1793038379251-1.jpg",
+      "images/443-1793038379251-2.jpg"
+    ]
   }
 ]
