@@ -7521,5 +7521,58 @@
         }
       }
     ]
+  },
+  {
+    "id": 432,
+    "brand": "Christopher Ward",
+    "name": "Christopher Ward C63 Sealander GMT Sky Blue",
+    "ref": "C63-39AGM4-S00B0-B1",
+    "medida": "39mm",
+    "movimento": "Automático (GMT)",
+    "resistencia": "150m",
+    "material": "Aço inoxidável",
+    "vidro": "Safira",
+    "espessura": "11.3mm",
+    "lugToLug": "45mm",
+    "reservaMarcha": "56 horas",
+    "acompanha": "",
+    "status": "Sob encomenda",
+    "qty": null,
+    "price": 12900,
+    "orderCount": 0,
+    "postedAt": "2026-10-26",
+    "images": [
+      "images/432-1793033442893-0.jpg",
+      "images/432-1793033442893-1.jpg",
+      "images/432-1793033442893-2.jpg"
+    ],
+    "straps": [
+      {
+        "nome": "Consort Bracelet",
+        "price": 12900,
+        "images": [
+          "images/432-strap0-1793033442893-0.jpg"
+        ]
+      }
+    ],
+    "strapBaseName": "Bader Bracelet",
+    "sizes": [
+      {
+        "medida": "36mm",
+        "ref": "C63-36AGM4-S00B0-B1",
+        "price": 0,
+        "specs": {
+          "lugToLug": "42mm"
+        }
+      },
+      {
+        "medida": "42mm",
+        "ref": "C63-42AGM4-S00B0-B1",
+        "price": 0,
+        "specs": {
+          "lugToLug": "48.5mm"
+        }
+      }
+    ]
   }
 ]
