@@ -7670,5 +7670,50 @@
         }
       }
     ]
+  },
+  {
+    "id": 435,
+    "brand": "Christopher Ward",
+    "name": "Christopher Ward C63 Sealander Automatic Sky Blue",
+    "ref": "C63-39ADA4-S00B0-B0",
+    "medida": "39mm",
+    "movimento": "Automático",
+    "resistencia": "150m",
+    "material": "Aço inoxidável",
+    "vidro": "Safira",
+    "espessura": "10.9mm",
+    "lugToLug": "45mm",
+    "reservaMarcha": "65 horas",
+    "acompanha": "",
+    "status": "Sob encomenda",
+    "qty": null,
+    "price": 11900,
+    "orderCount": 0,
+    "postedAt": "2026-10-26",
+    "images": [
+      "images/435-1793035106299-0.jpg",
+      "images/435-1793035106299-1.jpg",
+      "images/435-1793035106299-2.jpg"
+    ],
+    "straps": [
+      {
+        "nome": "Consort Bracelet",
+        "price": 11900,
+        "images": [
+          "images/435-strap0-1793035106300-0.jpg"
+        ]
+      }
+    ],
+    "strapBaseName": "Bader Bracelet",
+    "sizes": [
+      {
+        "medida": "36mm",
+        "ref": "C63-36ADA4-S00B0-B0",
+        "price": 0,
+        "specs": {
+          "lugToLug": "42mm"
+        }
+      }
+    ]
   }
 ]
