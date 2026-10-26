@@ -4596,6 +4596,16 @@
       "images/307-1792967465705-1.jpg",
       "images/307-1792967465705-2.jpg"
     ],
+    "straps": [
+      {
+        "nome": "Consort Bracelet",
+        "price": 12900,
+        "images": [
+          "images/307-strap0-1793033178533-0.jpg"
+        ]
+      }
+    ],
+    "strapBaseName": "Bader Bracelet",
     "sizes": [
       {
         "medida": "36mm",
