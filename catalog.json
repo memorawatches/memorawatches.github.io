@@ -8112,5 +8112,51 @@
       "images/448-1793040941121-2.jpg",
       "images/448-1793040941121-3.jpg"
     ]
+  },
+  {
+    "id": 449,
+    "brand": "Christopher Ward",
+    "name": "Christopher Ward C60 Trident Pro 300 Blue",
+    "ref": "C60-40ADA31S0BB1-B1",
+    "medida": "40mm",
+    "movimento": "Automático",
+    "resistencia": "300m",
+    "material": "Aço inoxidável",
+    "vidro": "Safira",
+    "espessura": "11.3mm",
+    "lugToLug": "47.4mm",
+    "reservaMarcha": "38 horas",
+    "acompanha": "",
+    "status": "Sob encomenda",
+    "qty": null,
+    "price": 10900,
+    "orderCount": 0,
+    "postedAt": "2026-10-26",
+    "images": [
+      "images/449-1793041502045-0.jpg",
+      "images/449-1793041502045-1.jpg",
+      "images/449-1793041502045-2.jpg",
+      "images/449-1793041502045-3.jpg"
+    ],
+    "straps": [
+      {
+        "nome": "Bader Bracelet",
+        "price": 10900,
+        "images": [
+          "images/449-strap0-1793041502045-0.jpg"
+        ]
+      }
+    ],
+    "strapBaseName": "Consort Bracelet",
+    "sizes": [
+      {
+        "medida": "38mm",
+        "ref": "C60-38ADA31S0BB1-B1",
+        "price": 0,
+        "specs": {
+          "lugToLug": "45mm"
+        }
+      }
+    ]
   }
 ]
