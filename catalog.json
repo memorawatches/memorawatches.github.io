@@ -7834,7 +7834,9 @@
       {
         "nome": "Consort Bracelet",
         "price": 11900,
-        "images": []
+        "images": [
+          "images/438-strap0-1793035950178-0.jpg"
+        ]
       }
     ],
     "strapBaseName": "Bader Bracelet",
