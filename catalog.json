@@ -8000,5 +8000,30 @@
       "images/444-1793038526594-1.jpg",
       "images/444-1793038526594-2.jpg"
     ]
+  },
+  {
+    "id": 445,
+    "brand": "Christopher Ward",
+    "name": "Christopher Ward C63 Sealander Chronograph Pistachio",
+    "ref": "C63-41ACH4-S0KV0-B0",
+    "medida": "41mm",
+    "movimento": "Automático",
+    "resistencia": "100m",
+    "material": "Aço inoxidável",
+    "vidro": "Safira",
+    "espessura": "13.9mm",
+    "lugToLug": "48mm",
+    "reservaMarcha": "62 horas",
+    "acompanha": "",
+    "status": "Sob encomenda",
+    "qty": null,
+    "price": 22900,
+    "orderCount": 0,
+    "postedAt": "2026-10-26",
+    "images": [
+      "images/445-1793038855375-0.jpg",
+      "images/445-1793038855375-1.jpg",
+      "images/445-1793038855375-2.jpg"
+    ]
   }
 ]
