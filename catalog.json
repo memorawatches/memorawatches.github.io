@@ -7925,5 +7925,30 @@
       "images/441-1793038098429-1.jpg",
       "images/441-1793038098430-2.jpg"
     ]
+  },
+  {
+    "id": 442,
+    "brand": "Christopher Ward",
+    "name": "Christopher Ward C63 Chronograph Black",
+    "ref": "C63-41ACH4-S0KK0-B0",
+    "medida": "41mm",
+    "movimento": "Automático",
+    "resistencia": "100m",
+    "material": "Aço inoxidável",
+    "vidro": "Safira",
+    "espessura": "13.9mm",
+    "lugToLug": "48mm",
+    "reservaMarcha": "62 horas",
+    "acompanha": "",
+    "status": "Sob encomenda",
+    "qty": null,
+    "price": 22900,
+    "orderCount": 0,
+    "postedAt": "2026-10-26",
+    "images": [
+      "images/442-1793038221381-0.jpg",
+      "images/442-1793038221381-1.jpg",
+      "images/442-1793038221381-2.jpg"
+    ]
   }
 ]
